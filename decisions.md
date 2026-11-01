@@ -14,8 +14,8 @@
   e deriva `created_at_int` em YYYYMMDD para metadados e filtros do Chroma.
 - Os dois arquivos brutos sao versionados como referencia para auditoria e gold set.
   Indices Chroma, caches e demais artefatos gerados continuam ignorados pelo Git.
-- O gold set ainda precisa ser selecionado e anotado; os aspectos sinteticos
-  emitidos pelo gerador nao substituem anotacao humana.
+- O conjunto de referência tem 100 anotações por IA, pendentes de revisão humana;
+  os aspectos sintéticos emitidos pelo gerador não substituem anotação humana.
 
 ### Comando de reproducao
 
@@ -53,3 +53,50 @@ recente (0,75) foram mantidos. População e linguagem usam fluxos aleatórios s
 O corpus permanece baseado em templates e não substitui um gold set independente com
 anotação humana. Duplicatas e famílias de templates precisam ser consideradas na separação
 de treino e avaliação. Índices já gerados a partir dos textos anteriores exigem novo upsert.
+
+## Splits e prevenção de vazamento
+
+O corpus bruto em `data/raw/` permanece integral e sem alteração. Os splits derivados
+são versionados em `data/splits/`, separados dos dados públicos de `data/external/`.
+O guia de anotação permanece em `docs/annotation-guide.md`, sem alterar o snapshot anotado.
+
+| Destino | Registros | Rótulos e uso |
+|---|---:|---|
+| `gold.jsonl` | 100 | Anotações por IA, pendentes de revisão humana; avaliação |
+| `train_pool.jsonl` | 2037 | Rótulos sintéticos do gerador; treino de ABSA |
+| `rag.jsonl` | 862 | Reviews reservadas exclusivamente ao índice RAG |
+| `quarantine.jsonl` | 1 | Duplicata textual do gold, sem treino nem RAG |
+
+Seed da separação: `2718`. Após reservar os 100 IDs de avaliação e todas as suas
+duplicatas normalizadas, 70% dos grupos textuais restantes vão para treino e 30%
+para RAG. A proporção aplica-se a grupos, não diretamente ao número de linhas;
+por isso as contagens não correspondem necessariamente a uma divisão exata 70/30.
+A normalização usa casefold e compactação de espaços, preservando acentos.
+Todos os restaurantes e todas as notas estão representados nos três splits principais.
+
+A reserva contém 101 IDs: os 100 anotados e uma duplicata textual. Não se atribui
+anotação adicional à duplicata em quarentena. Os conjuntos principais são disjuntos
+por ID e texto normalizado; os 3000 registros originais estão contabilizados.
+O manifesto registra todos os IDs e hashes SHA-256 do conteúdo com quebras LF,
+permitindo verificação independente da convenção de fim de linha do sistema.
+
+`load_absa_train_pool()` valida integridade, partições, IDs e textos reservados antes
+de retornar qualquer exemplo. É a entrada definida para o futuro treinador de ABSA.
+Os testes injetam deliberadamente um texto do gold sob outro ID e confirmam a rejeição.
+Ainda não há treino QLoRA implementado; código futuro precisa usar esse carregador.
+
+A ingestão padrão usa `DATA_SPLITS_DIR/rag.jsonl`, verifica o manifesto antes de carregar
+embeddings e recusa o corpus bruto integral ou o pool de treino como entrada. Uma coleção
+Chroma já populada com IDs fora do RAG também é recusada, pois upsert não remove documentos
+antigos. Nesse caso, configurar uma nova `CHROMA_COLLECTION`; não apagar dados automaticamente.
+
+```powershell
+python scripts/prepare_data_splits.py
+python scripts/prepare_data_splits.py --check-only
+python scripts/ingest.py --batch-size 128
+```
+
+Mudanças no corpus ou nas anotações congeladas exigem revisão explícita dos snapshots e
+recriação dos splits. A ausência de vazamento literal não garante independência entre
+famílias de templates: o corpus ainda é sintético. O gold atual não deve ser apresentado
+como benchmark humano independente até a revisão correspondente.

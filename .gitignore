@@ -21,3 +21,11 @@ data/gold/*
 !data/gold/aspects_100.ai.jsonl
 !data/gold/annotation_manifest.json
 !data/gold/aspects_100.human-template.jsonl
+
+!data/splits/
+data/splits/*
+!data/splits/gold.jsonl
+!data/splits/train_pool.jsonl
+!data/splits/rag.jsonl
+!data/splits/quarantine.jsonl
+!data/splits/manifest.json

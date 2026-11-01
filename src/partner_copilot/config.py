@@ -27,6 +27,7 @@ class Settings(BaseSettings):
 
     # --- Dados -----------------------------------------------------------
     data_raw_dir: Path = Path("data/raw")
+    data_splits_dir: Path = Path("data/splits")
     chroma_path: Path = Path("data/chroma")
     chroma_collection: str = "reviews"
 

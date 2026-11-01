@@ -10,15 +10,17 @@ Execute a partir da raiz do projeto, em um ambiente Python compatível:
 ```powershell
 python -m pip install -e ".[dev]"
 python scripts/generate_synthetic_data.py --n 3000 --seed 42 --end-date 2026-11-01 --validate
+python scripts/prepare_data_splits.py
 python scripts/ingest.py --batch-size 128
 python -m pytest
 python -m ruff check .
 ```
 
 Configure `.env` a partir de `.env.example`. A ingestão usa `DATA_RAW_DIR`,
-`CHROMA_PATH`, `CHROMA_COLLECTION` e `EMBEDDING_MODEL`. O primeiro uso do embedding
+`DATA_SPLITS_DIR`, `CHROMA_PATH`, `CHROMA_COLLECTION` e `EMBEDDING_MODEL`. O primeiro uso do embedding
 precisa baixar o modelo multilingual; a ingestão não carrega o Mistral e não exige GPU.
-`--input caminho/reviews.jsonl` permite escolher outro arquivo.
+`scripts/ingest.py` usa somente `data/splits/rag.jsonl` por padrão. Um `--input`
+alternativo precisa corresponder ao split RAG registrado no manifesto.
 
 O schema exige `category` e `bairro`, já emitidos pelo gerador. `created_at_int` é
 calculado a partir de `created_at` como YYYYMMDD, evitando divergência entre datas.
@@ -91,3 +93,20 @@ python scripts/validate_gold_set.py
 
 Reserve os IDs indicados no manifesto para fora do treino de ABSA. Não apresente as
 anotações por IA como gold humano validado nem como evidência final de generalização.
+
+## Separação entre avaliação, treino e RAG
+
+O manifesto em `data/splits/manifest.json` registra IDs, hashes e contagens:
+100 reviews para avaliação, 2.037 para `train_pool`, 862 para RAG e uma duplicata
+do gold em quarentena. Não há sobreposição de IDs ou textos completos normalizados
+entre os três conjuntos principais. O treino recebe apenas rótulos sintéticos do pool.
+
+```powershell
+python scripts/prepare_data_splits.py --check-only
+```
+
+O futuro treinador de ABSA deve carregar os dados com
+`partner_copilot.data_splits.load_absa_train_pool`, que valida os splits antes de
+retornar exemplos. A ingestão recusa o corpus integral e coleções antigas com IDs
+fora do split RAG; nesse caso, escolha uma nova `CHROMA_COLLECTION` no ambiente.
+As regras e os limites dessa separação estão em [decisions.md](decisions.md).

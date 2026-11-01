@@ -87,8 +87,9 @@ Os casos anotados são um ponto de partida para adjudicação humana, não verda
 
 `reserved_from_training_ids` contém **101 IDs**: as 100 reviews e uma duplicata textual
 normalizada fora da amostra. Futuras rotinas de treino de ABSA devem excluir esses IDs.
-A lista foi preparada; como o treinamento ainda não foi implementado, não há garantia
-automática de exclusão em um pipeline futuro que ignore esse contrato.
+Os splits em `data/splits/` já excluem esses IDs do treino e do RAG. O carregador
+`load_absa_train_pool()` valida a reserva por ID e texto antes de retornar dados.
+O treinamento ainda não foi implementado e precisa usar esse carregador para manter o contrato.
 
 Essa reserva evita vazamento literal, mas não resolve famílias de templates semelhantes.
 O conjunto é interno ao gerador e não demonstra generalização para linguagem real.
