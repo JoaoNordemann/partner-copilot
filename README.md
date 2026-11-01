@@ -64,3 +64,15 @@ A auditoria quantitativa e a leitura de exemplos estão em `docs/data-audit.md`.
 Os textos respeitam o perfil térmico do item, mas continuam baseados em templates.
 Para avaliar ABSA, use anotação humana independente e evite vazamento de duplicatas
 ou famílias de templates entre treino e avaliação.
+
+## Base externa para mudança de domínio
+
+A amostra B2W-Reviews01 contém 200 textos reais de e-commerce, isolados em
+`data/external/` para diagnóstico do extrator e inspeção de linguagem.
+A licença da fonte original é **CC BY-NC-SA 4.0**; os textos não integram o índice RAG.
+Origem, divergência de licença no espelho HF, amostragem e reprodução estão em
+[docs/external-data.md](docs/external-data.md).
+
+```powershell
+python scripts/prepare_external_reviews.py --seed 42 --per-rating 40 --time-budget-minutes 10
+```
