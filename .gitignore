@@ -12,3 +12,12 @@ data/raw/*
 !data/raw/reviews.jsonl
 !data/raw/restaurants.json
 work/
+
+!data/gold/
+data/gold/*
+!data/gold/prior_exposure.json
+!data/gold/reviews_100.blind.jsonl
+!data/gold/sample_manifest.json
+!data/gold/aspects_100.ai.jsonl
+!data/gold/annotation_manifest.json
+!data/gold/aspects_100.human-template.jsonl

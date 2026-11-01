@@ -1,0 +1,54 @@
+{
+  "status": "ai_annotated_pending_independent_human_review",
+  "annotator": "OpenAI assistant (AI); semantic reading, not generated-label copying",
+  "annotation_method": "Manual per-text decisions in three blocks of 40, 40 and 20",
+  "annotation_input_fields": [
+    "id",
+    "text"
+  ],
+  "generated_labels_consulted": false,
+  "prior_generator_design_exposure": true,
+  "independent_human_annotation": false,
+  "human_reviewed_count": 0,
+  "guide_written_before_sampling_and_annotation": true,
+  "guide_sha256": "4bc0db7dda7eea94f5d753ff5a256398e65928b0348aa1a3265f41e820c26cb5",
+  "blind_sample_sha256": "311821103d98fa351ee183865964a2aaaf7f9de36c6d927459d2c9830954c75b",
+  "annotations_sha256": "3151e0bf8fde66edec7a94bf4d2f574780562df2dd7c816de126482e5770ce60",
+  "frozen_at_utc": "2026-11-01T21:42:24.812100+00:00",
+  "comparison_to_generated_labels": "Not performed; annotations frozen without agreement checking",
+  "annotated_reviews": 100,
+  "mixed_polarity_reviews": 52,
+  "reviews_with_notes": 25,
+  "aspect_polarity_counts": {
+    "atendimento:neg": 6,
+    "atendimento:pos": 7,
+    "embalagem:neg": 15,
+    "embalagem:pos": 26,
+    "preco:neg": 6,
+    "preco:pos": 23,
+    "sabor:neg": 26,
+    "sabor:pos": 43,
+    "temperatura:neg": 17,
+    "temperatura:pos": 26,
+    "tempo_entrega:neg": 22,
+    "tempo_entrega:pos": 23
+  },
+  "reviews_without_identifiable_aspect": 1,
+  "consistency_review": {
+    "previous_annotation_sha256": "3277e87f90973e286b16778e902f7437ceb72304614f33eb22d2ab290fcf8d2d",
+    "basis": "Existing guide only; no generated labels or extractor predictions consulted",
+    "change": "Remove inferred flavor positivity from generic approval of a dish; document ambiguity",
+    "affected_ids": [
+      "rev_000613",
+      "rev_000650",
+      "rev_000708",
+      "rev_001760",
+      "rev_001895",
+      "rev_001916",
+      "rev_002142",
+      "rev_002363",
+      "rev_002476"
+    ]
+  },
+  "first_frozen_at_utc": "2026-11-01T21:37:22.975116+00:00"
+}

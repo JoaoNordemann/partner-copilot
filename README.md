@@ -76,3 +76,18 @@ Origem, divergência de licença no espelho HF, amostragem e reprodução estão
 ```powershell
 python scripts/prepare_external_reviews.py --seed 42 --per-rating 40 --time-budget-minutes 10
 ```
+
+## Referência para extração de aspectos
+
+A amostra estratificada em `data/gold/` contém 100 reviews e anotações feitas por IA,
+**pendentes de revisão humana independente**. A entrada cega expõe somente ID e texto.
+O [guia de anotação](docs/annotation-guide.md) fixa dez regras; o
+[protocolo e os limites do conjunto](docs/gold-set.md) registram seleção e proveniência.
+
+```powershell
+python scripts/prepare_gold_sample.py
+python scripts/validate_gold_set.py
+```
+
+Reserve os IDs indicados no manifesto para fora do treino de ABSA. Não apresente as
+anotações por IA como gold humano validado nem como evidência final de generalização.
