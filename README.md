@@ -23,6 +23,8 @@ precisa baixar o modelo multilingual; a ingestão não carrega o Mistral e não 
 O schema exige `category` e `bairro`, já emitidos pelo gerador. `created_at_int` é
 calculado a partir de `created_at` como YYYYMMDD, evitando divergência entre datas.
 Os aspectos são preservados na recuperação e também disponíveis em `aspect_<nome>`.
+Aspectos não mencionados não possuem chave nos metadados. As decisões de data,
+campos de filtro e polaridades estão em [docs/decisions.md](docs/decisions.md).
 
 IDs das reviews são as chaves de upsert: repetir a mesma entrada atualiza os mesmos
 registros. Não há remoção de documentos ausentes da entrada. IDs precisam ser únicos

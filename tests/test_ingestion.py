@@ -3,6 +3,7 @@ from datetime import date
 
 import pytest
 from chromadb.api.types import Documents, EmbeddingFunction, Embeddings
+from pydantic import ValidationError
 
 from partner_copilot.ingestion.indexer import ingest_reviews
 from partner_copilot.ingestion.loaders import load_reviews
@@ -139,3 +140,34 @@ def test_duplicate_ids_fail_and_invalid_batch_is_rejected(tmp_path):
         ingest_reviews(path, MemoryStore())
     with pytest.raises(ValueError, match="positive"):
         ingest_reviews(path, MemoryStore(), batch_size=0)
+
+
+def test_missing_aspect_keys_are_absent_after_upsert_and_reopen(tmp_path):
+    path = tmp_path / "aspect-removal"
+    store = ChromaStore(path, "tiny", embedding_function=TinyEmbedding())
+    store.upsert([make_review(aspects={"tempo_entrega": "neg", "sabor": "pos"})])
+    store.upsert([make_review(aspects={"sabor": "neg"})])
+    store = ChromaStore(path, "tiny", embedding_function=TinyEmbedding())
+    metadata = store.col.get(ids=["rev_001"], include=["metadatas"])["metadatas"][0]
+    assert "aspect_tempo_entrega" not in metadata
+    assert metadata["aspect_sabor"] == "neg"
+    assert json.loads(metadata["aspects_json"]) == {"sabor": "neg"}
+    store.upsert([make_review(aspects={})])
+    store.upsert([make_review(aspects={})])
+    metadata = store.col.get(ids=["rev_001"], include=["metadatas"])["metadatas"][0]
+    assert not any(key.startswith("aspect_") for key in metadata)
+    assert json.loads(metadata["aspects_json"]) == {}
+    assert store.query("avaliação", 1)[0].review.aspects == {}
+    assert store.col.count() == 1
+
+
+@pytest.mark.parametrize("polarity", ["none", "", None, "neutral"])
+def test_invalid_aspect_polarities_are_rejected(polarity):
+    with pytest.raises(ValidationError):
+        make_review(aspects={"sabor": polarity})
+
+
+def test_integer_date_is_derived_even_if_input_contains_a_conflicting_value():
+    review = make_review(created_at_int=19000101)
+    assert review.created_at.isoformat() == "2026-10-30"
+    assert review.created_at_int == 20261030

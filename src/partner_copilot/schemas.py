@@ -1,6 +1,7 @@
 """Validated domain models shared by ingestion, retrieval and generation."""
 
 from datetime import date
+from typing import Literal
 
 from pydantic import BaseModel, Field, computed_field
 
@@ -14,7 +15,7 @@ class Review(BaseModel):
     created_at: date
     category: str = Field(min_length=1)
     bairro: str = Field(min_length=1)
-    aspects: dict[str, str] = Field(default_factory=dict)
+    aspects: dict[str, Literal["pos", "neg"]] = Field(default_factory=dict)
 
     @computed_field
     @property

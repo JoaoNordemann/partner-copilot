@@ -49,9 +49,9 @@ class ChromaStore:
         for review in reviews:
             metadatas.append(
                 {
-                    # Chroma merges metadata on upsert: clear aspect filters removed by an update.
+                    # Chroma merges metadata; None deletes stale keys without storing a sentinel.
                     **{
-                        key: ""
+                        key: None
                         for key in (previous_metadata.get(review.id) or {})
                         if key.startswith("aspect_")
                     },
