@@ -47,7 +47,7 @@ where = ["src"]
 line-length = 100
 target-version = "py310"
 src = ["src", "tests", "scripts"]
-extend-exclude = ["notebooks", "data"]
+extend-exclude = ["notebooks", "data", "work"]
 
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "UP", "B", "SIM", "C4", "RUF"]
