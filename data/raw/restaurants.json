@@ -1,0 +1,98 @@
+[
+  {
+    "restaurant_id": "rest_001",
+    "name": "Pizzaria Forno Nobre",
+    "category": "pizza",
+    "bairro": "Jardim Aquarius",
+    "menu": [
+      "Pizza Margherita",
+      "Pizza Calabresa",
+      "Pizza Quatro Queijos",
+      "Pizza Portuguesa"
+    ]
+  },
+  {
+    "restaurant_id": "rest_002",
+    "name": "Burger do Zé",
+    "category": "hamburguer",
+    "bairro": "Vila Ema",
+    "menu": [
+      "X-Bacon",
+      "X-Salada",
+      "Burger Duplo",
+      "Batata Frita Grande"
+    ]
+  },
+  {
+    "restaurant_id": "rest_003",
+    "name": "Sushi Kaze",
+    "category": "japonês",
+    "bairro": "Centro",
+    "menu": [
+      "Combo 20 Peças",
+      "Temaki Salmão",
+      "Hot Roll",
+      "Yakisoba"
+    ]
+  },
+  {
+    "restaurant_id": "rest_004",
+    "name": "Marmitaria da Dona Rosa",
+    "category": "marmita",
+    "bairro": "Jardim Satélite",
+    "menu": [
+      "Marmita Executiva",
+      "Marmita Fit Frango",
+      "Feijoada Individual",
+      "Strogonoff"
+    ]
+  },
+  {
+    "restaurant_id": "rest_005",
+    "name": "Açaí Point",
+    "category": "açaí",
+    "bairro": "Urbanova",
+    "menu": [
+      "Açaí 500ml",
+      "Açaí 300ml",
+      "Copo da Felicidade",
+      "Vitamina de Morango"
+    ]
+  },
+  {
+    "restaurant_id": "rest_006",
+    "name": "Cantina Bella Massa",
+    "category": "massas",
+    "bairro": "Bosque dos Eucaliptos",
+    "menu": [
+      "Lasanha Bolonhesa",
+      "Fettuccine Alfredo",
+      "Nhoque ao Sugo",
+      "Ravióli de Queijo"
+    ]
+  },
+  {
+    "restaurant_id": "rest_007",
+    "name": "Churrasco Gaúcho Express",
+    "category": "churrasco",
+    "bairro": "Vila Industrial",
+    "menu": [
+      "Prato Executivo Picanha",
+      "Espetinho Misto",
+      "Costela no Bafo",
+      "Linguiça Artesanal"
+    ]
+  },
+  {
+    "restaurant_id": "rest_008",
+    "name": "Doceria Ateliê Doce",
+    "category": "doces",
+    "bairro": "Jardim Esplanada",
+    "menu": [
+      "Brigadeiro Gourmet",
+      "Bolo de Pote",
+      "Cookie Recheado",
+      "Torta de Limão"
+    ]
+  }
+]

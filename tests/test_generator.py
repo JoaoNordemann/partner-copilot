@@ -61,3 +61,30 @@ def test_jsonl_is_reproducible_and_round_trips(tmp_path):
 def test_invalid_generation_size(n, days):
     with pytest.raises(ValueError, match="positive"):
         _generator.generate(n, 42, END, days)
+
+
+def test_delivery_trend_is_present_only_for_configured_restaurants():
+    """Check the emitted dataset, with enough observations in both date windows."""
+    rows = _generator.generate(12000, 42, END, 90)
+    counts = {
+        restaurant.restaurant_id: {"recent": [], "historical": []}
+        for restaurant in _generator.RESTAURANTS
+    }
+    for row in rows:
+        polarity = row.aspects.get("tempo_entrega")
+        if polarity is None:
+            continue
+        age = (END - date.fromisoformat(row.created_at)).days
+        window = "recent" if age < 14 else "historical"
+        counts[row.restaurant_id][window].append(polarity == "neg")
+
+    for restaurant in _generator.RESTAURANTS:
+        recent = counts[restaurant.restaurant_id]["recent"]
+        historical = counts[restaurant.restaurant_id]["historical"]
+        assert len(recent) >= 30, restaurant.restaurant_id
+        assert len(historical) >= 100, restaurant.restaurant_id
+        difference = sum(recent) / len(recent) - sum(historical) / len(historical)
+        if restaurant.late_trend:
+            assert difference > 0.30, restaurant.restaurant_id
+        else:
+            assert abs(difference) < 0.20, restaurant.restaurant_id
