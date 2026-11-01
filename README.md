@@ -51,3 +51,14 @@ where = {
 Os testes usam um embedding determinístico pequeno para verificar Chroma persistente
 sem download de modelo. Isso não avalia a qualidade semântica do modelo multilingual.
 A reprodução exata do gerador exige seed, data final e janela iguais.
+
+## Auditoria dos dados sintéticos
+
+```powershell
+python scripts/audit_synthetic_data.py --end-date 2026-11-01 --output work/data-audit/current.json
+```
+
+A auditoria quantitativa e a leitura de exemplos estão em `docs/data-audit.md`.
+Os textos respeitam o perfil térmico do item, mas continuam baseados em templates.
+Para avaliar ABSA, use anotação humana independente e evite vazamento de duplicatas
+ou famílias de templates entre treino e avaliação.

@@ -88,3 +88,77 @@ def test_delivery_trend_is_present_only_for_configured_restaurants():
             assert difference > 0.30, restaurant.restaurant_id
         else:
             assert abs(difference) < 0.20, restaurant.restaurant_id
+
+
+@pytest.mark.parametrize(
+    "item,category,profile",
+    [
+        ("Açaí 500ml", "açaí", "cold"),
+        ("Vitamina de Morango", "açaí", "cold"),
+        ("Temaki Salmão", "japonês", "cold"),
+        ("Combo 20 Peças", "japonês", "cold"),
+        ("Bolo de Pote", "doces", "cold"),
+        ("Cookie Recheado", "doces", "ambient"),
+        ("Brigadeiro Gourmet", "doces", "ambient"),
+        ("Hot Roll", "japonês", "hot"),
+        ("Yakisoba", "japonês", "hot"),
+        ("Feijoada Individual", "marmita", "hot"),
+    ],
+)
+def test_temperature_language_matches_the_item(item, category, profile):
+    assert _generator.temperature_profile(item, category) == profile
+    for polarity in ("pos", "neg"):
+        for seed in range(40):
+            phrase = _generator._render_aspect(
+                "temperatura", polarity, item, category, random.Random(seed)
+            ).lower()
+            if profile != "hot":
+                assert "micro-ondas" not in phrase
+                assert "requentar" not in phrase
+            if profile == "cold" and polarity == "pos":
+                assert "quente" not in phrase
+                assert "quentinho" not in phrase
+            if profile == "hot" and polarity == "pos":
+                assert "refrigerado" not in phrase
+                assert "gelado" not in phrase
+
+
+def test_ratings_remain_consistent_with_negative_aspects():
+    for row in _generator.generate(3000, 42, END, 90):
+        if "neg" in row.aspects.values():
+            assert row.rating <= 4
+        if set(row.aspects.values()) == {"neg"}:
+            assert row.rating <= 3
+
+
+def test_each_configured_weakness_is_visible_in_the_population():
+    rows = _generator.generate(12000, 42, END, 90)
+    for restaurant in _generator.RESTAURANTS:
+        for aspect in restaurant.weak_aspects:
+            baseline_ids = {
+                rest.restaurant_id
+                for rest in _generator.RESTAURANTS
+                if aspect not in rest.weak_aspects
+            }
+            eligible = [
+                row
+                for row in rows
+                if aspect in row.aspects
+                and (
+                    aspect != "tempo_entrega"
+                    or (END - date.fromisoformat(row.created_at)).days >= 14
+                )
+            ]
+            target = [
+                row.aspects[aspect] == "neg"
+                for row in eligible
+                if row.restaurant_id == restaurant.restaurant_id
+            ]
+            baseline = [
+                row.aspects[aspect] == "neg"
+                for row in eligible
+                if row.restaurant_id in baseline_ids
+            ]
+            assert len(target) >= 100
+            difference = sum(target) / len(target) - sum(baseline) / len(baseline)
+            assert difference > 0.03, (restaurant.restaurant_id, aspect, difference)

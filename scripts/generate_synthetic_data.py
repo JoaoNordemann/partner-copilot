@@ -47,95 +47,268 @@ BASE_NEG_PROB: Final[float] = 0.18
 TREND_WINDOW_DAYS: Final[int] = 14
 TREND_NEG_PROB: Final[float] = 0.75
 
-# {item} aparece sem artigo para evitar problemas de gênero; {min} = minutos de entrega
+# Text fragments express exactly one labeled aspect. Food-specific language is selected below.
 TEMPLATES: Final[dict[Aspect, dict[Polarity, list[str]]]] = {
     "sabor": {
         "pos": [
-            "{item} estava delicioso, tempero no ponto.",
-            "O sabor de {item} surpreendeu, muito bem feito.",
-            "{item} tem gosto de comida caseira, caprichado.",
-            "Qualidade excelente em {item}, ingredientes frescos.",
+            "Gostei bastante do sabor de {item}.",
+            "Gostei muito de {item}.",
+            "O sabor estava ótimo, pediria {item} de novo.",
+            "Achei {item} uma delícia.",
+            "{item} veio com o sabor que eu esperava.",
+            "Dessa vez acertaram no sabor de {item}.",
+            "O sabor de {item} estava muito bom.",
+            "Aqui em casa todo mundo gostou de {item}.",
+            "O gosto de {item} me surpreendeu pra melhor.",
+            "{item} estava uma delícia, gostei até o fim.",
+            "O sabor de {item} valeu o pedido.",
+            "Nada a reclamar do sabor de {item}.",
         ],
         "neg": [
-            "{item} veio sem tempero, bem sem graça.",
-            "O sabor de {item} estava estranho, parecia requentado.",
-            "{item} muito salgado, difícil de comer.",
-            "Ingredientes de {item} pareciam velhos, gosto ruim.",
+            "Não gostei do sabor de {item}.",
+            "{item} veio com um gosto estranho.",
+            "Achei {item} bem sem graça.",
+            "O sabor de {item} deixou a desejar.",
+            "{item} estava com gosto de produto velho.",
+            "Não consegui terminar {item}, o gosto não estava bom.",
+            "Já pedi {item} antes e dessa vez o sabor estava pior.",
+            "{item} estava com um gosto ruim no final.",
+            "Pelo sabor, não pediria {item} de novo.",
+            "Esperava mais do sabor de {item}.",
+            "O gosto de {item} estava bem diferente do habitual.",
+            "{item} não estava gostoso como das outras vezes.",
         ],
     },
     "tempo_entrega": {
         "pos": [
-            "Chegou em {min} minutos, bem antes do previsto.",
-            "Entrega rápida, em {min} min estava na porta.",
-            "Pontual, chegou no horário combinado.",
+            "Chegou em {min} minutos, antes do previsto.",
+            "Em {min} min já estava aqui.",
+            "O pedido levou só {min} minutos pra chegar.",
+            "A entrega foi rápida, uns {min} minutos.",
+            "Entregaram dentro do prazo.",
+            "Chegou no horário que o app mostrou.",
+            "Não precisei esperar muito, deu {min} min.",
+            "Dessa vez chegou rapidinho, em {min} minutos.",
+            "O entregador chegou em {min} minutos.",
+            "Pedido feito e entregue em {min} min.",
         ],
         "neg": [
-            "Demorou {min} minutos, muito além do prazo informado.",
-            "Esperei mais de uma hora pelo pedido, atraso absurdo.",
-            "A entrega atrasou {min} min e ninguém avisou nada.",
-            "Prazo estourou, chegou quase {min} minutos depois do combinado.",
+            "Levou {min} minutos pra chegar, passou bastante do prazo.",
+            "Fiquei esperando {min} min pelo pedido.",
+            "Esperei quase duas horas e já tinha passado da previsão.",
+            "A entrega demorou demais, deu {min} minutos.",
+            "O prazo passou e o pedido nada de chegar.",
+            "Chegou bem depois do horário mostrado no app.",
+            "Foram {min} minutos de espera, atrapalhou meu almoço.",
+            "Pedi com antecedência e mesmo assim atrasou bastante.",
+            "O pedido levou {min} min e eu já estava desistindo.",
+            "Mais de uma hora esperando, muito além do combinado.",
         ],
     },
-    "temperatura": {
-        "pos": [
-            "Chegou quentinho, como se tivesse saído do forno.",
-            "Temperatura perfeita, nada de comida morna.",
-            "Bebida gelada e comida quente, tudo certo.",
-        ],
-        "neg": [
-            "Chegou frio, tive que esquentar no micro-ondas.",
-            "Comida morna, perdeu totalmente a graça.",
-            "{item} chegou gelado, claramente ficou parado esperando.",
-            "Veio frio e murcho, decepção.",
-        ],
-    },
+    # Temperature fragments come from TEMPERATURE_TEMPLATES according to the item.
+    "temperatura": {"pos": [], "neg": []},
     "embalagem": {
         "pos": [
-            "Embalagem bem vedada, nada vazou.",
-            "Muito bem embalado, chegou intacto.",
-            "Embalagem térmica e organizada, nota 10.",
+            "A embalagem veio bem fechada.",
+            "A embalagem protegeu bem {item}.",
+            "A sacola estava lacrada e tudo no lugar.",
+            "Embalagem firme, nada ficou solto.",
+            "Capricharam na embalagem de {item}.",
+            "Tudo bem acomodado, sem embalagem aberta.",
+            "O lacre estava inteiro quando recebi.",
+            "Gostei de como embalaram {item}.",
+            "Veio numa embalagem bem resistente.",
+            "Dava pra ver o cuidado com a embalagem.",
         ],
         "neg": [
-            "Embalagem aberta, molho vazou pela sacola toda.",
-            "{item} chegou amassado, embalagem fraca demais.",
-            "Veio sem lacre e com a tampa solta, fiquei com receio.",
-            "Pedido chegou todo derramado, embalagem péssima.",
+            "A embalagem de {item} chegou aberta.",
+            "Veio sem lacre na sacola.",
+            "A tampa veio solta, não gostei disso.",
+            "A embalagem rasgou no caminho.",
+            "A embalagem não segurou {item}, veio tudo bagunçado.",
+            "A sacola estava amassada e a embalagem abriu.",
+            "Precisam melhorar essa embalagem de {item}.",
+            "O recipiente era fraco e chegou danificado.",
+            "Não fecharam direito a embalagem.",
+            "O lacre já estava rompido quando recebi.",
         ],
     },
     "preco": {
-        "pos": ["Preço justo pelo que entrega.", "Ótimo custo-benefício, porção generosa."],
-        "neg": ["Caro pelo que entrega, porção pequena.", "Preço abusivo para a qualidade."],
+        "pos": [
+            "Achei o preço justo.",
+            "Valeu o que paguei por {item}.",
+            "Bom custo-benefício nesse {item}.",
+            "Pelo valor, achei uma boa compra.",
+            "O preço de {item} estava bom.",
+            "Gostei da porção pelo valor cobrado.",
+            "Não achei caro pelo que veio.",
+            "O valor coube no bolso.",
+        ],
+        "neg": [
+            "Achei caro pelo que veio.",
+            "{item} não vale o valor cobrado.",
+            "A porção de {item} era pequena pro preço.",
+            "O preço subiu demais.",
+            "Paguei caro e esperava mais quantidade.",
+            "O custo-benefício de {item} foi ruim.",
+            "Em outros lugares pago menos por {item}.",
+            "Não achei o preço justo.",
+        ],
     },
     "atendimento": {
         "pos": [
-            "Atendimento atencioso, resolveram rápido.",
-            "Restaurante muito educado no contato.",
+            "Responderam minha dúvida rapidinho no chat.",
+            "O pessoal foi educado quando entrei em contato.",
+            "Consegui falar com o restaurante sem dificuldade.",
+            "Me atenderam bem quando mandei mensagem.",
+            "O atendimento foi atencioso.",
+            "Tiraram minha dúvida com paciência.",
+            "Gostei da forma como responderam no chat.",
+            "Falei com o restaurante e foram bem prestativos.",
         ],
         "neg": [
-            "Atendimento ruim, ninguém respondeu minha reclamação.",
-            "Falta item no pedido e o restaurante ignorou o contato.",
+            "Mandei mensagem e ninguém respondeu.",
+            "O atendimento no chat foi bem ruim.",
+            "Não consegui falar com ninguém do restaurante.",
+            "Foram grossos quando entrei em contato.",
+            "Demoraram demais pra responder minha dúvida.",
+            "Fiquei sem resposta no chat.",
+            "O restaurante ignorou minhas mensagens.",
+            "Precisam melhorar o atendimento ao cliente.",
+        ],
+    },
+}
+
+TEMPERATURE_TEMPLATES: Final[dict[str, dict[Polarity, list[str]]]] = {
+    "hot": {
+        "pos": [
+            "{item} chegou bem quente.",
+            "Ainda estava quentinho quando abri.",
+            "Não precisei esquentar {item}.",
+            "A temperatura de {item} estava ótima.",
+            "Veio quente como eu esperava.",
+            "{item} ainda estava saindo fumaça.",
+            "Chegou quente, deu pra comer na hora.",
+            "Mantiveram o calor de {item} até a entrega.",
+        ],
+        "neg": [
+            "{item} chegou frio.",
+            "Tive que esquentar {item} no micro-ondas.",
+            "Já estava morno quando abri.",
+            "Veio frio, perdeu bastante a graça.",
+            "{item} esfriou antes de chegar aqui.",
+            "Esperava {item} quente, mas veio frio.",
+            "Precisei requentar antes de comer.",
+            "A comida já não estava quente ao chegar.",
+        ],
+    },
+    "cold": {
+        "pos": [
+            "Veio bem gelado, na temperatura certa.",
+            "Veio refrigerado como deveria.",
+            "A temperatura de {item} estava boa.",
+            "Veio gelado e pronto pra consumir.",
+            "A refrigeração de {item} foi mantida na entrega.",
+            "Veio geladinho, do jeito certo.",
+            "{item} chegou na temperatura que eu esperava.",
+            "Chegou fresco e bem refrigerado.",
+        ],
+        "neg": [
+            "{item} chegou quente, devia ter vindo refrigerado.",
+            "Veio sem refrigeração, já estava morno.",
+            "{item} perdeu o gelado no caminho.",
+            "A temperatura de {item} estava alta demais.",
+            "Era pra vir gelado, mas chegou em temperatura ambiente.",
+            "{item} esquentou durante a entrega.",
+            "Não mantiveram {item} refrigerado.",
+            "Veio morno e tive receio de consumir.",
+        ],
+    },
+    "ambient": {
+        "pos": [
+            "{item} veio bem conservado, sem sinal de calor excessivo.",
+            "A temperatura de {item} estava adequada.",
+            "{item} não pegou calor no caminho.",
+            "Veio protegido do calor, como deveria.",
+        ],
+        "neg": [
+            "{item} pegou calor demais no caminho.",
+            "Veio quente de ter ficado no sol.",
+            "O calor da entrega alterou a textura de {item}.",
+            "{item} veio abafado e quente demais.",
         ],
     },
 }
 
 OPENERS: Final[list[str]] = [
-    "",
-    "",
-    "Pedi {item}. ",
-    "Pedido de {item}: ",
-    "Primeira vez pedindo aqui. ",
-    "Pedi pro jantar. ",
+    "Pedi {item}.",
+    "Sobre {item}:",
+    "Meu pedido foi {item}.",
+    "Já é a segunda vez que peço aqui.",
+    "Foi minha primeira compra aqui.",
+    "Recebi agora meu pedido.",
+    "Pedi pra dividir aqui em casa.",
+    "Resolvi experimentar {item}.",
 ]
 CLOSERS: Final[dict[str, list[str]]] = {
     "low": [
-        "Não recomendo.",
-        "Vou pensar duas vezes antes de pedir de novo.",
-        "Decepcionante.",
-        "",
+        "Não pediria de novo.",
+        "Fiquei decepcionado.",
+        "Não valeu a pena.",
+        "Espero que melhorem.",
+        "Foi uma experiência ruim.",
     ],
-    "mid": ["Dá pra melhorar.", "Ok, nada demais.", "Foi razoável.", ""],
-    "high": ["Recomendo!", "Já virou meu pedido fixo.", "Nota 10.", ""],
+    "mid": [
+        "Dá pra melhorar.",
+        "No geral, foi razoável.",
+        "Fiquei dividido sobre o pedido.",
+        "Algumas coisas precisam melhorar.",
+        "Minha experiência foi mais ou menos.",
+    ],
+    "mixed": [
+        "Gostei de algumas coisas, mas tem o que melhorar.",
+        "Voltaria se resolvessem esse problema.",
+        "O pedido teve pontos bons e ruins.",
+        "Não foi tudo como eu esperava.",
+        "Tomara que acertem isso na próxima.",
+    ],
+    "high": [
+        "Pediria novamente.",
+        "Gostei da experiência.",
+        "Valeu a compra.",
+        "Vou pedir de novo.",
+        "Recomendo esse lugar.",
+    ],
 }
+
+
+def temperature_profile(item: str, category: str) -> str:
+    """Choose the expected serving temperature, including mixed-menu restaurants."""
+    if category == "açaí" or item in {
+        "Combo 20 Peças",
+        "Temaki Salmão",
+        "Bolo de Pote",
+        "Torta de Limão",
+    }:
+        return "cold"
+    if category == "doces":
+        return "ambient"
+    return "hot"
+
+
+def _render_aspect(
+    aspect: Aspect, polarity: Polarity, item: str, category: str, rng: random.Random
+) -> str:
+    pool = (
+        TEMPERATURE_TEMPLATES[temperature_profile(item, category)][polarity]
+        if aspect == "temperatura"
+        else TEMPLATES[aspect][polarity]
+    )
+    template = rng.choice(pool)
+    minutes = 0
+    if "{min}" in template:
+        minutes = rng.randint(70, 120) if polarity == "neg" else rng.randint(18, 35)
+    return template.format(item=item.lower(), min=minutes)
 
 
 @dataclass(frozen=True)
@@ -206,7 +379,7 @@ RESTAURANTS: Final[tuple[Restaurant, ...]] = (
         "churrasco",
         "Vila Industrial",
         ("Prato Executivo Picanha", "Espetinho Misto", "Costela no Bafo", "Linguiça Artesanal"),
-        {"preco": 0.30, "sabor": 0.05},
+        {"preco": 0.30, "sabor": 0.15},
     ),
     Restaurant(
         "rest_008",
@@ -261,7 +434,12 @@ def _add_noise(text: str, rng: random.Random) -> str:
 
 
 def _build_review(
-    idx: int, rest: Restaurant, end: date, days: int, rng: random.Random
+    idx: int,
+    rest: Restaurant,
+    end: date,
+    days: int,
+    rng: random.Random,
+    language_rng: random.Random,
 ) -> SyntheticReview:
     review_date = end - timedelta(days=rng.randrange(days))
     item = rng.choice(rest.menu)
@@ -279,18 +457,27 @@ def _build_review(
     score = 3.8 + 0.4 * min(n_pos, 3) - 1.4 * n_neg + rng.gauss(0, 0.45)
     rating = round(_clamp(score, 1, 5))
 
+    if n_neg:
+        rating = min(rating, 4 if n_pos else 3)
     parts: list[str] = []
     ordered = list(aspects.items())
-    rng.shuffle(ordered)
-    for a, pol in ordered:
-        minutes = rng.randint(70, 120) if pol == "neg" else rng.randint(18, 35)
-        parts.append(rng.choice(TEMPLATES[a][pol]).format(item=item, min=minutes))
+    language_rng.shuffle(ordered)
+    for aspect, polarity in ordered:
+        phrase = _render_aspect(aspect, polarity, item, rest.category, language_rng)
+        parts.append(phrase)
 
-    bucket = "low" if rating <= 2 else "mid" if rating == 3 else "high"
-    text = (
-        rng.choice(OPENERS).format(item=item) + " ".join(parts) + " " + rng.choice(CLOSERS[bucket])
-    )
-    text = _add_noise(text, rng)
+    if rating <= 2:
+        bucket = "low"
+    elif rating == 3:
+        bucket = "mid"
+    else:
+        bucket = "mixed" if n_neg else "high"
+    # Most customers go straight to the point; optional wrappers must not dominate the corpus.
+    if language_rng.random() < 0.20:
+        parts.insert(0, language_rng.choice(OPENERS).format(item=item.lower()))
+    if language_rng.random() < 0.20:
+        parts.append(language_rng.choice(CLOSERS[bucket]))
+    text = _add_noise(" ".join(parts), language_rng)
 
     return SyntheticReview(
         id=f"rev_{idx:06d}",
@@ -309,7 +496,13 @@ def generate(n: int, seed: int, end: date, days: int) -> list[SyntheticReview]:
     if n < 1 or days < 1:
         raise ValueError("n and days must be positive")
     rng = random.Random(seed)
-    return [_build_review(i + 1, rng.choice(RESTAURANTS), end, days, rng) for i in range(n)]
+    # Stable language streams keep template edits from perturbing population statistics.
+    return [
+        _build_review(
+            i + 1, rng.choice(RESTAURANTS), end, days, rng, random.Random(f"{seed}:language:{i}")
+        )
+        for i in range(n)
+    ]
 
 
 def write_jsonl(reviews: list[SyntheticReview], path: Path) -> None:
