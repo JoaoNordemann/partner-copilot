@@ -1,0 +1,8 @@
+# Dependencies for the current automated tests and lint checks only.
+# Direct versions validated on Python 3.14.7; transitive dependencies are resolved by pip.
+# Does not install the full inference/training stack from pyproject.toml.
+pydantic==2.14.2
+pydantic-settings==2.16.2
+chromadb==1.5.9
+pytest==9.2.0
+ruff==0.17.3
