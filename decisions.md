@@ -115,3 +115,14 @@ O pipeline reporta contagens reais de documentos novos/existentes e ignora regis
 mas falhas de infraestrutura e de integridade interrompem o processo. Reexecução é idempotente.
 Os contratos congelados de gold/treino/RAG não foram alterados. Regras completas em
 `docs/ingestion.md`.
+
+## CLI e reset explícito
+
+O script de entrada limita-se a parsing, configuração e apresentação. A orquestração
+passou para `ingestion/service.py`. Flags de dados, banco, modelo e batch sobrescrevem
+os defaults conforme aplicável, sem alterar a configuração global em cache.
+
+`--reset` autoriza limpar somente a collection do store selecionado, após validar os splits
+e preparar modelo/tokenizador. O modo padrão não apaga documentos e rejeita collections
+com IDs fora do RAG. O reset explícito permite reconstruir essa collection sem afetar outras.
+Falhas após a exclusão não são transacionais; a reexecução continua idempotente.

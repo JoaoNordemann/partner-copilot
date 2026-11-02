@@ -32,18 +32,28 @@ class TokenTextSplitter:
         self.provider = provider
         self.overlap_tokens = overlap_tokens
         self.max_tokens = max_tokens
+        self._context: tuple[Any, int, int, str] | None = None
+
+    def prepare(self) -> tuple[Any, int, int, str]:
+        """Lazily validate the effective budget; reset orchestration can preflight this."""
+        if self._context is None:
+            tokenizer, model_limit, prefix = self.provider.document_tokenizer()
+            limit = (
+                min(model_limit, self.max_tokens) if self.max_tokens is not None else model_limit
+            )
+            prefix_size = len(tokenizer(prefix, add_special_tokens=False)["input_ids"])
+            capacity = limit - prefix_size - tokenizer.num_special_tokens_to_add(pair=False)
+            if capacity <= self.overlap_tokens:
+                raise RuntimeError(
+                    "Chunk token budget must exceed overlap after prefixes/special tokens"
+                )
+            self._context = (tokenizer, limit, capacity, prefix)
+        return self._context
 
     def split(self, text: str) -> list[str]:
         if not text.strip():
             raise InvalidChunkInput("Review text must not be blank")
-        tokenizer, model_limit, prefix = self.provider.document_tokenizer()
-        limit = min(model_limit, self.max_tokens) if self.max_tokens is not None else model_limit
-        prefix_size = len(tokenizer(prefix, add_special_tokens=False)["input_ids"])
-        capacity = limit - prefix_size - tokenizer.num_special_tokens_to_add(pair=False)
-        if capacity <= self.overlap_tokens:
-            raise RuntimeError(
-                "Chunk token budget must exceed overlap after prefixes/special tokens"
-            )
+        tokenizer, limit, capacity, prefix = self.prepare()
         try:
             encoded = tokenizer(
                 text,

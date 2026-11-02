@@ -139,3 +139,11 @@ Com o MiniLM real em cache e collections temporárias em `work/`:
   exatamente ao manifesto, sem gold ou train_pool.
 
 Dados brutos, snapshots de anotação e splits não foram modificados pela validação.
+
+## Entrada por CLI
+
+A entrada aceita `--input`, `--db-path`, `--model` (alias `--embedding-model`),
+`--batch-size` e `--reset`. Argumentos explícitos prevalecem sobre `.env` e ambiente.
+A orquestração fica em `ingestion/service.py`, não no script de argumentos.
+O reset explícito é limitado à collection selecionada e só acontece após validar a fonte
+e preparar o modelo/tokenizador. Consulte [ingestion-cli.md](ingestion-cli.md).

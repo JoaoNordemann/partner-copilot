@@ -138,3 +138,14 @@ excedem o contexto do modelo são divididas por tokens, mantendo a ID de origem 
 A reexecução não duplica documentos e remove chunks obsoletos de reviews atualizadas.
 A CLI continua limitada ao split RAG validado. Estratégia, limites e contadores estão em
 [docs/ingestion.md](docs/ingestion.md).
+
+## CLI de ingestão
+
+```powershell
+python scripts/ingest.py --input data/splits/rag.jsonl --db-path data/chroma --model paraphrase-multilingual-MiniLM-L12-v2 --batch-size 128
+```
+
+`--reset` limpa somente a collection selecionada antes de reingerir. A validação do split
+e a preparação do modelo ocorrem antes de qualquer exclusão. Sem a flag, mantém-se o upsert.
+O script apenas trata argumentos e delega ao serviço de ingestão. Precedência, reset e
+códigos de saída estão em [docs/ingestion-cli.md](docs/ingestion-cli.md).

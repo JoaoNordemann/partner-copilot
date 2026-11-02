@@ -1,18 +1,16 @@
 #!/usr/bin/env python
-"""Ingest review JSONL using the configured multilingual embedding model.
+"""Ingest the registered RAG split into persistent Chroma storage."""
 
-Run from the repository root after installing the package:
-    python scripts/ingest.py --batch-size 128
-"""
+from __future__ import annotations
 
 import argparse
 import logging
 from pathlib import Path
 
-from partner_copilot.config import get_settings
-from partner_copilot.data_splits import validate_rag_collection_ids, validate_rag_input
-from partner_copilot.ingestion.chunking import TokenTextSplitter
-from partner_copilot.ingestion.pipeline import IngestionPipeline
+from pydantic import ValidationError
+
+from partner_copilot.config import Settings
+from partner_copilot.ingestion.service import IngestionPreflightError, run_ingestion
 
 logger = logging.getLogger(__name__)
 
@@ -24,55 +22,68 @@ def positive_int(value: str) -> int:
     return number
 
 
-def main() -> None:
+def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--input",
         type=Path,
-        help="Default: DATA_SPLITS_DIR/rag.jsonl; must match the registered RAG split",
+        help="Data path; default: DATA_SPLITS_DIR/rag.jsonl (registered RAG split)",
     )
-    parser.add_argument("--batch-size", type=positive_int, default=128)
-    args = parser.parse_args()
-    logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
-    settings = get_settings()
-    path = args.input or settings.data_splits_dir / "rag.jsonl"
-    if not path.is_file():
-        parser.error(f"Input file does not exist: {path}")
-    try:
-        validate_rag_input(path, settings.data_splits_dir)
-    except (ValueError, OSError) as exc:
-        parser.error(f"Split validation failed: {exc}. Run scripts/prepare_data_splits.py first.")
-    settings.export_hf_env()
-    from partner_copilot.ingestion.chroma_store import ChromaStore
+    parser.add_argument(
+        "--db-path", type=Path, help="Persistent database path; default: CHROMA_PATH"
+    )
+    parser.add_argument(
+        "--model",
+        "--embedding-model",
+        dest="model",
+        help="Embedding model; default: EMBEDDING_MODEL",
+    )
+    parser.add_argument(
+        "--batch-size",
+        type=positive_int,
+        default=128,
+        help="Document upsert batch size (default: 128)",
+    )
+    parser.add_argument(
+        "--reset",
+        action="store_true",
+        help="Clear only the selected collection before re-ingestion",
+    )
+    return parser
 
-    store = ChromaStore(
-        path=settings.chroma_path,
-        model=settings.embedding_model,
-        settings=settings,
-    )
+
+def main(argv: list[str] | None = None) -> int:
+    parser = build_parser()
+    args = parser.parse_args(argv)
+    logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
+    overrides = {}
+    if args.db_path is not None:
+        overrides["chroma_path"] = args.db_path
+    if args.model is not None:
+        overrides["embedding_model"] = args.model
     try:
-        validate_rag_collection_ids(store.review_ids(), settings.data_splits_dir)
-    except ValueError as exc:
+        settings = Settings(**overrides)
+    except ValidationError as exc:
         parser.error(str(exc))
-    splitter = TokenTextSplitter(
-        store.embedder,
-        max_tokens=settings.ingestion_chunk_max_tokens,
-        overlap_tokens=settings.ingestion_chunk_overlap_tokens,
-    )
-    report = IngestionPipeline(
-        store,
-        splitter,
-        batch_size=args.batch_size,
-        max_review_chars=settings.ingestion_max_review_chars,
-    ).run(path)
+    try:
+        outcome = run_ingestion(
+            settings, input_path=args.input, batch_size=args.batch_size, reset=args.reset
+        )
+    except IngestionPreflightError as exc:
+        parser.error(str(exc))
+    except Exception:
+        logger.exception("Ingestion failed")
+        return 1
     logger.info(
-        "Ingestion report=%s; collection=%s; path=%s; total=%d",
-        report.to_dict(),
-        store.collection_name,
-        settings.chroma_path,
-        store.count(),
+        "Ingestion report=%s; collection=%s; path=%s; total=%d; reset_removed=%d",
+        outcome.report.to_dict(),
+        outcome.collection,
+        outcome.database_path,
+        outcome.total_documents,
+        outcome.reset_removed,
     )
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())
