@@ -1,6 +1,6 @@
 """Configuração central do projeto, validada via pydantic-settings.
 
-Valores vêm (em ordem de precedência) de: variáveis de ambiente > arquivo `.env` > defaults.
+Precedência: argumentos explícitos > ambiente > arquivo `.env` > defaults.
 """
 
 from __future__ import annotations
@@ -13,6 +13,9 @@ from typing import Literal
 
 from pydantic import Field, SecretStr, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+MULTILINGUAL_MINILM_MODEL = "paraphrase-multilingual-MiniLM-L12-v2"
+MISTRAL_INSTRUCT_MODEL = "mistralai/Mistral-7B-Instruct-v0.2"
 
 
 class Settings(BaseSettings):
@@ -29,17 +32,20 @@ class Settings(BaseSettings):
     # --- Dados -----------------------------------------------------------
     data_raw_dir: Path = Path("data/raw")
     data_splits_dir: Path = Path("data/splits")
+    data_gold_dir: Path = Path("data/gold")
+    data_external_dir: Path = Path("data/external")
+    annotation_guide_path: Path = Path("docs/annotation-guide.md")
     chroma_path: Path = Path("data/chroma")
     chroma_collection: str = Field(
         default="reviews", description="Prefixo do nome automático da collection por modelo."
     )
 
     # --- Modelos ---------------------------------------------------------
-    embedding_model: str = "paraphrase-multilingual-MiniLM-L12-v2"
+    embedding_model: str = MULTILINGUAL_MINILM_MODEL
     embedding_batch_size: int = Field(default=32, ge=1, le=4096)
     embedding_device: str = "cpu"
     embedding_prefix_mode: Literal["auto", "none", "e5"] = "auto"
-    llm_model_id: str = "mistralai/Mistral-7B-Instruct-v0.2"
+    llm_model_id: str = MISTRAL_INSTRUCT_MODEL
 
     ingestion_chunk_max_tokens: int | None = Field(default=None, ge=8)
     ingestion_chunk_overlap_tokens: int = Field(default=16, ge=0)
@@ -54,11 +60,11 @@ class Settings(BaseSettings):
     temperature: float = Field(default=0.3, ge=0.0, le=2.0)
     top_p: float = Field(default=0.9, gt=0.0, le=1.0)
 
-    @field_validator("embedding_model", "embedding_device")
+    @field_validator("embedding_model", "embedding_device", "llm_model_id")
     @classmethod
     def _non_blank_embedding_setting(cls, value: str) -> str:
         if not value.strip():
-            raise ValueError("Embedding model and device must not be blank")
+            raise ValueError("Model names and embedding device must not be blank")
         return value.strip()
 
     @field_validator("hf_token", mode="before")
@@ -76,6 +82,18 @@ class Settings(BaseSettings):
         ):
             raise ValueError("Invalid Chroma collection name (3-63 ASCII characters).")
         return v
+
+    @property
+    def raw_reviews_path(self) -> Path:
+        return self.data_raw_dir / "reviews.jsonl"
+
+    @property
+    def external_reviews_dir(self) -> Path:
+        return self.data_external_dir / "b2w_reviews01"
+
+    @property
+    def gold_exposure_path(self) -> Path:
+        return self.data_gold_dir / "prior_exposure.json"
 
     def require_hf_token(self) -> str:
         """Retorna o token ou falha com mensagem clara (modelos gated, push para o Hub)."""

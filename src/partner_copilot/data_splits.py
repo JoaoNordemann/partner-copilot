@@ -176,21 +176,30 @@ def validate_splits(folder: Path) -> dict:
     return manifest
 
 
-def load_absa_train_pool(folder: Path = Path("data/splits")) -> list[Review]:
+def load_absa_train_pool(folder: Path | None = None) -> list[Review]:
     """Validate every partition before returning any training example."""
+    from partner_copilot.config import get_settings
+
+    folder = folder if folder is not None else get_settings().data_splits_dir
     validate_splits(folder)
     return [Review.model_validate(row) for row in read_jsonl(folder / "train_pool.jsonl")]
 
 
-def validate_rag_input(path: Path, folder: Path = Path("data/splits")) -> None:
+def validate_rag_input(path: Path, folder: Path | None = None) -> None:
     """Reject the full corpus, training pool or gold before loading embeddings."""
+    from partner_copilot.config import get_settings
+
+    folder = folder if folder is not None else get_settings().data_splits_dir
     manifest = validate_splits(folder)
     if file_key(path) != manifest["file_sha256_lf"]["rag.jsonl"]:
         raise ValueError("RAG input must match the registered rag split, not the full corpus")
 
 
-def validate_rag_collection_ids(ids: list[str], folder: Path = Path("data/splits")) -> None:
+def validate_rag_collection_ids(ids: list[str], folder: Path | None = None) -> None:
     """Check source review IDs (resolve chunks with store.review_ids() first)."""
+    from partner_copilot.config import get_settings
+
+    folder = folder if folder is not None else get_settings().data_splits_dir
     manifest = validate_splits(folder)
     if set(ids) - set(manifest["ids"]["rag"]):
         raise ValueError(

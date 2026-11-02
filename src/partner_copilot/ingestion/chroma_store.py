@@ -8,7 +8,7 @@ from pathlib import Path
 import chromadb
 from chromadb.api.types import EmbeddingFunction, Metadata, Where
 
-from partner_copilot.config import Settings, get_settings
+from partner_copilot.config import MULTILINGUAL_MINILM_MODEL, Settings, get_settings
 from partner_copilot.ingestion.documents import IndexedDocument, WriteResult
 from partner_copilot.ingestion.embedder import Embedder, SentenceTransformerEmbedder
 from partner_copilot.schemas import RetrievedDoc, Review
@@ -84,8 +84,7 @@ class ChromaStore:
             # The previous implementation used this exact model with normalization and no prefixes.
             compatible_legacy = (
                 metadata.get("embedding_input_contract") is None
-                and model.removeprefix("sentence-transformers/")
-                == "paraphrase-multilingual-MiniLM-L12-v2"
+                and model.removeprefix("sentence-transformers/") == MULTILINGUAL_MINILM_MODEL
                 and self.embedder is not None
                 and not self.embedder.document_prefix
                 and not self.embedder.query_prefix

@@ -149,3 +149,5 @@ python scripts/ingest.py --input data/splits/rag.jsonl --db-path data/chroma --m
 e a preparação do modelo ocorrem antes de qualquer exclusão. Sem a flag, mantém-se o upsert.
 O script apenas trata argumentos e delega ao serviço de ingestão. Precedência, reset e
 códigos de saída estão em [docs/ingestion-cli.md](docs/ingestion-cli.md).
+
+Configuração de paths, modelos e precedência: [guia de configuração](docs/configuration.md).

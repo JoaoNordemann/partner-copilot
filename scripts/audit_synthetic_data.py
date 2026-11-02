@@ -116,10 +116,14 @@ def audit(rows: list[dict], restaurants: tuple, end: date) -> dict:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--input", type=Path, default=Path("data/raw/reviews.jsonl"))
+    parser.add_argument("--input", type=Path)
     parser.add_argument("--end-date", type=date.fromisoformat, required=True)
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
+    from partner_copilot.config import get_settings
+
+    settings = get_settings()
+    args.input = args.input if args.input is not None else settings.raw_reviews_path
     generator_path = Path(__file__).with_name("generate_synthetic_data.py")
     spec = importlib.util.spec_from_file_location("audited_generator", generator_path)
     assert spec is not None and spec.loader is not None

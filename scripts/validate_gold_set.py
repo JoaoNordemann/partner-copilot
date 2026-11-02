@@ -105,10 +105,16 @@ def validate(folder: Path, source: Path, guide: Path) -> dict:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--folder", type=Path, default=Path("data/gold"))
-    parser.add_argument("--source", type=Path, default=Path("data/raw/reviews.jsonl"))
-    parser.add_argument("--guide", type=Path, default=Path("docs/annotation-guide.md"))
+    parser.add_argument("--folder", type=Path)
+    parser.add_argument("--source", type=Path)
+    parser.add_argument("--guide", type=Path)
     args = parser.parse_args()
+    from partner_copilot.config import get_settings
+
+    settings = get_settings()
+    args.folder = args.folder if args.folder is not None else settings.data_gold_dir
+    args.source = args.source if args.source is not None else settings.raw_reviews_path
+    args.guide = args.guide if args.guide is not None else settings.annotation_guide_path
     print(json.dumps(validate(args.folder, args.source, args.guide), ensure_ascii=True))
 
 

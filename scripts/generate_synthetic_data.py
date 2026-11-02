@@ -537,7 +537,7 @@ def write_restaurants(path: Path) -> None:
 
 def validate_against_schema(reviews: list[SyntheticReview]) -> None:
     """Valida contra partner_copilot.schemas.Review (requer `pip install -e .`)."""
-    from partner_copilot.schemas import Review  # import tardio: script roda sem o pacote
+    from partner_copilot.schemas import Review
 
     for r in reviews:
         Review.model_validate(asdict(r))
@@ -555,7 +555,7 @@ def _parse_args() -> argparse.Namespace:
         default=date.today(),
         help="última data possível (ISO). Fixe para reprodutibilidade total.",
     )
-    p.add_argument("--out-dir", type=Path, default=Path("data/raw"))
+    p.add_argument("--out-dir", type=Path)
     p.add_argument("--format", choices=("jsonl", "csv"), default="jsonl")
     p.add_argument("--validate", action="store_true", help="valida contra o schema Review")
     return p.parse_args()
@@ -563,6 +563,10 @@ def _parse_args() -> argparse.Namespace:
 
 def main() -> None:
     args = _parse_args()
+    from partner_copilot.config import get_settings
+
+    settings = get_settings()
+    args.out_dir = args.out_dir if args.out_dir is not None else settings.data_raw_dir
     args.out_dir.mkdir(parents=True, exist_ok=True)
 
     reviews = generate(args.n, args.seed, args.end_date, args.days)

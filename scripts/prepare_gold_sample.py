@@ -77,12 +77,19 @@ def select_reviews(rows: list[dict], exposure: dict, seed: int) -> tuple[list[di
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--input", type=Path, default=Path("data/raw/reviews.jsonl"))
-    parser.add_argument("--out-dir", type=Path, default=Path("data/gold"))
-    parser.add_argument("--exposure", type=Path, default=Path("data/gold/prior_exposure.json"))
-    parser.add_argument("--guide", type=Path, default=Path("docs/annotation-guide.md"))
+    parser.add_argument("--input", type=Path)
+    parser.add_argument("--out-dir", type=Path)
+    parser.add_argument("--exposure", type=Path)
+    parser.add_argument("--guide", type=Path)
     parser.add_argument("--seed", type=int, default=1729)
     args = parser.parse_args()
+    from partner_copilot.config import get_settings
+
+    settings = get_settings()
+    args.input = args.input if args.input is not None else settings.raw_reviews_path
+    args.out_dir = args.out_dir if args.out_dir is not None else settings.data_gold_dir
+    args.exposure = args.exposure if args.exposure is not None else settings.gold_exposure_path
+    args.guide = args.guide if args.guide is not None else settings.annotation_guide_path
     guide = args.guide.read_bytes()
     if len(guide.decode("utf-8-sig").splitlines()) != 10:
         parser.error("The annotation guide must be written with exactly ten rules first")

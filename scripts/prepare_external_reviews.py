@@ -24,7 +24,6 @@ SOURCE_URL = f"{SOURCE_ROOT}/B2W-Reviews01.csv"
 SOURCE_SHA256 = "821fb0bf9f7230b0fba4e4f9fadd75a66d1a9ff0b1657810791d33007eb2ab38"
 LICENSE_URL = "https://creativecommons.org/licenses/by-nc-sa/4.0/"
 CONTACT = re.compile(r"[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}|https?://|\b\d{10,14}\b")
-DEFAULT_OUTPUT = Path("data/external/b2w_reviews01")
 
 
 def file_sha256(path: Path) -> str:
@@ -132,11 +131,15 @@ def select_sample(
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--out-dir", type=Path, default=DEFAULT_OUTPUT)
+    parser.add_argument("--out-dir", type=Path)
     parser.add_argument("--per-rating", type=int, default=40)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--time-budget-minutes", type=float, default=10)
     args = parser.parse_args()
+    from partner_copilot.config import get_settings
+
+    settings = get_settings()
+    args.out_dir = args.out_dir if args.out_dir is not None else settings.external_reviews_dir
     if args.per_rating < 1 or not 0 < args.time_budget_minutes <= 90:
         parser.error("per-rating must be positive and time budget must be in (0, 90] minutes")
     started = time.monotonic()
