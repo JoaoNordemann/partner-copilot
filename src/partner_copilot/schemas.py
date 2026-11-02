@@ -3,7 +3,7 @@
 from datetime import date
 from typing import Literal
 
-from pydantic import BaseModel, Field, computed_field
+from pydantic import BaseModel, Field, computed_field, field_validator
 
 
 class Review(BaseModel):
@@ -15,7 +15,17 @@ class Review(BaseModel):
     created_at: date
     category: str = Field(min_length=1)
     bairro: str = Field(min_length=1)
+    city: str | None = Field(default=None, min_length=1)
     aspects: dict[str, Literal["pos", "neg"]] = Field(default_factory=dict)
+
+    @field_validator("city")
+    @classmethod
+    def _valid_city(cls, value: str | None) -> str | None:
+        if value is None:
+            return None
+        if not value.strip():
+            raise ValueError("city must not be blank when provided")
+        return value.strip()
 
     @computed_field
     @property

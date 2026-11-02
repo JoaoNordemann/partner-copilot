@@ -110,3 +110,21 @@ O futuro treinador de ABSA deve carregar os dados com
 retornar exemplos. A ingestão recusa o corpus integral e coleções antigas com IDs
 fora do split RAG; nesse caso, escolha uma nova `CHROMA_COLLECTION` no ambiente.
 As regras e os limites dessa separação estão em [decisions.md](decisions.md).
+
+## Embeddings multilíngues
+
+`SentenceTransformerEmbedder`, em `src/partner_copilot/ingestion/embedder.py`, expõe
+`embed_documents` e `embed_query`, com carregamento lazy, batching e normalização L2.
+O modelo vem de `EMBEDDING_MODEL`; `EMBEDDING_BATCH_SIZE`, `EMBEDDING_DEVICE` e
+`EMBEDDING_PREFIX_MODE` controlam a inferência. E5 usa prefixos distintos para documentos
+e consultas. Consulte [docs/embeddings.md](docs/embeddings.md) para exemplos e compatibilidade
+entre coleções. A ingestão permanece limitada ao split RAG; dados públicos ficam separados.
+
+## Store persistente
+
+A classe `ChromaStore` está em `src/partner_copilot/ingestion/chroma_store.py`, com
+`upsert`, `count`, `reset` e busca básica. O caminho vem de `CHROMA_PATH`; o nome
+automático combina `CHROMA_COLLECTION` como prefixo, modelo e hash do contrato.
+Metadados incluem cidade quando informada, sem inferir cidade a partir de bairro.
+`reset()` remove somente documentos da collection alvo. API, filtros e persistência
+estão descritos em [docs/chroma-store.md](docs/chroma-store.md).

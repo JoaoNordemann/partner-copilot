@@ -42,12 +42,12 @@ def main() -> None:
     except (ValueError, OSError) as exc:
         parser.error(f"Split validation failed: {exc}. Run scripts/prepare_data_splits.py first.")
     settings.export_hf_env()
-    from partner_copilot.retrieval.store import ChromaStore
+    from partner_copilot.ingestion.chroma_store import ChromaStore
 
     store = ChromaStore(
         path=settings.chroma_path,
         model=settings.embedding_model,
-        collection=settings.chroma_collection,
+        settings=settings,
     )
     try:
         validate_rag_collection_ids(store.col.get(include=[])["ids"], settings.data_splits_dir)
@@ -57,9 +57,9 @@ def main() -> None:
     logger.info(
         "Processed %d reviews; collection=%s; path=%s; total=%d",
         processed,
-        settings.chroma_collection,
+        store.collection_name,
         settings.chroma_path,
-        store.col.count(),
+        store.count(),
     )
 
 

@@ -9,6 +9,7 @@ import os
 import re
 from functools import lru_cache
 from pathlib import Path
+from typing import Literal
 
 from pydantic import Field, SecretStr, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -29,10 +30,15 @@ class Settings(BaseSettings):
     data_raw_dir: Path = Path("data/raw")
     data_splits_dir: Path = Path("data/splits")
     chroma_path: Path = Path("data/chroma")
-    chroma_collection: str = "reviews"
+    chroma_collection: str = Field(
+        default="reviews", description="Prefixo do nome automático da collection por modelo."
+    )
 
     # --- Modelos ---------------------------------------------------------
     embedding_model: str = "paraphrase-multilingual-MiniLM-L12-v2"
+    embedding_batch_size: int = Field(default=32, ge=1, le=4096)
+    embedding_device: str = "cpu"
+    embedding_prefix_mode: Literal["auto", "none", "e5"] = "auto"
     llm_model_id: str = "mistralai/Mistral-7B-Instruct-v0.2"
 
     # --- Retrieval -------------------------------------------------------
@@ -43,6 +49,13 @@ class Settings(BaseSettings):
     max_new_tokens: int = Field(default=400, ge=16, le=2048)
     temperature: float = Field(default=0.3, ge=0.0, le=2.0)
     top_p: float = Field(default=0.9, gt=0.0, le=1.0)
+
+    @field_validator("embedding_model", "embedding_device")
+    @classmethod
+    def _non_blank_embedding_setting(cls, value: str) -> str:
+        if not value.strip():
+            raise ValueError("Embedding model and device must not be blank")
+        return value.strip()
 
     @field_validator("hf_token", mode="before")
     @classmethod

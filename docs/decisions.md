@@ -45,3 +45,25 @@ Testes verificam filtros combinados, derivação da data, rejeição de polarida
 recuperação do mapa e ausência real de chaves após atualização e reabertura da coleção.
 
 Parâmetros e integridade do dataset estão em [decisions.md](../decisions.md).
+
+## Contrato dos embeddings
+
+O modelo é definido por `EMBEDDING_MODEL`, com MiniLM multilíngue como padrão.
+Documentos e consultas usam a interface do embedder em `ingestion/embedder.py`, com
+normalização L2 e vetores explícitos no Chroma. O modo E5 aplica `passage: ` nos documentos
+e `query: ` nas consultas. A coleção registra esse pré-processamento para impedir mistura
+de vetores incompatíveis. Trocar modelo ou prefixos exige outra coleção, mesmo com a mesma
+dimensão; batching e dispositivo são configurações de execução. Detalhes em
+[embeddings.md](embeddings.md).
+
+## Store persistente e cidade
+
+A persistência é implementada em `ingestion/chroma_store.py`, com alias do import anterior.
+O nome automático combina o prefixo configurado, o modelo e um hash do contrato dos vetores;
+o nome literal explícito continua disponível para abrir collections existentes.
+`reset()` limpa somente os documentos da collection alvo, sem reset global do cliente.
+
+`city` é opcional no `Review` e nos metadados: cidade desconhecida significa chave ausente.
+Não inferimos cidade por bairro nem alteramos os dados brutos para preencher esse campo.
+Os demais metadados filtráveis permanecem escalares; `created_at_int` continua YYYYMMDD.
+Detalhes e exemplos em [chroma-store.md](chroma-store.md).

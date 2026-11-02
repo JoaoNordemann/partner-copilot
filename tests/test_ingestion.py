@@ -108,7 +108,12 @@ def test_persistent_ingestion_is_idempotent_and_filters_metadata(tmp_path):
     )
     assert reopened.col.count() == 3
     with pytest.raises(ValueError, match="embedding model"):
-        ChromaStore(tmp_path / "chroma", "other-model", embedding_function=TinyEmbedding())
+        ChromaStore(
+            tmp_path / "chroma",
+            "other-model",
+            collection=reopened.collection_name,
+            embedding_function=TinyEmbedding(),
+        )
 
 
 def test_empty_store_and_empty_upsert(tmp_path):
