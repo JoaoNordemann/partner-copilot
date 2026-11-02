@@ -9,6 +9,7 @@ import chromadb
 from chromadb.api.types import EmbeddingFunction, Metadata, Where
 
 from partner_copilot.config import Settings, get_settings
+from partner_copilot.ingestion.documents import IndexedDocument, WriteResult
 from partner_copilot.ingestion.embedder import Embedder, SentenceTransformerEmbedder
 from partner_copilot.schemas import RetrievedDoc, Review
 
@@ -113,11 +114,85 @@ class ChromaStore:
             removed += len(ids)
 
     def upsert(self, reviews: list[Review]) -> None:
+        documents = [
+            review
+            if isinstance(review, IndexedDocument)
+            else IndexedDocument(
+                **review.model_dump(exclude={"created_at_int"}), review_id=review.id
+            )
+            for review in reviews
+        ]
+        self.upsert_documents(documents)
+
+    def review_ids(self) -> list[str]:
+        """Resolve chunk IDs to source reviews for split membership checks."""
+        source_ids: set[str] = set()
+        offset = 0
+        while True:
+            result = self.col.get(limit=1000, offset=offset, include=["metadatas"])
+            if not result["ids"]:
+                return sorted(source_ids)
+            for document_id, metadata in zip(result["ids"], result["metadatas"], strict=True):
+                source_ids.add(str((metadata or {}).get("review_id", document_id)))
+            offset += len(result["ids"])
+
+    def upsert_documents(
+        self, documents: list[IndexedDocument], batch_size: int = 128
+    ) -> WriteResult:
+        if batch_size < 1:
+            raise ValueError("batch_size must be positive")
+        groups: dict[str, list[IndexedDocument]] = {}
+        seen_ids: set[str] = set()
+        for doc in documents:
+            if doc.id in seen_ids:
+                raise ValueError("Duplicate document IDs in the batch")
+            seen_ids.add(doc.id)
+            groups.setdefault(doc.review_id, []).append(doc)
+        for group in groups.values():
+            if any(doc.chunk_count != len(group) for doc in group) or {
+                doc.chunk_index for doc in group
+            } != set(range(len(group))):
+                raise ValueError("Every source review must include its complete chunk set")
+        result = WriteResult()
+        size = min(batch_size, self.client.get_max_batch_size())
+        for start in range(0, len(documents), size):
+            written = self._upsert_batch(documents[start : start + size])
+            result.inserted += written.inserted
+            result.updated += written.updated
+        # Only prune after every new chunk was persisted; metadata reads are batched too.
+        source_ids = list(groups)
+        keep = {doc.id for doc in documents}
+        stale: set[str] = set()
+        for start in range(0, len(source_ids), size):
+            source_batch = source_ids[start : start + size]
+            current = self.col.get(
+                where={"review_id": {"$in": source_batch}}, include=["metadatas"]
+            )
+            legacy = self.col.get(ids=source_batch, include=["metadatas"])
+            for found in (current, legacy):
+                for document_id, metadata in zip(found["ids"], found["metadatas"], strict=True):
+                    owner = (metadata or {}).get("review_id", document_id)
+                    if owner in groups and document_id not in keep:
+                        stale.add(document_id)
+        stale_ids = sorted(stale)
+        for start in range(0, len(stale_ids), size):
+            self.col.delete(ids=stale_ids[start : start + size])
+        result.stale_deleted = len(stale_ids)
+        return result
+
+    def _upsert_batch(self, reviews: list[IndexedDocument]) -> WriteResult:
         if not reviews:
-            return
+            return WriteResult()
         ids = [review.id for review in reviews]
         previous = self.col.get(ids=ids, include=["metadatas"])
         previous_metadata = dict(zip(previous["ids"], previous["metadatas"] or [], strict=True))
+        for review in reviews:
+            previous = previous_metadata.get(review.id)
+            if (
+                review.id in previous_metadata
+                and (previous or {}).get("review_id", review.id) != review.review_id
+            ):
+                raise ValueError("Document ID collides with a different source review")
         metadatas: list[Metadata] = []
         for review in reviews:
             metadatas.append(
@@ -130,6 +205,9 @@ class ChromaStore:
                     },
                     "aspects_json": json.dumps(review.aspects, ensure_ascii=False),
                     "restaurant_id": review.restaurant_id,
+                    "review_id": review.review_id,
+                    "chunk_index": review.chunk_index,
+                    "chunk_count": review.chunk_count,
                     "item": review.item or "",
                     "rating": review.rating,
                     "created_at": review.created_at.isoformat(),
@@ -156,6 +234,12 @@ class ChromaStore:
             documents=[review.text for review in reviews],
             metadatas=metadatas,
             embeddings=vectors,
+        )
+
+        existing_ids = set(previous_metadata)
+        return WriteResult(
+            inserted=sum(review.id not in existing_ids for review in reviews),
+            updated=sum(review.id in existing_ids for review in reviews),
         )
 
     def query(self, text: str, k: int, where: Where | None = None) -> list[RetrievedDoc]:
@@ -189,11 +273,19 @@ class ChromaStore:
             review = Review.model_validate(
                 {
                     **metadata,
-                    "id": review_id,
+                    "id": metadata.get("review_id", review_id),
                     "text": document,
                     "item": metadata.get("item") or None,
                     "aspects": json.loads(str(metadata["aspects_json"])),
                 }
             )
-            output.append(RetrievedDoc(review=review, score=1.0 - distance))
+            output.append(
+                RetrievedDoc(
+                    review=review,
+                    score=1.0 - distance,
+                    document_id=review_id,
+                    chunk_index=int(metadata.get("chunk_index", 0)),
+                    chunk_count=int(metadata.get("chunk_count", 1)),
+                )
+            )
         return output

@@ -102,3 +102,13 @@ python -m pytest tests/test_chroma_store.py -v
 Os testes usam vetores fixos, sem download: persistência entre processos, idempotência,
 reset vazio e com múltiplos lotes, isolamento entre collections/modelos, re-ingestão,
 tipos dos metadados, filtros combinados, cidade opcional e compatibilidade dos imports.
+
+## Documentos divididos e contagem de gravações
+
+A pipeline usa `upsert_documents` com conjuntos completos de chunks por review.
+Esse método retorna inseridos, atualizados e removidos obsoletos; aceita batches menores
+na gravação, mas só remove os chunks antigos após gravar todos os novos.
+Metadados adicionais `review_id`, `chunk_index` e `chunk_count` preservam a fonte e a ordem.
+`review_ids()` retorna as IDs de origem para validar os splits, enquanto `count()` conta
+documentos físicos. A query retorna ID original na review e ID física em `document_id`.
+Mais detalhes em [ingestion.md](ingestion.md).

@@ -57,8 +57,9 @@ incompatível exige outra coleção e novo índice, inclusive se ambos os modelo
 Coleções legadas do MiniLM multilíngue, já normalizadas e sem prefixos, são compatíveis;
 um índice E5 sem registro dos prefixos é recusado. Nada é apagado automaticamente.
 
-O tokenizador pode truncar textos conforme o limite do modelo; este módulo ainda não
-implementa chunking. Não há cache de vetores entre execuções. Trocar o modelo também exige
+A interface isolada de embeddings não divide textos. A pipeline de ingestão usa
+`TokenTextSplitter` com o tokenizador e o limite reais, evitando truncamento dos documentos
+que processa. O uso direto de encode fora da pipeline ainda deve respeitar o contexto. Não há cache de vetores entre execuções. Trocar o modelo também exige
 reavaliar o limiar de similaridade do retrieval, além de reconstruir o índice.
 
 ## Pré-requisitos conferidos

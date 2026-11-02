@@ -37,6 +37,9 @@ class Review(BaseModel):
 class RetrievedDoc(BaseModel):
     review: Review
     score: float
+    document_id: str | None = None
+    chunk_index: int = 0
+    chunk_count: int = 1
 
 
 class Answer(BaseModel):

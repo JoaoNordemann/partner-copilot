@@ -41,6 +41,10 @@ class Settings(BaseSettings):
     embedding_prefix_mode: Literal["auto", "none", "e5"] = "auto"
     llm_model_id: str = "mistralai/Mistral-7B-Instruct-v0.2"
 
+    ingestion_chunk_max_tokens: int | None = Field(default=None, ge=8)
+    ingestion_chunk_overlap_tokens: int = Field(default=16, ge=0)
+    ingestion_max_review_chars: int = Field(default=50000, ge=1)
+
     # --- Retrieval -------------------------------------------------------
     retrieval_k: int = Field(default=8, ge=1, le=50)
     retrieval_min_score: float = Field(default=0.25, ge=0.0, le=1.0)

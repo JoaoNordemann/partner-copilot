@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from collections.abc import Callable, Sequence
 from threading import Lock
-from typing import Protocol
+from typing import Any, Protocol
 
 import numpy as np
 
@@ -113,6 +113,15 @@ class SentenceTransformerEmbedder:
             self._dimension = dimension
             output.extend((vectors / norms).tolist())
         return output
+
+    def document_tokenizer(self) -> tuple[Any, int, str]:
+        """Lazily expose tokenizer and context size for lossless document chunking."""
+        encoder = self._get_encoder()
+        tokenizer = getattr(encoder, "tokenizer", None)
+        limit = getattr(encoder, "max_seq_length", None)
+        if tokenizer is None or not isinstance(limit, int) or limit < 1:
+            raise RuntimeError("Encoder does not expose its tokenizer and context size")
+        return tokenizer, limit, self.document_prefix
 
     def embed_documents(self, texts: Sequence[str]) -> list[list[float]]:
         """Return one normalized vector per document, in input order."""

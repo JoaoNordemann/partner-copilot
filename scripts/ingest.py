@@ -11,7 +11,8 @@ from pathlib import Path
 
 from partner_copilot.config import get_settings
 from partner_copilot.data_splits import validate_rag_collection_ids, validate_rag_input
-from partner_copilot.ingestion.indexer import ingest_reviews
+from partner_copilot.ingestion.chunking import TokenTextSplitter
+from partner_copilot.ingestion.pipeline import IngestionPipeline
 
 logger = logging.getLogger(__name__)
 
@@ -50,13 +51,23 @@ def main() -> None:
         settings=settings,
     )
     try:
-        validate_rag_collection_ids(store.col.get(include=[])["ids"], settings.data_splits_dir)
+        validate_rag_collection_ids(store.review_ids(), settings.data_splits_dir)
     except ValueError as exc:
         parser.error(str(exc))
-    processed = ingest_reviews(path, store, batch_size=args.batch_size)
+    splitter = TokenTextSplitter(
+        store.embedder,
+        max_tokens=settings.ingestion_chunk_max_tokens,
+        overlap_tokens=settings.ingestion_chunk_overlap_tokens,
+    )
+    report = IngestionPipeline(
+        store,
+        splitter,
+        batch_size=args.batch_size,
+        max_review_chars=settings.ingestion_max_review_chars,
+    ).run(path)
     logger.info(
-        "Processed %d reviews; collection=%s; path=%s; total=%d",
-        processed,
+        "Ingestion report=%s; collection=%s; path=%s; total=%d",
+        report.to_dict(),
         store.collection_name,
         settings.chroma_path,
         store.count(),

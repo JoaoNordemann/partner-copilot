@@ -100,3 +100,18 @@ Mudanças no corpus ou nas anotações congeladas exigem revisão explícita dos
 recriação dos splits. A ausência de vazamento literal não garante independência entre
 famílias de templates: o corpus ainda é sintético. O gold atual não deve ser apresentado
 como benchmark humano independente até a revisão correspondente.
+
+## Ingestão, IDs e chunking
+
+A CLI usa a pipeline tolerante em `ingestion/pipeline.py`. IDs autoritativas são preservadas;
+`review_id` é aceito como alias de entrada. Sem ID, usa SHA-256 de restaurante/data/texto.
+Reviews que cabem no contexto do embedder são documentos únicos; textos maiores são
+janelas de tokens com overlap de 16, descontando tokens especiais e prefixos E5.
+O limite de segurança por review é 50000 caracteres, configurável.
+
+Chunks possuem IDs determinísticas por fonte/índice e guardam a ID original para citações.
+Chunks obsoletos são removidos somente após a gravação completa da review atualizada.
+O pipeline reporta contagens reais de documentos novos/existentes e ignora registros inválidos,
+mas falhas de infraestrutura e de integridade interrompem o processo. Reexecução é idempotente.
+Os contratos congelados de gold/treino/RAG não foram alterados. Regras completas em
+`docs/ingestion.md`.

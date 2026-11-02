@@ -1,4 +1,4 @@
-"""Batch ingestion, independent from the concrete vector store."""
+"""Legacy fail-fast helper; use ingestion.pipeline for tolerant, chunked ingestion."""
 
 from pathlib import Path
 from typing import Protocol

@@ -190,7 +190,7 @@ def validate_rag_input(path: Path, folder: Path = Path("data/splits")) -> None:
 
 
 def validate_rag_collection_ids(ids: list[str], folder: Path = Path("data/splits")) -> None:
-    """Do not mix a previously indexed full corpus into the new RAG-only collection."""
+    """Check source review IDs (resolve chunks with store.review_ids() first)."""
     manifest = validate_splits(folder)
     if set(ids) - set(manifest["ids"]["rag"]):
         raise ValueError(

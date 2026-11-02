@@ -128,3 +128,13 @@ automático combina `CHROMA_COLLECTION` como prefixo, modelo e hash do contrato.
 Metadados incluem cidade quando informada, sem inferir cidade a partir de bairro.
 `reset()` remove somente documentos da collection alvo. API, filtros e persistência
 estão descritos em [docs/chroma-store.md](docs/chroma-store.md).
+
+## Pipeline de ingestão
+
+`ingestion/pipeline.py` valida JSONL, ignora registros inválidos com log por linha e
+retorna contagens de lidos, válidos, inseridos, atualizados e ignorados. IDs de origem
+são preservadas; quando ausentes, são derivadas de hash determinístico. Reviews que
+excedem o contexto do modelo são divididas por tokens, mantendo a ID de origem para citações.
+A reexecução não duplica documentos e remove chunks obsoletos de reviews atualizadas.
+A CLI continua limitada ao split RAG validado. Estratégia, limites e contadores estão em
+[docs/ingestion.md](docs/ingestion.md).
