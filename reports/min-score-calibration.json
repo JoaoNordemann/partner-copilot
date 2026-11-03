@@ -1,0 +1,2592 @@
+{
+  "selected_threshold": 0.287,
+  "previous_threshold": 0.25,
+  "k": 8,
+  "objective": "balanced_accuracy_on_filtered_calibration_only",
+  "candidate_grid_count": 1001,
+  "calibration_curve_change_points": [
+    {
+      "threshold": 0.0,
+      "answerable": 16,
+      "unanswerable": 4,
+      "valid_questions_accepted": 16,
+      "valid_questions_rejected": 0,
+      "unanswerable_rejected": 1,
+      "unanswerable_accepted": 3,
+      "accepted_with_relevant_evidence": 16,
+      "balanced_accuracy": 0.625,
+      "semantic_negatives_accepted": 3,
+      "semantic_negatives": 3
+    },
+    {
+      "threshold": 0.19,
+      "answerable": 16,
+      "unanswerable": 4,
+      "valid_questions_accepted": 16,
+      "valid_questions_rejected": 0,
+      "unanswerable_rejected": 1,
+      "unanswerable_accepted": 3,
+      "accepted_with_relevant_evidence": 15,
+      "balanced_accuracy": 0.625,
+      "semantic_negatives_accepted": 3,
+      "semantic_negatives": 3
+    },
+    {
+      "threshold": 0.21,
+      "answerable": 16,
+      "unanswerable": 4,
+      "valid_questions_accepted": 15,
+      "valid_questions_rejected": 1,
+      "unanswerable_rejected": 1,
+      "unanswerable_accepted": 3,
+      "accepted_with_relevant_evidence": 15,
+      "balanced_accuracy": 0.59375,
+      "semantic_negatives_accepted": 3,
+      "semantic_negatives": 3
+    },
+    {
+      "threshold": 0.272,
+      "answerable": 16,
+      "unanswerable": 4,
+      "valid_questions_accepted": 15,
+      "valid_questions_rejected": 1,
+      "unanswerable_rejected": 1,
+      "unanswerable_accepted": 3,
+      "accepted_with_relevant_evidence": 14,
+      "balanced_accuracy": 0.59375,
+      "semantic_negatives_accepted": 3,
+      "semantic_negatives": 3
+    },
+    {
+      "threshold": 0.287,
+      "answerable": 16,
+      "unanswerable": 4,
+      "valid_questions_accepted": 15,
+      "valid_questions_rejected": 1,
+      "unanswerable_rejected": 2,
+      "unanswerable_accepted": 2,
+      "accepted_with_relevant_evidence": 14,
+      "balanced_accuracy": 0.71875,
+      "semantic_negatives_accepted": 2,
+      "semantic_negatives": 3
+    },
+    {
+      "threshold": 0.31,
+      "answerable": 16,
+      "unanswerable": 4,
+      "valid_questions_accepted": 14,
+      "valid_questions_rejected": 2,
+      "unanswerable_rejected": 2,
+      "unanswerable_accepted": 2,
+      "accepted_with_relevant_evidence": 13,
+      "balanced_accuracy": 0.6875,
+      "semantic_negatives_accepted": 2,
+      "semantic_negatives": 3
+    },
+    {
+      "threshold": 0.314,
+      "answerable": 16,
+      "unanswerable": 4,
+      "valid_questions_accepted": 14,
+      "valid_questions_rejected": 2,
+      "unanswerable_rejected": 2,
+      "unanswerable_accepted": 2,
+      "accepted_with_relevant_evidence": 12,
+      "balanced_accuracy": 0.6875,
+      "semantic_negatives_accepted": 2,
+      "semantic_negatives": 3
+    },
+    {
+      "threshold": 0.318,
+      "answerable": 16,
+      "unanswerable": 4,
+      "valid_questions_accepted": 13,
+      "valid_questions_rejected": 3,
+      "unanswerable_rejected": 2,
+      "unanswerable_accepted": 2,
+      "accepted_with_relevant_evidence": 12,
+      "balanced_accuracy": 0.65625,
+      "semantic_negatives_accepted": 2,
+      "semantic_negatives": 3
+    },
+    {
+      "threshold": 0.348,
+      "answerable": 16,
+      "unanswerable": 4,
+      "valid_questions_accepted": 12,
+      "valid_questions_rejected": 4,
+      "unanswerable_rejected": 2,
+      "unanswerable_accepted": 2,
+      "accepted_with_relevant_evidence": 11,
+      "balanced_accuracy": 0.625,
+      "semantic_negatives_accepted": 2,
+      "semantic_negatives": 3
+    },
+    {
+      "threshold": 0.387,
+      "answerable": 16,
+      "unanswerable": 4,
+      "valid_questions_accepted": 12,
+      "valid_questions_rejected": 4,
+      "unanswerable_rejected": 2,
+      "unanswerable_accepted": 2,
+      "accepted_with_relevant_evidence": 10,
+      "balanced_accuracy": 0.625,
+      "semantic_negatives_accepted": 2,
+      "semantic_negatives": 3
+    },
+    {
+      "threshold": 0.393,
+      "answerable": 16,
+      "unanswerable": 4,
+      "valid_questions_accepted": 11,
+      "valid_questions_rejected": 5,
+      "unanswerable_rejected": 2,
+      "unanswerable_accepted": 2,
+      "accepted_with_relevant_evidence": 9,
+      "balanced_accuracy": 0.59375,
+      "semantic_negatives_accepted": 2,
+      "semantic_negatives": 3
+    },
+    {
+      "threshold": 0.396,
+      "answerable": 16,
+      "unanswerable": 4,
+      "valid_questions_accepted": 10,
+      "valid_questions_rejected": 6,
+      "unanswerable_rejected": 2,
+      "unanswerable_accepted": 2,
+      "accepted_with_relevant_evidence": 9,
+      "balanced_accuracy": 0.5625,
+      "semantic_negatives_accepted": 2,
+      "semantic_negatives": 3
+    },
+    {
+      "threshold": 0.4,
+      "answerable": 16,
+      "unanswerable": 4,
+      "valid_questions_accepted": 9,
+      "valid_questions_rejected": 7,
+      "unanswerable_rejected": 2,
+      "unanswerable_accepted": 2,
+      "accepted_with_relevant_evidence": 8,
+      "balanced_accuracy": 0.53125,
+      "semantic_negatives_accepted": 2,
+      "semantic_negatives": 3
+    },
+    {
+      "threshold": 0.422,
+      "answerable": 16,
+      "unanswerable": 4,
+      "valid_questions_accepted": 9,
+      "valid_questions_rejected": 7,
+      "unanswerable_rejected": 2,
+      "unanswerable_accepted": 2,
+      "accepted_with_relevant_evidence": 7,
+      "balanced_accuracy": 0.53125,
+      "semantic_negatives_accepted": 2,
+      "semantic_negatives": 3
+    },
+    {
+      "threshold": 0.471,
+      "answerable": 16,
+      "unanswerable": 4,
+      "valid_questions_accepted": 9,
+      "valid_questions_rejected": 7,
+      "unanswerable_rejected": 2,
+      "unanswerable_accepted": 2,
+      "accepted_with_relevant_evidence": 6,
+      "balanced_accuracy": 0.53125,
+      "semantic_negatives_accepted": 2,
+      "semantic_negatives": 3
+    },
+    {
+      "threshold": 0.48,
+      "answerable": 16,
+      "unanswerable": 4,
+      "valid_questions_accepted": 9,
+      "valid_questions_rejected": 7,
+      "unanswerable_rejected": 2,
+      "unanswerable_accepted": 2,
+      "accepted_with_relevant_evidence": 5,
+      "balanced_accuracy": 0.53125,
+      "semantic_negatives_accepted": 2,
+      "semantic_negatives": 3
+    },
+    {
+      "threshold": 0.485,
+      "answerable": 16,
+      "unanswerable": 4,
+      "valid_questions_accepted": 8,
+      "valid_questions_rejected": 8,
+      "unanswerable_rejected": 2,
+      "unanswerable_accepted": 2,
+      "accepted_with_relevant_evidence": 4,
+      "balanced_accuracy": 0.5,
+      "semantic_negatives_accepted": 2,
+      "semantic_negatives": 3
+    },
+    {
+      "threshold": 0.489,
+      "answerable": 16,
+      "unanswerable": 4,
+      "valid_questions_accepted": 7,
+      "valid_questions_rejected": 9,
+      "unanswerable_rejected": 2,
+      "unanswerable_accepted": 2,
+      "accepted_with_relevant_evidence": 4,
+      "balanced_accuracy": 0.46875,
+      "semantic_negatives_accepted": 2,
+      "semantic_negatives": 3
+    },
+    {
+      "threshold": 0.496,
+      "answerable": 16,
+      "unanswerable": 4,
+      "valid_questions_accepted": 6,
+      "valid_questions_rejected": 10,
+      "unanswerable_rejected": 2,
+      "unanswerable_accepted": 2,
+      "accepted_with_relevant_evidence": 4,
+      "balanced_accuracy": 0.4375,
+      "semantic_negatives_accepted": 2,
+      "semantic_negatives": 3
+    },
+    {
+      "threshold": 0.504,
+      "answerable": 16,
+      "unanswerable": 4,
+      "valid_questions_accepted": 6,
+      "valid_questions_rejected": 10,
+      "unanswerable_rejected": 2,
+      "unanswerable_accepted": 2,
+      "accepted_with_relevant_evidence": 3,
+      "balanced_accuracy": 0.4375,
+      "semantic_negatives_accepted": 2,
+      "semantic_negatives": 3
+    },
+    {
+      "threshold": 0.516,
+      "answerable": 16,
+      "unanswerable": 4,
+      "valid_questions_accepted": 6,
+      "valid_questions_rejected": 10,
+      "unanswerable_rejected": 3,
+      "unanswerable_accepted": 1,
+      "accepted_with_relevant_evidence": 3,
+      "balanced_accuracy": 0.5625,
+      "semantic_negatives_accepted": 1,
+      "semantic_negatives": 3
+    },
+    {
+      "threshold": 0.53,
+      "answerable": 16,
+      "unanswerable": 4,
+      "valid_questions_accepted": 5,
+      "valid_questions_rejected": 11,
+      "unanswerable_rejected": 3,
+      "unanswerable_accepted": 1,
+      "accepted_with_relevant_evidence": 3,
+      "balanced_accuracy": 0.53125,
+      "semantic_negatives_accepted": 1,
+      "semantic_negatives": 3
+    },
+    {
+      "threshold": 0.534,
+      "answerable": 16,
+      "unanswerable": 4,
+      "valid_questions_accepted": 4,
+      "valid_questions_rejected": 12,
+      "unanswerable_rejected": 3,
+      "unanswerable_accepted": 1,
+      "accepted_with_relevant_evidence": 3,
+      "balanced_accuracy": 0.5,
+      "semantic_negatives_accepted": 1,
+      "semantic_negatives": 3
+    },
+    {
+      "threshold": 0.543,
+      "answerable": 16,
+      "unanswerable": 4,
+      "valid_questions_accepted": 4,
+      "valid_questions_rejected": 12,
+      "unanswerable_rejected": 3,
+      "unanswerable_accepted": 1,
+      "accepted_with_relevant_evidence": 2,
+      "balanced_accuracy": 0.5,
+      "semantic_negatives_accepted": 1,
+      "semantic_negatives": 3
+    },
+    {
+      "threshold": 0.576,
+      "answerable": 16,
+      "unanswerable": 4,
+      "valid_questions_accepted": 3,
+      "valid_questions_rejected": 13,
+      "unanswerable_rejected": 3,
+      "unanswerable_accepted": 1,
+      "accepted_with_relevant_evidence": 2,
+      "balanced_accuracy": 0.46875,
+      "semantic_negatives_accepted": 1,
+      "semantic_negatives": 3
+    },
+    {
+      "threshold": 0.585,
+      "answerable": 16,
+      "unanswerable": 4,
+      "valid_questions_accepted": 3,
+      "valid_questions_rejected": 13,
+      "unanswerable_rejected": 4,
+      "unanswerable_accepted": 0,
+      "accepted_with_relevant_evidence": 2,
+      "balanced_accuracy": 0.59375,
+      "semantic_negatives_accepted": 0,
+      "semantic_negatives": 3
+    },
+    {
+      "threshold": 0.586,
+      "answerable": 16,
+      "unanswerable": 4,
+      "valid_questions_accepted": 2,
+      "valid_questions_rejected": 14,
+      "unanswerable_rejected": 4,
+      "unanswerable_accepted": 0,
+      "accepted_with_relevant_evidence": 2,
+      "balanced_accuracy": 0.5625,
+      "semantic_negatives_accepted": 0,
+      "semantic_negatives": 3
+    },
+    {
+      "threshold": 0.632,
+      "answerable": 16,
+      "unanswerable": 4,
+      "valid_questions_accepted": 2,
+      "valid_questions_rejected": 14,
+      "unanswerable_rejected": 4,
+      "unanswerable_accepted": 0,
+      "accepted_with_relevant_evidence": 1,
+      "balanced_accuracy": 0.5625,
+      "semantic_negatives_accepted": 0,
+      "semantic_negatives": 3
+    },
+    {
+      "threshold": 0.673,
+      "answerable": 16,
+      "unanswerable": 4,
+      "valid_questions_accepted": 1,
+      "valid_questions_rejected": 15,
+      "unanswerable_rejected": 4,
+      "unanswerable_accepted": 0,
+      "accepted_with_relevant_evidence": 1,
+      "balanced_accuracy": 0.53125,
+      "semantic_negatives_accepted": 0,
+      "semantic_negatives": 3
+    },
+    {
+      "threshold": 0.675,
+      "answerable": 16,
+      "unanswerable": 4,
+      "valid_questions_accepted": 0,
+      "valid_questions_rejected": 16,
+      "unanswerable_rejected": 4,
+      "unanswerable_accepted": 0,
+      "accepted_with_relevant_evidence": 0,
+      "balanced_accuracy": 0.5,
+      "semantic_negatives_accepted": 0,
+      "semantic_negatives": 3
+    }
+  ],
+  "snapshot_sha256_lf": {
+    "questions.jsonl": "25b218ddc5369b2187be44699a781723a0d8f6f2870257923270a76321dd9cc4",
+    "corpus.jsonl": "74f04a4bf0407de3a4302f9a869dbeadde6541bd9fa56bb74e5e2fe0a832c95f",
+    "relevance_audit.jsonl": "a18f13fe9f79a8b2390ffd331134ac3f754aa66a85a70f7eb73ae5bf1d2ded10"
+  },
+  "model": "paraphrase-multilingual-MiniLM-L12-v2",
+  "model_revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42",
+  "historically_exposed_evaluation_set": true,
+  "promoted_global_default": false,
+  "modes": {
+    "com_filtro": {
+      "calibration": {
+        "distributions": {
+          "answerable": {
+            "count": 16,
+            "no_candidate": 0,
+            "quantiles": {
+              "min": 0.20974821228282212,
+              "q1": 0.38094512494631394,
+              "median": 0.48623288001077203,
+              "q3": 0.5438795090023465,
+              "max": 0.6744610207561201
+            }
+          },
+          "unanswerable": {
+            "count": 4,
+            "no_candidate": 1,
+            "quantiles": {
+              "min": 0.286703120624287,
+              "q1": 0.40095737663791065,
+              "median": 0.5152116326515344,
+              "q3": 0.5497179267635506,
+              "max": 0.5842242208755668
+            }
+          },
+          "range_overlap": [
+            0.286703120624287,
+            0.5842242208755668
+          ]
+        },
+        "previous": {
+          "answerable": 16,
+          "unanswerable": 4,
+          "valid_questions_accepted": 15,
+          "valid_questions_rejected": 1,
+          "unanswerable_rejected": 1,
+          "unanswerable_accepted": 3,
+          "accepted_with_relevant_evidence": 15,
+          "balanced_accuracy": 0.59375,
+          "semantic_negatives_accepted": 3,
+          "semantic_negatives": 3
+        },
+        "selected": {
+          "answerable": 16,
+          "unanswerable": 4,
+          "valid_questions_accepted": 15,
+          "valid_questions_rejected": 1,
+          "unanswerable_rejected": 2,
+          "unanswerable_accepted": 2,
+          "accepted_with_relevant_evidence": 14,
+          "balanced_accuracy": 0.71875,
+          "semantic_negatives_accepted": 2,
+          "semantic_negatives": 3
+        }
+      },
+      "evaluation": {
+        "distributions": {
+          "answerable": {
+            "count": 8,
+            "no_candidate": 0,
+            "quantiles": {
+              "min": 0.29636610158028137,
+              "q1": 0.33894292168140483,
+              "median": 0.37234291210836545,
+              "q3": 0.5693727473755961,
+              "max": 0.668984798547273
+            }
+          },
+          "unanswerable": {
+            "count": 2,
+            "no_candidate": 1,
+            "quantiles": {
+              "min": 0.4145683351381427,
+              "q1": 0.4145683351381427,
+              "median": 0.4145683351381427,
+              "q3": 0.4145683351381427,
+              "max": 0.4145683351381427
+            }
+          },
+          "range_overlap": [
+            0.4145683351381427,
+            0.4145683351381427
+          ]
+        },
+        "previous": {
+          "answerable": 8,
+          "unanswerable": 2,
+          "valid_questions_accepted": 8,
+          "valid_questions_rejected": 0,
+          "unanswerable_rejected": 1,
+          "unanswerable_accepted": 1,
+          "accepted_with_relevant_evidence": 8,
+          "balanced_accuracy": 0.75,
+          "semantic_negatives_accepted": 1,
+          "semantic_negatives": 1
+        },
+        "selected": {
+          "answerable": 8,
+          "unanswerable": 2,
+          "valid_questions_accepted": 8,
+          "valid_questions_rejected": 0,
+          "unanswerable_rejected": 1,
+          "unanswerable_accepted": 1,
+          "accepted_with_relevant_evidence": 7,
+          "balanced_accuracy": 0.75,
+          "semantic_negatives_accepted": 1,
+          "semantic_negatives": 1
+        }
+      }
+    },
+    "sem_filtro": {
+      "calibration": {
+        "distributions": {
+          "answerable": {
+            "count": 16,
+            "no_candidate": 0,
+            "quantiles": {
+              "min": 0.26504083715329374,
+              "q1": 0.416849301340319,
+              "median": 0.5040000555836855,
+              "q3": 0.5780475665121073,
+              "max": 0.7046643211687393
+            }
+          },
+          "unanswerable": {
+            "count": 4,
+            "no_candidate": 0,
+            "quantiles": {
+              "min": 0.3553271679909654,
+              "q1": 0.49569240860736585,
+              "median": 0.5633525215108663,
+              "q3": 0.625156806108812,
+              "max": 0.7479545618085475
+            }
+          },
+          "range_overlap": [
+            0.3553271679909654,
+            0.7046643211687393
+          ]
+        },
+        "previous": {
+          "answerable": 16,
+          "unanswerable": 4,
+          "valid_questions_accepted": 16,
+          "valid_questions_rejected": 0,
+          "unanswerable_rejected": 0,
+          "unanswerable_accepted": 4,
+          "accepted_with_relevant_evidence": 7,
+          "balanced_accuracy": 0.5,
+          "semantic_negatives_accepted": 3,
+          "semantic_negatives": 3
+        },
+        "selected": {
+          "answerable": 16,
+          "unanswerable": 4,
+          "valid_questions_accepted": 15,
+          "valid_questions_rejected": 1,
+          "unanswerable_rejected": 0,
+          "unanswerable_accepted": 4,
+          "accepted_with_relevant_evidence": 7,
+          "balanced_accuracy": 0.46875,
+          "semantic_negatives_accepted": 3,
+          "semantic_negatives": 3
+        }
+      },
+      "evaluation": {
+        "distributions": {
+          "answerable": {
+            "count": 8,
+            "no_candidate": 0,
+            "quantiles": {
+              "min": 0.3750633371985942,
+              "q1": 0.3998016239502526,
+              "median": 0.43834670569613476,
+              "q3": 0.5907966690098738,
+              "max": 0.7230304808804597
+            }
+          },
+          "unanswerable": {
+            "count": 2,
+            "no_candidate": 0,
+            "quantiles": {
+              "min": 0.4565513616516306,
+              "q1": 0.46559915682794856,
+              "median": 0.47464695200426643,
+              "q3": 0.48369474718058436,
+              "max": 0.4927425423569023
+            }
+          },
+          "range_overlap": [
+            0.4565513616516306,
+            0.4927425423569023
+          ]
+        },
+        "previous": {
+          "answerable": 8,
+          "unanswerable": 2,
+          "valid_questions_accepted": 8,
+          "valid_questions_rejected": 0,
+          "unanswerable_rejected": 0,
+          "unanswerable_accepted": 2,
+          "accepted_with_relevant_evidence": 5,
+          "balanced_accuracy": 0.5,
+          "semantic_negatives_accepted": 1,
+          "semantic_negatives": 1
+        },
+        "selected": {
+          "answerable": 8,
+          "unanswerable": 2,
+          "valid_questions_accepted": 8,
+          "valid_questions_rejected": 0,
+          "unanswerable_rejected": 0,
+          "unanswerable_accepted": 2,
+          "accepted_with_relevant_evidence": 5,
+          "balanced_accuracy": 0.5,
+          "semantic_negatives_accepted": 1,
+          "semantic_negatives": 1
+        }
+      }
+    }
+  },
+  "per_question": [
+    {
+      "id": "q01",
+      "pergunta": "Quais reclamações sobre embalagem aparecem na Pizzaria Forno Nobre?",
+      "mode": "com_filtro",
+      "split": "calibration",
+      "deve_abster": false,
+      "negative_kind": null,
+      "best_score": 0.5755789685879243,
+      "best_id": "rev_000294",
+      "top1_relevant": false,
+      "ranked_ids": [
+        "rev_000294",
+        "rev_002980",
+        "rev_002549",
+        "rev_000673",
+        "rev_000650",
+        "rev_001661",
+        "rev_001076",
+        "rev_000797"
+      ],
+      "scores": [
+        0.5755789685879243,
+        0.5520854758602376,
+        0.5466111678154282,
+        0.5437331387280281,
+        0.5430162933305723,
+        0.5420664160882114,
+        0.5323128850767356,
+        0.5252992712933438
+      ],
+      "relevant_ids": [
+        "rev_001661"
+      ]
+    },
+    {
+      "id": "q02",
+      "pergunta": "O que os clientes criticam no atendimento do Burger do Zé?",
+      "mode": "com_filtro",
+      "split": "evaluation",
+      "deve_abster": false,
+      "negative_kind": null,
+      "best_score": 0.5647339591640741,
+      "best_id": "rev_002257",
+      "top1_relevant": true,
+      "ranked_ids": [
+        "rev_002257",
+        "rev_000799",
+        "rev_002289",
+        "rev_001685",
+        "rev_002089",
+        "rev_002191",
+        "rev_000212",
+        "rev_002917"
+      ],
+      "scores": [
+        0.5647339591640741,
+        0.4884869779477792,
+        0.372686269541603,
+        0.3471763214953302,
+        0.33636931233891365,
+        0.3303007760238288,
+        0.2890745770723922,
+        0.27928877519476913
+      ],
+      "relevant_ids": [
+        "rev_002257"
+      ]
+    },
+    {
+      "id": "q03",
+      "pergunta": "Quais problemas de temperatura foram relatados no Sushi Kaze?",
+      "mode": "com_filtro",
+      "split": "evaluation",
+      "deve_abster": false,
+      "negative_kind": null,
+      "best_score": 0.33723463179736557,
+      "best_id": "rev_002562",
+      "top1_relevant": false,
+      "ranked_ids": [
+        "rev_002562",
+        "rev_002759",
+        "rev_002142",
+        "rev_000908",
+        "rev_001339",
+        "rev_001629",
+        "rev_001729",
+        "rev_001998"
+      ],
+      "scores": [
+        0.33723463179736557,
+        0.28831162767049506,
+        0.270644149966229,
+        0.2681377010152552,
+        0.26264132053794687,
+        0.2231227816144806,
+        0.20108314380101402,
+        0.19556307058306768
+      ],
+      "relevant_ids": [
+        "rev_001339",
+        "rev_001629"
+      ]
+    },
+    {
+      "id": "q04",
+      "pergunta": "O que desagradou no sabor dos pratos da Marmitaria da Dona Rosa?",
+      "mode": "com_filtro",
+      "split": "calibration",
+      "deve_abster": false,
+      "negative_kind": null,
+      "best_score": 0.5290642495499773,
+      "best_id": "rev_000345",
+      "top1_relevant": false,
+      "ranked_ids": [
+        "rev_000345",
+        "rev_000400",
+        "rev_001212",
+        "rev_001829",
+        "rev_002438",
+        "rev_000934",
+        "rev_002598",
+        "rev_000645"
+      ],
+      "scores": [
+        0.5290642495499773,
+        0.503357249957857,
+        0.4910648089389724,
+        0.4792500969325665,
+        0.45910910575085084,
+        0.45060462363190024,
+        0.4396534816959652,
+        0.3847835428028534
+      ],
+      "relevant_ids": [
+        "rev_000400",
+        "rev_000934",
+        "rev_001212",
+        "rev_001552"
+      ]
+    },
+    {
+      "id": "q05",
+      "pergunta": "Quais falhas de acondicionamento aparecem nas avaliações do Açaí Point?",
+      "mode": "com_filtro",
+      "split": "calibration",
+      "deve_abster": false,
+      "negative_kind": null,
+      "best_score": 0.3475526826177314,
+      "best_id": "rev_001123",
+      "top1_relevant": true,
+      "ranked_ids": [
+        "rev_001123",
+        "rev_002058",
+        "rev_000613",
+        "rev_001190",
+        "rev_002370",
+        "rev_000267",
+        "rev_002959",
+        "rev_002693"
+      ],
+      "scores": [
+        0.3475526826177314,
+        0.2723767850598877,
+        0.15294059245148567,
+        0.14919958728375846,
+        0.14563825001075942,
+        0.13908452251184836,
+        0.13435836143335464,
+        0.13362689872860545
+      ],
+      "relevant_ids": [
+        "rev_001123",
+        "rev_002302",
+        "rev_002693"
+      ]
+    },
+    {
+      "id": "q06",
+      "pergunta": "Quais clientes da Cantina Bella Massa receberam comida sem o calor esperado?",
+      "mode": "com_filtro",
+      "split": "calibration",
+      "deve_abster": false,
+      "negative_kind": null,
+      "best_score": 0.48845931479043186,
+      "best_id": "rev_002234",
+      "top1_relevant": false,
+      "ranked_ids": [
+        "rev_002234",
+        "rev_000403",
+        "rev_000300",
+        "rev_001760",
+        "rev_001051",
+        "rev_002800",
+        "rev_002684",
+        "rev_002665"
+      ],
+      "scores": [
+        0.48845931479043186,
+        0.4817151991931435,
+        0.4425758143894105,
+        0.421835957343508,
+        0.38319268998788003,
+        0.37745977156625077,
+        0.3592628342323727,
+        0.28713813544634226
+      ],
+      "relevant_ids": [
+        "rev_001051",
+        "rev_001760",
+        "rev_002684"
+      ]
+    },
+    {
+      "id": "q07",
+      "pergunta": "Que críticas ao gosto da comida aparecem no Churrasco Gaúcho Express?",
+      "mode": "com_filtro",
+      "split": "calibration",
+      "deve_abster": false,
+      "negative_kind": null,
+      "best_score": 0.48400644523111214,
+      "best_id": "rev_002417",
+      "top1_relevant": true,
+      "ranked_ids": [
+        "rev_002417",
+        "rev_000351",
+        "rev_001715",
+        "rev_001172",
+        "rev_001416",
+        "rev_002476",
+        "rev_001286",
+        "rev_002021"
+      ],
+      "scores": [
+        0.48400644523111214,
+        0.4344560774506015,
+        0.4235880660516199,
+        0.4204125938387502,
+        0.4085807659070391,
+        0.3900757015719632,
+        0.3721581840974959,
+        0.37214061197547577
+      ],
+      "relevant_ids": [
+        "rev_000351",
+        "rev_001172",
+        "rev_001416",
+        "rev_002021",
+        "rev_002417"
+      ]
+    },
+    {
+      "id": "q08",
+      "pergunta": "Por que alguns clientes da Doceria Ateliê Doce acham o preço injusto?",
+      "mode": "com_filtro",
+      "split": "evaluation",
+      "deve_abster": false,
+      "negative_kind": null,
+      "best_score": 0.35044921941386975,
+      "best_id": "rev_002833",
+      "top1_relevant": true,
+      "ranked_ids": [
+        "rev_002833",
+        "rev_002176",
+        "rev_000357",
+        "rev_002490",
+        "rev_000759",
+        "rev_000445",
+        "rev_002787",
+        "rev_002127"
+      ],
+      "scores": [
+        0.35044921941386975,
+        0.24751080755974786,
+        0.17257011367855277,
+        0.16909133922222744,
+        0.15901055545854278,
+        0.100544549479482,
+        0.09814814108065997,
+        0.08625567527355124
+      ],
+      "relevant_ids": [
+        "rev_002176",
+        "rev_002490",
+        "rev_002833"
+      ]
+    },
+    {
+      "id": "q09",
+      "pergunta": "Quais relatos sustentam reclamações de atraso do Burger do Zé nas últimas duas semanas até 01/11/2026?",
+      "mode": "com_filtro",
+      "split": "evaluation",
+      "deve_abster": false,
+      "negative_kind": null,
+      "best_score": 0.29636610158028137,
+      "best_id": "rev_000212",
+      "top1_relevant": true,
+      "ranked_ids": [
+        "rev_000212",
+        "rev_002089"
+      ],
+      "scores": [
+        0.29636610158028137,
+        0.2244840189366038
+      ],
+      "relevant_ids": [
+        "rev_000212"
+      ]
+    },
+    {
+      "id": "q10",
+      "pergunta": "Quais avaliações da Marmitaria da Dona Rosa mencionam demora de 19/10 a 01/11/2026?",
+      "mode": "com_filtro",
+      "split": "calibration",
+      "deve_abster": false,
+      "negative_kind": null,
+      "best_score": 0.30931869427879843,
+      "best_id": "rev_002237",
+      "top1_relevant": true,
+      "ranked_ids": [
+        "rev_002237"
+      ],
+      "scores": [
+        0.30931869427879843
+      ],
+      "relevant_ids": [
+        "rev_002237"
+      ]
+    },
+    {
+      "id": "q11",
+      "pergunta": "Houve reclamações de espera no Burger do Zé nas duas semanas anteriores, de 05/10 a 18/10/2026?",
+      "mode": "com_filtro",
+      "split": "calibration",
+      "deve_abster": false,
+      "negative_kind": null,
+      "best_score": 0.3920759390558414,
+      "best_id": "rev_002289",
+      "top1_relevant": true,
+      "ranked_ids": [
+        "rev_002289",
+        "rev_000796"
+      ],
+      "scores": [
+        0.3920759390558414,
+        0.3053575469770169
+      ],
+      "relevant_ids": [
+        "rev_002289"
+      ]
+    },
+    {
+      "id": "q12",
+      "pergunta": "Quais clientes do Sushi Kaze reclamaram do prazo entre 19/10 e 01/11/2026?",
+      "mode": "com_filtro",
+      "split": "evaluation",
+      "deve_abster": false,
+      "negative_kind": null,
+      "best_score": 0.3942366048028611,
+      "best_id": "rev_002675",
+      "top1_relevant": true,
+      "ranked_ids": [
+        "rev_002675",
+        "rev_001339"
+      ],
+      "scores": [
+        0.3942366048028611,
+        0.18917128858753376
+      ],
+      "relevant_ids": [
+        "rev_002675"
+      ]
+    },
+    {
+      "id": "q13",
+      "pergunta": "Quais relatos da Cantina Bella Massa mencionam espera excessiva de 19/10 a 01/11/2026?",
+      "mode": "com_filtro",
+      "split": "calibration",
+      "deve_abster": false,
+      "negative_kind": null,
+      "best_score": 0.20974821228282212,
+      "best_id": "rev_000407",
+      "top1_relevant": false,
+      "ranked_ids": [
+        "rev_000407",
+        "rev_002800",
+        "rev_002234"
+      ],
+      "scores": [
+        0.20974821228282212,
+        0.1943816183444775,
+        0.189213224775514
+      ],
+      "relevant_ids": [
+        "rev_002234"
+      ]
+    },
+    {
+      "id": "q14",
+      "pergunta": "Quais críticas ao sabor da Pizza Calabresa aparecem na Pizzaria Forno Nobre?",
+      "mode": "com_filtro",
+      "split": "calibration",
+      "deve_abster": false,
+      "negative_kind": null,
+      "best_score": 0.6744610207561201,
+      "best_id": "rev_001076",
+      "top1_relevant": true,
+      "ranked_ids": [
+        "rev_001076",
+        "rev_002549",
+        "rev_000813"
+      ],
+      "scores": [
+        0.6744610207561201,
+        0.5439043768413807,
+        0.4954846273970694
+      ],
+      "relevant_ids": [
+        "rev_000813",
+        "rev_001076"
+      ]
+    },
+    {
+      "id": "q15",
+      "pergunta": "O que desagradou no gosto da Batata Frita Grande do Burger do Zé?",
+      "mode": "com_filtro",
+      "split": "evaluation",
+      "deve_abster": false,
+      "negative_kind": null,
+      "best_score": 0.583289112010162,
+      "best_id": "rev_001685",
+      "top1_relevant": true,
+      "ranked_ids": [
+        "rev_001685",
+        "rev_002089",
+        "rev_001291",
+        "rev_000796"
+      ],
+      "scores": [
+        0.583289112010162,
+        0.5696771969126895,
+        0.46644758507562256,
+        0.31597655791135426
+      ],
+      "relevant_ids": [
+        "rev_001685",
+        "rev_002089"
+      ]
+    },
+    {
+      "id": "q16",
+      "pergunta": "Quais clientes não gostaram do sabor do Combo 20 Peças do Sushi Kaze?",
+      "mode": "com_filtro",
+      "split": "calibration",
+      "deve_abster": false,
+      "negative_kind": null,
+      "best_score": 0.5854533602846561,
+      "best_id": "rev_001010",
+      "top1_relevant": false,
+      "ranked_ids": [
+        "rev_001010",
+        "rev_002494",
+        "rev_002141",
+        "rev_001998",
+        "rev_002675"
+      ],
+      "scores": [
+        0.5854533602846561,
+        0.4908437236377131,
+        0.4765461073504462,
+        0.4700263765014363,
+        0.27642877407236754
+      ],
+      "relevant_ids": [
+        "rev_001998"
+      ]
+    },
+    {
+      "id": "q17",
+      "pergunta": "Quais críticas ao sabor da Marmita Executiva aparecem na Marmitaria da Dona Rosa?",
+      "mode": "com_filtro",
+      "split": "calibration",
+      "deve_abster": false,
+      "negative_kind": null,
+      "best_score": 0.39982356979746403,
+      "best_id": "rev_000934",
+      "top1_relevant": true,
+      "ranked_ids": [
+        "rev_000934",
+        "rev_000345",
+        "rev_002015",
+        "rev_001552",
+        "rev_001916",
+        "rev_000645",
+        "rev_000864",
+        "rev_002237"
+      ],
+      "scores": [
+        0.39982356979746403,
+        0.3623929405196077,
+        0.35075987304117423,
+        0.3314085796161325,
+        0.3276478851677627,
+        0.3065091052162605,
+        0.24466846409756948,
+        0.020501699220721606
+      ],
+      "relevant_ids": [
+        "rev_000934",
+        "rev_001552"
+      ]
+    },
+    {
+      "id": "q18",
+      "pergunta": "O que os clientes criticaram no gosto da Vitamina de Morango do Açaí Point?",
+      "mode": "com_filtro",
+      "split": "evaluation",
+      "deve_abster": false,
+      "negative_kind": null,
+      "best_score": 0.668984798547273,
+      "best_id": "rev_000267",
+      "top1_relevant": true,
+      "ranked_ids": [
+        "rev_000267",
+        "rev_002302",
+        "rev_001190",
+        "rev_001551",
+        "rev_002959",
+        "rev_000613",
+        "rev_002693"
+      ],
+      "scores": [
+        0.668984798547273,
+        0.6327995835687247,
+        0.6222331408604169,
+        0.5911954538563077,
+        0.5253450070920896,
+        0.5136611371377133,
+        0.4875526774055779
+      ],
+      "relevant_ids": [
+        "rev_000267",
+        "rev_002959"
+      ]
+    },
+    {
+      "id": "q19",
+      "pergunta": "Quais pedidos da Pizzaria Forno Nobre perderam o calor durante o trajeto?",
+      "mode": "com_filtro",
+      "split": "calibration",
+      "deve_abster": false,
+      "negative_kind": null,
+      "best_score": 0.6729904521189474,
+      "best_id": "rev_000604",
+      "top1_relevant": false,
+      "ranked_ids": [
+        "rev_000604",
+        "rev_001661",
+        "rev_001076",
+        "rev_000673",
+        "rev_000752",
+        "rev_000797",
+        "rev_002335",
+        "rev_000294"
+      ],
+      "scores": [
+        0.6729904521189474,
+        0.6312264798944617,
+        0.5862710658437572,
+        0.5722774675696365,
+        0.5690835410842326,
+        0.5612679993948079,
+        0.5536253593137243,
+        0.5399917347716509
+      ],
+      "relevant_ids": [
+        "rev_000673",
+        "rev_000813",
+        "rev_001661"
+      ]
+    },
+    {
+      "id": "q20",
+      "pergunta": "Quais clientes do Sushi Kaze reclamaram de falta de pontualidade?",
+      "mode": "com_filtro",
+      "split": "evaluation",
+      "deve_abster": false,
+      "negative_kind": null,
+      "best_score": 0.3395123516427513,
+      "best_id": "rev_002142",
+      "top1_relevant": true,
+      "ranked_ids": [
+        "rev_002142",
+        "rev_002494",
+        "rev_002675",
+        "rev_001998",
+        "rev_001339",
+        "rev_002562",
+        "rev_000908",
+        "rev_001010"
+      ],
+      "scores": [
+        0.3395123516427513,
+        0.29278670269820517,
+        0.2878410161680256,
+        0.27267694218570154,
+        0.2714868315738506,
+        0.26963890070155017,
+        0.2695361405287382,
+        0.25957028429026363
+      ],
+      "relevant_ids": [
+        "rev_000802",
+        "rev_000908",
+        "rev_001010",
+        "rev_001998",
+        "rev_002142",
+        "rev_002494",
+        "rev_002562",
+        "rev_002675"
+      ]
+    },
+    {
+      "id": "q21",
+      "pergunta": "Em quais pedidos da Doceria Ateliê Doce o recipiente deixou o conteúdo desprotegido?",
+      "mode": "com_filtro",
+      "split": "calibration",
+      "deve_abster": false,
+      "negative_kind": null,
+      "best_score": 0.31749992906429647,
+      "best_id": "rev_002833",
+      "top1_relevant": false,
+      "ranked_ids": [
+        "rev_002833",
+        "rev_002355",
+        "rev_000357",
+        "rev_002490",
+        "rev_002127",
+        "rev_000445",
+        "rev_002176",
+        "rev_002485"
+      ],
+      "scores": [
+        0.31749992906429647,
+        0.2711839345853466,
+        0.26584683495209693,
+        0.21751422188501185,
+        0.2167462516010753,
+        0.19522754197098274,
+        0.1931192456607773,
+        0.16427289494463554
+      ],
+      "relevant_ids": [
+        "rev_000445",
+        "rev_002127",
+        "rev_002355",
+        "rev_002363",
+        "rev_002485"
+      ]
+    },
+    {
+      "id": "q22",
+      "pergunta": "Quem achou a refeição da Cantina Bella Massa desagradável ao paladar?",
+      "mode": "com_filtro",
+      "split": "calibration",
+      "deve_abster": false,
+      "negative_kind": null,
+      "best_score": 0.5333130224738205,
+      "best_id": "rev_000300",
+      "top1_relevant": false,
+      "ranked_ids": [
+        "rev_000300",
+        "rev_001760",
+        "rev_001051",
+        "rev_002684",
+        "rev_002234",
+        "rev_000403",
+        "rev_002800",
+        "rev_000407"
+      ],
+      "scores": [
+        0.5333130224738205,
+        0.4835693968658896,
+        0.47991270386992,
+        0.478320752875937,
+        0.46421940598378375,
+        0.4574290383627906,
+        0.4316211931171085,
+        0.25506443499614684
+      ],
+      "relevant_ids": [
+        "rev_001051",
+        "rev_002234",
+        "rev_002684"
+      ]
+    },
+    {
+      "id": "q23",
+      "pergunta": "Em quais relatos do Açaí Point a conversa com a loja ficou sem retorno?",
+      "mode": "com_filtro",
+      "split": "calibration",
+      "deve_abster": false,
+      "negative_kind": null,
+      "best_score": 0.3955801410852706,
+      "best_id": "rev_002058",
+      "top1_relevant": false,
+      "ranked_ids": [
+        "rev_002058",
+        "rev_001123",
+        "rev_001265",
+        "rev_002370",
+        "rev_002693",
+        "rev_002959",
+        "rev_001190",
+        "rev_000613"
+      ],
+      "scores": [
+        0.3955801410852706,
+        0.37524191882734714,
+        0.31363679598279526,
+        0.30257767760656273,
+        0.22620240266438285,
+        0.22472347696860856,
+        0.2074761391013134,
+        0.1687037245906669
+      ],
+      "relevant_ids": [
+        "rev_001265"
+      ]
+    },
+    {
+      "id": "q24",
+      "pergunta": "Quais compras do Churrasco Gaúcho Express decepcionaram na relação entre desembolso e porção?",
+      "mode": "com_filtro",
+      "split": "calibration",
+      "deve_abster": false,
+      "negative_kind": null,
+      "best_score": 0.4956293848971105,
+      "best_id": "rev_002417",
+      "top1_relevant": false,
+      "ranked_ids": [
+        "rev_002417",
+        "rev_002021",
+        "rev_001715",
+        "rev_001172",
+        "rev_001027",
+        "rev_002298",
+        "rev_000351",
+        "rev_002476"
+      ],
+      "scores": [
+        0.4956293848971105,
+        0.40354846682387524,
+        0.38608179049741886,
+        0.3545606138227301,
+        0.34988079864936217,
+        0.2916056544391664,
+        0.2855195177556382,
+        0.2557266386826256
+      ],
+      "relevant_ids": [
+        "rev_001715"
+      ]
+    },
+    {
+      "id": "q25",
+      "pergunta": "Quais clientes do Burger do Zé relataram uma reação alérgica a amendoim?",
+      "mode": "com_filtro",
+      "split": "calibration",
+      "deve_abster": true,
+      "negative_kind": "semantic",
+      "best_score": 0.5842242208755668,
+      "best_id": "rev_002257",
+      "top1_relevant": false,
+      "ranked_ids": [
+        "rev_002257",
+        "rev_002289",
+        "rev_000799",
+        "rev_002089",
+        "rev_001685",
+        "rev_000212",
+        "rev_002191",
+        "rev_001291"
+      ],
+      "scores": [
+        0.5842242208755668,
+        0.42366351260978663,
+        0.4182342565402948,
+        0.354534642259397,
+        0.3519275130576603,
+        0.35011615620507996,
+        0.34965949377694905,
+        0.3194303737468725
+      ],
+      "relevant_ids": []
+    },
+    {
+      "id": "q26",
+      "pergunta": "Qual valor de reembolso via Pix foi recebido pelos clientes do Sushi Kaze?",
+      "mode": "com_filtro",
+      "split": "evaluation",
+      "deve_abster": true,
+      "negative_kind": "semantic",
+      "best_score": 0.4145683351381427,
+      "best_id": "rev_002759",
+      "top1_relevant": false,
+      "ranked_ids": [
+        "rev_002759",
+        "rev_001998",
+        "rev_002142",
+        "rev_001629",
+        "rev_002675",
+        "rev_002494",
+        "rev_002562",
+        "rev_001010"
+      ],
+      "scores": [
+        0.4145683351381427,
+        0.394394931069332,
+        0.3833584754181948,
+        0.34520560601549005,
+        0.3270950615748925,
+        0.2945543790124372,
+        0.2909441622867298,
+        0.2365672678167571
+      ],
+      "relevant_ids": []
+    },
+    {
+      "id": "q27",
+      "pergunta": "Qual é a receita completa sem glúten da Marmita Fit Frango da Dona Rosa?",
+      "mode": "com_filtro",
+      "split": "calibration",
+      "deve_abster": true,
+      "negative_kind": "semantic",
+      "best_score": 0.5152116326515344,
+      "best_id": "rev_001829",
+      "top1_relevant": false,
+      "ranked_ids": [
+        "rev_001829",
+        "rev_000400",
+        "rev_000345",
+        "rev_002438",
+        "rev_002598",
+        "rev_001212",
+        "rev_000645",
+        "rev_002015"
+      ],
+      "scores": [
+        0.5152116326515344,
+        0.4026625123168359,
+        0.3844193920230338,
+        0.36899044052829677,
+        0.36179609197453905,
+        0.3149557710826192,
+        0.27611669089080176,
+        0.22108834054656673
+      ],
+      "relevant_ids": []
+    },
+    {
+      "id": "q28",
+      "pergunta": "Quais consumidores da Doceria Ateliê Doce encontraram insetos na comida?",
+      "mode": "com_filtro",
+      "split": "calibration",
+      "deve_abster": true,
+      "negative_kind": "semantic",
+      "best_score": 0.286703120624287,
+      "best_id": "rev_002833",
+      "top1_relevant": false,
+      "ranked_ids": [
+        "rev_002833",
+        "rev_002121",
+        "rev_002355",
+        "rev_000357",
+        "rev_002490",
+        "rev_000445",
+        "rev_002127",
+        "rev_002485"
+      ],
+      "scores": [
+        0.286703120624287,
+        0.264247843682449,
+        0.2639205367376615,
+        0.2625708734558241,
+        0.24825173537320314,
+        0.22989138075281915,
+        0.21650612480286444,
+        0.207971575005275
+      ],
+      "relevant_ids": []
+    },
+    {
+      "id": "q29",
+      "pergunta": "Quais críticas de sabor recebeu a Pizza de Trufas da Pizzaria Forno Nobre?",
+      "mode": "com_filtro",
+      "split": "calibration",
+      "deve_abster": true,
+      "negative_kind": "structural",
+      "best_score": null,
+      "best_id": null,
+      "top1_relevant": false,
+      "ranked_ids": [],
+      "scores": [],
+      "relevant_ids": []
+    },
+    {
+      "id": "q30",
+      "pergunta": "Quais avaliações do Burger do Zé mencionam atrasos de 01/01 a 14/01/2030?",
+      "mode": "com_filtro",
+      "split": "evaluation",
+      "deve_abster": true,
+      "negative_kind": "structural",
+      "best_score": null,
+      "best_id": null,
+      "top1_relevant": false,
+      "ranked_ids": [],
+      "scores": [],
+      "relevant_ids": []
+    },
+    {
+      "id": "q01",
+      "pergunta": "Quais reclamações sobre embalagem aparecem na Pizzaria Forno Nobre?",
+      "mode": "sem_filtro",
+      "split": "calibration",
+      "deve_abster": false,
+      "negative_kind": null,
+      "best_score": 0.5755789685879243,
+      "best_id": "rev_000294",
+      "top1_relevant": false,
+      "ranked_ids": [
+        "rev_000294",
+        "rev_002980",
+        "rev_002549",
+        "rev_000673",
+        "rev_000650",
+        "rev_001661",
+        "rev_001076",
+        "rev_000797"
+      ],
+      "scores": [
+        0.5755789685879243,
+        0.5520854758602376,
+        0.5466111678154282,
+        0.5437331387280281,
+        0.5430162933305723,
+        0.5420664160882114,
+        0.5323128850767356,
+        0.5252992712933438
+      ],
+      "relevant_ids": [
+        "rev_001661"
+      ]
+    },
+    {
+      "id": "q02",
+      "pergunta": "O que os clientes criticam no atendimento do Burger do Zé?",
+      "mode": "sem_filtro",
+      "split": "evaluation",
+      "deve_abster": false,
+      "negative_kind": null,
+      "best_score": 0.5647339591640741,
+      "best_id": "rev_002257",
+      "top1_relevant": true,
+      "ranked_ids": [
+        "rev_002257",
+        "rev_000799",
+        "rev_002759",
+        "rev_002417",
+        "rev_002438",
+        "rev_001715",
+        "rev_002549",
+        "rev_000934"
+      ],
+      "scores": [
+        0.5647339591640741,
+        0.4884869779477792,
+        0.46234405177539906,
+        0.4465728650565949,
+        0.4427561513061981,
+        0.4424998578576256,
+        0.43499467378636314,
+        0.4222654377384383
+      ],
+      "relevant_ids": [
+        "rev_002257"
+      ]
+    },
+    {
+      "id": "q03",
+      "pergunta": "Quais problemas de temperatura foram relatados no Sushi Kaze?",
+      "mode": "sem_filtro",
+      "split": "evaluation",
+      "deve_abster": false,
+      "negative_kind": null,
+      "best_score": 0.3750633371985942,
+      "best_id": "rev_000604",
+      "top1_relevant": false,
+      "ranked_ids": [
+        "rev_000604",
+        "rev_002833",
+        "rev_001051",
+        "rev_002562",
+        "rev_002234",
+        "rev_000400",
+        "rev_001661",
+        "rev_002121"
+      ],
+      "scores": [
+        0.3750633371985942,
+        0.3677681030484987,
+        0.3493467881464262,
+        0.33723463179736557,
+        0.3350195962631145,
+        0.32351156980563567,
+        0.32283370604629463,
+        0.31825313623321
+      ],
+      "relevant_ids": [
+        "rev_001339",
+        "rev_001629"
+      ]
+    },
+    {
+      "id": "q04",
+      "pergunta": "O que desagradou no sabor dos pratos da Marmitaria da Dona Rosa?",
+      "mode": "sem_filtro",
+      "split": "calibration",
+      "deve_abster": false,
+      "negative_kind": null,
+      "best_score": 0.6363359080237753,
+      "best_id": "rev_001661",
+      "top1_relevant": false,
+      "ranked_ids": [
+        "rev_001661",
+        "rev_000300",
+        "rev_001416",
+        "rev_002485",
+        "rev_002191",
+        "rev_002127",
+        "rev_000679",
+        "rev_002980"
+      ],
+      "scores": [
+        0.6363359080237753,
+        0.614403653110005,
+        0.5769501584177632,
+        0.5635464445090635,
+        0.5532878698399376,
+        0.5450046702109002,
+        0.5408120681762165,
+        0.5391930422154425
+      ],
+      "relevant_ids": [
+        "rev_000400",
+        "rev_000934",
+        "rev_001212",
+        "rev_001552"
+      ]
+    },
+    {
+      "id": "q05",
+      "pergunta": "Quais falhas de acondicionamento aparecem nas avaliações do Açaí Point?",
+      "mode": "sem_filtro",
+      "split": "calibration",
+      "deve_abster": false,
+      "negative_kind": null,
+      "best_score": 0.3475526826177314,
+      "best_id": "rev_001123",
+      "top1_relevant": true,
+      "ranked_ids": [
+        "rev_001123",
+        "rev_002058",
+        "rev_002800",
+        "rev_002833",
+        "rev_000632",
+        "rev_002675",
+        "rev_000908",
+        "rev_000934"
+      ],
+      "scores": [
+        0.3475526826177314,
+        0.2723767850598877,
+        0.27163631002812855,
+        0.2679668086886087,
+        0.24807104177159053,
+        0.24143885610360055,
+        0.21817790020196673,
+        0.20556157637742886
+      ],
+      "relevant_ids": [
+        "rev_001123",
+        "rev_002302",
+        "rev_002693"
+      ]
+    },
+    {
+      "id": "q06",
+      "pergunta": "Quais clientes da Cantina Bella Massa receberam comida sem o calor esperado?",
+      "mode": "sem_filtro",
+      "split": "calibration",
+      "deve_abster": false,
+      "negative_kind": null,
+      "best_score": 0.5335548956497027,
+      "best_id": "rev_000604",
+      "top1_relevant": false,
+      "ranked_ids": [
+        "rev_000604",
+        "rev_002234",
+        "rev_000403",
+        "rev_002833",
+        "rev_000400",
+        "rev_002759",
+        "rev_001715",
+        "rev_002335"
+      ],
+      "scores": [
+        0.5335548956497027,
+        0.48845931479043186,
+        0.4817151991931435,
+        0.47565678075458395,
+        0.4734208657203576,
+        0.46569755204680213,
+        0.46527920858440347,
+        0.45751542307950305
+      ],
+      "relevant_ids": [
+        "rev_001051",
+        "rev_001760",
+        "rev_002684"
+      ]
+    },
+    {
+      "id": "q07",
+      "pergunta": "Que críticas ao gosto da comida aparecem no Churrasco Gaúcho Express?",
+      "mode": "sem_filtro",
+      "split": "calibration",
+      "deve_abster": false,
+      "negative_kind": null,
+      "best_score": 0.5123707262702606,
+      "best_id": "rev_002980",
+      "top1_relevant": false,
+      "ranked_ids": [
+        "rev_002980",
+        "rev_000300",
+        "rev_002417",
+        "rev_002800",
+        "rev_000357",
+        "rev_001661",
+        "rev_002257",
+        "rev_000604"
+      ],
+      "scores": [
+        0.5123707262702606,
+        0.5108153760788735,
+        0.48400644523111214,
+        0.47044554009871953,
+        0.4672767214315309,
+        0.46671074150576064,
+        0.4450743752328741,
+        0.4396618521599563
+      ],
+      "relevant_ids": [
+        "rev_000351",
+        "rev_001172",
+        "rev_001416",
+        "rev_002021",
+        "rev_002417"
+      ]
+    },
+    {
+      "id": "q08",
+      "pergunta": "Por que alguns clientes da Doceria Ateliê Doce acham o preço injusto?",
+      "mode": "sem_filtro",
+      "split": "evaluation",
+      "deve_abster": false,
+      "negative_kind": null,
+      "best_score": 0.448180220265362,
+      "best_id": "rev_000407",
+      "top1_relevant": false,
+      "ranked_ids": [
+        "rev_000407",
+        "rev_001212",
+        "rev_002833",
+        "rev_001172",
+        "rev_001715",
+        "rev_001998",
+        "rev_002021",
+        "rev_001123"
+      ],
+      "scores": [
+        0.448180220265362,
+        0.3513727745553399,
+        0.35044921941386975,
+        0.34304033148162083,
+        0.32063828184266047,
+        0.3184161336462636,
+        0.30955813507492935,
+        0.2861254378044468
+      ],
+      "relevant_ids": [
+        "rev_002176",
+        "rev_002490",
+        "rev_002833"
+      ]
+    },
+    {
+      "id": "q09",
+      "pergunta": "Quais relatos sustentam reclamações de atraso do Burger do Zé nas últimas duas semanas até 01/11/2026?",
+      "mode": "sem_filtro",
+      "split": "evaluation",
+      "deve_abster": false,
+      "negative_kind": null,
+      "best_score": 0.4285131911269075,
+      "best_id": "rev_002234",
+      "top1_relevant": false,
+      "ranked_ids": [
+        "rev_002234",
+        "rev_002675",
+        "rev_002257",
+        "rev_002476",
+        "rev_001552",
+        "rev_000400",
+        "rev_001027",
+        "rev_000908"
+      ],
+      "scores": [
+        0.4285131911269075,
+        0.41287149698886727,
+        0.41262121546613917,
+        0.41074774713757956,
+        0.40165352171697133,
+        0.40016982467885975,
+        0.3942334366378296,
+        0.3753914826060621
+      ],
+      "relevant_ids": [
+        "rev_000212"
+      ]
+    },
+    {
+      "id": "q10",
+      "pergunta": "Quais avaliações da Marmitaria da Dona Rosa mencionam demora de 19/10 a 01/11/2026?",
+      "mode": "sem_filtro",
+      "split": "calibration",
+      "deve_abster": false,
+      "negative_kind": null,
+      "best_score": 0.3677931064595763,
+      "best_id": "rev_002675",
+      "top1_relevant": false,
+      "ranked_ids": [
+        "rev_002675",
+        "rev_001552",
+        "rev_002015",
+        "rev_002370",
+        "rev_000357",
+        "rev_002058",
+        "rev_002237",
+        "rev_001973"
+      ],
+      "scores": [
+        0.3677931064595763,
+        0.3586270003588435,
+        0.34732919639534815,
+        0.3206533016443962,
+        0.3193620852204166,
+        0.31360358546968253,
+        0.30931869427879843,
+        0.29809172487467017
+      ],
+      "relevant_ids": [
+        "rev_002237"
+      ]
+    },
+    {
+      "id": "q11",
+      "pergunta": "Houve reclamações de espera no Burger do Zé nas duas semanas anteriores, de 05/10 a 18/10/2026?",
+      "mode": "sem_filtro",
+      "split": "calibration",
+      "deve_abster": false,
+      "negative_kind": null,
+      "best_score": 0.4550886555841436,
+      "best_id": "rev_001027",
+      "top1_relevant": false,
+      "ranked_ids": [
+        "rev_001027",
+        "rev_002675",
+        "rev_002234",
+        "rev_001629",
+        "rev_000400",
+        "rev_002257",
+        "rev_000908",
+        "rev_002598"
+      ],
+      "scores": [
+        0.4550886555841436,
+        0.44711557354744347,
+        0.4426234927821192,
+        0.430463120369027,
+        0.4272373570128548,
+        0.4269492527339077,
+        0.4248781340930907,
+        0.41867165680287705
+      ],
+      "relevant_ids": [
+        "rev_002289"
+      ]
+    },
+    {
+      "id": "q12",
+      "pergunta": "Quais clientes do Sushi Kaze reclamaram do prazo entre 19/10 e 01/11/2026?",
+      "mode": "sem_filtro",
+      "split": "evaluation",
+      "deve_abster": false,
+      "negative_kind": null,
+      "best_score": 0.4057535131023656,
+      "best_id": "rev_002142",
+      "top1_relevant": false,
+      "ranked_ids": [
+        "rev_002142",
+        "rev_001027",
+        "rev_002675",
+        "rev_002476",
+        "rev_002298",
+        "rev_002598",
+        "rev_002234",
+        "rev_000400"
+      ],
+      "scores": [
+        0.4057535131023656,
+        0.3944298827095494,
+        0.3942366048028611,
+        0.36942263283715404,
+        0.36654767804298827,
+        0.36569486987710176,
+        0.3589573760415534,
+        0.3510437283678012
+      ],
+      "relevant_ids": [
+        "rev_002675"
+      ]
+    },
+    {
+      "id": "q13",
+      "pergunta": "Quais relatos da Cantina Bella Massa mencionam espera excessiva de 19/10 a 01/11/2026?",
+      "mode": "sem_filtro",
+      "split": "calibration",
+      "deve_abster": false,
+      "negative_kind": null,
+      "best_score": 0.26504083715329374,
+      "best_id": "rev_002675",
+      "top1_relevant": false,
+      "ranked_ids": [
+        "rev_002675",
+        "rev_000400",
+        "rev_002058",
+        "rev_002833",
+        "rev_000357",
+        "rev_001552",
+        "rev_002494",
+        "rev_000407"
+      ],
+      "scores": [
+        0.26504083715329374,
+        0.253440613472136,
+        0.2509149797018561,
+        0.245998898253816,
+        0.22856821587223675,
+        0.22027568578508425,
+        0.21221812668548704,
+        0.20974821228282212
+      ],
+      "relevant_ids": [
+        "rev_002234"
+      ]
+    },
+    {
+      "id": "q14",
+      "pergunta": "Quais críticas ao sabor da Pizza Calabresa aparecem na Pizzaria Forno Nobre?",
+      "mode": "sem_filtro",
+      "split": "calibration",
+      "deve_abster": false,
+      "negative_kind": null,
+      "best_score": 0.7046643211687393,
+      "best_id": "rev_000294",
+      "top1_relevant": false,
+      "ranked_ids": [
+        "rev_000294",
+        "rev_000604",
+        "rev_002980",
+        "rev_001076",
+        "rev_000673",
+        "rev_000797",
+        "rev_001661",
+        "rev_002335"
+      ],
+      "scores": [
+        0.7046643211687393,
+        0.6836368332478996,
+        0.6758218664484066,
+        0.6744610207561201,
+        0.6473504465928521,
+        0.6449590845860396,
+        0.6190909814296152,
+        0.5930461591934771
+      ],
+      "relevant_ids": [
+        "rev_000813",
+        "rev_001076"
+      ]
+    },
+    {
+      "id": "q15",
+      "pergunta": "O que desagradou no gosto da Batata Frita Grande do Burger do Zé?",
+      "mode": "sem_filtro",
+      "split": "evaluation",
+      "deve_abster": false,
+      "negative_kind": null,
+      "best_score": 0.7230304808804597,
+      "best_id": "rev_002257",
+      "top1_relevant": false,
+      "ranked_ids": [
+        "rev_002257",
+        "rev_001416",
+        "rev_000300",
+        "rev_001685",
+        "rev_000679",
+        "rev_002800",
+        "rev_000799",
+        "rev_000400"
+      ],
+      "scores": [
+        0.7230304808804597,
+        0.6562347797801025,
+        0.6273602380590191,
+        0.583289112010162,
+        0.5777193080675701,
+        0.5759770267603728,
+        0.5737772018918904,
+        0.5736972962417064
+      ],
+      "relevant_ids": [
+        "rev_001685",
+        "rev_002089"
+      ]
+    },
+    {
+      "id": "q16",
+      "pergunta": "Quais clientes não gostaram do sabor do Combo 20 Peças do Sushi Kaze?",
+      "mode": "sem_filtro",
+      "split": "calibration",
+      "deve_abster": false,
+      "negative_kind": null,
+      "best_score": 0.5854533602846561,
+      "best_id": "rev_001010",
+      "top1_relevant": false,
+      "ranked_ids": [
+        "rev_001010",
+        "rev_002257",
+        "rev_000679",
+        "rev_001416",
+        "rev_000345",
+        "rev_001339",
+        "rev_002598",
+        "rev_000300"
+      ],
+      "scores": [
+        0.5854533602846561,
+        0.5386000137916327,
+        0.5364674560118593,
+        0.535356760200135,
+        0.5228757078449724,
+        0.5056454716168824,
+        0.502253009303436,
+        0.4985167298355333
+      ],
+      "relevant_ids": [
+        "rev_001998"
+      ]
+    },
+    {
+      "id": "q17",
+      "pergunta": "Quais críticas ao sabor da Marmita Executiva aparecem na Marmitaria da Dona Rosa?",
+      "mode": "sem_filtro",
+      "split": "calibration",
+      "deve_abster": false,
+      "negative_kind": null,
+      "best_score": 0.39982356979746403,
+      "best_id": "rev_000934",
+      "top1_relevant": true,
+      "ranked_ids": [
+        "rev_000934",
+        "rev_000345",
+        "rev_000357",
+        "rev_002015",
+        "rev_001760",
+        "rev_002800",
+        "rev_002980",
+        "rev_000300"
+      ],
+      "scores": [
+        0.39982356979746403,
+        0.3623929405196077,
+        0.3534959913659147,
+        0.35075987304117423,
+        0.3400225359104151,
+        0.33605791066064405,
+        0.3355401713248006,
+        0.33403607124737295
+      ],
+      "relevant_ids": [
+        "rev_000934",
+        "rev_001552"
+      ]
+    },
+    {
+      "id": "q18",
+      "pergunta": "O que os clientes criticaram no gosto da Vitamina de Morango do Açaí Point?",
+      "mode": "sem_filtro",
+      "split": "evaluation",
+      "deve_abster": false,
+      "negative_kind": null,
+      "best_score": 0.668984798547273,
+      "best_id": "rev_000267",
+      "top1_relevant": true,
+      "ranked_ids": [
+        "rev_000267",
+        "rev_002302",
+        "rev_001190",
+        "rev_001551",
+        "rev_002959",
+        "rev_000613",
+        "rev_002693",
+        "rev_002417"
+      ],
+      "scores": [
+        0.668984798547273,
+        0.6327995835687247,
+        0.6222331408604169,
+        0.5911954538563077,
+        0.5253450070920896,
+        0.5136611371377133,
+        0.4875526774055779,
+        0.442829793763195
+      ],
+      "relevant_ids": [
+        "rev_000267",
+        "rev_002959"
+      ]
+    },
+    {
+      "id": "q19",
+      "pergunta": "Quais pedidos da Pizzaria Forno Nobre perderam o calor durante o trajeto?",
+      "mode": "sem_filtro",
+      "split": "calibration",
+      "deve_abster": false,
+      "negative_kind": null,
+      "best_score": 0.6729904521189474,
+      "best_id": "rev_000604",
+      "top1_relevant": false,
+      "ranked_ids": [
+        "rev_000604",
+        "rev_001661",
+        "rev_001076",
+        "rev_000673",
+        "rev_000752",
+        "rev_002234",
+        "rev_000797",
+        "rev_002335"
+      ],
+      "scores": [
+        0.6729904521189474,
+        0.6312264798944617,
+        0.5862710658437572,
+        0.5722774675696365,
+        0.5690835410842326,
+        0.5673475129418709,
+        0.5612679993948079,
+        0.5536253593137243
+      ],
+      "relevant_ids": [
+        "rev_000673",
+        "rev_000813",
+        "rev_001661"
+      ]
+    },
+    {
+      "id": "q20",
+      "pergunta": "Quais clientes do Sushi Kaze reclamaram de falta de pontualidade?",
+      "mode": "sem_filtro",
+      "split": "evaluation",
+      "deve_abster": false,
+      "negative_kind": null,
+      "best_score": 0.3819459564939135,
+      "best_id": "rev_002438",
+      "top1_relevant": false,
+      "ranked_ids": [
+        "rev_002438",
+        "rev_000934",
+        "rev_000604",
+        "rev_002234",
+        "rev_002476",
+        "rev_001416",
+        "rev_001552",
+        "rev_002598"
+      ],
+      "scores": [
+        0.3819459564939135,
+        0.37177456184626667,
+        0.36797474825237125,
+        0.36138988592111426,
+        0.35432222791883317,
+        0.35258622804362827,
+        0.34896862046397426,
+        0.34740383981266726
+      ],
+      "relevant_ids": [
+        "rev_000802",
+        "rev_000908",
+        "rev_001010",
+        "rev_001998",
+        "rev_002142",
+        "rev_002494",
+        "rev_002562",
+        "rev_002675"
+      ]
+    },
+    {
+      "id": "q21",
+      "pergunta": "Em quais pedidos da Doceria Ateliê Doce o recipiente deixou o conteúdo desprotegido?",
+      "mode": "sem_filtro",
+      "split": "calibration",
+      "deve_abster": false,
+      "negative_kind": null,
+      "best_score": 0.4225245451879373,
+      "best_id": "rev_001533",
+      "top1_relevant": false,
+      "ranked_ids": [
+        "rev_001533",
+        "rev_000632",
+        "rev_001051",
+        "rev_001123",
+        "rev_002015",
+        "rev_001998",
+        "rev_002675",
+        "rev_000802"
+      ],
+      "scores": [
+        0.4225245451879373,
+        0.41483614466624696,
+        0.4109282326488727,
+        0.38832508270393745,
+        0.3655296432779877,
+        0.35549643764344135,
+        0.34786594536864723,
+        0.345372636337133
+      ],
+      "relevant_ids": [
+        "rev_000445",
+        "rev_002127",
+        "rev_002355",
+        "rev_002363",
+        "rev_002485"
+      ]
+    },
+    {
+      "id": "q22",
+      "pergunta": "Quem achou a refeição da Cantina Bella Massa desagradável ao paladar?",
+      "mode": "sem_filtro",
+      "split": "calibration",
+      "deve_abster": false,
+      "negative_kind": null,
+      "best_score": 0.5333130224738205,
+      "best_id": "rev_000300",
+      "top1_relevant": false,
+      "ranked_ids": [
+        "rev_000300",
+        "rev_001661",
+        "rev_002257",
+        "rev_000400",
+        "rev_001416",
+        "rev_001685",
+        "rev_002476",
+        "rev_002485"
+      ],
+      "scores": [
+        0.5333130224738205,
+        0.5254789094184803,
+        0.5248973197787904,
+        0.5228956263687545,
+        0.5183501424990671,
+        0.5040433250758444,
+        0.4987124721921902,
+        0.4915000485137636
+      ],
+      "relevant_ids": [
+        "rev_001051",
+        "rev_002234",
+        "rev_002684"
+      ]
+    },
+    {
+      "id": "q23",
+      "pergunta": "Em quais relatos do Açaí Point a conversa com a loja ficou sem retorno?",
+      "mode": "sem_filtro",
+      "split": "calibration",
+      "deve_abster": false,
+      "negative_kind": null,
+      "best_score": 0.45141516210161736,
+      "best_id": "rev_002015",
+      "top1_relevant": false,
+      "ranked_ids": [
+        "rev_002015",
+        "rev_000934",
+        "rev_002675",
+        "rev_002417",
+        "rev_002058",
+        "rev_001552",
+        "rev_002438",
+        "rev_000645"
+      ],
+      "scores": [
+        0.45141516210161736,
+        0.40739526974669077,
+        0.39656822605075875,
+        0.3961371217568447,
+        0.3955801410852706,
+        0.38663279477209755,
+        0.377838551998646,
+        0.3775706521190776
+      ],
+      "relevant_ids": [
+        "rev_001265"
+      ]
+    },
+    {
+      "id": "q24",
+      "pergunta": "Quais compras do Churrasco Gaúcho Express decepcionaram na relação entre desembolso e porção?",
+      "mode": "sem_filtro",
+      "split": "calibration",
+      "deve_abster": false,
+      "negative_kind": null,
+      "best_score": 0.4956293848971105,
+      "best_id": "rev_002417",
+      "top1_relevant": false,
+      "ranked_ids": [
+        "rev_002417",
+        "rev_000796",
+        "rev_002933",
+        "rev_001998",
+        "rev_002598",
+        "rev_000407",
+        "rev_002675",
+        "rev_000797"
+      ],
+      "scores": [
+        0.4956293848971105,
+        0.4536694519930311,
+        0.44165046303955846,
+        0.43272879642273165,
+        0.4303334927247784,
+        0.42221116264471414,
+        0.4179234433683533,
+        0.4058573655392754
+      ],
+      "relevant_ids": [
+        "rev_001715"
+      ]
+    },
+    {
+      "id": "q25",
+      "pergunta": "Quais clientes do Burger do Zé relataram uma reação alérgica a amendoim?",
+      "mode": "sem_filtro",
+      "split": "calibration",
+      "deve_abster": true,
+      "negative_kind": "semantic",
+      "best_score": 0.5842242208755668,
+      "best_id": "rev_002257",
+      "top1_relevant": false,
+      "ranked_ids": [
+        "rev_002257",
+        "rev_002121",
+        "rev_000300",
+        "rev_001212",
+        "rev_002289",
+        "rev_002980",
+        "rev_000799",
+        "rev_001715"
+      ],
+      "scores": [
+        0.5842242208755668,
+        0.4764059639272475,
+        0.4700845716381954,
+        0.4392545385966923,
+        0.42366351260978663,
+        0.42004619504972196,
+        0.4182342565402948,
+        0.4180642927523095
+      ],
+      "relevant_ids": []
+    },
+    {
+      "id": "q26",
+      "pergunta": "Qual valor de reembolso via Pix foi recebido pelos clientes do Sushi Kaze?",
+      "mode": "sem_filtro",
+      "split": "evaluation",
+      "deve_abster": true,
+      "negative_kind": "semantic",
+      "best_score": 0.4927425423569023,
+      "best_id": "rev_002933",
+      "top1_relevant": false,
+      "ranked_ids": [
+        "rev_002933",
+        "rev_000797",
+        "rev_001076",
+        "rev_000407",
+        "rev_002759",
+        "rev_001998",
+        "rev_002142",
+        "rev_000796"
+      ],
+      "scores": [
+        0.4927425423569023,
+        0.42813389945201397,
+        0.4275350272221815,
+        0.42749125358742646,
+        0.4145683351381427,
+        0.394394931069332,
+        0.3833584754181948,
+        0.37845452358858117
+      ],
+      "relevant_ids": []
+    },
+    {
+      "id": "q27",
+      "pergunta": "Qual é a receita completa sem glúten da Marmita Fit Frango da Dona Rosa?",
+      "mode": "sem_filtro",
+      "split": "calibration",
+      "deve_abster": true,
+      "negative_kind": "semantic",
+      "best_score": 0.542480822146166,
+      "best_id": "rev_000294",
+      "top1_relevant": false,
+      "ranked_ids": [
+        "rev_000294",
+        "rev_001829",
+        "rev_001416",
+        "rev_001760",
+        "rev_000403",
+        "rev_000679",
+        "rev_000673",
+        "rev_000752"
+      ],
+      "scores": [
+        0.542480822146166,
+        0.5152116326515344,
+        0.5041766569790294,
+        0.5013085799103886,
+        0.4962004709914955,
+        0.4919861823224071,
+        0.4701355357863292,
+        0.4606283243146285
+      ],
+      "relevant_ids": []
+    },
+    {
+      "id": "q28",
+      "pergunta": "Quais consumidores da Doceria Ateliê Doce encontraram insetos na comida?",
+      "mode": "sem_filtro",
+      "split": "calibration",
+      "deve_abster": true,
+      "negative_kind": "semantic",
+      "best_score": 0.3553271679909654,
+      "best_id": "rev_000300",
+      "top1_relevant": false,
+      "ranked_ids": [
+        "rev_000300",
+        "rev_001051",
+        "rev_001212",
+        "rev_002417",
+        "rev_001533",
+        "rev_002959",
+        "rev_001829",
+        "rev_000345"
+      ],
+      "scores": [
+        0.3553271679909654,
+        0.3235541319809718,
+        0.31969195739218625,
+        0.314683964609042,
+        0.3036414036480821,
+        0.30227859811861885,
+        0.30030933660126924,
+        0.2956406330896345
+      ],
+      "relevant_ids": []
+    },
+    {
+      "id": "q29",
+      "pergunta": "Quais críticas de sabor recebeu a Pizza de Trufas da Pizzaria Forno Nobre?",
+      "mode": "sem_filtro",
+      "split": "calibration",
+      "deve_abster": true,
+      "negative_kind": "structural",
+      "best_score": 0.7479545618085475,
+      "best_id": "rev_001076",
+      "top1_relevant": false,
+      "ranked_ids": [
+        "rev_001076",
+        "rev_000294",
+        "rev_000604",
+        "rev_000797",
+        "rev_002980",
+        "rev_000673",
+        "rev_001661",
+        "rev_002335"
+      ],
+      "scores": [
+        0.7479545618085475,
+        0.735235613189394,
+        0.7311799632962565,
+        0.7217033693233752,
+        0.7123616562739903,
+        0.6991678312837559,
+        0.6868582914908339,
+        0.6489266844327641
+      ],
+      "relevant_ids": []
+    },
+    {
+      "id": "q30",
+      "pergunta": "Quais avaliações do Burger do Zé mencionam atrasos de 01/01 a 14/01/2030?",
+      "mode": "sem_filtro",
+      "split": "evaluation",
+      "deve_abster": true,
+      "negative_kind": "structural",
+      "best_score": 0.4565513616516306,
+      "best_id": "rev_002476",
+      "top1_relevant": false,
+      "ranked_ids": [
+        "rev_002476",
+        "rev_000400",
+        "rev_001027",
+        "rev_001973",
+        "rev_002675",
+        "rev_001629",
+        "rev_000908",
+        "rev_002234"
+      ],
+      "scores": [
+        0.4565513616516306,
+        0.43298645406559866,
+        0.41388960224299737,
+        0.4116458598986472,
+        0.409102042689689,
+        0.39774971603778425,
+        0.39546829884391066,
+        0.3936429107870178
+      ],
+      "relevant_ids": []
+    }
+  ]
+}

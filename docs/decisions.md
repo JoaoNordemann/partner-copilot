@@ -122,3 +122,43 @@ vetores de outro corpus não serão comparados como se fossem o mesmo experiment
 Se o modelo inglês histórico estiver disponível em cache, poderá ser reembutido
 no banco isolado do mesmo corpus, registrando a origem e a revisão. Na ausência de
 coleção histórica elegível, essa ablação será explicitamente marcada como não executada.
+
+## Calibração de min_score — protocolo anterior à seleção do limiar
+
+Fixamos k=8 e usamos o maior score de cosseno exato registrado em
+reports/retrieval-comparison.json, sem aplicar previamente o corte 0.25.
+O modo principal é com filtros; o mesmo limiar será aplicado ao modo sem filtro,
+sem selecionar um segundo limiar nos seus resultados. Sem candidato significa
+score ausente (null), não zero; sempre abstemos nesse caso.
+
+Partição determinística por hash SHA256 de "20261103:<id>", estratificada:
+calibração 20 perguntas (5 restaurante/aspecto, 3 temporais, 3 por item, 5 paráfrases,
+3 negativas semânticas e 1 negativa estrutural); avaliação 10 (as restantes).
+Isso dá 16 respondíveis + 4 sem resposta na calibração e 8 + 2 na avaliação.
+As negativas estruturais são item inexistente/janela vazia; não são misturadas com
+as semânticas na descrição dos erros. A partição não consulta scores.
+
+Escolha: maximizar balanced accuracy na calibração, isto é, média entre a fração
+de respondíveis aceitas e a fração de sem resposta corretamente rejeitadas.
+Usamos a grade fixa 0.000..1.000, passo 0.001; aceitação inclusiva score >= limiar.
+Empates: menos falsas aceitações de perguntas sem resposta; depois menor limiar.
+A escolha usa somente as 20 perguntas. Não ajustamos k, grade ou função de custo
+após observar o resultado. Comparamos também o limiar anterior 0.25.
+
+Registrar score máximo e ID do primeiro documento para as 30 perguntas nos dois
+modos, inclusive se o documento é irrelevante. Aceitar uma pergunta respondível
+não prova que recuperou evidência válida: reportaremos separadamente se há ao menos
+um relevante nos oito documentos que passaram pelo corte.
+Distribuições: contagens, mínimo, quartis, mediana e máximo por grupo; scores ausentes
+são contados separadamente. Overlap numérico dos intervalos não prova separabilidade;
+mostraremos exemplos concretos de negativas com score maior que positivas.
+
+Limitação essencial: as 30 perguntas já foram usadas nos baselines e lidas por IA.
+Esta divisão impede usar as dez perguntas nesta nova otimização, mas não as torna
+um teste final independente ou nunca observado. Reportaremos contagens e essa
+exposição anterior; as anotações gold continuam pendentes de revisão humana.
+O limiar escolhido é experimental e será registrado em artefato próprio. Não será
+promovido automaticamente ao default global nem sobrescreverá o .env local sem
+validação em perguntas novas. O relatório deve mostrar o custo, mesmo quando ruim.
+
+Resultado da seleção: candidato experimental 0,287, sem promoção ao default. Na avaliação separada, rejeitou 1/2 sem resposta (igual a 0,25) e preservou evidência em 7/8 respondíveis (antes 8/8). Sobreposição e exposição histórica impedem tratar isso como ganho validado. Relatório: [min-score-calibration.md](min-score-calibration.md).

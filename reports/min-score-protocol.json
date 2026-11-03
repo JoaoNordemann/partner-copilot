@@ -1,0 +1,67 @@
+{
+  "version": 1,
+  "seed": 20261103,
+  "split_method": "SHA256(seed:id), sorted within prespecified strata",
+  "calibration_ids": [
+    "q01",
+    "q04",
+    "q05",
+    "q06",
+    "q07",
+    "q10",
+    "q11",
+    "q13",
+    "q14",
+    "q16",
+    "q17",
+    "q19",
+    "q21",
+    "q22",
+    "q23",
+    "q24",
+    "q25",
+    "q27",
+    "q28",
+    "q29"
+  ],
+  "evaluation_ids": [
+    "q02",
+    "q03",
+    "q08",
+    "q09",
+    "q12",
+    "q15",
+    "q18",
+    "q20",
+    "q26",
+    "q30"
+  ],
+  "calibration_strata_counts": {
+    "restaurante_aspecto": 5,
+    "temporal": 3,
+    "item": 3,
+    "parafrase": 5,
+    "negative_semantic": 3,
+    "negative_structural": 1
+  },
+  "k": 8,
+  "primary_mode": "com_filtro",
+  "objective": "balanced_accuracy",
+  "candidate_grid": {
+    "start": 0.0,
+    "end": 1.0,
+    "step": 0.001
+  },
+  "ties": [
+    "fewer_false_acceptances",
+    "lower_threshold"
+  ],
+  "previous_threshold": 0.25,
+  "snapshot_sha256_lf": {
+    "questions.jsonl": "25b218ddc5369b2187be44699a781723a0d8f6f2870257923270a76321dd9cc4",
+    "corpus.jsonl": "74f04a4bf0407de3a4302f9a869dbeadde6541bd9fa56bb74e5e2fe0a832c95f",
+    "relevance_audit.jsonl": "a18f13fe9f79a8b2390ffd331134ac3f754aa66a85a70f7eb73ae5bf1d2ded10"
+  },
+  "historically_exposed_evaluation_set": true,
+  "promote_global_default": false
+}
