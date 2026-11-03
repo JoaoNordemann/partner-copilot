@@ -1,12 +1,13 @@
 """Restaurant-scoped retrieval with inclusive date filters and explicit abstention."""
 
 from datetime import date
-from typing import Protocol
-
-from chromadb.api.types import Where
+from typing import Any, Protocol
 
 from partner_copilot.config import Settings, get_settings
 from partner_copilot.schemas import RetrievedDoc
+
+# Structural contract; importing the retriever must not require the Chroma adapter.
+Where = dict[str, Any]
 
 
 class VectorStore(Protocol):

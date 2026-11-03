@@ -162,3 +162,7 @@ promovido automaticamente ao default global nem sobrescreverá o .env local sem
 validação em perguntas novas. O relatório deve mostrar o custo, mesmo quando ruim.
 
 Resultado da seleção: candidato experimental 0,287, sem promoção ao default. Na avaliação separada, rejeitou 1/2 sem resposta (igual a 0,25) e preservou evidência em 7/8 respondíveis (antes 8/8). Sobreposição e exposição histórica impedem tratar isso como ganho validado. Relatório: [min-score-calibration.md](min-score-calibration.md).
+
+## Testes unitários e análise de falhas
+
+O núcleo do retriever não importa Chroma nem frameworks de modelos. Testes com store falso e bloqueio de dependências pesadas rodam em workflow mínimo; os testes de integração permanecem separados. As cinco piores perguntas do baseline operacional são selecionadas por perda, MRR e ID, sem mudar julgamentos para melhorar métricas. Diagnósticos e fontes: [retrieval-failure-analysis.md](retrieval-failure-analysis.md).

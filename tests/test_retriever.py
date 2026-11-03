@@ -4,7 +4,6 @@ from unittest.mock import Mock
 import pytest
 
 from partner_copilot.config import Settings
-from partner_copilot.ingestion.chroma_store import ChromaStore
 from partner_copilot.pipeline import RAGPipeline
 from partner_copilot.retrieval.retriever import Retriever
 from partner_copilot.schemas import RetrievedDoc, Review
@@ -74,73 +73,6 @@ def test_settings_and_combined_filters():
     )
 
 
-class GeometryEmbedder:
-    model_name = "test/cosine-geometry"
-    document_prefix = query_prefix = ""
-
-    def embed_documents(self, texts):
-        vectors = {"parallel": [1.0, 0.0], "orthogonal": [0.0, 1.0], "opposite": [-1.0, 0.0]}
-        return [vectors[text] for text in texts]
-
-    def embed_query(self, text):
-        return [1.0, 0.0]
-
-
-def test_cosine_scores_have_known_geometry_and_wrong_metric_is_rejected(tmp_path):
-    store = ChromaStore(tmp_path / "vectors", embedder=GeometryEmbedder())
-    store.upsert([review(name, text=name) for name in ["parallel", "orthogonal", "opposite"]])
-    docs = store.query("query", 3)
-    assert [doc.review.id for doc in docs] == ["parallel", "orthogonal", "opposite"]
-    assert [doc.score for doc in docs] == pytest.approx([1.0, 0.0, -1.0], abs=1e-6)
-    store.client.create_collection(
-        "wrong_metric",
-        metadata={
-            "hnsw:space": "l2",
-            "embedding_model": GeometryEmbedder.model_name,
-        },
-    )
-    with pytest.raises(ValueError, match="cosine"):
-        ChromaStore(tmp_path / "vectors", collection="wrong_metric", embedder=GeometryEmbedder())
-
-
-def test_date_boundaries_restaurant_isolation_and_pipeline_abstention(tmp_path):
-    store = ChromaStore(tmp_path / "dates", embedder=GeometryEmbedder())
-    store.upsert(
-        [
-            review(identifier, text="parallel", created_at=day, restaurant_id=restaurant)
-            for identifier, day, restaurant in [
-                ("before", "2026-10-18", "rest_001"),
-                ("start", "2026-10-19", "rest_001"),
-                ("end", "2026-11-01", "rest_001"),
-                ("after", "2026-11-02", "rest_001"),
-                ("other", "2026-11-01", "rest_002"),
-            ]
-        ]
-    )
-    retriever = Retriever(store, k=8)
-    dates = {"start_date": date(2026, 10, 19), "end_date": date(2026, 11, 1)}
-    assert {doc.review.id for doc in retriever.retrieve("entrega", "rest_001", **dates)} == {
-        "start",
-        "end",
-    }
-    assert {
-        doc.review.id
-        for doc in retriever.retrieve("entrega", "rest_001", start_date=date(2026, 11, 2))
-    } == {"after"}
-    assert {
-        doc.review.id
-        for doc in retriever.retrieve("entrega", "rest_001", end_date=date(2026, 10, 18))
-    } == {"before"}
-    assert retriever.retrieve("entrega", "rest_001", category="sushi") == []
-    llm = Mock()
-    pipeline = RAGPipeline(retriever, llm)
-    answer = pipeline.ask("entrega", "rest_001", start_date=date(2030, 1, 1))
-    assert answer.sources == [] and answer.answer == "Sem avaliações relevantes para responder."
-    llm.generate.assert_not_called()
-    llm.generate.return_value = "Diagnóstico"
-    assert set(pipeline.ask("entrega", "rest_001", **dates).sources) == {"start", "end"}
-
-
 def test_inverted_date_window_fails_before_query():
     store = Mock()
     with pytest.raises(ValueError, match="start_date"):
@@ -148,3 +80,34 @@ def test_inverted_date_window_fails_before_query():
             "entrega", "rest_001", start_date=date(2026, 11, 2), end_date=date(2026, 11, 1)
         )
     store.query.assert_not_called()
+
+
+def test_empty_store_result_abstains_without_calling_llm():
+    store, llm = Mock(), Mock()
+    store.query.return_value = []
+    retriever = Retriever(store, k=3)
+    assert retriever.retrieve("entrega", "rest_001") == []
+    answer = RAGPipeline(retriever, llm).ask("entrega", "rest_001")
+    assert answer.sources == []
+    assert answer.answer == "Sem avaliações relevantes para responder."
+    llm.generate.assert_not_called()
+
+
+@pytest.mark.parametrize("bound,operator", [("start_date", "$gte"), ("end_date", "$lte")])
+def test_item_and_one_sided_date_filters(bound, operator):
+    store = Mock()
+    store.query.return_value = []
+    Retriever(store, k=2).retrieve(
+        "sabor", "rest_001", item="Pizza Calabresa", **{bound: date(2026, 11, 1)}
+    )
+    store.query.assert_called_once_with(
+        "sabor",
+        4,
+        {
+            "$and": [
+                {"restaurant_id": "rest_001"},
+                {"item": "Pizza Calabresa"},
+                {"created_at_int": {operator: 20261101}},
+            ]
+        },
+    )

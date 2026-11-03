@@ -1,0 +1,289 @@
+{
+  "mode": "com_filtro",
+  "k": 8,
+  "min_score": 0.25,
+  "selection_rule": "Descending loss: answerable=1-classic_recall@8; unanswerable=1 if any returned else 0. Ties: ascending MRR (null=0), then ID.",
+  "reviewer": "OpenAI assistant; per-text review, not independent human annotation",
+  "sources_sha256_lf": {
+    "reports/retrieval-baseline.json": "2da0545afd8ebaf2c6b9dc6cf9f9a368c0715424f9eafa5d5c2cd8d3e3ae5e7d",
+    "reports/retrieval-comparison.json": "ca536df257f42129c89f4428b4ae1b0ab595972f39ddce866353c613387500b4",
+    "data/eval/questions.jsonl": "25b218ddc5369b2187be44699a781723a0d8f6f2870257923270a76321dd9cc4",
+    "data/eval/corpus.jsonl": "74f04a4bf0407de3a4302f9a869dbeadde6541bd9fa56bb74e5e2fe0a832c95f"
+  },
+  "score_sources": "Operational Chroma scores are primary; exact-cosine pre-threshold diagnostics are labeled separately.",
+  "selected_ids": [
+    "q13",
+    "q25",
+    "q26",
+    "q27",
+    "q28"
+  ],
+  "cases": [
+    {
+      "id": "q13",
+      "question": "Quais relatos da Cantina Bella Massa mencionam espera excessiva de 19/10 a 01/11/2026?",
+      "filters": {
+        "restaurant_id": "rest_006",
+        "start_date": "2026-10-19",
+        "end_date": "2026-11-01"
+      },
+      "loss": 1.0,
+      "category": "ranking_semantico_fraco_e_corte_de_score",
+      "analysis": "A evidência explícita de 92 minutos está em terceiro antes do corte, com score 0,189. O primeiro fala de quantidade/preço e tem 0,210. Todos ficam abaixo de 0,25. Review mista dificulta ordenação, mas o trecho sobre demora não é ambíguo. Não é apenas um problema de filtro ou de limiar: reduzir o limiar também admitiria os distratores.",
+      "next_experiment": "Avaliar reranking por relevância à pergunta e fusão lexical; não reduzir o corte global com base neste caso.",
+      "filter_assessment": "All inspected candidates respect restaurant and date scope; no filter error found.",
+      "relevance_assessment": "Text supports frozen judgment; no relabeling justified by this review. Gold remains pending human review.",
+      "operational_returned_ids": [],
+      "retrieved_top3": [],
+      "exact_before_threshold_top3": [
+        {
+          "id": "rev_000407",
+          "score": 0.20974821228282212,
+          "text": "Paguei caro e esperava mais quantidade. Veio numa embalagem bem resistente"
+        },
+        {
+          "id": "rev_002800",
+          "score": 0.1943816183444775,
+          "text": "Sobre nhoque ao sugo: O gosto de nhoque ao sugo estava bem diferente do habitual. Embalagem firme, nada ficou solto. Em 20 min já estava aqui. Algumas coisas precisam melhorar"
+        },
+        {
+          "id": "rev_002234",
+          "score": 0.189213224775514,
+          "text": "Chegou quente, deu pra comer na hora. Foram 92 minutos de espera, atrapalhou meu almoço. Esperava mais do sabor de ravióli de queijo."
+        }
+      ],
+      "relevant_texts": [
+        {
+          "id": "rev_002234",
+          "text": "Chegou quente, deu pra comer na hora. Foram 92 minutos de espera, atrapalhou meu almoço. Esperava mais do sabor de ravióli de queijo."
+        }
+      ]
+    },
+    {
+      "id": "q25",
+      "question": "Quais clientes do Burger do Zé relataram uma reação alérgica a amendoim?",
+      "filters": {
+        "restaurant_id": "rest_002"
+      },
+      "loss": 1,
+      "category": "falha_de_abstencao_semantica",
+      "analysis": "O primeiro resultado critica atendimento e elogia burger, sem falar de amendoim ou reação alérgica. Similaridade temática de restaurante/comida não prova o evento pedido. Atribuição lexical específica ao nome do prato é hipótese, não causalidade demonstrada.",
+      "next_experiment": "Exigir evidência explícita para a intenção e permitir abstenção após reranking; silêncio não prova segurança alimentar.",
+      "filter_assessment": "All inspected candidates respect restaurant and date scope; no filter error found.",
+      "relevance_assessment": "Text supports frozen judgment; no relabeling justified by this review. Gold remains pending human review.",
+      "operational_returned_ids": [
+        "rev_002257",
+        "rev_002289",
+        "rev_000799",
+        "rev_002089",
+        "rev_001685",
+        "rev_000212",
+        "rev_002191",
+        "rev_001291"
+      ],
+      "retrieved_top3": [
+        {
+          "id": "rev_002257",
+          "score": 0.5842241644859314,
+          "text": "Demoraram demais pra responder minha dúvida. O sabor de burger duplo estava muito bom."
+        },
+        {
+          "id": "rev_002289",
+          "score": 0.42366355657577515,
+          "text": "Não gostei do sabor de x-bacon. Tive que esquentar x-bacon no micro-ondas. Fiquei esperando 112 min pelo pedido"
+        },
+        {
+          "id": "rev_000799",
+          "score": 0.41823428869247437,
+          "text": "Não precisei esquentar burger duplo. burger duplo estava uma delícia, gostei até o fim. Pelo valor, achei uma boa compra."
+        }
+      ],
+      "exact_before_threshold_top3": [
+        {
+          "id": "rev_002257",
+          "score": 0.5842242208755668,
+          "text": "Demoraram demais pra responder minha dúvida. O sabor de burger duplo estava muito bom."
+        },
+        {
+          "id": "rev_002289",
+          "score": 0.42366351260978663,
+          "text": "Não gostei do sabor de x-bacon. Tive que esquentar x-bacon no micro-ondas. Fiquei esperando 112 min pelo pedido"
+        },
+        {
+          "id": "rev_000799",
+          "score": 0.4182342565402948,
+          "text": "Não precisei esquentar burger duplo. burger duplo estava uma delícia, gostei até o fim. Pelo valor, achei uma boa compra."
+        }
+      ],
+      "relevant_texts": []
+    },
+    {
+      "id": "q26",
+      "question": "Qual valor de reembolso via Pix foi recebido pelos clientes do Sushi Kaze?",
+      "filters": {
+        "restaurant_id": "rest_003"
+      },
+      "loss": 1,
+      "category": "falha_de_abstencao_e_confusao_de_intencao",
+      "analysis": "O primeiro resultado diz que o valor coube no bolso; preço ou custo-benefício não informam reembolso nem Pix. Os seguintes também tratam de preço, sabor e atraso.",
+      "next_experiment": "Distinguir avaliação de preço de transação de reembolso; testar reranking e detecção de suporte factual.",
+      "filter_assessment": "All inspected candidates respect restaurant and date scope; no filter error found.",
+      "relevance_assessment": "Text supports frozen judgment; no relabeling justified by this review. Gold remains pending human review.",
+      "operational_returned_ids": [
+        "rev_002759",
+        "rev_001998",
+        "rev_002142",
+        "rev_001629",
+        "rev_002675",
+        "rev_002494",
+        "rev_002562"
+      ],
+      "retrieved_top3": [
+        {
+          "id": "rev_002759",
+          "score": 0.4145684838294983,
+          "text": "O valor coube no bolso. Dessa vez acertaram no sabor de hot roll. A embalagem protegeu bem hot roll. Recomendo esse lugar."
+        },
+        {
+          "id": "rev_001998",
+          "score": 0.3943949341773987,
+          "text": "A entrega demorou demais, deu 76 minutos. combo 20 peças estava com um gosto ruim no final. Capricharam na embalagem de combo 20 peças. O preço de combo 20 peças estava bom."
+        },
+        {
+          "id": "rev_002142",
+          "score": 0.38335853815078735,
+          "text": "Ainda estava quentinho quando abri. Gostei muito de yakisoba. Bom custo-beneficio nesse yakisoba. A entrega demorou demais, deu 115 minutos"
+        }
+      ],
+      "exact_before_threshold_top3": [
+        {
+          "id": "rev_002759",
+          "score": 0.4145683351381427,
+          "text": "O valor coube no bolso. Dessa vez acertaram no sabor de hot roll. A embalagem protegeu bem hot roll. Recomendo esse lugar."
+        },
+        {
+          "id": "rev_001998",
+          "score": 0.394394931069332,
+          "text": "A entrega demorou demais, deu 76 minutos. combo 20 peças estava com um gosto ruim no final. Capricharam na embalagem de combo 20 peças. O preço de combo 20 peças estava bom."
+        },
+        {
+          "id": "rev_002142",
+          "score": 0.3833584754181948,
+          "text": "Ainda estava quentinho quando abri. Gostei muito de yakisoba. Bom custo-beneficio nesse yakisoba. A entrega demorou demais, deu 115 minutos"
+        }
+      ],
+      "relevant_texts": []
+    },
+    {
+      "id": "q27",
+      "question": "Qual é a receita completa sem glúten da Marmita Fit Frango da Dona Rosa?",
+      "filters": {
+        "restaurant_id": "rest_004"
+      },
+      "loss": 1,
+      "category": "falha_de_abstencao_e_entidade_sem_evidencia",
+      "analysis": "O primeiro resultado menciona exatamente marmita fit frango, mas só elogia sabor. Acerto da entidade não fornece receita nem lista de ingredientes. Filtrar também pelo item não criaria a informação ausente.",
+      "next_experiment": "Separar perguntas de reviews de pedidos de receita/ingredientes; abster quando a fonte não oferece essa informação.",
+      "filter_assessment": "All inspected candidates respect restaurant and date scope; no filter error found.",
+      "relevance_assessment": "Text supports frozen judgment; no relabeling justified by this review. Gold remains pending human review.",
+      "operational_returned_ids": [
+        "rev_001829",
+        "rev_000400",
+        "rev_000345",
+        "rev_002438",
+        "rev_002598",
+        "rev_001212",
+        "rev_000645"
+      ],
+      "retrieved_top3": [
+        {
+          "id": "rev_001829",
+          "score": 0.5152117013931274,
+          "text": "o sabor de marmita fit frango valeu o pedido."
+        },
+        {
+          "id": "rev_000400",
+          "score": 0.40266257524490356,
+          "text": "Chegou em 26 minutos, antes do previsto. Não gostei do sabor de marmita fit frango. marmita fit frango chegou bem quente."
+        },
+        {
+          "id": "rev_000345",
+          "score": 0.38441944122314453,
+          "text": "O sabor de marmita executiva estava muito bom. Gostei de como embalaram marmita executiva. Em 20 min já estava aqui. Não achei caro pelo que veio. Veio frio, perdeu bastante a graça."
+        }
+      ],
+      "exact_before_threshold_top3": [
+        {
+          "id": "rev_001829",
+          "score": 0.5152116326515344,
+          "text": "o sabor de marmita fit frango valeu o pedido."
+        },
+        {
+          "id": "rev_000400",
+          "score": 0.4026625123168359,
+          "text": "Chegou em 26 minutos, antes do previsto. Não gostei do sabor de marmita fit frango. marmita fit frango chegou bem quente."
+        },
+        {
+          "id": "rev_000345",
+          "score": 0.3844193920230338,
+          "text": "O sabor de marmita executiva estava muito bom. Gostei de como embalaram marmita executiva. Em 20 min já estava aqui. Não achei caro pelo que veio. Veio frio, perdeu bastante a graça."
+        }
+      ],
+      "relevant_texts": []
+    },
+    {
+      "id": "q28",
+      "question": "Quais consumidores da Doceria Ateliê Doce encontraram insetos na comida?",
+      "filters": {
+        "restaurant_id": "rest_008"
+      },
+      "loss": 1,
+      "category": "falha_de_abstencao_semantica",
+      "analysis": "O primeiro resultado menciona preço, temperatura, prazo e sabor; o segundo critica gosto e calor. Nenhum relata insetos. Embalagem inadequada ou gosto ruim não autoriza inferir contaminação.",
+      "next_experiment": "Validar a presença do evento solicitado; reranking ou busca híbrida são experimentos, sem garantia de resolver ausência de evidência.",
+      "filter_assessment": "All inspected candidates respect restaurant and date scope; no filter error found.",
+      "relevance_assessment": "Text supports frozen judgment; no relabeling justified by this review. Gold remains pending human review.",
+      "operational_returned_ids": [
+        "rev_002833",
+        "rev_002121",
+        "rev_002355",
+        "rev_000357"
+      ],
+      "retrieved_top3": [
+        {
+          "id": "rev_002833",
+          "score": 0.28670310974121094,
+          "text": "Não achei o preço justo. A temperatura de brigadeiro gourmet estava adequada. Entregaram dentro do prazo. Dessa vez acertaram no sabor de brigadeiro gourmet. O pedido teve pontos bons e ruins."
+        },
+        {
+          "id": "rev_002121",
+          "score": 0.2642477750778198,
+          "text": "cookie recheado veio abafado e quente demais. Não consegui terminar cookie recheado, o gosto não estava bom. Gostei de como embalaram cookie recheado."
+        },
+        {
+          "id": "rev_002355",
+          "score": 0.26392054557800293,
+          "text": "Sobre torta de limão: Achei torta de limão uma delícia. Não fecharam direito a embalagem. Veio gelado e pronto pra consumir. Em 30 min já estava aqui."
+        }
+      ],
+      "exact_before_threshold_top3": [
+        {
+          "id": "rev_002833",
+          "score": 0.286703120624287,
+          "text": "Não achei o preço justo. A temperatura de brigadeiro gourmet estava adequada. Entregaram dentro do prazo. Dessa vez acertaram no sabor de brigadeiro gourmet. O pedido teve pontos bons e ruins."
+        },
+        {
+          "id": "rev_002121",
+          "score": 0.264247843682449,
+          "text": "cookie recheado veio abafado e quente demais. Não consegui terminar cookie recheado, o gosto não estava bom. Gostei de como embalaram cookie recheado."
+        },
+        {
+          "id": "rev_002355",
+          "score": 0.2639205367376615,
+          "text": "Sobre torta de limão: Achei torta de limão uma delícia. Não fecharam direito a embalagem. Veio gelado e pronto pra consumir. Em 30 min já estava aqui."
+        }
+      ],
+      "relevant_texts": []
+    }
+  ]
+}

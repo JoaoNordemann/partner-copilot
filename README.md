@@ -159,3 +159,5 @@ Perguntas, relevâncias e baseline de retrieval: [protocolo de avaliação](docs
 Métricas em quatro valores de k e comparação semântica/lexical/aleatória: [baselines de retrieval](docs/retrieval-baselines.md).
 
 Calibração de abstenção: o melhor score do embedding apresenta sobreposição entre perguntas respondíveis e sem resposta. O candidato experimental 0,287 não melhorou a rejeição nas dez perguntas separadas e perdeu evidências válidas; não foi promovido ao default. Contagens, distribuições e limitações: [calibração de min_score](docs/min-score-calibration.md).
+
+Análise das cinco piores perguntas: um falso negativo por ranking/corte e quatro falsas aceitações por falta de suporte factual. Filtros corretos não garantem relevância; tema parecido não basta. Evidências e testes unitários de CI: [análise de falhas](docs/retrieval-failure-analysis.md).

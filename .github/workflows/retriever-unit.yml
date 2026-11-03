@@ -1,0 +1,16 @@
+name: Retriever unit tests
+on:
+  push:
+  pull_request:
+jobs:
+  retriever-unit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install unit-test dependencies
+        run: python -m pip install "pytest>=8" "pydantic>=2.6" "pydantic-settings>=2.2"
+      - name: Run retriever unit tests without Chroma or models
+        run: python -m pytest tests/test_retriever.py tests/test_retriever_dependencies.py -v
