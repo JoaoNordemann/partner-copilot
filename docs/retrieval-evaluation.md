@@ -104,3 +104,5 @@ O script não baixa modelos. Para o cache padrão, omita `SENTENCE_TRANSFORMERS_
 As reviews são mantidas inteiras, uma por documento; o CLI rejeita textos que excedam a
 janela do modelo para evitar truncamento silencioso. No Windows, o Chroma pode manter
 handles até o processo encerrar; isso pode adiar a remoção do diretório temporário.
+
+Comparação em k=1,3,5,8 com recall limitado, Hit, MRR e precision: [métricas e baselines](retrieval-baselines.md). O baseline anterior mantém sua definição original de recall clássico.

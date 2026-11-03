@@ -21,7 +21,10 @@ def main() -> int:
     parser.add_argument("--min-score", type=float)
     parser.add_argument("--output", type=Path)
     parser.add_argument("--check-only", action="store_true")
+    parser.add_argument("--compare-baselines", action="store_true")
     args = parser.parse_args()
+    if args.compare_baselines and (args.k is not None or args.min_score is not None):
+        parser.error("Baseline comparison fixes k=1,3,5,8 and the operational threshold at 0.25")
     overrides = {
         key: value
         for key, value in {
@@ -84,7 +87,12 @@ def main() -> int:
         # No production database path is accepted. On Windows the client may retain handles
         # until process exit; cleanup errors must not discard a successful evaluation report.
         with TemporaryDirectory(prefix="partner-copilot-eval-", ignore_cleanup_errors=True) as tmp:
-            report = evaluate(folder, Path(tmp) / "chroma", embedder, settings)
+            if args.compare_baselines:
+                from partner_copilot.evaluation.baselines import compare_baselines
+
+                report = compare_baselines(folder, embedder)
+            else:
+                report = evaluate(folder, Path(tmp) / "chroma", embedder, settings)
             report["model_revision"] = model_details["revision"]
             report["runtime_versions"] = {
                 name: version(name)
@@ -104,7 +112,10 @@ def main() -> int:
             output.write_text(
                 json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
             )
-        print(json.dumps({mode: value["summary"] for mode, value in report["modes"].items()}))
+        if args.compare_baselines:
+            print(json.dumps({"report": str(output), "ks": report["ks"]}))
+        else:
+            print(json.dumps({mode: value["summary"] for mode, value in report["modes"].items()}))
         return 0
     except (ValueError, OSError) as exc:
         parser.exit(2, f"Evaluation failed: {exc}\n")

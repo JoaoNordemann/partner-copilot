@@ -155,3 +155,5 @@ Configuração de paths, modelos e precedência: [guia de configuração](docs/c
 Execução dos testes e sanidade semântica: [guia de testes](docs/testing.md).
 
 Perguntas, relevâncias e baseline de retrieval: [protocolo de avaliação](docs/retrieval-evaluation.md).
+
+Métricas em quatro valores de k e comparação semântica/lexical/aleatória: [baselines de retrieval](docs/retrieval-baselines.md).

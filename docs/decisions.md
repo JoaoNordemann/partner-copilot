@@ -75,3 +75,50 @@ Score de cosseno, limiar inclusivo, filtros temporais e abstenção estão defin
 ## Conjunto de avaliação de retrieval
 
 As 30 perguntas usam um corpus gold isolado, filtros estruturais sem rótulos de aspecto e relevâncias congeladas. As anotações são provisórias de IA, pendentes de revisão humana independente. Janelas temporais são fixas em 01/11/2026. O conjunto serve para desenvolvimento e calibração; não é teste final após ajuste de limiar. Protocolo, auditoria e baseline nos dois modos: [retrieval-evaluation.md](retrieval-evaluation.md).
+
+## Métricas e baselines de ranking — protocolo definido antes do cálculo
+
+Para cada pergunta respondível, R é o conjunto de IDs relevantes congelados e L_k
+é o prefixo de até k IDs distintos retornados. H = |R ∩ L_k|. Reportaremos k = 1, 3, 5, 8.
+As médias são macro nas 24 perguntas respondíveis, com o mesmo peso por pergunta.
+
+- hit@k = 1 se H > 0; caso contrário, 0.
+- recall@k limitado = H / min(k, |R|). Esta é a definição solicitada para o novo
+  relatório; o recall clássico H / |R| continuará separado e identificado, sem
+  reinterpretar o baseline anterior. O recall limitado também é chamado capped recall.
+- MRR@k = média de 1/r, sendo r a posição do primeiro relevante até k;
+  vale zero quando não há relevante no prefixo.
+- precision@k = H / k. Posições não preenchidas contam como zero, inclusive se os
+  filtros deixarem menos de k candidatos. Não dividimos pela quantidade retornada.
+
+As seis perguntas sem resposta não entram nessas quatro médias, pois R é vazio.
+Reportamos para elas a taxa de abstenção correta e a taxa de falsa aceitação de
+qualquer evidência. Também reportamos abstenção nas perguntas respondíveis.
+
+Comparação principal: ranking sem corte por score para todos os métodos, nos modos
+sem filtro e com os mesmos filtros estruturais de restaurante/item/data. O aleatório
+usa permutações uniformes sem reposição do mesmo conjunto elegível: 200 repetições,
+seeds 42..241, média e desvio padrão entre repetições. Uma permutação por pergunta e
+seed é reutilizada nos quatro k, sem alterar o estado aleatório ao mudar k.
+Filtros muito restritivos podem tornar o aleatório forte; não interpretaremos todo
+ganho sobre esse piso como qualidade semântica ou exigiremos uma margem impossível.
+
+O baseline lexical usa contagem de termos distintos compartilhados após casefold,
+remoção de acentos, tokenização alfanumérica e exclusão de uma lista fixa de palavras
+funcionais pt-BR, declarada no código antes da execução. Não usa stemming, sinônimos,
+labels ou expansão de consulta. Empates são resolvidos por ID, inclusive score zero.
+Embeddings e lexical recebem somente o texto das reviews. Relevâncias nunca entram
+na geração dos rankings ou nas pontuações.
+
+A comparação operacional fica separada: embedding com min_score=0.25 (sem ajuste),
+lexical com score > 0 e aleatório sem limiar (não há confiança semântica no acaso).
+Esses cortes não são probabilidades equivalentes. A tabela principal sem limiar
+isola ranking; a operacional mostra o efeito de rejeitar evidência. Não haverá
+calibração de limiar neste cálculo nem uso deste conjunto como teste final.
+
+Coleções históricas de embedding em inglês serão inspecionadas sem modificações.
+Uma ablação comparável exige os mesmos 100 documentos, texto e pré-processamento;
+vetores de outro corpus não serão comparados como se fossem o mesmo experimento.
+Se o modelo inglês histórico estiver disponível em cache, poderá ser reembutido
+no banco isolado do mesmo corpus, registrando a origem e a revisão. Na ausência de
+coleção histórica elegível, essa ablação será explicitamente marcada como não executada.
