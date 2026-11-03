@@ -226,3 +226,45 @@ def test_model_value_error_is_not_misclassified_as_a_bad_record(tmp_path):
     with pytest.raises(ValueError, match="model configuration"):
         IngestionPipeline(store, BadModelSplitter()).run(path)
     assert store.calls == 0
+
+
+def test_persistent_pipeline_skips_invalid_records_and_preserves_metadata(tmp_path, caplog):
+    source = tmp_path / "mixed.jsonl"
+    rows = [
+        payload("first", city="São José dos Campos", aspects={"tempo_entrega": "neg"}),
+        payload("invalid", rating=0, text="PRIVATE-SENTINEL"),
+        payload("last", rating=5, text="Pizza deliciosa.", aspects={"sabor": "pos"}),
+    ]
+    write(source, rows)
+    database = tmp_path / "persistent"
+    store = ChromaStore(database, embedder=FixedEmbedder())
+    caplog.set_level(logging.INFO, logger="partner_copilot.ingestion.pipeline")
+    first = IngestionPipeline(store, NoSplit(), batch_size=1).run(source)
+    assert (first.read, first.valid, first.invalid, first.ignored) == (3, 2, 1, 1)
+    assert first.inserted == store.count() == 2
+    assert set(store.review_ids()) == {"first", "last"}
+    assert "invalid_record line=2" in caplog.text
+    assert "rating:greater_than_equal" in caplog.text
+    assert "PRIVATE-SENTINEL" not in caplog.text
+    assert "ingestion_completed" in caplog.text
+    reopened = ChromaStore(database, embedder=FixedEmbedder())
+    second = IngestionPipeline(reopened, NoSplit(), batch_size=1).run(source)
+    assert second.inserted == 0 and second.updated == 2 and reopened.count() == 2
+    metadata = reopened.col.get(ids=["first"], include=["metadatas"])["metadatas"][0]
+    expected = {
+        "restaurant_id": "rest_001",
+        "review_id": "first",
+        "city": "São José dos Campos",
+        "category": "pizza",
+        "bairro": "Centro",
+        "rating": 2,
+        "created_at": "2026-11-01",
+        "created_at_int": 20261101,
+        "aspect_tempo_entrega": "neg",
+        "chunk_index": 0,
+        "chunk_count": 1,
+    }
+    assert {key: metadata[key] for key in expected} == expected
+    assert json.loads(metadata["aspects_json"]) == {"tempo_entrega": "neg"}
+    assert "aspect_sabor" not in metadata
+    assert all(type(value) in (str, int, float, bool) for value in metadata.values())

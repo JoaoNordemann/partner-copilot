@@ -67,3 +67,7 @@ o nome literal explícito continua disponível para abrir collections existentes
 Não inferimos cidade por bairro nem alteramos os dados brutos para preencher esse campo.
 Os demais metadados filtráveis permanecem escalares; `created_at_int` continua YYYYMMDD.
 Detalhes e exemplos em [chroma-store.md](chroma-store.md).
+
+## Contrato de retrieval
+
+Score de cosseno, limiar inclusivo, filtros temporais e abstenção estão definidos em [retriever-contract.md](retriever-contract.md).
