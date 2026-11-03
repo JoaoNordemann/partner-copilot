@@ -29,3 +29,10 @@ data/splits/*
 !data/splits/rag.jsonl
 !data/splits/quarantine.jsonl
 !data/splits/manifest.json
+
+!data/eval/
+data/eval/*
+!data/eval/questions.jsonl
+!data/eval/corpus.jsonl
+!data/eval/relevance_audit.jsonl
+!data/eval/manifest.json

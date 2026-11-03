@@ -33,6 +33,7 @@ class Settings(BaseSettings):
     data_raw_dir: Path = Path("data/raw")
     data_splits_dir: Path = Path("data/splits")
     data_gold_dir: Path = Path("data/gold")
+    data_eval_dir: Path = Path("data/eval")
     data_external_dir: Path = Path("data/external")
     annotation_guide_path: Path = Path("docs/annotation-guide.md")
     chroma_path: Path = Path("data/chroma")

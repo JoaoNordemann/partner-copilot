@@ -71,3 +71,7 @@ Detalhes e exemplos em [chroma-store.md](chroma-store.md).
 ## Contrato de retrieval
 
 Score de cosseno, limiar inclusivo, filtros temporais e abstenção estão definidos em [retriever-contract.md](retriever-contract.md).
+
+## Conjunto de avaliação de retrieval
+
+As 30 perguntas usam um corpus gold isolado, filtros estruturais sem rótulos de aspecto e relevâncias congeladas. As anotações são provisórias de IA, pendentes de revisão humana independente. Janelas temporais são fixas em 01/11/2026. O conjunto serve para desenvolvimento e calibração; não é teste final após ajuste de limiar. Protocolo, auditoria e baseline nos dois modos: [retrieval-evaluation.md](retrieval-evaluation.md).

@@ -41,6 +41,7 @@ class Retriever:
         *,
         start_date: date | None = None,
         end_date: date | None = None,
+        item: str | None = None,
         category: str | None = None,
         city: str | None = None,
         bairro: str | None = None,
@@ -55,7 +56,12 @@ class Retriever:
             if not aspect.strip():
                 raise ValueError("aspect must not be blank")
             filters.append({f"aspect_{aspect}": "neg"})
-        for name, value in (("category", category), ("city", city), ("bairro", bairro)):
+        for name, value in (
+            ("item", item),
+            ("category", category),
+            ("city", city),
+            ("bairro", bairro),
+        ):
             if value is not None:
                 if not value.strip():
                     raise ValueError(f"{name} must not be blank")

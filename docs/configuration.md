@@ -29,3 +29,5 @@ Copy-Item .env.example .env
 .\.venv\Scripts\python.exe scripts/ingest.py --help
 .\.venv\Scripts\python.exe -m pytest -v
 ```
+
+DATA_EVAL_DIR define o diretório das perguntas e do corpus de avaliação isolado; o padrão é data/eval.

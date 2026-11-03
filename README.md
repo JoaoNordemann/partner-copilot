@@ -153,3 +153,5 @@ códigos de saída estão em [docs/ingestion-cli.md](docs/ingestion-cli.md).
 Configuração de paths, modelos e precedência: [guia de configuração](docs/configuration.md).
 
 Execução dos testes e sanidade semântica: [guia de testes](docs/testing.md).
+
+Perguntas, relevâncias e baseline de retrieval: [protocolo de avaliação](docs/retrieval-evaluation.md).
