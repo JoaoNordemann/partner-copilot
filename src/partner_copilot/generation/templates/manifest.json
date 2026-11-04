@@ -1,0 +1,21 @@
+{
+  "active_versions": {
+    "partner-copilot-v1": {
+      "file": "partner-copilot-v1.txt",
+      "sha256": "b371374404cb10f49703fbd2af5a6a338e5c78f51c25b7733ad22206c14d8bf4",
+      "role": "user",
+      "data_format": "escaped-jsonl-v1",
+      "examples": false,
+      "prior_exposure": "Designed after retrieval analysis of the existing evaluation set; not blind or held out.",
+      "model_generation_results_used_for_tuning": false
+    }
+  },
+  "archive": {
+    "legacy-v0": {
+      "file": "legacy-v0.txt",
+      "sha256": "a5a35c654cfa4e89ba5809cafcc6a2a60ffad8990a7531e9b584b15e1800ca26",
+      "selectable": false
+    }
+  },
+  "version_policy": "Any instruction or context serialization change after freezing requires a new version and hash; preserve previous templates."
+}

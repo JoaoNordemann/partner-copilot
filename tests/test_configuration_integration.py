@@ -79,6 +79,7 @@ def test_mistral_consumes_settings_without_loading_models(monkeypatch, temperatu
         top_p=0.8,
         max_new_tokens=64,
     )
+    model_loader.return_value.config.max_position_embeddings = 128
     engine = llm.Mistral4bit(settings=settings)
     tokenizer_loader.assert_called_once_with("custom/model", token="test-token")
     assert model_loader.call_args.args == ("custom/model",)
@@ -87,6 +88,11 @@ def test_mistral_consumes_settings_without_loading_models(monkeypatch, temperatu
     tokenizer_loader.return_value.return_value = inputs
     model_loader.return_value.generate.return_value = llm.torch.tensor([[1, 2, 3]])
     engine.generate("Pergunta")
+    tokenizer_loader.return_value.apply_chat_template.assert_called_once_with(
+        [{"role": "user", "content": "Pergunta"}],
+        tokenize=False,
+        add_generation_prompt=True,
+    )
     kwargs = model_loader.return_value.generate.call_args.kwargs
     assert kwargs["max_new_tokens"] == 64
     assert kwargs["do_sample"] == (temperature > 0)
@@ -98,3 +104,11 @@ def test_mistral_consumes_settings_without_loading_models(monkeypatch, temperatu
         assert "top_p" not in kwargs
     engine.generate("Pergunta", max_new_tokens=32)
     assert model_loader.return_value.generate.call_args.kwargs["max_new_tokens"] == 32
+
+    from partner_copilot.generation.contracts import GenerationContractError
+
+    model_loader.return_value.generate.reset_mock()
+    model_loader.return_value.config.max_position_embeddings = 33
+    with pytest.raises(GenerationContractError, match="context"):
+        engine.generate("Pergunta", max_new_tokens=32)
+    model_loader.return_value.generate.assert_not_called()

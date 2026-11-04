@@ -1,13 +1,9 @@
-from typing import Protocol
-
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 
 from partner_copilot.config import Settings, get_settings
-
-
-class LLM(Protocol):
-    def generate(self, user_prompt: str, max_new_tokens: int | None = None) -> str: ...
+from partner_copilot.generation.contracts import LLM as LLM
+from partner_copilot.generation.contracts import GenerationContractError
 
 
 class Mistral4bit:
@@ -32,7 +28,18 @@ class Mistral4bit:
         text = self.tok.apply_chat_template(
             [{"role": "user", "content": user_prompt}], tokenize=False, add_generation_prompt=True
         )
-        inputs = self.tok(text, return_tensors="pt", add_special_tokens=False).to(self.model.device)
+        inputs = self.tok(text, return_tensors="pt", add_special_tokens=False, truncation=False).to(
+            self.model.device
+        )
+        budget = max_new_tokens if max_new_tokens is not None else self.settings.max_new_tokens
+        context_limit = getattr(self.model.config, "max_position_embeddings", None)
+        if not isinstance(context_limit, int) or context_limit < 1:
+            raise GenerationContractError("Cannot determine model context window")
+        tokenizer_limit = getattr(self.tok, "model_max_length", None)
+        if isinstance(tokenizer_limit, int) and tokenizer_limit > 0:
+            context_limit = min(context_limit, tokenizer_limit)
+        if budget < 1 or inputs["input_ids"].shape[-1] + budget > context_limit:
+            raise GenerationContractError("Prompt plus generation budget exceeds model context")
         sampling = self.settings.temperature > 0
         sampling_options = (
             {"temperature": self.settings.temperature, "top_p": self.settings.top_p}
@@ -41,9 +48,7 @@ class Mistral4bit:
         )
         out = self.model.generate(
             **inputs,
-            max_new_tokens=(
-                max_new_tokens if max_new_tokens is not None else self.settings.max_new_tokens
-            ),
+            max_new_tokens=budget,
             do_sample=sampling,
             **sampling_options,
             pad_token_id=self.tok.eos_token_id,

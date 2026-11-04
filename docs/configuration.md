@@ -31,3 +31,5 @@ Copy-Item .env.example .env
 ```
 
 DATA_EVAL_DIR define o diretório das perguntas e do corpus de avaliação isolado; o padrão é data/eval/human-v2.
+
+CONTEXT_K=5 limita documentos enviados ao LLM, independentemente de RETRIEVAL_K=8. PROMPT_VERSION=partner-copilot-v1 seleciona o template congelado; versões não registradas são rejeitadas. Alterações do prompt após avaliação exigem versão nova.

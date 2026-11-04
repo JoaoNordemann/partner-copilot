@@ -132,4 +132,4 @@ Falhas após a exclusão não são transacionais; a reexecução continua idempo
 As decisões anteriores à implementação do retorno estruturado, marcador
 [[SEM_EVIDENCIA]], caminhos de abstenção e context_k=5 estão registradas em
 [docs/decisions.md](docs/decisions.md#contrato-de-resposta-abstenção-e-contexto-da-geração).
-O contrato é alvo de implementação; sua documentação não afirma que já foi codificado.
+O registro antecedeu a implementação. O prompt v1 e o contrato agora possuem testes; a avaliação com o modelo real continua pendente. Detalhes em [docs/prompt-design.md](docs/prompt-design.md).

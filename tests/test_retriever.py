@@ -89,7 +89,7 @@ def test_empty_store_result_abstains_without_calling_llm():
     assert retriever.retrieve("entrega", "rest_001") == []
     answer = RAGPipeline(retriever, llm).ask("entrega", "rest_001")
     assert answer.sources == []
-    assert answer.answer == "Sem avaliações relevantes para responder."
+    assert answer.answer == "Não há evidência suficiente nas avaliações fornecidas."
     llm.generate.assert_not_called()
 
 

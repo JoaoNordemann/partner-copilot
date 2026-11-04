@@ -69,3 +69,5 @@ markers = [
     "semantic: sanidade com modelo multilingue real em cache local (opt-in)",
     "gpu: testes que exigem GPU e download de modelos (excluídos do CI)",
 ]
+[tool.setuptools.package-data]
+"partner_copilot.generation" = ["templates/*.txt", "templates/*.json"]

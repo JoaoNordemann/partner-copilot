@@ -194,3 +194,5 @@ Para reproduzir resultados históricos do v1, informe `--eval-dir data/eval`.
 Um valor explícito de `DATA_EVAL_DIR` no ambiente ou `.env` prevalece sobre o default;
 se ainda estiver em `data/eval`, atualize-o para `data/eval/human-v2`.
 No recálculo de relatórios, informe `--parent-eval-dir data/eval` para identificar a origem.
+
+Prompt ativo partner-copilot-v1: exige evidência explícita, citações por afirmação e abstenção padronizada. Reviews são delimitadas como dados; ações só com evidência. A pipeline usa até cinco documentos e registra metadados. [Contrato, versionamento e limites dos testes](docs/prompt-design.md).

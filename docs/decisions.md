@@ -189,10 +189,11 @@ DATA_EVAL_DIR passa a usar data/eval/human-v2 por padrão no config e no exemplo
 
 ## Contrato de resposta, abstenção e contexto da geração
 
-Status: decisões definidas antes da implementação. Esta seção descreve o contrato
-alvo; o código atual ainda retorna somente answer/sources e não implementa os novos
-campos, o marcador ou a limitação de contexto. A implementação deverá seguir estas
-regras e adicionar seus testes antes de declarar o contrato entregue.
+Status: decisões registradas antes da implementação no commit 04d67de. O prompt v1,
+o retorno estruturado, os dois caminhos de abstenção e a seleção de contexto agora
+estão implementados e cobertos por testes com doubles. A taxa de abstenção e a
+fidelidade com o Mistral real ainda precisam de avaliação; os testes de formato não
+certificam a qualidade semântica da geração.
 
 ### Saída pública do pipeline
 
@@ -350,3 +351,35 @@ chamada ao LLM com retrieval vazio; marcador exato e violações de formato; con
 latência não negativa e versão; no máximo cinco documentos no prompt; respostas com
 citações somente de reviews enviadas. O teste com o modelo real é separado dos
 unitários de CI e deve informar o comportamento observado nos quatro negativos.
+
+
+## Prompt de evidência explícita: primeira versão implementada
+
+A versão partner-copilot-v1 usa somente role=user no chat template. O template
+legado foi arquivado como legacy-v0; ele não pode ser selecionado para novas chamadas.
+V1 não tem exemplos nem perguntas copiadas do eval set. Foi desenhado após conhecer
+os resultados de retrieval, e essa exposição está declarada no manifesto do prompt.
+Nenhuma avaliação de geração com o Mistral real foi usada para ajustar esta versão.
+
+Cada review vira um objeto JSONL delimitado, sem labels de aspectos ou scores de
+similaridade. Tags de delimitadores e marcadores de chat em valores de dados são
+escapados; os textos continuam decodificáveis como JSON. Isso reduz ambiguidade e
+risco de injeção, sem garantir que o modelo ignorará instruções maliciosas.
+
+O template exige suporte explícito ao fato, uma afirmação/recomendação por linha
+com fonte, ações apenas quando motivadas por evidência e o marcador exato quando não
+houver suporte. A pipeline normaliza esse marcador para a frase pública já definida,
+registra abstention_reason e devolve apenas IDs citados que existam no contexto.
+A validação cobre formato e pertença das fontes; não comprova fidelidade factual.
+
+CONTEXT_K=5 e PROMPT_VERSION=partner-copilot-v1 são configuráveis. O adaptador do
+Mistral valida prompt + orçamento de geração contra a janela real sem truncamento
+silencioso. O workflow de testes unitários passa a incluir o contrato do prompt,
+sem carregar modelos. O wheel inclui os templates e seu manifesto.
+
+O hash do template e o snapshot renderizado ficam congelados. Toda alteração de
+instruções, formato de resposta ou serialização do contexto após observar resultados
+exige versão nova e preservação da anterior; não substituir v1 silenciosamente.
+A avaliação futura deverá registrar versão/hash, parâmetros de geração e violações
+de formato, inclusive nos quatro negativos q25–q28. Protocolo e limites em
+[prompt-design.md](prompt-design.md).

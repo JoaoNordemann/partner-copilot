@@ -86,7 +86,10 @@ def test_date_boundaries_restaurant_isolation_and_pipeline_abstention(tmp_path):
     llm = Mock()
     pipeline = RAGPipeline(retriever, llm)
     answer = pipeline.ask("entrega", "rest_001", start_date=date(2030, 1, 1))
-    assert answer.sources == [] and answer.answer == "Sem avaliações relevantes para responder."
+    assert (
+        answer.sources == []
+        and answer.answer == "Não há evidência suficiente nas avaliações fornecidas."
+    )
     llm.generate.assert_not_called()
-    llm.generate.return_value = "Diagnóstico"
-    assert set(pipeline.ask("entrega", "rest_001", **dates).sources) == {"start", "end"}
+    llm.generate.return_value = "Diagnóstico [start]."
+    assert pipeline.ask("entrega", "rest_001", **dates).sources == ["start"]
