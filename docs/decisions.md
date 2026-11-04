@@ -186,3 +186,167 @@ Comando dedicado mede aleatório (200 repetições, seeds 42..241) e contagem de
 ## Versão ativa de avaliação
 
 DATA_EVAL_DIR passa a usar data/eval/human-v2 por padrão no config e no exemplo de ambiente. O v1 permanece congelado e só deve ser selecionado explicitamente com --eval-dir data/eval. O recálculo exige --parent-eval-dir para distinguir a versão de origem da versão revisada. Valores explícitos de ambiente/.env mantêm sua precedência e devem ser atualizados quando apontarem para v1.
+
+## Contrato de resposta, abstenção e contexto da geração
+
+Status: decisões definidas antes da implementação. Esta seção descreve o contrato
+alvo; o código atual ainda retorna somente answer/sources e não implementa os novos
+campos, o marcador ou a limitação de contexto. A implementação deverá seguir estas
+regras e adicionar seus testes antes de declarar o contrato entregue.
+
+### Saída pública do pipeline
+
+O pipeline devolverá um modelo Pydantic serializável com:
+
+| Campo | Tipo | Significado |
+| --- | --- | --- |
+| answer | str | Resposta ao usuário ou a frase padronizada de abstenção. |
+| sources | list[str] | IDs únicos de reviews efetivamente citadas na resposta, na ordem da primeira citação. |
+| abstained | bool | True somente quando o pipeline se abstém por falta de evidência. |
+| abstention_reason | retriever_empty / llm_insufficient_evidence / null | Origem da abstenção; null em respostas normais. |
+| metadata.latency_ms | float >= 0 | Tempo total da chamada ask, medido com relógio monotônico de alta resolução. |
+| metadata.retrieved_documents | int >= 0 | Quantidade devolvida pelo retriever após filtros, min_score e limite retrieval_k. |
+| metadata.context_documents | int >= 0 | Quantidade de documentos/chunks efetivamente enviada ao LLM após a seleção do contexto. |
+| metadata.prompt_version | str | Identificador do template configurado; versão inicial partner-copilot-v1. |
+| metadata.llm_called | bool | Indica se a geração foi chamada, permitindo distinguir os dois caminhos. |
+
+A latência começa na entrada de ask e termina após validar e montar o resultado.
+Inclui retrieval, preparação do prompt, geração e validação; inclui carregamento
+preguiçoso se ocorrer nessa chamada. Não inclui transporte HTTP ou fila externa.
+As contagens são de documentos/chunks, não de IDs distintos de reviews.
+No caminho sem chamada ao LLM, context_documents=0 e llm_called=false; prompt_version
+continua identificando o template configurado, sem afirmar que ele foi executado.
+
+sources não é a lista inteira de documentos recuperados. As citações usam [review_id]
+e só podem referenciar reviews presentes no contexto enviado. O pipeline extrairá
+os IDs citados, validará sua pertença ao contexto e removerá repetições. Não poderá
+aceitar uma resposta normal sem citação nem devolver IDs inventados. Validar um ID
+não prova que a afirmação está sustentada: fidelidade exige avaliação de geração.
+Em qualquer abstenção, sources=[] e abstention_reason é obrigatório; em resposta
+normal, abstained=false e abstention_reason=null.
+
+Exemplo de resposta normal (valores ilustrativos, não resultado de inferência):
+
+```json
+{
+  "answer": "Há relato de espera além do prazo combinado [rev_000212].",
+  "sources": ["rev_000212"],
+  "abstained": false,
+  "abstention_reason": null,
+  "metadata": {
+    "latency_ms": 1250.0,
+    "retrieved_documents": 8,
+    "context_documents": 5,
+    "prompt_version": "partner-copilot-v1",
+    "llm_called": true
+  }
+}
+```
+
+### Abstenção explícita e detectável
+
+Marcador interno único que o LLM deverá emitir, sozinho e sem citações ou recomendações:
+
+```text
+[[SEM_EVIDENCIA]]
+```
+
+A detecção é igualdade da saída completa após strip(), não busca por substring.
+Isso permite apenas whitespace externo; marcador junto de explicações, citações,
+Markdown ou resposta vazia não satisfaz o formato. A instrução vale quando os textos
+não sustentam a informação específica pedida, mesmo que tratem do mesmo assunto,
+item ou restaurante. Não inferir receita, alergia, reembolso ou contaminação a partir
+de avaliações genéricas. Havendo evidência apenas parcial, responder somente à parte
+sustentada, citando-a e explicitando a limitação, sem inventar a parte ausente.
+
+Ao reconhecer o marcador, o pipeline devolverá ao usuário exatamente:
+
+```text
+Não há evidência suficiente nas avaliações fornecidas.
+```
+
+O marcador é protocolo interno, não texto a exibir. Os dois caminhos usam essa mesma
+frase pública. A saída pública sempre inclui abstained e abstention_reason; métricas
+e testes não procurarão sinônimos de recusa no texto final.
+
+Exemplo do caminho de recusa pelo LLM:
+
+```json
+{
+  "answer": "Não há evidência suficiente nas avaliações fornecidas.",
+  "sources": [],
+  "abstained": true,
+  "abstention_reason": "llm_insufficient_evidence",
+  "metadata": {
+    "latency_ms": 1250.0,
+    "retrieved_documents": 8,
+    "context_documents": 5,
+    "prompt_version": "partner-copilot-v1",
+    "llm_called": true
+  }
+}
+```
+
+Solicitar um marcador no prompt não garante obediência. Saída vazia, recusa livre sem
+o marcador e sem citações válidas, mistura do marcador com outros textos ou citações
+fora do contexto serão erros explícitos de contrato da geração, não abstention_reason
+adicionais nem respostas normais silenciosas. Exceções de execução também não serão
+mascaradas como falta de evidência. O tratamento HTTP desses erros será definido na
+camada de API; esta decisão não fixa status HTTP nem política de retry.
+
+### Dois caminhos distintos
+
+1. Retriever devolve []: retornar imediatamente a frase pública, sources=[],
+   abstained=true, abstention_reason=retriever_empty, retrieved_documents=0,
+   context_documents=0 e llm_called=false. Nenhuma inferência é executada.
+2. Retriever devolve documentos, mas o LLM emite [[SEM_EVIDENCIA]]: retornar a mesma
+   frase pública, sources=[], abstained=true,
+   abstention_reason=llm_insufficient_evidence e llm_called=true. Preservar as contagens
+   reais de documentos recuperados e enviados, mesmo com sources vazio.
+
+A segunda condição precisa ser avaliada explicitamente: no baseline operacional,
+4/6 perguntas sem resposta (q25–q28) ainda recebem documentos. Lista não vazia não
+é evidência suficiente. Esses quatro casos devem entrar no teste de geração ponta
+a ponta. Registrar separadamente abstenções por retrieval vazio, recusas do LLM,
+falsas respostas e violações de formato; reportar contagens e o número de tentativas.
+Não excluir violações de formato do relatório como se fossem respostas bem-sucedidas.
+A medição de abstenção do LLM deve distinguir chamadas de geração de recusas anteriores
+à inferência, para não atribuir ao Mistral o acerto de um filtro sem candidatos.
+
+### Tamanho inicial do contexto
+
+Fixar context_k=5, configurável e separado de retrieval_k=8. O retriever mantém
+min_score=0,25, filtros e sua política atual de 2*k candidatos antes do corte.
+A geração seleciona os primeiros min(context_k, len(docs)) documentos devolvidos,
+preservando a ordem de similaridade. Não relaxar filtro ou limiar para completar
+cinco documentos, nem usar documentos que não passaram no retriever.
+A seleção inicial não adiciona reranking nem deduplicação por review; contagens
+referem-se a documentos/chunks. A implementação deverá verificar a janela de tokens
+antes da inferência e falhar explicitamente se o prompt exceder o limite, evitando
+truncamento silencioso da evidência. Uma política de orçamento/adaptação de contexto
+poderá ser decidida depois de medir esses casos.
+
+Justificativa: no ranking sem corte com filtros de human-v2, Hit@5=23/24 e
+Hit@8=24/24; precision@8=0,276. O acaso com filtros já alcança Hit@8 médio de 0,931.
+Esses números não demonstram que cinco documentos geram respostas melhores: são
+motivação para começar com menos contexto e medir. Não confundir essas métricas
+sem corte com o comportamento operacional após min_score.
+Comparar context_k=3,5,8 posteriormente, mantendo modelo, filtros, limiar e template
+fixos entre variantes. Medir suporte factual, citações, abstenção, latência e tamanho
+do prompt; não escolher context_k somente pelo Hit de retrieval. O conjunto já foi
+exposto e revisado com assistência; ganhos obtidos ajustando nele não serão tratados
+como teste final independente.
+
+### Versão do prompt e verificações da implementação
+
+A versão partner-copilot-v1 identifica o primeiro template que implementar este
+contrato. Alterações de instrução, formato ou serialização do contexto exigem nova
+versão. O snapshot completo do prompt usado em uma avaliação deve ser recuperável
+pelo código versionado; o identificador sozinho não substitui esse registro.
+
+Antes de considerar a implementação concluída, verificar com doubles de retriever
+LLM: saída normal com fontes válidas; ambos os caminhos de abstenção; ausência de
+chamada ao LLM com retrieval vazio; marcador exato e violações de formato; contagens,
+latência não negativa e versão; no máximo cinco documentos no prompt; respostas com
+citações somente de reviews enviadas. O teste com o modelo real é separado dos
+unitários de CI e deve informar o comportamento observado nos quatro negativos.

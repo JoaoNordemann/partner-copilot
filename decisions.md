@@ -126,3 +126,10 @@ os defaults conforme aplicável, sem alterar a configuração global em cache.
 e preparar modelo/tokenizador. O modo padrão não apaga documentos e rejeita collections
 com IDs fora do RAG. O reset explícito permite reconstruir essa collection sem afetar outras.
 Falhas após a exclusão não são transacionais; a reexecução continua idempotente.
+
+## Contrato de resposta e abstenção
+
+As decisões anteriores à implementação do retorno estruturado, marcador
+[[SEM_EVIDENCIA]], caminhos de abstenção e context_k=5 estão registradas em
+[docs/decisions.md](docs/decisions.md#contrato-de-resposta-abstenção-e-contexto-da-geração).
+O contrato é alvo de implementação; sua documentação não afirma que já foi codificado.
