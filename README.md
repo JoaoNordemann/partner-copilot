@@ -198,3 +198,13 @@ No recálculo de relatórios, informe `--parent-eval-dir data/eval` para identif
 Prompt ativo partner-copilot-v1: exige evidência explícita, citações por afirmação e abstenção padronizada. Reviews são delimitadas como dados; ações só com evidência. A pipeline usa até cinco documentos e registra metadados. [Contrato, versionamento e limites dos testes](docs/prompt-design.md).
 
 Geração reutilizável e instrumentada: provider lazy por processo, seed por chamada, temperatura padrão zero, margem de tokens e metadados de latência/VRAM por GPU. [Como funciona e como medir](docs/generation-runtime.md).
+
+CLI de consulta:
+
+```powershell
+.\.venv\Scripts\partner-copilot.exe ask "Quais reclamações de entrega aparecem?" --restaurant-id rest_002 --json
+```
+
+Mostra resposta, fontes e metadados. Citação fora do contexto rejeita a resposta com
+código invalid_citation e contagem de referências inválidas.
+[Uso, filtros e códigos de saída](docs/ask-cli.md).

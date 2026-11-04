@@ -84,3 +84,5 @@ O empacotamento também foi verificado com um wheel local, que contém todos os 
 
 A validação ponta a ponta com Mistral-7B real continua pendente, inclusive os quatro
 negativos q25–q28. Testes unitários não permitem reportar sua taxa de abstenção real.
+
+A consulta agora tem entrada ask e erro específico InvalidCitationError, com IDs e ocorrências inválidas contáveis. A resposta inteira é rejeitada; não há remoção silenciosa. O template v1 e seu hash não mudaram. [CLI e política de validação](ask-cli.md).

@@ -1,15 +1,23 @@
 """Evidence-grounded generation with typed answers and explicit abstention paths."""
 
+import logging
 from datetime import date
 from time import perf_counter
 
 from partner_copilot.config import Settings, get_settings
-from partner_copilot.generation.contracts import ABSTENTION_MESSAGE, LLM, MeasuredLLM
+from partner_copilot.generation.contracts import (
+    ABSTENTION_MESSAGE,
+    LLM,
+    InvalidCitationError,
+    MeasuredLLM,
+)
 from partner_copilot.generation.output import parse_generation
 from partner_copilot.generation.prompts import build_prompt, load_prompt_template
 from partner_copilot.generation.provider import get_llm
 from partner_copilot.retrieval.retriever import Retriever
 from partner_copilot.schemas import Answer, AnswerMetadata
+
+logger = logging.getLogger(__name__)
 
 
 class RAGPipeline:
@@ -55,9 +63,18 @@ class RAGPipeline:
             if isinstance(llm, MeasuredLLM):
                 generated = llm.generate_with_metrics(prompt)
                 generation_metrics = generated.metrics
-                parsed = parse_generation(generated.text, context)
+                generated_text = generated.text
             else:
-                parsed = parse_generation(llm.generate(prompt), context)
+                generated_text = llm.generate(prompt)
+            try:
+                parsed = parse_generation(generated_text, context)
+            except InvalidCitationError as exc:
+                logger.warning(
+                    "generation_rejected code=%s invalid_citation_count=%d",
+                    exc.code,
+                    exc.invalid_citation_count,
+                )
+                raise
             text, sources, abstained = parsed.answer, parsed.sources, parsed.abstained
             reason = "llm_insufficient_evidence" if abstained else None
         result = Answer(

@@ -389,3 +389,30 @@ de formato, inclusive nos quatro negativos q25–q28. Protocolo e limites em
 Provider lazy por processo, protegido por lock, evita carregar pesos por pergunta e rejeita troca de configuração após a primeira carga. Modelo em eval; compute_dtype bf16 apenas se as GPUs visíveis suportarem, com fallback fp16. Seed 42 reiniciada por chamada com restauração do RNG; temperatura padrão 0 para greedy, mantendo amostragem coerente quando configurada positiva. Prompt, chat template e tokens especiais continuam no protocolo v1, sem alteração das instruções.
 
 Validar tokens reais do prompt + reserva max_new_tokens + margem configurável de 256 contra a janela efetiva, sem truncamento. GenerationResult leva métricas por chamada; a pipeline as inclui em metadata.generation, preservando generate()->str. Sincronizar CUDA e reiniciar picos por chamada; registrar bytes alocados/reservados por GPU, baseline residente, latência de geração e tempo da carga única. Inferência serializada para evitar corrida do RNG/contadores; medidas não garantem isolamento de outro trabalho CUDA no processo. Ambiente local sem GPU: validação com doubles, sem benchmark real anunciado. Detalhes: [generation-runtime.md](generation-runtime.md).
+
+## CLI ask e falhas de citação
+
+Decisão anterior à implementação desta entrada: toda citação deve referenciar uma
+review realmente enviada ao LLM. Isso é mais estrito que pertencer ao conjunto
+recuperado, porque documentos além de CONTEXT_K não foram vistos pelo modelo.
+Uma citação desconhecida invalida a resposta inteira: não remover o ID nem publicar
+o restante do texto. Não transformar erro de citação em abstenção por falta de evidência.
+
+A falha será InvalidCitationError, subtipo de GenerationContractError, com código
+estável invalid_citation, IDs inválidos únicos, contagem de ocorrências inválidas e
+IDs permitidos no contexto. Falhas de formato permanecem separadas. Um ID válido
+não comprova que a afirmação está apoiada na fonte; isso depende da avaliação de geração.
+
+A CLI ask exibirá resposta, fontes, abstenção e metadados, com modo --json. Saídas
+JSON de sucesso ou erro vão para stdout; logs vão para stderr. Erros de sintaxe dos
+argumentos continuam no padrão argparse (stderr). Códigos de saída: 0 para resposta
+ou abstenção válida; 2 para configuração/preflight; 3 para citação inválida; 4 para
+outra violação do contrato de geração; 1 para falha de execução. Conte ocorrências
+invalid_citation para respostas rejeitadas e invalid_citation_count para referências
+inválidas, inclusive repetidas; não confundir as duas unidades.
+
+A entrada só abre uma collection existente e valida seus IDs contra o split RAG
+registrado, preservando a separação de treino/gold. Não cria índice vazio quando o
+nome/modelo está errado, nem ingere/reset a base. Coleção existente sem resultados
+leva à abstenção normal sem carregar o LLM. Datasets de avaliação isolados continuam
+sendo responsabilidade dos seus runners, não desta CLI de consulta de produção.

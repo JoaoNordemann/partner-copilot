@@ -34,6 +34,7 @@ class ChromaStore:
         embedding_function: EmbeddingFunction | None = None,
         embedder: Embedder | None = None,
         settings: Settings | None = None,
+        create_if_missing: bool = True,
     ) -> None:
         if embedding_function is not None and embedder is not None:
             raise ValueError("Provide either embedder or embedding_function, not both")
@@ -61,17 +62,25 @@ class ChromaStore:
             if collection is not None
             else model_collection_name(config.chroma_collection, model, contract)
         )
+        if not create_if_missing and not (self.path / "chroma.sqlite3").is_file():
+            raise FileNotFoundError(f"Persistent Chroma database not found: {self.path}")
         self.client = chromadb.PersistentClient(path=str(self.path))
         collection_metadata = {"hnsw:space": "cosine", "embedding_model": model}
         if contract is not None:
             collection_metadata["embedding_input_contract"] = contract
         # Production embeddings are explicit: Chroma must not choose its own model or prompts.
         # embedding_function is retained only as an explicit compatibility/injection path.
-        self.col = self.client.get_or_create_collection(
-            self.collection_name,
-            embedding_function=embedding_function,
-            metadata=collection_metadata,
-        )
+        if create_if_missing:
+            self.col = self.client.get_or_create_collection(
+                self.collection_name,
+                embedding_function=embedding_function,
+                metadata=collection_metadata,
+            )
+        else:
+            self.col = self.client.get_collection(
+                self.collection_name,
+                embedding_function=embedding_function,
+            )
         metadata = self.col.metadata or {}
         if metadata.get("embedding_model") != model:
             raise ValueError(

@@ -8,6 +8,7 @@ from partner_copilot.generation.contracts import (
     ABSTENTION_MARKER,
     ABSTENTION_MESSAGE,
     GenerationContractError,
+    InvalidCitationError,
 )
 from partner_copilot.schemas import RetrievedDoc
 
@@ -28,6 +29,13 @@ def parse_generation(text: str, docs: Sequence[RetrievedDoc]) -> ParsedGeneratio
     if ABSTENTION_MARKER in text:
         raise GenerationContractError("Abstention marker must be the complete output")
     valid_ids = {doc.review.id for doc in docs}
+    invalid = [
+        identifier
+        for identifier in re.findall(r"\[([^\[\]\r\n]+)\]", text)
+        if identifier not in valid_ids
+    ]
+    if invalid:
+        raise InvalidCitationError(invalid, valid_ids)
     sources = []
     for line in text.splitlines():
         if not line.strip():
@@ -39,8 +47,6 @@ def parse_generation(text: str, docs: Sequence[RetrievedDoc]) -> ParsedGeneratio
         if not citations or not re.search(r"(?:\[[A-Za-z0-9_-]+\]\s*)+[.!?]?$", line):
             raise GenerationContractError("Every output line must end with a source citation")
         for identifier in citations:
-            if identifier not in valid_ids:
-                raise GenerationContractError("Citation references a review outside the context")
             if identifier not in sources:
                 sources.append(identifier)
     return ParsedGeneration(text, sources, False)

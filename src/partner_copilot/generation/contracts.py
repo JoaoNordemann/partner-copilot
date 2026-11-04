@@ -15,6 +15,18 @@ class GenerationContractError(ValueError):
     """Model output or input cannot satisfy the generation contract."""
 
 
+class InvalidCitationError(GenerationContractError):
+    """Reject the whole answer while retaining machine-readable citation diagnostics."""
+
+    code = "invalid_citation"
+
+    def __init__(self, invalid_ids: list[str], allowed_ids: set[str]) -> None:
+        self.invalid_ids = tuple(dict.fromkeys(invalid_ids))
+        self.invalid_citation_count = len(invalid_ids)
+        self.allowed_context_ids = tuple(sorted(allowed_ids))
+        super().__init__("Citation references a review outside the context")
+
+
 class LLM(Protocol):
     def generate(self, user_prompt: str, max_new_tokens: int | None = None) -> str: ...
 
