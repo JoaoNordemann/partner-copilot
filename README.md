@@ -196,3 +196,5 @@ se ainda estiver em `data/eval`, atualize-o para `data/eval/human-v2`.
 No recálculo de relatórios, informe `--parent-eval-dir data/eval` para identificar a origem.
 
 Prompt ativo partner-copilot-v1: exige evidência explícita, citações por afirmação e abstenção padronizada. Reviews são delimitadas como dados; ações só com evidência. A pipeline usa até cinco documentos e registra metadados. [Contrato, versionamento e limites dos testes](docs/prompt-design.md).
+
+Geração reutilizável e instrumentada: provider lazy por processo, seed por chamada, temperatura padrão zero, margem de tokens e metadados de latência/VRAM por GPU. [Como funciona e como medir](docs/generation-runtime.md).

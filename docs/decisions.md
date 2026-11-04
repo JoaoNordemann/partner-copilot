@@ -383,3 +383,9 @@ exige versão nova e preservação da anterior; não substituir v1 silenciosamen
 A avaliação futura deverá registrar versão/hash, parâmetros de geração e violações
 de formato, inclusive nos quatro negativos q25–q28. Protocolo e limites em
 [prompt-design.md](prompt-design.md).
+
+## Execução reprodutível e instrumentada do Mistral
+
+Provider lazy por processo, protegido por lock, evita carregar pesos por pergunta e rejeita troca de configuração após a primeira carga. Modelo em eval; compute_dtype bf16 apenas se as GPUs visíveis suportarem, com fallback fp16. Seed 42 reiniciada por chamada com restauração do RNG; temperatura padrão 0 para greedy, mantendo amostragem coerente quando configurada positiva. Prompt, chat template e tokens especiais continuam no protocolo v1, sem alteração das instruções.
+
+Validar tokens reais do prompt + reserva max_new_tokens + margem configurável de 256 contra a janela efetiva, sem truncamento. GenerationResult leva métricas por chamada; a pipeline as inclui em metadata.generation, preservando generate()->str. Sincronizar CUDA e reiniciar picos por chamada; registrar bytes alocados/reservados por GPU, baseline residente, latência de geração e tempo da carga única. Inferência serializada para evitar corrida do RNG/contadores; medidas não garantem isolamento de outro trabalho CUDA no processo. Ambiente local sem GPU: validação com doubles, sem benchmark real anunciado. Detalhes: [generation-runtime.md](generation-runtime.md).

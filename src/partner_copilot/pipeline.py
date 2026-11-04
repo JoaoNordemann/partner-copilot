@@ -4,15 +4,18 @@ from datetime import date
 from time import perf_counter
 
 from partner_copilot.config import Settings, get_settings
-from partner_copilot.generation.contracts import ABSTENTION_MESSAGE, LLM
+from partner_copilot.generation.contracts import ABSTENTION_MESSAGE, LLM, MeasuredLLM
 from partner_copilot.generation.output import parse_generation
 from partner_copilot.generation.prompts import build_prompt, load_prompt_template
+from partner_copilot.generation.provider import get_llm
 from partner_copilot.retrieval.retriever import Retriever
 from partner_copilot.schemas import Answer, AnswerMetadata
 
 
 class RAGPipeline:
-    def __init__(self, retriever: Retriever, llm: LLM, *, settings: Settings | None = None) -> None:
+    def __init__(
+        self, retriever: Retriever, llm: LLM | None = None, *, settings: Settings | None = None
+    ) -> None:
         self.retriever, self.llm = retriever, llm
         self.settings = settings if settings is not None else get_settings()
         load_prompt_template(self.settings.prompt_version)
@@ -43,11 +46,18 @@ class RAGPipeline:
             bairro=bairro,
         )
         context = docs[: self.settings.context_k]
+        generation_metrics = None
         if not docs:
             text, sources, abstained, reason = ABSTENTION_MESSAGE, [], True, "retriever_empty"
         else:
             prompt = build_prompt(question, context, prompt_version=self.settings.prompt_version)
-            parsed = parse_generation(self.llm.generate(prompt), context)
+            llm = self.llm if self.llm is not None else get_llm(self.settings)
+            if isinstance(llm, MeasuredLLM):
+                generated = llm.generate_with_metrics(prompt)
+                generation_metrics = generated.metrics
+                parsed = parse_generation(generated.text, context)
+            else:
+                parsed = parse_generation(llm.generate(prompt), context)
             text, sources, abstained = parsed.answer, parsed.sources, parsed.abstained
             reason = "llm_insufficient_evidence" if abstained else None
         result = Answer(
@@ -61,6 +71,7 @@ class RAGPipeline:
                 context_documents=len(context),
                 prompt_version=self.settings.prompt_version,
                 llm_called=bool(docs),
+                generation=generation_metrics,
             ),
         )
         # End timing after output parsing and Pydantic validation, before returning.

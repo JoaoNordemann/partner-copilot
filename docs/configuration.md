@@ -33,3 +33,5 @@ Copy-Item .env.example .env
 DATA_EVAL_DIR define o diretório das perguntas e do corpus de avaliação isolado; o padrão é data/eval/human-v2.
 
 CONTEXT_K=5 limita documentos enviados ao LLM, independentemente de RETRIEVAL_K=8. PROMPT_VERSION=partner-copilot-v1 seleciona o template congelado; versões não registradas são rejeitadas. Alterações do prompt após avaliação exigem versão nova.
+
+GENERATION_SEED=42 fixa o RNG por chamada; TEMPERATURE=0.0 é o default de geração sem amostragem. GENERATION_CONTEXT_MARGIN_TOKENS=256 reserva folga além dos tokens de entrada e resposta. O provider usa uma configuração de geração por processo; reinicie para trocá-la. [Medições e reprodução](generation-runtime.md).

@@ -62,6 +62,7 @@ def test_generator_uses_env_root_and_cli_override(tmp_path, monkeypatch):
 
 @pytest.mark.parametrize("temperature", [0.0, 0.7])
 def test_mistral_consumes_settings_without_loading_models(monkeypatch, temperature):
+    from contextlib import nullcontext
     from unittest.mock import MagicMock
 
     from partner_copilot.generation import llm
@@ -71,6 +72,9 @@ def test_mistral_consumes_settings_without_loading_models(monkeypatch, temperatu
     monkeypatch.setattr(llm.AutoTokenizer, "from_pretrained", tokenizer_loader)
     monkeypatch.setattr(llm.AutoModelForCausalLM, "from_pretrained", model_loader)
     monkeypatch.setattr(llm, "BitsAndBytesConfig", MagicMock())
+    monkeypatch.setattr(llm.torch.cuda, "is_available", lambda: True)
+    monkeypatch.setattr(llm.torch.cuda, "device_count", lambda: 1)
+    monkeypatch.setattr(llm.torch.cuda, "device", lambda _: nullcontext())
     monkeypatch.setattr(llm.torch.cuda, "is_bf16_supported", lambda: False)
     settings = Settings(
         llm_model_id="custom/model",
@@ -78,6 +82,7 @@ def test_mistral_consumes_settings_without_loading_models(monkeypatch, temperatu
         temperature=temperature,
         top_p=0.8,
         max_new_tokens=64,
+        generation_context_margin_tokens=8,
     )
     model_loader.return_value.config.max_position_embeddings = 128
     engine = llm.Mistral4bit(settings=settings)

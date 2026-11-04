@@ -5,7 +5,7 @@ from typing import Literal
 
 from pydantic import BaseModel, Field, computed_field, field_validator, model_validator
 
-from partner_copilot.generation.contracts import ABSTENTION_MESSAGE
+from partner_copilot.generation.contracts import ABSTENTION_MESSAGE, GenerationMetrics
 
 
 class Review(BaseModel):
@@ -50,9 +50,12 @@ class AnswerMetadata(BaseModel):
     context_documents: int = Field(ge=0)
     prompt_version: str = Field(min_length=1)
     llm_called: bool
+    generation: GenerationMetrics | None = None
 
     @model_validator(mode="after")
     def consistent_counts(self) -> "AnswerMetadata":
+        if not self.llm_called and self.generation is not None:
+            raise ValueError("Generation metrics require a model call")
         if self.context_documents > self.retrieved_documents:
             raise ValueError("Context count cannot exceed retrieved count")
         if not self.llm_called and self.context_documents != 0:

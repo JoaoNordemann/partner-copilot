@@ -10,6 +10,9 @@ from partner_copilot.config import Settings, get_settings
 def test_defaults():
     settings = Settings()
     assert settings.retrieval_k == 8
+    assert settings.temperature == 0.0
+    assert settings.generation_seed == 42
+    assert settings.generation_context_margin_tokens == 256
     assert settings.data_raw_dir == Path("data/raw")
     assert settings.data_eval_dir == Path("data/eval/human-v2")
     assert settings.hf_token is None
@@ -38,6 +41,9 @@ def test_env_overrides_dotenv_and_parses_types(tmp_path, monkeypatch):
         ("max_new_tokens", 2049),
         ("temperature", -0.1),
         ("temperature", 2.1),
+        ("generation_seed", -1),
+        ("generation_seed", 4294967296),
+        ("generation_context_margin_tokens", -1),
         ("top_p", 0),
         ("top_p", 1.1),
     ],

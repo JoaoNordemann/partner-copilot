@@ -63,8 +63,10 @@ class Settings(BaseSettings):
 
     # --- Geração ---------------------------------------------------------
     max_new_tokens: int = Field(default=400, ge=16, le=2048)
-    temperature: float = Field(default=0.3, ge=0.0, le=2.0)
+    temperature: float = Field(default=0.0, ge=0.0, le=2.0)
     top_p: float = Field(default=0.9, gt=0.0, le=1.0)
+    generation_seed: int = Field(default=42, ge=0, le=4294967295)
+    generation_context_margin_tokens: int = Field(default=256, ge=0)
 
     @field_validator("embedding_model", "embedding_device", "llm_model_id", "prompt_version")
     @classmethod
