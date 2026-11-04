@@ -11,6 +11,7 @@ def test_defaults():
     settings = Settings()
     assert settings.retrieval_k == 8
     assert settings.data_raw_dir == Path("data/raw")
+    assert settings.data_eval_dir == Path("data/eval/human-v2")
     assert settings.hf_token is None
 
 

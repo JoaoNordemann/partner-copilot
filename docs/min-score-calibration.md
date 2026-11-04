@@ -105,10 +105,12 @@ Antes de promoção, medir em perguntas novas e revisar as relevâncias independ
 ## Reproduzir sem carregar modelos
 
 ```powershell
-.\.venv\Scripts\python.exe scripts/calibrate_min_score.py --input reports/retrieval-comparison.json --protocol reports/min-score-protocol.json --output work/evaluation/min-score-run.json
+.\.venv\Scripts\python.exe scripts/calibrate_min_score.py --eval-dir data/eval --input reports/retrieval-comparison.json --protocol reports/min-score-protocol.json --output work/evaluation/min-score-run.json
 .\.venv\Scripts\python.exe -m pytest tests/test_score_calibration.py -v
 ```
 
 O cálculo reutiliza os rankings sem corte já registrados, com revisão do modelo e hashes
 do mesmo corpus. O teste de isolamento altera os scores das dez perguntas de avaliação
 e verifica que isso não muda o limiar selecionado ou a curva da calibração.
+
+Os comandos desta reprodução histórica fixam v1 com `--eval-dir data/eval`. O padrão atual sem essa opção é `data/eval/human-v2`.

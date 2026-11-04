@@ -105,7 +105,7 @@ Nenhuma coleção foi modificada. O inventário desta execução consta no relat
 ```powershell
 $env:SENTENCE_TRANSFORMERS_HOME = "$PWD\work\hf-cache\sentence-transformers"
 $env:HF_HUB_OFFLINE = '1'
-.\.venv\Scripts\python.exe scripts/evaluate_retrieval.py --compare-baselines --output work/evaluation/comparison.json
+.\.venv\Scripts\python.exe scripts/evaluate_retrieval.py --eval-dir data/eval --compare-baselines --output work/evaluation/comparison.json
 .\.venv\Scripts\python.exe -m pytest tests/test_retrieval_baselines.py -v
 Remove-Item Env:SENTENCE_TRANSFORMERS_HOME
 Remove-Item Env:HF_HUB_OFFLINE
@@ -116,3 +116,5 @@ O modo comparação fixa os quatro k e os cortes operacionais. Não aceita `--k`
 O modelo deve estar em cache: não há downloads automáticos. O JSON registra a revisão
 do modelo, versões do runtime, hashes do eval set, rankings e os desvios do aleatório.
 Os bancos do projeto não são abertos pelo cálculo exato da comparação.
+
+Os comandos desta reprodução histórica fixam v1 com `--eval-dir data/eval`. O padrão atual sem essa opção é `data/eval/human-v2`.

@@ -182,3 +182,7 @@ Nova execução usa 100 candidatos para todas as perguntas no modo sem filtro, s
 ## Baselines baratos executáveis sem modelo
 
 Comando dedicado mede aleatório (200 repetições, seeds 42..241) e contagem de palavras normalizadas, sem carregar embeddings ou Chroma. Na revisão human-v2, com filtros, Hit@8 é 0,9315 aleatório, 23/24 lexical e 24/24 semântico. Hit@8 sozinho é pouco discriminante nesse conjunto filtrado; considerar Hit@1, MRR e precision. Sem filtros, lexical e semântico empatam em Hit@8, e o lexical vence em recall limitado@8. Resultados completos: [cheap-baselines-check.md](cheap-baselines-check.md).
+
+## Versão ativa de avaliação
+
+DATA_EVAL_DIR passa a usar data/eval/human-v2 por padrão no config e no exemplo de ambiente. O v1 permanece congelado e só deve ser selecionado explicitamente com --eval-dir data/eval. O recálculo exige --parent-eval-dir para distinguir a versão de origem da versão revisada. Valores explícitos de ambiente/.env mantêm sua precedência e devem ser atualizados quando apontarem para v1.

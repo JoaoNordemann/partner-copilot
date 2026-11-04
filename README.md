@@ -185,3 +185,12 @@ nem exaustiva. Novos julgamentos, proveniência e métricas estão em
 [resultado da revisão humana](docs/human-review-results.md).
 
 Baselines sem embeddings: no corpus revisado com filtros, o aleatório já atinge Hit@8 de 93,1% e palavras-chave 95,8%, contra 100% semântico. O ganho de ordenação deve ser avaliado em Hit@1/MRR/precision. [Resultados e comando sem modelo](docs/cheap-baselines-check.md).
+
+## Versão padrão da avaliação
+
+`DATA_EVAL_DIR=data/eval/human-v2` é o padrão do config e do `.env.example`.
+Os comandos de avaliação sem `--eval-dir` usam os julgamentos revisados.
+Para reproduzir resultados históricos do v1, informe `--eval-dir data/eval`.
+Um valor explícito de `DATA_EVAL_DIR` no ambiente ou `.env` prevalece sobre o default;
+se ainda estiver em `data/eval`, atualize-o para `data/eval/human-v2`.
+No recálculo de relatórios, informe `--parent-eval-dir data/eval` para identificar a origem.

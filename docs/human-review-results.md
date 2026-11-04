@@ -73,8 +73,9 @@ O corpus e as perguntas já eram conhecidos, portanto a versão revisada não é
 
 ## Executar
 
-O default de DATA_EVAL_DIR continua apontando para o snapshot histórico. Selecione
-explicitamente human-v2 para usar os novos julgamentos:
+O default de DATA_EVAL_DIR aponta para data/eval/human-v2. Para reproduzir a avaliação
+histórica, use --eval-dir data/eval explicitamente. O recálculo exige --parent-eval-dir
+para não confundir a versão de origem com a versão revisada:
 
 ```powershell
 .\.venv\Scripts\python.exe scripts/evaluate_retrieval.py --eval-dir data/eval/human-v2 --check-only

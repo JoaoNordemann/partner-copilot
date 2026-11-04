@@ -27,7 +27,9 @@ def test_example_documents_all_settings_and_is_valid():
     example = ROOT / ".env.example"
     keys = re.findall(r"^\s*(?:#\s*)?([A-Z_]+)=", example.read_text(encoding="utf-8-sig"), re.M)
     assert set(keys) == {name.upper() for name in Settings.model_fields}
-    assert Settings(_env_file=example).hf_token is None
+    settings = Settings(_env_file=example)
+    assert settings.hf_token is None
+    assert settings.data_eval_dir == Path("data/eval/human-v2")
 
 
 def test_blank_llm_model_is_rejected():

@@ -11,12 +11,12 @@ from partner_copilot.evaluation.rescore import rescore_review
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--eval-dir", type=Path, required=True)
-    parser.add_argument("--parent-eval-dir", type=Path)
+    parser.add_argument("--parent-eval-dir", type=Path, required=True)
     parser.add_argument("--source-reports", type=Path, required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
     args = parser.parse_args()
     settings = get_settings()
-    parent = args.parent_eval_dir if args.parent_eval_dir else settings.data_eval_dir
+    parent = args.parent_eval_dir
     output = args.output_dir.resolve()
     sources = args.source_reports.resolve()
     if output == sources or any(

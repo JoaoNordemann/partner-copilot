@@ -84,7 +84,7 @@ não há suporte para conclusões de alta precisão estatística.
 Na raiz do repositório, valide os artefatos sem carregar modelos:
 
 ```powershell
-.\.venv\Scripts\python.exe scripts/evaluate_retrieval.py --check-only
+.\.venv\Scripts\python.exe scripts/evaluate_retrieval.py --eval-dir data/eval --check-only
 .\.venv\Scripts\python.exe -m pytest tests/test_eval_set.py -v
 ```
 
@@ -93,7 +93,7 @@ Com o modelo previamente disponível no cache local:
 ```powershell
 $env:SENTENCE_TRANSFORMERS_HOME = "$PWD\work\hf-cache\sentence-transformers"
 $env:HF_HUB_OFFLINE = '1'
-.\.venv\Scripts\python.exe scripts/evaluate_retrieval.py --k 8 --min-score 0.25 --output work/evaluation/retrieval-run.json
+.\.venv\Scripts\python.exe scripts/evaluate_retrieval.py --eval-dir data/eval --k 8 --min-score 0.25 --output work/evaluation/retrieval-run.json
 Remove-Item Env:SENTENCE_TRANSFORMERS_HOME
 Remove-Item Env:HF_HUB_OFFLINE
 ```
@@ -106,3 +106,5 @@ janela do modelo para evitar truncamento silencioso. No Windows, o Chroma pode m
 handles até o processo encerrar; isso pode adiar a remoção do diretório temporário.
 
 Comparação em k=1,3,5,8 com recall limitado, Hit, MRR e precision: [métricas e baselines](retrieval-baselines.md). O baseline anterior mantém sua definição original de recall clássico.
+
+Os comandos desta reprodução histórica fixam v1 com `--eval-dir data/eval`. O padrão atual sem essa opção é `data/eval/human-v2`.
