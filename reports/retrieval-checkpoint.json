@@ -1,0 +1,130 @@
+{
+  "k": 8,
+  "operational_min_score": 0.25,
+  "source_sha256_lf": {
+    "reports/retrieval-baseline.json": "2da0545afd8ebaf2c6b9dc6cf9f9a368c0715424f9eafa5d5c2cd8d3e3ae5e7d",
+    "reports/retrieval-comparison.json": "ca536df257f42129c89f4428b4ae1b0ab595972f39ddce866353c613387500b4"
+  },
+  "failure_counts": {
+    "com_filtro": {
+      "unanswerable_with_documents": 4,
+      "unanswerable_total": 6,
+      "unanswerable_failure_ids": [
+        "q25",
+        "q26",
+        "q27",
+        "q28"
+      ],
+      "answerable_zero_recall": 1,
+      "answerable_total": 24,
+      "zero_recall_ids": [
+        "q13"
+      ],
+      "operational_hit_at_8": 0.9583333333333334,
+      "best_score_distributions_before_threshold": {
+        "answerable": {
+          "questions": 24,
+          "no_candidate": 0,
+          "quantiles": {
+            "min": 0.20974821228282212,
+            "q1": 0.3455425998739864,
+            "median": 0.4419150075142881,
+            "q3": 0.5674452115200367,
+            "max": 0.6744610207561201
+          }
+        },
+        "unanswerable": {
+          "questions": 6,
+          "no_candidate": 2,
+          "quantiles": {
+            "min": 0.286703120624287,
+            "q1": 0.38260203150967875,
+            "median": 0.4648899838948385,
+            "q3": 0.5324647797075425,
+            "max": 0.5842242208755668
+          }
+        }
+      }
+    },
+    "sem_filtro": {
+      "unanswerable_with_documents": 6,
+      "unanswerable_total": 6,
+      "unanswerable_failure_ids": [
+        "q25",
+        "q26",
+        "q27",
+        "q28",
+        "q29",
+        "q30"
+      ],
+      "answerable_zero_recall": 12,
+      "answerable_total": 24,
+      "zero_recall_ids": [
+        "q03",
+        "q04",
+        "q06",
+        "q09",
+        "q11",
+        "q13",
+        "q16",
+        "q20",
+        "q21",
+        "q22",
+        "q23",
+        "q24"
+      ],
+      "operational_hit_at_8": 0.5,
+      "best_score_distributions_before_threshold": {
+        "answerable": {
+          "questions": 24,
+          "no_candidate": 0,
+          "quantiles": {
+            "min": 0.26504083715329374,
+            "q1": 0.4042710272761402,
+            "median": 0.47535902024062704,
+            "q3": 0.5780475665121073,
+            "max": 0.7230304808804597
+          }
+        },
+        "unanswerable": {
+          "questions": 6,
+          "no_candidate": 0,
+          "quantiles": {
+            "min": 0.3553271679909654,
+            "q1": 0.46559915682794856,
+            "median": 0.5176116822515342,
+            "q3": 0.5737883711932166,
+            "max": 0.7479545618085475
+          }
+        }
+      }
+    }
+  },
+  "top_five_are_all_maximum_loss_failures_with_filters": true,
+  "ai_text_review_ids": [
+    "q01",
+    "q02",
+    "q03",
+    "q04",
+    "q09",
+    "q10",
+    "q13",
+    "q14",
+    "q17",
+    "q19",
+    "q22",
+    "q25",
+    "q26",
+    "q27",
+    "q28"
+  ],
+  "independent_human_reviewed_count": 0,
+  "ci": {
+    "commit": "f31831b193ec9dbe2dddf5b268649b26535a8aa2",
+    "workflow_run_id": 41750165793,
+    "job_id": 126312991455,
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/JoaoNordemann/partner-copilot/actions/runs/41750165793"
+  }
+}

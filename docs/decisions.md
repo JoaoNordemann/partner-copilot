@@ -166,3 +166,7 @@ Resultado da seleção: candidato experimental 0,287, sem promoção ao default.
 ## Testes unitários e análise de falhas
 
 O núcleo do retriever não importa Chroma nem frameworks de modelos. Testes com store falso e bloqueio de dependências pesadas rodam em workflow mínimo; os testes de integração permanecem separados. As cinco piores perguntas do baseline operacional são selecionadas por perda, MRR e ID, sem mudar julgamentos para melhorar métricas. Diagnósticos e fontes: [retrieval-failure-analysis.md](retrieval-failure-analysis.md).
+
+## Revisão dos resultados e limites de evidência
+
+Contagem operacional com filtros e corte 0,25: 4/6 sem resposta retornam documentos; 1/24 respondíveis tem recall@8 zero. Os cinco casos selecionados cobrem todas as perdas máximas. O filtro não recalibra scores; confusão temática é hipótese, e a inversão observada prova que um limiar único não separa todos os exemplos. Dez inspeções textuais de IA identificadas, revisão humana pendente. CI remoto de f31831b confirmado como success. Tabelas, proveniência e experimentos de geração/segmentação registrados em [retrieval-checkpoint.md](retrieval-checkpoint.md).

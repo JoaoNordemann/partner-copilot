@@ -161,3 +161,16 @@ Métricas em quatro valores de k e comparação semântica/lexical/aleatória: [
 Calibração de abstenção: o melhor score do embedding apresenta sobreposição entre perguntas respondíveis e sem resposta. O candidato experimental 0,287 não melhorou a rejeição nas dez perguntas separadas e perdeu evidências válidas; não foi promovido ao default. Contagens, distribuições e limitações: [calibração de min_score](docs/min-score-calibration.md).
 
 Análise das cinco piores perguntas: um falso negativo por ranking/corte e quatro falsas aceitações por falta de suporte factual. Filtros corretos não garantem relevância; tema parecido não basta. Evidências e testes unitários de CI: [análise de falhas](docs/retrieval-failure-analysis.md).
+
+## Limite do score como detector de evidência
+
+Com k=8 e min_score=0,25, 4/6 perguntas sem resposta retornaram documentos e
+1/24 respondíveis teve recall@8 zero. Esses cinco casos são todas as perdas máximas
+observadas com filtros. A evidência correta de atraso de q13 pontua 0,189, enquanto
+os melhores candidatos sem resposta de q25 e q27 pontuam 0,584 e 0,515. Nenhum limiar
+único aceita aquela evidência e rejeita ambos os negativos. O filtro restringe o
+domínio, mas não recalibra o cosseno: similaridade temática não certifica suporte factual.
+
+Tabelas completas, distribuições, origem das relevâncias e CI remoto verificado estão
+em [revisão de resultados](docs/retrieval-checkpoint.md). A inspeção de IA está marcada;
+a [revisão humana independente](docs/human-review-checklist.md) continua pendente.
