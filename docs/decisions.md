@@ -422,3 +422,34 @@ sendo responsabilidade dos seus runners, não desta CLI de consulta de produçã
 O grupo leve testa a pipeline com retriever/LLM falsos e confirma explicitamente ausência de chamada com lista vazia, instruções/IDs no prompt enviado, erro contável para fontes fora do retrieval/contexto e normalização do marcador para a frase pública de abstenção. Texto livre não é contado silenciosamente como recusa válida.
 
 Testes reais de Mistral ficam marcados gpu e desabilitados por padrão via --run-gpu; CI seleciona arquivos leves e -m not gpu. Dois casos sintéticos usam pesos reais em cache, uma carga por módulo, seed fixa e temperatura zero; loaders proíbem download. Ambiente sem CUDA é skip explícito, não aprovação de inferência real. Protocolo: [testing.md](testing.md).
+
+## Rodada completa de geração com checkpoint por pergunta
+
+A rodada usa as 30 perguntas e o corpus gold isolado de human-v2, com configuração
+fixa de retrieval/contexto/geração e prompt versionado. Nunca misturar o gold no índice
+RAG de produção. A execução real exige CUDA; doubles só podem produzir artefatos
+explicitamente identificados como teste, sem serem publicados como resultados do Mistral.
+
+Salvar um JSONL de resultados com uma linha por pergunta, incluindo pergunta/filtros,
+IDs, scores e textos recuperados/enviados, prompt renderizado, versão/hash, saída bruta,
+Answer ou erro, latência e métricas de geração. Flush e fsync a cada pergunta; manter
+lock de escrita. Retomada explícita só aceita o mesmo snapshot, template, parâmetros
+e ambiente registrados, pula perguntas já gravadas e preserva erros como tentativas
+concluídas. Recuperar somente uma cauda final interrompida, arquivando-a; corrupção
+no meio e IDs duplicados devem impedir a retomada.
+
+Métricas antes da execução: abstenções válidas nas 6 negativas, com contagem separada
+q25–q28 e dos motivos retriever_empty/llm_insufficient_evidence; abstenções nas 24
+respondíveis; erros separados, nunca tratados como abstenção correta. Taxas finais
+só com as 30 tentativas registradas. Reportar sempre numerador/denominador e erros.
+
+Validade de citações é calculada na saída bruta não abstida do LLM: exige ao menos
+uma citação e todos os IDs no contexto realmente enviado. Respostas sem citações
+contam como inválidas; abstenções com marcador exato e casos sem chamada ao LLM ficam
+fora desse denominador. Essa métrica de referências é separada da validade de formato
+ou da fidelidade factual; erros não são removidos silenciosamente do relatório.
+
+A leitura qualitativa será preparada para q25–q30 e q01/q09/q13/q22: dez perguntas
+fixadas antes da geração, incluindo todas as negativas. O relatório de leitura nasce
+pendente; gerar um checklist não significa que respostas do modelo foram lidas ou
+revisadas por uma pessoa. Respostas reais ainda dependem do ambiente com GPU.
