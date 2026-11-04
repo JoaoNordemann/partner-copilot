@@ -170,3 +170,15 @@ O núcleo do retriever não importa Chroma nem frameworks de modelos. Testes com
 ## Revisão dos resultados e limites de evidência
 
 Contagem operacional com filtros e corte 0,25: 4/6 sem resposta retornam documentos; 1/24 respondíveis tem recall@8 zero. Os cinco casos selecionados cobrem todas as perdas máximas. O filtro não recalibra scores; confusão temática é hipótese, e a inversão observada prova que um limiar único não separa todos os exemplos. Dez inspeções textuais de IA identificadas, revisão humana pendente. CI remoto de f31831b confirmado como success. Tabelas, proveniência e experimentos de geração/segmentação registrados em [retrieval-checkpoint.md](retrieval-checkpoint.md).
+
+## Revisão humana assistida e versão dos julgamentos
+
+Revisão no chat concluída em 15 perguntas e 56 pares apresentados, após exposição aos resultados e com esclarecimentos da IA. Não é revisão cega independente nem exaustiva do corpus. Human-v2 preserva v1 e registra uma alteração: rev_002800 relevante em q22 por decisão do responsável, sem mudar o gold ABSA ou a regra global para diferente do habitual. Rankings e scores são reutilizados somente após validar corpus, perguntas e filtros idênticos; métricas e aleatório são recalculados. O default histórico e o limiar 0,25 permanecem. Protocolo e resultados: [human-review-results.md](human-review-results.md).
+
+## Reexecução sem filtros na versão humana v2
+
+Nova execução usa 100 candidatos para todas as perguntas no modo sem filtro, sem restrições de restaurante, item ou data. Em k=8 sem corte, Hit é 12/24 sem filtro contra 24/24 com filtro; com min_score=0,25, o filtrado cai para 23/24. O ganho não é uma medida causal isolada do embedding: filtros fornecem escopo ausente do texto. Resultados e reprodução: [unfiltered-retrieval-check.md](unfiltered-retrieval-check.md).
+
+## Baselines baratos executáveis sem modelo
+
+Comando dedicado mede aleatório (200 repetições, seeds 42..241) e contagem de palavras normalizadas, sem carregar embeddings ou Chroma. Na revisão human-v2, com filtros, Hit@8 é 0,9315 aleatório, 23/24 lexical e 24/24 semântico. Hit@8 sozinho é pouco discriminante nesse conjunto filtrado; considerar Hit@1, MRR e precision. Sem filtros, lexical e semântico empatam em Hit@8, e o lexical vence em recall limitado@8. Resultados completos: [cheap-baselines-check.md](cheap-baselines-check.md).

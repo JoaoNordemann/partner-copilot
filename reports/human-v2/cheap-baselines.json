@@ -1,0 +1,2629 @@
+{
+  "protocol": "cheap_baselines_v1",
+  "ks": [
+    1,
+    3,
+    5,
+    8
+  ],
+  "corpus_count": 100,
+  "model_loaded": false,
+  "keyword_score": "distinct token intersection",
+  "keyword_stopwords": [
+    "a",
+    "ao",
+    "aos",
+    "as",
+    "ate",
+    "com",
+    "como",
+    "da",
+    "das",
+    "de",
+    "do",
+    "dos",
+    "e",
+    "em",
+    "entre",
+    "essa",
+    "esse",
+    "esta",
+    "este",
+    "foi",
+    "ha",
+    "na",
+    "nas",
+    "no",
+    "nos",
+    "o",
+    "os",
+    "ou",
+    "para",
+    "pela",
+    "pelas",
+    "pelo",
+    "pelos",
+    "por",
+    "quais",
+    "qual",
+    "que",
+    "quem",
+    "sao",
+    "se",
+    "ser",
+    "seu",
+    "seus",
+    "sua",
+    "suas",
+    "the",
+    "um",
+    "uma",
+    "umas",
+    "uns"
+  ],
+  "keyword_tie_break": "ascending review ID",
+  "random_repetitions": 200,
+  "random_seed_range": [
+    42,
+    241
+  ],
+  "snapshot_sha256_lf": {
+    "questions.jsonl": "a063cf435ce9de75e4ec4d620841823519fab4d9c40ab6c057dfe3cc41b5aed2",
+    "corpus.jsonl": "74f04a4bf0407de3a4302f9a869dbeadde6541bd9fa56bb74e5e2fe0a832c95f",
+    "relevance_audit.jsonl": "a18f13fe9f79a8b2390ffd331134ac3f754aa66a85a70f7eb73ae5bf1d2ded10",
+    "human_review.jsonl": "7789de26f925a4a473586b0ef1688b647aad181e1de46314b34e32e143b4eb03"
+  },
+  "annotation_status": "partially_assisted_human_reviewed_query_judgments_gold_aspects_unchanged",
+  "methods": {
+    "keyword": {
+      "sem_filtro": {
+        "ranking": {
+          "1": {
+            "hit_at_k": 0.08333333333333333,
+            "recall_capped_at_k": 0.08333333333333333,
+            "recall_classic_at_k": 0.034722222222222224,
+            "mrr_at_k": 0.08333333333333333,
+            "precision_at_k": 0.08333333333333333,
+            "answerable_abstention_rate": 0,
+            "correct_abstention_rate": 0,
+            "false_evidence_rate": 1
+          },
+          "3": {
+            "hit_at_k": 0.2916666666666667,
+            "recall_capped_at_k": 0.24305555555555555,
+            "recall_classic_at_k": 0.24305555555555555,
+            "mrr_at_k": 0.18055555555555555,
+            "precision_at_k": 0.1388888888888889,
+            "answerable_abstention_rate": 0,
+            "correct_abstention_rate": 0,
+            "false_evidence_rate": 1
+          },
+          "5": {
+            "hit_at_k": 0.4166666666666667,
+            "recall_capped_at_k": 0.3347222222222222,
+            "recall_classic_at_k": 0.3347222222222222,
+            "mrr_at_k": 0.21180555555555555,
+            "precision_at_k": 0.10833333333333334,
+            "answerable_abstention_rate": 0,
+            "correct_abstention_rate": 0,
+            "false_evidence_rate": 1
+          },
+          "8": {
+            "hit_at_k": 0.5,
+            "recall_capped_at_k": 0.41597222222222224,
+            "recall_classic_at_k": 0.41597222222222224,
+            "mrr_at_k": 0.22569444444444445,
+            "precision_at_k": 0.09895833333333333,
+            "answerable_abstention_rate": 0,
+            "correct_abstention_rate": 0,
+            "false_evidence_rate": 1
+          }
+        },
+        "operational": {
+          "1": {
+            "hit_at_k": 0.08333333333333333,
+            "recall_capped_at_k": 0.08333333333333333,
+            "recall_classic_at_k": 0.034722222222222224,
+            "mrr_at_k": 0.08333333333333333,
+            "precision_at_k": 0.08333333333333333,
+            "answerable_abstention_rate": 0.125,
+            "correct_abstention_rate": 0.16666666666666666,
+            "false_evidence_rate": 0.8333333333333334
+          },
+          "3": {
+            "hit_at_k": 0.2916666666666667,
+            "recall_capped_at_k": 0.24305555555555555,
+            "recall_classic_at_k": 0.24305555555555555,
+            "mrr_at_k": 0.18055555555555555,
+            "precision_at_k": 0.1388888888888889,
+            "answerable_abstention_rate": 0.125,
+            "correct_abstention_rate": 0.16666666666666666,
+            "false_evidence_rate": 0.8333333333333334
+          },
+          "5": {
+            "hit_at_k": 0.375,
+            "recall_capped_at_k": 0.29305555555555557,
+            "recall_classic_at_k": 0.29305555555555557,
+            "mrr_at_k": 0.2013888888888889,
+            "precision_at_k": 0.1,
+            "answerable_abstention_rate": 0.125,
+            "correct_abstention_rate": 0.16666666666666666,
+            "false_evidence_rate": 0.8333333333333334
+          },
+          "8": {
+            "hit_at_k": 0.4583333333333333,
+            "recall_capped_at_k": 0.37430555555555556,
+            "recall_classic_at_k": 0.37430555555555556,
+            "mrr_at_k": 0.2152777777777778,
+            "precision_at_k": 0.09375,
+            "answerable_abstention_rate": 0.125,
+            "correct_abstention_rate": 0.16666666666666666,
+            "false_evidence_rate": 0.8333333333333334
+          }
+        },
+        "questions": [
+          {
+            "id": "q01",
+            "eligible_count": 100,
+            "ranked_ids": [
+              "rev_002355",
+              "rev_002800",
+              "rev_000294",
+              "rev_000351",
+              "rev_000407",
+              "rev_000549",
+              "rev_000645",
+              "rev_000650"
+            ],
+            "scores": [
+              2,
+              2,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ],
+            "operational_ids": [
+              "rev_002355",
+              "rev_002800",
+              "rev_000294",
+              "rev_000351",
+              "rev_000407",
+              "rev_000549",
+              "rev_000645",
+              "rev_000650"
+            ]
+          },
+          {
+            "id": "q02",
+            "eligible_count": 100,
+            "ranked_ids": [
+              "rev_000799",
+              "rev_002257",
+              "rev_002417",
+              "rev_002549",
+              "rev_000212",
+              "rev_000267",
+              "rev_000294",
+              "rev_000300"
+            ],
+            "scores": [
+              1,
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            "operational_ids": [
+              "rev_000799",
+              "rev_002257",
+              "rev_002417",
+              "rev_002549"
+            ]
+          },
+          {
+            "id": "q03",
+            "eligible_count": 100,
+            "ranked_ids": [
+              "rev_002787",
+              "rev_000604",
+              "rev_001051",
+              "rev_002234",
+              "rev_002438",
+              "rev_002562",
+              "rev_002598",
+              "rev_002833"
+            ],
+            "scores": [
+              2,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ],
+            "operational_ids": [
+              "rev_002787",
+              "rev_000604",
+              "rev_001051",
+              "rev_002234",
+              "rev_002438",
+              "rev_002562",
+              "rev_002598",
+              "rev_002833"
+            ]
+          },
+          {
+            "id": "q04",
+            "eligible_count": 100,
+            "ranked_ids": [
+              "rev_000212",
+              "rev_000294",
+              "rev_000300",
+              "rev_000345",
+              "rev_000351",
+              "rev_000400",
+              "rev_000403",
+              "rev_000445"
+            ],
+            "scores": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ],
+            "operational_ids": [
+              "rev_000212",
+              "rev_000294",
+              "rev_000300",
+              "rev_000345",
+              "rev_000351",
+              "rev_000400",
+              "rev_000403",
+              "rev_000445"
+            ]
+          },
+          {
+            "id": "q05",
+            "eligible_count": 100,
+            "ranked_ids": [
+              "rev_001123",
+              "rev_002058",
+              "rev_000212",
+              "rev_000267",
+              "rev_000294",
+              "rev_000300",
+              "rev_000345",
+              "rev_000351"
+            ],
+            "scores": [
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "operational_ids": [
+              "rev_001123",
+              "rev_002058"
+            ]
+          },
+          {
+            "id": "q06",
+            "eligible_count": 100,
+            "ranked_ids": [
+              "rev_000445",
+              "rev_000549",
+              "rev_000802",
+              "rev_001416",
+              "rev_001533",
+              "rev_002141",
+              "rev_002490",
+              "rev_002598"
+            ],
+            "scores": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ],
+            "operational_ids": [
+              "rev_000445",
+              "rev_000549",
+              "rev_000802",
+              "rev_001416",
+              "rev_001533",
+              "rev_002141",
+              "rev_002490",
+              "rev_002598"
+            ]
+          },
+          {
+            "id": "q07",
+            "eligible_count": 100,
+            "ranked_ids": [
+              "rev_000357",
+              "rev_000797",
+              "rev_000908",
+              "rev_001172",
+              "rev_001190",
+              "rev_001416",
+              "rev_001552",
+              "rev_001998"
+            ],
+            "scores": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ],
+            "operational_ids": [
+              "rev_000357",
+              "rev_000797",
+              "rev_000908",
+              "rev_001172",
+              "rev_001190",
+              "rev_001416",
+              "rev_001552",
+              "rev_001998"
+            ]
+          },
+          {
+            "id": "q08",
+            "eligible_count": 100,
+            "ranked_ids": [
+              "rev_000759",
+              "rev_000797",
+              "rev_001629",
+              "rev_001715",
+              "rev_001998",
+              "rev_002176",
+              "rev_002490",
+              "rev_002833"
+            ],
+            "scores": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ],
+            "operational_ids": [
+              "rev_000759",
+              "rev_000797",
+              "rev_001629",
+              "rev_001715",
+              "rev_001998",
+              "rev_002176",
+              "rev_002490",
+              "rev_002833"
+            ]
+          },
+          {
+            "id": "q09",
+            "eligible_count": 100,
+            "ranked_ids": [
+              "rev_000799",
+              "rev_000908",
+              "rev_002257",
+              "rev_000212",
+              "rev_000267",
+              "rev_000294",
+              "rev_000300",
+              "rev_000345"
+            ],
+            "scores": [
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "operational_ids": [
+              "rev_000799",
+              "rev_000908",
+              "rev_002257"
+            ]
+          },
+          {
+            "id": "q10",
+            "eligible_count": 100,
+            "ranked_ids": [
+              "rev_001973",
+              "rev_000212",
+              "rev_000267",
+              "rev_000294",
+              "rev_000300",
+              "rev_000345",
+              "rev_000351",
+              "rev_000357"
+            ],
+            "scores": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "operational_ids": [
+              "rev_001973"
+            ]
+          },
+          {
+            "id": "q11",
+            "eligible_count": 100,
+            "ranked_ids": [
+              "rev_000357",
+              "rev_000799",
+              "rev_000908",
+              "rev_002058",
+              "rev_002234",
+              "rev_002257",
+              "rev_000212",
+              "rev_000267"
+            ],
+            "scores": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              0
+            ],
+            "operational_ids": [
+              "rev_000357",
+              "rev_000799",
+              "rev_000908",
+              "rev_002058",
+              "rev_002234",
+              "rev_002257"
+            ]
+          },
+          {
+            "id": "q12",
+            "eligible_count": 100,
+            "ranked_ids": [
+              "rev_000445",
+              "rev_000632",
+              "rev_001027",
+              "rev_001123",
+              "rev_001552",
+              "rev_001973",
+              "rev_002485",
+              "rev_002665"
+            ],
+            "scores": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ],
+            "operational_ids": [
+              "rev_000445",
+              "rev_000632",
+              "rev_001027",
+              "rev_001123",
+              "rev_001552",
+              "rev_001973",
+              "rev_002485",
+              "rev_002665"
+            ]
+          },
+          {
+            "id": "q13",
+            "eligible_count": 100,
+            "ranked_ids": [
+              "rev_001973",
+              "rev_002234",
+              "rev_000212",
+              "rev_000267",
+              "rev_000294",
+              "rev_000300",
+              "rev_000345",
+              "rev_000351"
+            ],
+            "scores": [
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "operational_ids": [
+              "rev_001973",
+              "rev_002234"
+            ]
+          },
+          {
+            "id": "q14",
+            "eligible_count": 100,
+            "ranked_ids": [
+              "rev_000813",
+              "rev_001076",
+              "rev_000294",
+              "rev_000604",
+              "rev_000752",
+              "rev_001661",
+              "rev_002335",
+              "rev_002549"
+            ],
+            "scores": [
+              3,
+              3,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2
+            ],
+            "operational_ids": [
+              "rev_000813",
+              "rev_001076",
+              "rev_000294",
+              "rev_000604",
+              "rev_000752",
+              "rev_001661",
+              "rev_002335",
+              "rev_002549"
+            ]
+          },
+          {
+            "id": "q15",
+            "eligible_count": 100,
+            "ranked_ids": [
+              "rev_001291",
+              "rev_001685",
+              "rev_002089",
+              "rev_000357",
+              "rev_000797",
+              "rev_000799",
+              "rev_000908",
+              "rev_001172"
+            ],
+            "scores": [
+              3,
+              3,
+              3,
+              1,
+              1,
+              1,
+              1,
+              1
+            ],
+            "operational_ids": [
+              "rev_001291",
+              "rev_001685",
+              "rev_002089",
+              "rev_000357",
+              "rev_000797",
+              "rev_000799",
+              "rev_000908",
+              "rev_001172"
+            ]
+          },
+          {
+            "id": "q16",
+            "eligible_count": 100,
+            "ranked_ids": [
+              "rev_002141",
+              "rev_001010",
+              "rev_000345",
+              "rev_001998",
+              "rev_002494",
+              "rev_002675",
+              "rev_000294",
+              "rev_000400"
+            ],
+            "scores": [
+              5,
+              4,
+              3,
+              3,
+              3,
+              3,
+              2,
+              2
+            ],
+            "operational_ids": [
+              "rev_002141",
+              "rev_001010",
+              "rev_000345",
+              "rev_001998",
+              "rev_002494",
+              "rev_002675",
+              "rev_000294",
+              "rev_000400"
+            ]
+          },
+          {
+            "id": "q17",
+            "eligible_count": 100,
+            "ranked_ids": [
+              "rev_000345",
+              "rev_000645",
+              "rev_000934",
+              "rev_000400",
+              "rev_000864",
+              "rev_001552",
+              "rev_001829",
+              "rev_001916"
+            ],
+            "scores": [
+              3,
+              3,
+              3,
+              2,
+              2,
+              2,
+              2,
+              2
+            ],
+            "operational_ids": [
+              "rev_000345",
+              "rev_000645",
+              "rev_000934",
+              "rev_000400",
+              "rev_000864",
+              "rev_001552",
+              "rev_001829",
+              "rev_001916"
+            ]
+          },
+          {
+            "id": "q18",
+            "eligible_count": 100,
+            "ranked_ids": [
+              "rev_001190",
+              "rev_002959",
+              "rev_000267",
+              "rev_000613",
+              "rev_001551",
+              "rev_002058",
+              "rev_002302",
+              "rev_002693"
+            ],
+            "scores": [
+              3,
+              3,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2
+            ],
+            "operational_ids": [
+              "rev_001190",
+              "rev_002959",
+              "rev_000267",
+              "rev_000613",
+              "rev_001551",
+              "rev_002058",
+              "rev_002302",
+              "rev_002693"
+            ]
+          },
+          {
+            "id": "q19",
+            "eligible_count": 100,
+            "ranked_ids": [
+              "rev_000212",
+              "rev_000267",
+              "rev_000294",
+              "rev_000300",
+              "rev_000345",
+              "rev_000351",
+              "rev_000357",
+              "rev_000400"
+            ],
+            "scores": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "operational_ids": []
+          },
+          {
+            "id": "q20",
+            "eligible_count": 100,
+            "ranked_ids": [
+              "rev_000212",
+              "rev_000267",
+              "rev_000294",
+              "rev_000300",
+              "rev_000345",
+              "rev_000351",
+              "rev_000357",
+              "rev_000400"
+            ],
+            "scores": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "operational_ids": []
+          },
+          {
+            "id": "q21",
+            "eligible_count": 100,
+            "ranked_ids": [
+              "rev_000632",
+              "rev_002417",
+              "rev_000212",
+              "rev_000267",
+              "rev_000294",
+              "rev_000300",
+              "rev_000345",
+              "rev_000351"
+            ],
+            "scores": [
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "operational_ids": [
+              "rev_000632",
+              "rev_002417"
+            ]
+          },
+          {
+            "id": "q22",
+            "eligible_count": 100,
+            "ranked_ids": [
+              "rev_000212",
+              "rev_000267",
+              "rev_000294",
+              "rev_000300",
+              "rev_000345",
+              "rev_000351",
+              "rev_000357",
+              "rev_000400"
+            ],
+            "scores": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "operational_ids": []
+          },
+          {
+            "id": "q23",
+            "eligible_count": 100,
+            "ranked_ids": [
+              "rev_000445",
+              "rev_000549",
+              "rev_000796",
+              "rev_000802",
+              "rev_001123",
+              "rev_001416",
+              "rev_001533",
+              "rev_002058"
+            ],
+            "scores": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ],
+            "operational_ids": [
+              "rev_000445",
+              "rev_000549",
+              "rev_000796",
+              "rev_000802",
+              "rev_001123",
+              "rev_001416",
+              "rev_001533",
+              "rev_002058"
+            ]
+          },
+          {
+            "id": "q24",
+            "eligible_count": 100,
+            "ranked_ids": [
+              "rev_001076",
+              "rev_001212",
+              "rev_002021",
+              "rev_000212",
+              "rev_000267",
+              "rev_000294",
+              "rev_000300",
+              "rev_000345"
+            ],
+            "scores": [
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "operational_ids": [
+              "rev_001076",
+              "rev_001212",
+              "rev_002021"
+            ]
+          },
+          {
+            "id": "q25",
+            "eligible_count": 100,
+            "ranked_ids": [
+              "rev_000799",
+              "rev_002257",
+              "rev_000212",
+              "rev_000267",
+              "rev_000294",
+              "rev_000300",
+              "rev_000345",
+              "rev_000351"
+            ],
+            "scores": [
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "operational_ids": [
+              "rev_000799",
+              "rev_002257"
+            ]
+          },
+          {
+            "id": "q26",
+            "eligible_count": 100,
+            "ranked_ids": [
+              "rev_000796",
+              "rev_000799",
+              "rev_001076",
+              "rev_001212",
+              "rev_002021",
+              "rev_002675",
+              "rev_002759",
+              "rev_002787"
+            ],
+            "scores": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ],
+            "operational_ids": [
+              "rev_000796",
+              "rev_000799",
+              "rev_001076",
+              "rev_001212",
+              "rev_002021",
+              "rev_002675",
+              "rev_002759",
+              "rev_002787"
+            ]
+          },
+          {
+            "id": "q27",
+            "eligible_count": 100,
+            "ranked_ids": [
+              "rev_000400",
+              "rev_001829",
+              "rev_000345",
+              "rev_000445",
+              "rev_000549",
+              "rev_000645",
+              "rev_000802",
+              "rev_000864"
+            ],
+            "scores": [
+              3,
+              3,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ],
+            "operational_ids": [
+              "rev_000400",
+              "rev_001829",
+              "rev_000345",
+              "rev_000445",
+              "rev_000549",
+              "rev_000645",
+              "rev_000802",
+              "rev_000864"
+            ]
+          },
+          {
+            "id": "q28",
+            "eligible_count": 100,
+            "ranked_ids": [
+              "rev_000212",
+              "rev_000267",
+              "rev_000294",
+              "rev_000300",
+              "rev_000345",
+              "rev_000351",
+              "rev_000357",
+              "rev_000400"
+            ],
+            "scores": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "operational_ids": []
+          },
+          {
+            "id": "q29",
+            "eligible_count": 100,
+            "ranked_ids": [
+              "rev_000294",
+              "rev_000604",
+              "rev_000752",
+              "rev_000813",
+              "rev_001076",
+              "rev_001661",
+              "rev_002335",
+              "rev_000212"
+            ],
+            "scores": [
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              1
+            ],
+            "operational_ids": [
+              "rev_000294",
+              "rev_000604",
+              "rev_000752",
+              "rev_000813",
+              "rev_001076",
+              "rev_001661",
+              "rev_002335",
+              "rev_000212"
+            ]
+          },
+          {
+            "id": "q30",
+            "eligible_count": 100,
+            "ranked_ids": [
+              "rev_000799",
+              "rev_002257",
+              "rev_000212",
+              "rev_000267",
+              "rev_000294",
+              "rev_000300",
+              "rev_000345",
+              "rev_000351"
+            ],
+            "scores": [
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "operational_ids": [
+              "rev_000799",
+              "rev_002257"
+            ]
+          }
+        ]
+      },
+      "com_filtro": {
+        "ranking": {
+          "1": {
+            "hit_at_k": 0.3333333333333333,
+            "recall_capped_at_k": 0.3333333333333333,
+            "recall_classic_at_k": 0.21493055555555557,
+            "mrr_at_k": 0.3333333333333333,
+            "precision_at_k": 0.3333333333333333,
+            "answerable_abstention_rate": 0,
+            "correct_abstention_rate": 0.3333333333333333,
+            "false_evidence_rate": 0.6666666666666666
+          },
+          "3": {
+            "hit_at_k": 0.7083333333333334,
+            "recall_capped_at_k": 0.5902777777777778,
+            "recall_classic_at_k": 0.5385416666666667,
+            "mrr_at_k": 0.5069444444444444,
+            "precision_at_k": 0.3472222222222222,
+            "answerable_abstention_rate": 0,
+            "correct_abstention_rate": 0.3333333333333333,
+            "false_evidence_rate": 0.6666666666666666
+          },
+          "5": {
+            "hit_at_k": 0.8333333333333334,
+            "recall_capped_at_k": 0.6777777777777778,
+            "recall_classic_at_k": 0.6684027777777778,
+            "mrr_at_k": 0.5340277777777778,
+            "precision_at_k": 0.26666666666666666,
+            "answerable_abstention_rate": 0,
+            "correct_abstention_rate": 0.3333333333333333,
+            "false_evidence_rate": 0.6666666666666666
+          },
+          "8": {
+            "hit_at_k": 0.9583333333333334,
+            "recall_capped_at_k": 0.8256944444444444,
+            "recall_classic_at_k": 0.8256944444444444,
+            "mrr_at_k": 0.5548611111111111,
+            "precision_at_k": 0.22395833333333334,
+            "answerable_abstention_rate": 0,
+            "correct_abstention_rate": 0.3333333333333333,
+            "false_evidence_rate": 0.6666666666666666
+          }
+        },
+        "operational": {
+          "1": {
+            "hit_at_k": 0.20833333333333334,
+            "recall_capped_at_k": 0.20833333333333334,
+            "recall_classic_at_k": 0.12638888888888888,
+            "mrr_at_k": 0.20833333333333334,
+            "precision_at_k": 0.20833333333333334,
+            "answerable_abstention_rate": 0.3333333333333333,
+            "correct_abstention_rate": 0.5,
+            "false_evidence_rate": 0.5
+          },
+          "3": {
+            "hit_at_k": 0.5,
+            "recall_capped_at_k": 0.3958333333333333,
+            "recall_classic_at_k": 0.38125,
+            "mrr_at_k": 0.3402777777777778,
+            "precision_at_k": 0.2361111111111111,
+            "answerable_abstention_rate": 0.3333333333333333,
+            "correct_abstention_rate": 0.5,
+            "false_evidence_rate": 0.5
+          },
+          "5": {
+            "hit_at_k": 0.5416666666666666,
+            "recall_capped_at_k": 0.46805555555555556,
+            "recall_classic_at_k": 0.46805555555555556,
+            "mrr_at_k": 0.3506944444444444,
+            "precision_at_k": 0.17500000000000002,
+            "answerable_abstention_rate": 0.3333333333333333,
+            "correct_abstention_rate": 0.5,
+            "false_evidence_rate": 0.5
+          },
+          "8": {
+            "hit_at_k": 0.5416666666666666,
+            "recall_capped_at_k": 0.46805555555555556,
+            "recall_classic_at_k": 0.46805555555555556,
+            "mrr_at_k": 0.3506944444444444,
+            "precision_at_k": 0.109375,
+            "answerable_abstention_rate": 0.3333333333333333,
+            "correct_abstention_rate": 0.5,
+            "false_evidence_rate": 0.5
+          }
+        },
+        "questions": [
+          {
+            "id": "q01",
+            "eligible_count": 13,
+            "ranked_ids": [
+              "rev_000294",
+              "rev_000549",
+              "rev_000650",
+              "rev_001661",
+              "rev_000604",
+              "rev_000673",
+              "rev_000752",
+              "rev_000797"
+            ],
+            "scores": [
+              1,
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            "operational_ids": [
+              "rev_000294",
+              "rev_000549",
+              "rev_000650",
+              "rev_001661"
+            ]
+          },
+          {
+            "id": "q02",
+            "eligible_count": 13,
+            "ranked_ids": [
+              "rev_000799",
+              "rev_002257",
+              "rev_000212",
+              "rev_000796",
+              "rev_001291",
+              "rev_001533",
+              "rev_001685",
+              "rev_001895"
+            ],
+            "scores": [
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "operational_ids": [
+              "rev_000799",
+              "rev_002257"
+            ]
+          },
+          {
+            "id": "q03",
+            "eligible_count": 13,
+            "ranked_ids": [
+              "rev_002562",
+              "rev_000802",
+              "rev_000908",
+              "rev_001010",
+              "rev_001339",
+              "rev_001629",
+              "rev_001729",
+              "rev_001998"
+            ],
+            "scores": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "operational_ids": [
+              "rev_002562"
+            ]
+          },
+          {
+            "id": "q04",
+            "eligible_count": 13,
+            "ranked_ids": [
+              "rev_000345",
+              "rev_000400",
+              "rev_000645",
+              "rev_000934",
+              "rev_001829",
+              "rev_002598",
+              "rev_000864",
+              "rev_001212"
+            ],
+            "scores": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              0
+            ],
+            "operational_ids": [
+              "rev_000345",
+              "rev_000400",
+              "rev_000645",
+              "rev_000934",
+              "rev_001829",
+              "rev_002598"
+            ]
+          },
+          {
+            "id": "q05",
+            "eligible_count": 12,
+            "ranked_ids": [
+              "rev_001123",
+              "rev_002058",
+              "rev_000267",
+              "rev_000613",
+              "rev_001190",
+              "rev_001265",
+              "rev_001478",
+              "rev_001551"
+            ],
+            "scores": [
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "operational_ids": [
+              "rev_001123",
+              "rev_002058"
+            ]
+          },
+          {
+            "id": "q06",
+            "eligible_count": 12,
+            "ranked_ids": [
+              "rev_000300",
+              "rev_000403",
+              "rev_000407",
+              "rev_000632",
+              "rev_000926",
+              "rev_001051",
+              "rev_001760",
+              "rev_002234"
+            ],
+            "scores": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "operational_ids": []
+          },
+          {
+            "id": "q07",
+            "eligible_count": 12,
+            "ranked_ids": [
+              "rev_001172",
+              "rev_001416",
+              "rev_000351",
+              "rev_000679",
+              "rev_000708",
+              "rev_001027",
+              "rev_001286",
+              "rev_001715"
+            ],
+            "scores": [
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "operational_ids": [
+              "rev_001172",
+              "rev_001416"
+            ]
+          },
+          {
+            "id": "q08",
+            "eligible_count": 12,
+            "ranked_ids": [
+              "rev_000759",
+              "rev_002176",
+              "rev_002490",
+              "rev_002833",
+              "rev_000357",
+              "rev_000445",
+              "rev_002121",
+              "rev_002127"
+            ],
+            "scores": [
+              1,
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            "operational_ids": [
+              "rev_000759",
+              "rev_002176",
+              "rev_002490",
+              "rev_002833"
+            ]
+          },
+          {
+            "id": "q09",
+            "eligible_count": 2,
+            "ranked_ids": [
+              "rev_000212",
+              "rev_002089"
+            ],
+            "scores": [
+              0,
+              0
+            ],
+            "operational_ids": []
+          },
+          {
+            "id": "q10",
+            "eligible_count": 1,
+            "ranked_ids": [
+              "rev_002237"
+            ],
+            "scores": [
+              0
+            ],
+            "operational_ids": []
+          },
+          {
+            "id": "q11",
+            "eligible_count": 2,
+            "ranked_ids": [
+              "rev_000796",
+              "rev_002289"
+            ],
+            "scores": [
+              0,
+              0
+            ],
+            "operational_ids": []
+          },
+          {
+            "id": "q12",
+            "eligible_count": 2,
+            "ranked_ids": [
+              "rev_002675",
+              "rev_001339"
+            ],
+            "scores": [
+              1,
+              0
+            ],
+            "operational_ids": [
+              "rev_002675"
+            ]
+          },
+          {
+            "id": "q13",
+            "eligible_count": 3,
+            "ranked_ids": [
+              "rev_002234",
+              "rev_000407",
+              "rev_002800"
+            ],
+            "scores": [
+              1,
+              0,
+              0
+            ],
+            "operational_ids": [
+              "rev_002234"
+            ]
+          },
+          {
+            "id": "q14",
+            "eligible_count": 3,
+            "ranked_ids": [
+              "rev_000813",
+              "rev_001076",
+              "rev_002549"
+            ],
+            "scores": [
+              3,
+              3,
+              2
+            ],
+            "operational_ids": [
+              "rev_000813",
+              "rev_001076",
+              "rev_002549"
+            ]
+          },
+          {
+            "id": "q15",
+            "eligible_count": 4,
+            "ranked_ids": [
+              "rev_001291",
+              "rev_001685",
+              "rev_002089",
+              "rev_000796"
+            ],
+            "scores": [
+              3,
+              3,
+              3,
+              0
+            ],
+            "operational_ids": [
+              "rev_001291",
+              "rev_001685",
+              "rev_002089"
+            ]
+          },
+          {
+            "id": "q16",
+            "eligible_count": 5,
+            "ranked_ids": [
+              "rev_002141",
+              "rev_001010",
+              "rev_001998",
+              "rev_002494",
+              "rev_002675"
+            ],
+            "scores": [
+              5,
+              4,
+              3,
+              3,
+              3
+            ],
+            "operational_ids": [
+              "rev_002141",
+              "rev_001010",
+              "rev_001998",
+              "rev_002494",
+              "rev_002675"
+            ]
+          },
+          {
+            "id": "q17",
+            "eligible_count": 8,
+            "ranked_ids": [
+              "rev_000345",
+              "rev_000645",
+              "rev_000934",
+              "rev_000864",
+              "rev_001552",
+              "rev_001916",
+              "rev_002015",
+              "rev_002237"
+            ],
+            "scores": [
+              3,
+              3,
+              3,
+              2,
+              2,
+              2,
+              2,
+              0
+            ],
+            "operational_ids": [
+              "rev_000345",
+              "rev_000645",
+              "rev_000934",
+              "rev_000864",
+              "rev_001552",
+              "rev_001916",
+              "rev_002015"
+            ]
+          },
+          {
+            "id": "q18",
+            "eligible_count": 7,
+            "ranked_ids": [
+              "rev_001190",
+              "rev_002959",
+              "rev_000267",
+              "rev_000613",
+              "rev_001551",
+              "rev_002302",
+              "rev_002693"
+            ],
+            "scores": [
+              3,
+              3,
+              2,
+              2,
+              2,
+              2,
+              2
+            ],
+            "operational_ids": [
+              "rev_001190",
+              "rev_002959",
+              "rev_000267",
+              "rev_000613",
+              "rev_001551",
+              "rev_002302",
+              "rev_002693"
+            ]
+          },
+          {
+            "id": "q19",
+            "eligible_count": 13,
+            "ranked_ids": [
+              "rev_000294",
+              "rev_000549",
+              "rev_000604",
+              "rev_000650",
+              "rev_000673",
+              "rev_000752",
+              "rev_000797",
+              "rev_000813"
+            ],
+            "scores": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "operational_ids": []
+          },
+          {
+            "id": "q20",
+            "eligible_count": 13,
+            "ranked_ids": [
+              "rev_000802",
+              "rev_000908",
+              "rev_001010",
+              "rev_001339",
+              "rev_001629",
+              "rev_001729",
+              "rev_001998",
+              "rev_002141"
+            ],
+            "scores": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "operational_ids": []
+          },
+          {
+            "id": "q21",
+            "eligible_count": 12,
+            "ranked_ids": [
+              "rev_000357",
+              "rev_000445",
+              "rev_000759",
+              "rev_002121",
+              "rev_002127",
+              "rev_002176",
+              "rev_002355",
+              "rev_002363"
+            ],
+            "scores": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "operational_ids": []
+          },
+          {
+            "id": "q22",
+            "eligible_count": 12,
+            "ranked_ids": [
+              "rev_000300",
+              "rev_000403",
+              "rev_000407",
+              "rev_000632",
+              "rev_000926",
+              "rev_001051",
+              "rev_001760",
+              "rev_002234"
+            ],
+            "scores": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "operational_ids": []
+          },
+          {
+            "id": "q23",
+            "eligible_count": 12,
+            "ranked_ids": [
+              "rev_001123",
+              "rev_002058",
+              "rev_000267",
+              "rev_000613",
+              "rev_001190",
+              "rev_001265",
+              "rev_001478",
+              "rev_001551"
+            ],
+            "scores": [
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "operational_ids": [
+              "rev_001123",
+              "rev_002058"
+            ]
+          },
+          {
+            "id": "q24",
+            "eligible_count": 12,
+            "ranked_ids": [
+              "rev_002021",
+              "rev_000351",
+              "rev_000679",
+              "rev_000708",
+              "rev_001027",
+              "rev_001172",
+              "rev_001286",
+              "rev_001416"
+            ],
+            "scores": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "operational_ids": [
+              "rev_002021"
+            ]
+          },
+          {
+            "id": "q25",
+            "eligible_count": 13,
+            "ranked_ids": [
+              "rev_000799",
+              "rev_002257",
+              "rev_000212",
+              "rev_000796",
+              "rev_001291",
+              "rev_001533",
+              "rev_001685",
+              "rev_001895"
+            ],
+            "scores": [
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "operational_ids": [
+              "rev_000799",
+              "rev_002257"
+            ]
+          },
+          {
+            "id": "q26",
+            "eligible_count": 13,
+            "ranked_ids": [
+              "rev_002675",
+              "rev_002759",
+              "rev_000802",
+              "rev_000908",
+              "rev_001010",
+              "rev_001339",
+              "rev_001629",
+              "rev_001729"
+            ],
+            "scores": [
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "operational_ids": [
+              "rev_002675",
+              "rev_002759"
+            ]
+          },
+          {
+            "id": "q27",
+            "eligible_count": 13,
+            "ranked_ids": [
+              "rev_000400",
+              "rev_001829",
+              "rev_000345",
+              "rev_000645",
+              "rev_000864",
+              "rev_000934",
+              "rev_001552",
+              "rev_001916"
+            ],
+            "scores": [
+              3,
+              3,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ],
+            "operational_ids": [
+              "rev_000400",
+              "rev_001829",
+              "rev_000345",
+              "rev_000645",
+              "rev_000864",
+              "rev_000934",
+              "rev_001552",
+              "rev_001916"
+            ]
+          },
+          {
+            "id": "q28",
+            "eligible_count": 12,
+            "ranked_ids": [
+              "rev_000357",
+              "rev_000445",
+              "rev_000759",
+              "rev_002121",
+              "rev_002127",
+              "rev_002176",
+              "rev_002355",
+              "rev_002363"
+            ],
+            "scores": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "operational_ids": []
+          },
+          {
+            "id": "q29",
+            "eligible_count": 0,
+            "ranked_ids": [],
+            "scores": [],
+            "operational_ids": []
+          },
+          {
+            "id": "q30",
+            "eligible_count": 0,
+            "ranked_ids": [],
+            "scores": [],
+            "operational_ids": []
+          }
+        ]
+      }
+    },
+    "random": {
+      "sem_filtro": {
+        "ranking": {
+          "1": {
+            "mean": {
+              "hit_at_k": 0.02375,
+              "recall_capped_at_k": 0.02375,
+              "recall_classic_at_k": 0.008980902777777777,
+              "mrr_at_k": 0.02375,
+              "precision_at_k": 0.02375,
+              "answerable_abstention_rate": 0,
+              "correct_abstention_rate": 0,
+              "false_evidence_rate": 1
+            },
+            "std": {
+              "hit_at_k": 0.03187159567877189,
+              "recall_capped_at_k": 0.03187159567877189,
+              "recall_classic_at_k": 0.014646015977833536,
+              "mrr_at_k": 0.03187159567877189,
+              "precision_at_k": 0.03187159567877189,
+              "answerable_abstention_rate": 0.0,
+              "correct_abstention_rate": 0.0,
+              "false_evidence_rate": 0.0
+            }
+          },
+          "3": {
+            "mean": {
+              "hit_at_k": 0.07125,
+              "recall_capped_at_k": 0.034652777777777775,
+              "recall_classic_at_k": 0.02983159722222222,
+              "mrr_at_k": 0.04388888888888889,
+              "precision_at_k": 0.024513888888888887,
+              "answerable_abstention_rate": 0,
+              "correct_abstention_rate": 0,
+              "false_evidence_rate": 1
+            },
+            "std": {
+              "hit_at_k": 0.052965856402445194,
+              "recall_capped_at_k": 0.028666259552449374,
+              "recall_classic_at_k": 0.0266334559160217,
+              "mrr_at_k": 0.03652117599826567,
+              "precision_at_k": 0.01873597726663337,
+              "answerable_abstention_rate": 0.0,
+              "correct_abstention_rate": 0.0,
+              "false_evidence_rate": 0.0
+            }
+          },
+          "5": {
+            "mean": {
+              "hit_at_k": 0.11875,
+              "recall_capped_at_k": 0.053385416666666664,
+              "recall_classic_at_k": 0.051994791666666665,
+              "mrr_at_k": 0.05465972222222222,
+              "precision_at_k": 0.024708333333333336,
+              "answerable_abstention_rate": 0,
+              "correct_abstention_rate": 0,
+              "false_evidence_rate": 1
+            },
+            "std": {
+              "hit_at_k": 0.05918280296392413,
+              "recall_capped_at_k": 0.032217203385182136,
+              "recall_classic_at_k": 0.032250870240121854,
+              "mrr_at_k": 0.03578495806033073,
+              "precision_at_k": 0.012593469978965731,
+              "answerable_abstention_rate": 0.0,
+              "correct_abstention_rate": 0.0,
+              "false_evidence_rate": 0.0
+            }
+          },
+          "8": {
+            "mean": {
+              "hit_at_k": 0.18145833333333333,
+              "recall_capped_at_k": 0.08249479166666666,
+              "recall_classic_at_k": 0.08249479166666666,
+              "mrr_at_k": 0.06381150793650793,
+              "precision_at_k": 0.02471354166666667,
+              "answerable_abstention_rate": 0,
+              "correct_abstention_rate": 0,
+              "false_evidence_rate": 1
+            },
+            "std": {
+              "hit_at_k": 0.07263606723858947,
+              "recall_capped_at_k": 0.04151037349984976,
+              "recall_classic_at_k": 0.04151037349984976,
+              "mrr_at_k": 0.03619149109690212,
+              "precision_at_k": 0.01000484772905601,
+              "answerable_abstention_rate": 0.0,
+              "correct_abstention_rate": 0.0,
+              "false_evidence_rate": 0.0
+            }
+          }
+        },
+        "operational_same_as_ranking": true,
+        "seed_42_rankings": {
+          "q01": [
+            "rev_000908",
+            "rev_001291",
+            "rev_000345",
+            "rev_001661",
+            "rev_000813",
+            "rev_001286",
+            "rev_000604",
+            "rev_002089"
+          ],
+          "q02": [
+            "rev_002933",
+            "rev_002127",
+            "rev_000673",
+            "rev_000400",
+            "rev_001027",
+            "rev_002917",
+            "rev_002476",
+            "rev_002089"
+          ],
+          "q03": [
+            "rev_001123",
+            "rev_001715",
+            "rev_000864",
+            "rev_000926",
+            "rev_002665",
+            "rev_002917",
+            "rev_000708",
+            "rev_000752"
+          ],
+          "q04": [
+            "rev_002335",
+            "rev_000802",
+            "rev_002363",
+            "rev_001895",
+            "rev_001286",
+            "rev_002684",
+            "rev_002800",
+            "rev_000650"
+          ],
+          "q05": [
+            "rev_001760",
+            "rev_001010",
+            "rev_002234",
+            "rev_000926",
+            "rev_000549",
+            "rev_000679",
+            "rev_002787",
+            "rev_002021"
+          ],
+          "q06": [
+            "rev_000604",
+            "rev_002058",
+            "rev_000400",
+            "rev_000934",
+            "rev_002693",
+            "rev_000797",
+            "rev_002494",
+            "rev_000799"
+          ],
+          "q07": [
+            "rev_000357",
+            "rev_002234",
+            "rev_001416",
+            "rev_000604",
+            "rev_002494",
+            "rev_001661",
+            "rev_002417",
+            "rev_000400"
+          ],
+          "q08": [
+            "rev_001286",
+            "rev_001212",
+            "rev_002562",
+            "rev_001265",
+            "rev_000864",
+            "rev_000679",
+            "rev_002257",
+            "rev_002298"
+          ],
+          "q09": [
+            "rev_001829",
+            "rev_000403",
+            "rev_001629",
+            "rev_002494",
+            "rev_001010",
+            "rev_002490",
+            "rev_002438",
+            "rev_002237"
+          ],
+          "q10": [
+            "rev_000294",
+            "rev_002234",
+            "rev_002438",
+            "rev_002176",
+            "rev_000212",
+            "rev_001265",
+            "rev_002089",
+            "rev_001286"
+          ],
+          "q11": [
+            "rev_001286",
+            "rev_001829",
+            "rev_001661",
+            "rev_002015",
+            "rev_002237",
+            "rev_002684",
+            "rev_002476",
+            "rev_000403"
+          ],
+          "q12": [
+            "rev_002302",
+            "rev_002363",
+            "rev_002417",
+            "rev_001685",
+            "rev_002494",
+            "rev_000357",
+            "rev_001760",
+            "rev_002787"
+          ],
+          "q13": [
+            "rev_002759",
+            "rev_002917",
+            "rev_001212",
+            "rev_000400",
+            "rev_002089",
+            "rev_002121",
+            "rev_000752",
+            "rev_002237"
+          ],
+          "q14": [
+            "rev_002058",
+            "rev_002015",
+            "rev_002302",
+            "rev_002675",
+            "rev_002549",
+            "rev_002141",
+            "rev_000604",
+            "rev_001286"
+          ],
+          "q15": [
+            "rev_001629",
+            "rev_002298",
+            "rev_000445",
+            "rev_000613",
+            "rev_002598",
+            "rev_000673",
+            "rev_002058",
+            "rev_002370"
+          ],
+          "q16": [
+            "rev_000294",
+            "rev_002141",
+            "rev_002417",
+            "rev_002438",
+            "rev_002549",
+            "rev_000679",
+            "rev_000759",
+            "rev_001339"
+          ],
+          "q17": [
+            "rev_002176",
+            "rev_002917",
+            "rev_001685",
+            "rev_002800",
+            "rev_001212",
+            "rev_002675",
+            "rev_000300",
+            "rev_001552"
+          ],
+          "q18": [
+            "rev_000673",
+            "rev_001212",
+            "rev_001027",
+            "rev_001629",
+            "rev_001190",
+            "rev_000294",
+            "rev_002675",
+            "rev_000403"
+          ],
+          "q19": [
+            "rev_000708",
+            "rev_001339",
+            "rev_002089",
+            "rev_001998",
+            "rev_002675",
+            "rev_001265",
+            "rev_001123",
+            "rev_000796"
+          ],
+          "q20": [
+            "rev_002298",
+            "rev_000445",
+            "rev_001478",
+            "rev_001552",
+            "rev_002335",
+            "rev_000752",
+            "rev_000345",
+            "rev_000673"
+          ],
+          "q21": [
+            "rev_002787",
+            "rev_002191",
+            "rev_001286",
+            "rev_000632",
+            "rev_000679",
+            "rev_001685",
+            "rev_001895",
+            "rev_000403"
+          ],
+          "q22": [
+            "rev_002933",
+            "rev_002490",
+            "rev_000212",
+            "rev_001478",
+            "rev_001998",
+            "rev_002363",
+            "rev_000267",
+            "rev_002549"
+          ],
+          "q23": [
+            "rev_000604",
+            "rev_002693",
+            "rev_000300",
+            "rev_001478",
+            "rev_002562",
+            "rev_000267",
+            "rev_002127",
+            "rev_002363"
+          ],
+          "q24": [
+            "rev_000759",
+            "rev_002289",
+            "rev_002089",
+            "rev_002476",
+            "rev_000267",
+            "rev_001552",
+            "rev_002800",
+            "rev_002980"
+          ],
+          "q25": [
+            "rev_001729",
+            "rev_000632",
+            "rev_002141",
+            "rev_000673",
+            "rev_001027",
+            "rev_002549",
+            "rev_001685",
+            "rev_000549"
+          ],
+          "q26": [
+            "rev_000752",
+            "rev_002121",
+            "rev_001212",
+            "rev_002917",
+            "rev_002058",
+            "rev_001760",
+            "rev_002490",
+            "rev_000613"
+          ],
+          "q27": [
+            "rev_002438",
+            "rev_000445",
+            "rev_001286",
+            "rev_002759",
+            "rev_001478",
+            "rev_001212",
+            "rev_000294",
+            "rev_000267"
+          ],
+          "q28": [
+            "rev_002141",
+            "rev_002370",
+            "rev_000267",
+            "rev_001076",
+            "rev_001172",
+            "rev_001291",
+            "rev_001190",
+            "rev_002917"
+          ],
+          "q29": [
+            "rev_001998",
+            "rev_000357",
+            "rev_002562",
+            "rev_001661",
+            "rev_002289",
+            "rev_000679",
+            "rev_001291",
+            "rev_001685"
+          ],
+          "q30": [
+            "rev_000679",
+            "rev_001760",
+            "rev_002800",
+            "rev_000650",
+            "rev_000908",
+            "rev_001027",
+            "rev_002142",
+            "rev_001729"
+          ]
+        }
+      },
+      "com_filtro": {
+        "ranking": {
+          "1": {
+            "mean": {
+              "hit_at_k": 0.346875,
+              "recall_capped_at_k": 0.346875,
+              "recall_classic_at_k": 0.2112361111111111,
+              "mrr_at_k": 0.346875,
+              "precision_at_k": 0.346875,
+              "answerable_abstention_rate": 0,
+              "correct_abstention_rate": 0.3333333333333333,
+              "false_evidence_rate": 0.6666666666666666
+            },
+            "std": {
+              "hit_at_k": 0.08906706859627375,
+              "recall_capped_at_k": 0.08906706859627375,
+              "recall_classic_at_k": 0.055838839816221154,
+              "mrr_at_k": 0.08906706859627375,
+              "precision_at_k": 0.08906706859627375,
+              "answerable_abstention_rate": 0.0,
+              "correct_abstention_rate": 0.0,
+              "false_evidence_rate": 0.0
+            }
+          },
+          "3": {
+            "mean": {
+              "hit_at_k": 0.705,
+              "recall_capped_at_k": 0.5205208333333333,
+              "recall_classic_at_k": 0.483328125,
+              "mrr_at_k": 0.5061805555555555,
+              "precision_at_k": 0.2980555555555555,
+              "answerable_abstention_rate": 0,
+              "correct_abstention_rate": 0.3333333333333333,
+              "false_evidence_rate": 0.6666666666666666
+            },
+            "std": {
+              "hit_at_k": 0.07328596955306885,
+              "recall_capped_at_k": 0.05705569037025617,
+              "recall_classic_at_k": 0.05443984352791568,
+              "mrr_at_k": 0.06660801094398165,
+              "precision_at_k": 0.03705601365700509,
+              "answerable_abstention_rate": 0.0,
+              "correct_abstention_rate": 0.0,
+              "false_evidence_rate": 0.0
+            }
+          },
+          "5": {
+            "mean": {
+              "hit_at_k": 0.839375,
+              "recall_capped_at_k": 0.6350729166666667,
+              "recall_classic_at_k": 0.6251666666666666,
+              "mrr_at_k": 0.5369409722222223,
+              "precision_at_k": 0.25416666666666665,
+              "answerable_abstention_rate": 0,
+              "correct_abstention_rate": 0.3333333333333333,
+              "false_evidence_rate": 0.6666666666666666
+            },
+            "std": {
+              "hit_at_k": 0.06213749036075832,
+              "recall_capped_at_k": 0.05566854817993901,
+              "recall_classic_at_k": 0.05522179430585378,
+              "mrr_at_k": 0.06119315426702056,
+              "precision_at_k": 0.02541325113662818,
+              "answerable_abstention_rate": 0.0,
+              "correct_abstention_rate": 0.0,
+              "false_evidence_rate": 0.0
+            }
+          },
+          "8": {
+            "mean": {
+              "hit_at_k": 0.9314583333333334,
+              "recall_capped_at_k": 0.7949982638888888,
+              "recall_classic_at_k": 0.7949982638888888,
+              "mrr_at_k": 0.5506996527777778,
+              "precision_at_k": 0.221640625,
+              "answerable_abstention_rate": 0,
+              "correct_abstention_rate": 0.3333333333333333,
+              "false_evidence_rate": 0.6666666666666666
+            },
+            "std": {
+              "hit_at_k": 0.04368000352945652,
+              "recall_capped_at_k": 0.05093093262096997,
+              "recall_classic_at_k": 0.05093093262096997,
+              "mrr_at_k": 0.058130074049843404,
+              "precision_at_k": 0.014346075027916076,
+              "answerable_abstention_rate": 0.0,
+              "correct_abstention_rate": 0.0,
+              "false_evidence_rate": 0.0
+            }
+          }
+        },
+        "operational_same_as_ranking": true,
+        "seed_42_rankings": {
+          "q01": [
+            "rev_000294",
+            "rev_000797",
+            "rev_001661",
+            "rev_001076",
+            "rev_000752",
+            "rev_000650",
+            "rev_000549",
+            "rev_000604"
+          ],
+          "q02": [
+            "rev_000212",
+            "rev_002089",
+            "rev_002191",
+            "rev_002289",
+            "rev_001895",
+            "rev_002257",
+            "rev_000799",
+            "rev_000796"
+          ],
+          "q03": [
+            "rev_000802",
+            "rev_001729",
+            "rev_001339",
+            "rev_001998",
+            "rev_001629",
+            "rev_002494",
+            "rev_002675",
+            "rev_002562"
+          ],
+          "q04": [
+            "rev_000864",
+            "rev_002237",
+            "rev_002015",
+            "rev_000934",
+            "rev_001916",
+            "rev_002598",
+            "rev_000345",
+            "rev_001552"
+          ],
+          "q05": [
+            "rev_001190",
+            "rev_001265",
+            "rev_001123",
+            "rev_002959",
+            "rev_000267",
+            "rev_002302",
+            "rev_002693",
+            "rev_001551"
+          ],
+          "q06": [
+            "rev_000632",
+            "rev_001051",
+            "rev_002665",
+            "rev_000926",
+            "rev_001760",
+            "rev_002234",
+            "rev_000403",
+            "rev_002933"
+          ],
+          "q07": [
+            "rev_000351",
+            "rev_001027",
+            "rev_000679",
+            "rev_001286",
+            "rev_001715",
+            "rev_002476",
+            "rev_001172",
+            "rev_002298"
+          ],
+          "q08": [
+            "rev_002490",
+            "rev_000445",
+            "rev_002363",
+            "rev_002127",
+            "rev_002121",
+            "rev_002485",
+            "rev_002833",
+            "rev_000357"
+          ],
+          "q09": [
+            "rev_000212",
+            "rev_002089"
+          ],
+          "q10": [
+            "rev_002237"
+          ],
+          "q11": [
+            "rev_002289",
+            "rev_000796"
+          ],
+          "q12": [
+            "rev_001339",
+            "rev_002675"
+          ],
+          "q13": [
+            "rev_000407",
+            "rev_002800",
+            "rev_002234"
+          ],
+          "q14": [
+            "rev_001076",
+            "rev_000813",
+            "rev_002549"
+          ],
+          "q15": [
+            "rev_000796",
+            "rev_002089",
+            "rev_001291",
+            "rev_001685"
+          ],
+          "q16": [
+            "rev_001010",
+            "rev_002141",
+            "rev_002494",
+            "rev_001998",
+            "rev_002675"
+          ],
+          "q17": [
+            "rev_000934",
+            "rev_000645",
+            "rev_001552",
+            "rev_001916",
+            "rev_000345",
+            "rev_002237",
+            "rev_000864",
+            "rev_002015"
+          ],
+          "q18": [
+            "rev_002693",
+            "rev_002302",
+            "rev_002959",
+            "rev_001551",
+            "rev_000267",
+            "rev_000613",
+            "rev_001190"
+          ],
+          "q19": [
+            "rev_000549",
+            "rev_002980",
+            "rev_000813",
+            "rev_000673",
+            "rev_000294",
+            "rev_002335",
+            "rev_001076",
+            "rev_000604"
+          ],
+          "q20": [
+            "rev_001998",
+            "rev_002675",
+            "rev_000908",
+            "rev_001629",
+            "rev_002142",
+            "rev_002494",
+            "rev_002562",
+            "rev_002759"
+          ],
+          "q21": [
+            "rev_000445",
+            "rev_002176",
+            "rev_002787",
+            "rev_002355",
+            "rev_002127",
+            "rev_000759",
+            "rev_002363",
+            "rev_000357"
+          ],
+          "q22": [
+            "rev_002933",
+            "rev_000632",
+            "rev_002800",
+            "rev_000403",
+            "rev_001760",
+            "rev_000300",
+            "rev_002665",
+            "rev_002234"
+          ],
+          "q23": [
+            "rev_002302",
+            "rev_000613",
+            "rev_001478",
+            "rev_002693",
+            "rev_002959",
+            "rev_000267",
+            "rev_001551",
+            "rev_001265"
+          ],
+          "q24": [
+            "rev_001416",
+            "rev_002298",
+            "rev_001286",
+            "rev_001715",
+            "rev_000679",
+            "rev_000708",
+            "rev_002417",
+            "rev_002476"
+          ],
+          "q25": [
+            "rev_001685",
+            "rev_001533",
+            "rev_001895",
+            "rev_001973",
+            "rev_002289",
+            "rev_000796",
+            "rev_002089",
+            "rev_002257"
+          ],
+          "q26": [
+            "rev_001629",
+            "rev_001998",
+            "rev_002562",
+            "rev_000802",
+            "rev_002759",
+            "rev_002494",
+            "rev_000908",
+            "rev_001010"
+          ],
+          "q27": [
+            "rev_000934",
+            "rev_002015",
+            "rev_000400",
+            "rev_001552",
+            "rev_002598",
+            "rev_002438",
+            "rev_000645",
+            "rev_001916"
+          ],
+          "q28": [
+            "rev_002485",
+            "rev_002127",
+            "rev_002355",
+            "rev_002490",
+            "rev_000357",
+            "rev_002121",
+            "rev_002176",
+            "rev_000759"
+          ],
+          "q29": [],
+          "q30": []
+        }
+      }
+    }
+  }
+}

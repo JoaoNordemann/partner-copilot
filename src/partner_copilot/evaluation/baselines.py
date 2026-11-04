@@ -194,35 +194,7 @@ def compare_baselines(folder: Path, embedder: Embedder) -> dict:
                 "operational": score_rankings(questions, gated),
                 "questions": details,
             }
-        repetitions = []
-        seed_example = None
-        for seed in SEEDS:
-            ranked = {}
-            for q in questions:
-                indices = sorted(eligible[q.id], key=lambda i: corpus[i].id)
-                random.Random(f"{seed}:{q.id}").shuffle(indices)
-                ranked[q.id] = [corpus[i].id for i in indices]
-            repetitions.append(score_rankings(questions, ranked))
-            if seed == SEEDS.start:
-                seed_example = {key: value[: max(KS)] for key, value in ranked.items()}
-        random_summary = {}
-        for k in map(str, KS):
-            random_summary[k] = {
-                stat: {
-                    metric: (
-                        operation(run[k][metric] for run in repetitions)
-                        if repetitions[0][k][metric] is not None
-                        else None
-                    )
-                    for metric in repetitions[0][k]
-                }
-                for stat, operation in (("mean", mean), ("std", pstdev))
-            }
-        methods["random"][mode] = {
-            "ranking": random_summary,
-            "operational_same_as_ranking": True,
-            "seed_42_rankings": seed_example,
-        }
+        methods["random"][mode] = random_baseline(questions, corpus, eligible)
     return {
         "protocol": "multi_k_v1",
         "ks": list(KS),
@@ -249,5 +221,89 @@ def compare_baselines(folder: Path, embedder: Embedder) -> dict:
                 "English model not supplied to this run; see documented local collection inventory"
             ),
         },
+        "methods": methods,
+    }
+
+
+def random_baseline(questions: list[EvalQuestion], corpus: list, eligible: dict) -> dict:
+    repetitions = []
+    seed_example = None
+    for seed in SEEDS:
+        ranked = {}
+        for q in questions:
+            indices = sorted(eligible[q.id], key=lambda i: corpus[i].id)
+            random.Random(f"{seed}:{q.id}").shuffle(indices)
+            ranked[q.id] = [corpus[i].id for i in indices]
+        repetitions.append(score_rankings(questions, ranked))
+        if seed == SEEDS.start:
+            seed_example = {key: value[: max(KS)] for key, value in ranked.items()}
+    random_summary = {}
+    for k in map(str, KS):
+        random_summary[k] = {
+            stat: {
+                metric: (
+                    operation(run[k][metric] for run in repetitions)
+                    if repetitions[0][k][metric] is not None
+                    else None
+                )
+                for metric in repetitions[0][k]
+            }
+            for stat, operation in (("mean", mean), ("std", pstdev))
+        }
+    return {
+        "ranking": random_summary,
+        "operational_same_as_ranking": True,
+        "seed_42_rankings": seed_example,
+    }
+
+
+def measure_cheap_baselines(folder: Path) -> dict:
+    """Run random and lexical retrieval without constructing any embedding model."""
+    questions, corpus, manifest = load_eval_set(folder)
+    document_terms = [tokens(review.text) for review in corpus]
+    methods = {"keyword": {}, "random": {}}
+    for mode in ("sem_filtro", "com_filtro"):
+        eligible = {
+            q.id: [
+                i
+                for i, review in enumerate(corpus)
+                if mode == "sem_filtro" or q.filtros.matches(review)
+            ]
+            for q in questions
+        }
+        ranked, gated, details = {}, {}, []
+        for q in questions:
+            query_terms = tokens(q.pergunta)
+            scores = {i: len(query_terms & document_terms[i]) for i in eligible[q.id]}
+            ordered = sorted(scores, key=lambda i: (-scores[i], corpus[i].id))
+            ranked[q.id] = [corpus[i].id for i in ordered]
+            gated[q.id] = [corpus[i].id for i in ordered if scores[i] > 0]
+            details.append(
+                {
+                    "id": q.id,
+                    "eligible_count": len(ordered),
+                    "ranked_ids": ranked[q.id][: max(KS)],
+                    "scores": [scores[i] for i in ordered[: max(KS)]],
+                    "operational_ids": gated[q.id][: max(KS)],
+                }
+            )
+        methods["keyword"][mode] = {
+            "ranking": score_rankings(questions, ranked),
+            "operational": score_rankings(questions, gated),
+            "questions": details,
+        }
+        methods["random"][mode] = random_baseline(questions, corpus, eligible)
+    return {
+        "protocol": "cheap_baselines_v1",
+        "ks": list(KS),
+        "corpus_count": len(corpus),
+        "model_loaded": False,
+        "keyword_score": "distinct token intersection",
+        "keyword_stopwords": sorted(STOPWORDS),
+        "keyword_tie_break": "ascending review ID",
+        "random_repetitions": len(SEEDS),
+        "random_seed_range": [SEEDS.start, SEEDS.stop - 1],
+        "snapshot_sha256_lf": manifest["file_sha256_lf"],
+        "annotation_status": manifest["annotation_status"],
         "methods": methods,
     }

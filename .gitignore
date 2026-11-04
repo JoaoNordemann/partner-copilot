@@ -36,3 +36,11 @@ data/eval/*
 !data/eval/corpus.jsonl
 !data/eval/relevance_audit.jsonl
 !data/eval/manifest.json
+
+!data/eval/human-v2/
+data/eval/human-v2/*
+!data/eval/human-v2/questions.jsonl
+!data/eval/human-v2/corpus.jsonl
+!data/eval/human-v2/relevance_audit.jsonl
+!data/eval/human-v2/human_review.jsonl
+!data/eval/human-v2/manifest.json

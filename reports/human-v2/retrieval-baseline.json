@@ -1,0 +1,1800 @@
+{
+  "model": "paraphrase-multilingual-MiniLM-L12-v2",
+  "k": 8,
+  "min_score": 0.25,
+  "corpus_count": 100,
+  "snapshot_sha256_lf": {
+    "questions.jsonl": "a063cf435ce9de75e4ec4d620841823519fab4d9c40ab6c057dfe3cc41b5aed2",
+    "corpus.jsonl": "74f04a4bf0407de3a4302f9a869dbeadde6541bd9fa56bb74e5e2fe0a832c95f",
+    "relevance_audit.jsonl": "a18f13fe9f79a8b2390ffd331134ac3f754aa66a85a70f7eb73ae5bf1d2ded10",
+    "human_review.jsonl": "7789de26f925a4a473586b0ef1688b647aad181e1de46314b34e32e143b4eb03"
+  },
+  "annotation_status": "partially_assisted_human_reviewed_query_judgments_gold_aspects_unchanged",
+  "purpose": "development_and_abstention_calibration_not_held_out_test",
+  "modes": {
+    "sem_filtro": {
+      "summary": {
+        "questions": 30,
+        "answerable_questions": 24,
+        "unanswerable_questions": 6,
+        "recall_at_k": 0.3347222222222222,
+        "mrr_at_k": 0.2628968253968254,
+        "answerable_abstention_rate": 0,
+        "correct_abstention_rate": 0,
+        "false_answer_rate": 1
+      },
+      "per_type": {
+        "item": {
+          "questions": 5,
+          "answerable_questions": 5,
+          "unanswerable_questions": 0,
+          "recall_at_k": 0.5,
+          "mrr_at_k": 0.5,
+          "answerable_abstention_rate": 0,
+          "correct_abstention_rate": null,
+          "false_answer_rate": null
+        },
+        "parafrase": {
+          "questions": 6,
+          "answerable_questions": 6,
+          "unanswerable_questions": 0,
+          "recall_at_k": 0.1111111111111111,
+          "mrr_at_k": 0.08333333333333333,
+          "answerable_abstention_rate": 0,
+          "correct_abstention_rate": null,
+          "false_answer_rate": null
+        },
+        "restaurante_aspecto": {
+          "questions": 8,
+          "answerable_questions": 8,
+          "unanswerable_questions": 0,
+          "recall_at_k": 0.35833333333333334,
+          "mrr_at_k": 0.3541666666666667,
+          "answerable_abstention_rate": 0,
+          "correct_abstention_rate": null,
+          "false_answer_rate": null
+        },
+        "sem_resposta": {
+          "questions": 6,
+          "answerable_questions": 0,
+          "unanswerable_questions": 6,
+          "recall_at_k": null,
+          "mrr_at_k": null,
+          "answerable_abstention_rate": null,
+          "correct_abstention_rate": 0,
+          "false_answer_rate": 1
+        },
+        "temporal": {
+          "questions": 5,
+          "answerable_questions": 5,
+          "unanswerable_questions": 0,
+          "recall_at_k": 0.4,
+          "mrr_at_k": 0.09523809523809523,
+          "answerable_abstention_rate": 0,
+          "correct_abstention_rate": null,
+          "false_answer_rate": null
+        }
+      },
+      "questions": [
+        {
+          "id": "q01",
+          "tipo": "restaurante_aspecto",
+          "deve_abster": false,
+          "returned_ids": [
+            "rev_000294",
+            "rev_002980",
+            "rev_002549",
+            "rev_000673",
+            "rev_000650",
+            "rev_001661",
+            "rev_001076",
+            "rev_000797"
+          ],
+          "scores": [
+            0.575579047203064,
+            0.5520856380462646,
+            0.5466112494468689,
+            0.5437333583831787,
+            0.5430165529251099,
+            0.5420664548873901,
+            0.5323131084442139,
+            0.5252994894981384
+          ],
+          "relevant_ids": [
+            "rev_001661"
+          ],
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 0.16666666666666666
+        },
+        {
+          "id": "q02",
+          "tipo": "restaurante_aspecto",
+          "deve_abster": false,
+          "returned_ids": [
+            "rev_002257",
+            "rev_000799",
+            "rev_002759",
+            "rev_002417",
+            "rev_002438",
+            "rev_001715",
+            "rev_002549",
+            "rev_000934"
+          ],
+          "scores": [
+            0.5647338628768921,
+            0.4884869456291199,
+            0.4623441696166992,
+            0.44657284021377563,
+            0.44275617599487305,
+            0.4424997568130493,
+            0.434994637966156,
+            0.42226529121398926
+          ],
+          "relevant_ids": [
+            "rev_002257"
+          ],
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0
+        },
+        {
+          "id": "q03",
+          "tipo": "restaurante_aspecto",
+          "deve_abster": false,
+          "returned_ids": [
+            "rev_000604",
+            "rev_002833",
+            "rev_001051",
+            "rev_002562",
+            "rev_002234",
+            "rev_000400",
+            "rev_001661",
+            "rev_002121"
+          ],
+          "scores": [
+            0.37506335973739624,
+            0.3677680492401123,
+            0.34934675693511963,
+            0.3372347354888916,
+            0.335019588470459,
+            0.32351160049438477,
+            0.3228336572647095,
+            0.3182530403137207
+          ],
+          "relevant_ids": [
+            "rev_001339",
+            "rev_001629"
+          ],
+          "recall_at_k": 0.0,
+          "reciprocal_rank": 0.0
+        },
+        {
+          "id": "q04",
+          "tipo": "restaurante_aspecto",
+          "deve_abster": false,
+          "returned_ids": [
+            "rev_001661",
+            "rev_000300",
+            "rev_001416",
+            "rev_002485",
+            "rev_002191",
+            "rev_002127",
+            "rev_000679",
+            "rev_002980"
+          ],
+          "scores": [
+            0.6363357901573181,
+            0.6144037246704102,
+            0.576950192451477,
+            0.5635465383529663,
+            0.5532877445220947,
+            0.5450047254562378,
+            0.5408119559288025,
+            0.5391929745674133
+          ],
+          "relevant_ids": [
+            "rev_000400",
+            "rev_000934",
+            "rev_001212",
+            "rev_001552"
+          ],
+          "recall_at_k": 0.0,
+          "reciprocal_rank": 0.0
+        },
+        {
+          "id": "q05",
+          "tipo": "restaurante_aspecto",
+          "deve_abster": false,
+          "returned_ids": [
+            "rev_001123",
+            "rev_002058",
+            "rev_002800",
+            "rev_002833"
+          ],
+          "scores": [
+            0.3475527763366699,
+            0.2723767161369324,
+            0.27163630723953247,
+            0.2679668068885803
+          ],
+          "relevant_ids": [
+            "rev_001123",
+            "rev_002302",
+            "rev_002693"
+          ],
+          "recall_at_k": 0.3333333333333333,
+          "reciprocal_rank": 1.0
+        },
+        {
+          "id": "q06",
+          "tipo": "restaurante_aspecto",
+          "deve_abster": false,
+          "returned_ids": [
+            "rev_000604",
+            "rev_002234",
+            "rev_000403",
+            "rev_002833",
+            "rev_000400",
+            "rev_002759",
+            "rev_001715",
+            "rev_002335"
+          ],
+          "scores": [
+            0.5335549116134644,
+            0.48845934867858887,
+            0.4817150831222534,
+            0.47565674781799316,
+            0.4734209179878235,
+            0.465697705745697,
+            0.4652792811393738,
+            0.4575154781341553
+          ],
+          "relevant_ids": [
+            "rev_001051",
+            "rev_001760",
+            "rev_002684"
+          ],
+          "recall_at_k": 0.0,
+          "reciprocal_rank": 0.0
+        },
+        {
+          "id": "q07",
+          "tipo": "restaurante_aspecto",
+          "deve_abster": false,
+          "returned_ids": [
+            "rev_002980",
+            "rev_000300",
+            "rev_002417",
+            "rev_002800",
+            "rev_000357",
+            "rev_001661",
+            "rev_002257",
+            "rev_000604"
+          ],
+          "scores": [
+            0.5123707056045532,
+            0.5108152627944946,
+            0.484006404876709,
+            0.4704453945159912,
+            0.46727681159973145,
+            0.4667106866836548,
+            0.44507426023483276,
+            0.43966180086135864
+          ],
+          "relevant_ids": [
+            "rev_000351",
+            "rev_001172",
+            "rev_001416",
+            "rev_002021",
+            "rev_002417"
+          ],
+          "recall_at_k": 0.2,
+          "reciprocal_rank": 0.3333333333333333
+        },
+        {
+          "id": "q08",
+          "tipo": "restaurante_aspecto",
+          "deve_abster": false,
+          "returned_ids": [
+            "rev_000407",
+            "rev_001212",
+            "rev_002833",
+            "rev_001172",
+            "rev_001715",
+            "rev_001998",
+            "rev_002021",
+            "rev_001123"
+          ],
+          "scores": [
+            0.4481801986694336,
+            0.3513728380203247,
+            0.35044920444488525,
+            0.3430403470993042,
+            0.3206382989883423,
+            0.31841617822647095,
+            0.30955809354782104,
+            0.28612542152404785
+          ],
+          "relevant_ids": [
+            "rev_002176",
+            "rev_002490",
+            "rev_002833"
+          ],
+          "recall_at_k": 0.3333333333333333,
+          "reciprocal_rank": 0.3333333333333333
+        },
+        {
+          "id": "q09",
+          "tipo": "temporal",
+          "deve_abster": false,
+          "returned_ids": [
+            "rev_002234",
+            "rev_002675",
+            "rev_002257",
+            "rev_002476",
+            "rev_001552",
+            "rev_000400",
+            "rev_001027",
+            "rev_000908"
+          ],
+          "scores": [
+            0.42851322889328003,
+            0.41287147998809814,
+            0.4126211404800415,
+            0.4107477068901062,
+            0.401653528213501,
+            0.40016984939575195,
+            0.3942333459854126,
+            0.37539142370224
+          ],
+          "relevant_ids": [
+            "rev_000212"
+          ],
+          "recall_at_k": 0.0,
+          "reciprocal_rank": 0.0
+        },
+        {
+          "id": "q10",
+          "tipo": "temporal",
+          "deve_abster": false,
+          "returned_ids": [
+            "rev_002675",
+            "rev_001552",
+            "rev_002015",
+            "rev_002370",
+            "rev_000357",
+            "rev_002058",
+            "rev_002237",
+            "rev_001973"
+          ],
+          "scores": [
+            0.36779314279556274,
+            0.3586270809173584,
+            0.34732919931411743,
+            0.32065337896347046,
+            0.31936216354370117,
+            0.31360357999801636,
+            0.3093187212944031,
+            0.2980917692184448
+          ],
+          "relevant_ids": [
+            "rev_002237"
+          ],
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 0.14285714285714285
+        },
+        {
+          "id": "q11",
+          "tipo": "temporal",
+          "deve_abster": false,
+          "returned_ids": [
+            "rev_001027",
+            "rev_002675",
+            "rev_002234",
+            "rev_001629",
+            "rev_000400",
+            "rev_002257",
+            "rev_000908",
+            "rev_002598"
+          ],
+          "scores": [
+            0.45508867502212524,
+            0.44711560010910034,
+            0.4426236152648926,
+            0.43046319484710693,
+            0.42723751068115234,
+            0.42694932222366333,
+            0.42487818002700806,
+            0.4186716675758362
+          ],
+          "relevant_ids": [
+            "rev_002289"
+          ],
+          "recall_at_k": 0.0,
+          "reciprocal_rank": 0.0
+        },
+        {
+          "id": "q12",
+          "tipo": "temporal",
+          "deve_abster": false,
+          "returned_ids": [
+            "rev_002142",
+            "rev_001027",
+            "rev_002675",
+            "rev_002476",
+            "rev_002298",
+            "rev_002598",
+            "rev_002234",
+            "rev_000400"
+          ],
+          "scores": [
+            0.40575361251831055,
+            0.3944298028945923,
+            0.39423656463623047,
+            0.3694226145744324,
+            0.3665476441383362,
+            0.36569488048553467,
+            0.3589574098587036,
+            0.351043701171875
+          ],
+          "relevant_ids": [
+            "rev_002675"
+          ],
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 0.3333333333333333
+        },
+        {
+          "id": "q13",
+          "tipo": "temporal",
+          "deve_abster": false,
+          "returned_ids": [
+            "rev_002675",
+            "rev_000400",
+            "rev_002058"
+          ],
+          "scores": [
+            0.2650407552719116,
+            0.25344061851501465,
+            0.25091493129730225
+          ],
+          "relevant_ids": [
+            "rev_002234"
+          ],
+          "recall_at_k": 0.0,
+          "reciprocal_rank": 0.0
+        },
+        {
+          "id": "q14",
+          "tipo": "item",
+          "deve_abster": false,
+          "returned_ids": [
+            "rev_000294",
+            "rev_000604",
+            "rev_002980",
+            "rev_001076",
+            "rev_000673",
+            "rev_000797",
+            "rev_001661",
+            "rev_002335"
+          ],
+          "scores": [
+            0.704664409160614,
+            0.6836369037628174,
+            0.6758219003677368,
+            0.6744610071182251,
+            0.6473506689071655,
+            0.6449594497680664,
+            0.6190910339355469,
+            0.5930461883544922
+          ],
+          "relevant_ids": [
+            "rev_000813",
+            "rev_001076"
+          ],
+          "recall_at_k": 0.5,
+          "reciprocal_rank": 0.25
+        },
+        {
+          "id": "q15",
+          "tipo": "item",
+          "deve_abster": false,
+          "returned_ids": [
+            "rev_002257",
+            "rev_001416",
+            "rev_000300",
+            "rev_001685",
+            "rev_000679",
+            "rev_002800",
+            "rev_000799",
+            "rev_000400"
+          ],
+          "scores": [
+            0.7230305075645447,
+            0.6562349796295166,
+            0.6273601651191711,
+            0.5832892060279846,
+            0.5777192115783691,
+            0.5759769678115845,
+            0.5737773180007935,
+            0.5736974477767944
+          ],
+          "relevant_ids": [
+            "rev_001685",
+            "rev_002089"
+          ],
+          "recall_at_k": 0.5,
+          "reciprocal_rank": 0.25
+        },
+        {
+          "id": "q16",
+          "tipo": "item",
+          "deve_abster": false,
+          "returned_ids": [
+            "rev_001010",
+            "rev_002257",
+            "rev_000679",
+            "rev_001416",
+            "rev_000345",
+            "rev_001339",
+            "rev_002598",
+            "rev_000300"
+          ],
+          "scores": [
+            0.5854532718658447,
+            0.538599967956543,
+            0.5364671945571899,
+            0.5353567600250244,
+            0.5228756070137024,
+            0.5056453347206116,
+            0.5022528767585754,
+            0.49851661920547485
+          ],
+          "relevant_ids": [
+            "rev_001998"
+          ],
+          "recall_at_k": 0.0,
+          "reciprocal_rank": 0.0
+        },
+        {
+          "id": "q17",
+          "tipo": "item",
+          "deve_abster": false,
+          "returned_ids": [
+            "rev_000934",
+            "rev_000345",
+            "rev_000357",
+            "rev_002015",
+            "rev_001760",
+            "rev_002800",
+            "rev_002980",
+            "rev_000300"
+          ],
+          "scores": [
+            0.3998234272003174,
+            0.36239296197891235,
+            0.3534959554672241,
+            0.3507598042488098,
+            0.34002256393432617,
+            0.33605778217315674,
+            0.33554011583328247,
+            0.3340359926223755
+          ],
+          "relevant_ids": [
+            "rev_000934",
+            "rev_001552"
+          ],
+          "recall_at_k": 0.5,
+          "reciprocal_rank": 1.0
+        },
+        {
+          "id": "q18",
+          "tipo": "item",
+          "deve_abster": false,
+          "returned_ids": [
+            "rev_000267",
+            "rev_002302",
+            "rev_001190",
+            "rev_001551",
+            "rev_002959",
+            "rev_000613",
+            "rev_002693",
+            "rev_002417"
+          ],
+          "scores": [
+            0.6689848899841309,
+            0.6327997446060181,
+            0.6222329139709473,
+            0.5911955237388611,
+            0.5253449082374573,
+            0.51366126537323,
+            0.4875526428222656,
+            0.44282984733581543
+          ],
+          "relevant_ids": [
+            "rev_000267",
+            "rev_002959"
+          ],
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0
+        },
+        {
+          "id": "q19",
+          "tipo": "parafrase",
+          "deve_abster": false,
+          "returned_ids": [
+            "rev_000604",
+            "rev_001661",
+            "rev_001076",
+            "rev_000673",
+            "rev_000752",
+            "rev_002234",
+            "rev_000797",
+            "rev_002335"
+          ],
+          "scores": [
+            0.672990620136261,
+            0.6312263607978821,
+            0.5862710475921631,
+            0.5722775459289551,
+            0.5690838098526001,
+            0.5673477053642273,
+            0.5612680912017822,
+            0.5536254048347473
+          ],
+          "relevant_ids": [
+            "rev_000673",
+            "rev_000813",
+            "rev_001661"
+          ],
+          "recall_at_k": 0.6666666666666666,
+          "reciprocal_rank": 0.5
+        },
+        {
+          "id": "q20",
+          "tipo": "parafrase",
+          "deve_abster": false,
+          "returned_ids": [
+            "rev_002438",
+            "rev_000934",
+            "rev_000604",
+            "rev_002234",
+            "rev_002476",
+            "rev_001416",
+            "rev_001552",
+            "rev_002598"
+          ],
+          "scores": [
+            0.3819460868835449,
+            0.3717745542526245,
+            0.36797475814819336,
+            0.36138999462127686,
+            0.3543221950531006,
+            0.3525862693786621,
+            0.34896862506866455,
+            0.347403883934021
+          ],
+          "relevant_ids": [
+            "rev_000802",
+            "rev_000908",
+            "rev_001010",
+            "rev_001998",
+            "rev_002142",
+            "rev_002494",
+            "rev_002562",
+            "rev_002675"
+          ],
+          "recall_at_k": 0.0,
+          "reciprocal_rank": 0.0
+        },
+        {
+          "id": "q21",
+          "tipo": "parafrase",
+          "deve_abster": false,
+          "returned_ids": [
+            "rev_001533",
+            "rev_000632",
+            "rev_001051",
+            "rev_001123",
+            "rev_002015",
+            "rev_001998",
+            "rev_002675",
+            "rev_000802"
+          ],
+          "scores": [
+            0.4225245714187622,
+            0.41483622789382935,
+            0.41092830896377563,
+            0.3883250951766968,
+            0.36552971601486206,
+            0.35549652576446533,
+            0.3478659987449646,
+            0.3453727960586548
+          ],
+          "relevant_ids": [
+            "rev_000445",
+            "rev_002127",
+            "rev_002355",
+            "rev_002363",
+            "rev_002485"
+          ],
+          "recall_at_k": 0.0,
+          "reciprocal_rank": 0.0
+        },
+        {
+          "id": "q22",
+          "tipo": "parafrase",
+          "deve_abster": false,
+          "returned_ids": [
+            "rev_000300",
+            "rev_001661",
+            "rev_002257",
+            "rev_000400",
+            "rev_001416",
+            "rev_001685",
+            "rev_002476",
+            "rev_002485"
+          ],
+          "scores": [
+            0.533312976360321,
+            0.5254788398742676,
+            0.5248973369598389,
+            0.5228956937789917,
+            0.51835036277771,
+            0.5040433406829834,
+            0.498712420463562,
+            0.49150019884109497
+          ],
+          "relevant_ids": [
+            "rev_001051",
+            "rev_002234",
+            "rev_002684",
+            "rev_002800"
+          ],
+          "recall_at_k": 0.0,
+          "reciprocal_rank": 0.0
+        },
+        {
+          "id": "q23",
+          "tipo": "parafrase",
+          "deve_abster": false,
+          "returned_ids": [
+            "rev_002015",
+            "rev_000934",
+            "rev_002675",
+            "rev_002417",
+            "rev_002058",
+            "rev_001552",
+            "rev_002438",
+            "rev_000645"
+          ],
+          "scores": [
+            0.45141518115997314,
+            0.40739524364471436,
+            0.39656829833984375,
+            0.3961372375488281,
+            0.39558011293411255,
+            0.38663285970687866,
+            0.3778386116027832,
+            0.37757062911987305
+          ],
+          "relevant_ids": [
+            "rev_001265"
+          ],
+          "recall_at_k": 0.0,
+          "reciprocal_rank": 0.0
+        },
+        {
+          "id": "q24",
+          "tipo": "parafrase",
+          "deve_abster": false,
+          "returned_ids": [
+            "rev_002417",
+            "rev_000796",
+            "rev_002933",
+            "rev_001998",
+            "rev_002598",
+            "rev_000407",
+            "rev_002675",
+            "rev_000797"
+          ],
+          "scores": [
+            0.49562937021255493,
+            0.4536694884300232,
+            0.4416503310203552,
+            0.43272876739501953,
+            0.43033337593078613,
+            0.4222111701965332,
+            0.4179234504699707,
+            0.4058573842048645
+          ],
+          "relevant_ids": [
+            "rev_001715"
+          ],
+          "recall_at_k": 0.0,
+          "reciprocal_rank": 0.0
+        },
+        {
+          "id": "q25",
+          "tipo": "sem_resposta",
+          "deve_abster": true,
+          "returned_ids": [
+            "rev_002257",
+            "rev_002121",
+            "rev_000300",
+            "rev_001212",
+            "rev_002289",
+            "rev_002980",
+            "rev_000799",
+            "rev_001715"
+          ],
+          "scores": [
+            0.5842241644859314,
+            0.47640591859817505,
+            0.4700844883918762,
+            0.43925464153289795,
+            0.42366355657577515,
+            0.42004621028900146,
+            0.41823428869247437,
+            0.41806429624557495
+          ],
+          "relevant_ids": [],
+          "recall_at_k": null,
+          "reciprocal_rank": null
+        },
+        {
+          "id": "q26",
+          "tipo": "sem_resposta",
+          "deve_abster": true,
+          "returned_ids": [
+            "rev_002933",
+            "rev_000797",
+            "rev_001076",
+            "rev_000407",
+            "rev_002759",
+            "rev_001998",
+            "rev_002142",
+            "rev_000796"
+          ],
+          "scores": [
+            0.49274253845214844,
+            0.428134024143219,
+            0.4275350570678711,
+            0.4274912476539612,
+            0.4145684838294983,
+            0.3943949341773987,
+            0.38335853815078735,
+            0.37845462560653687
+          ],
+          "relevant_ids": [],
+          "recall_at_k": null,
+          "reciprocal_rank": null
+        },
+        {
+          "id": "q27",
+          "tipo": "sem_resposta",
+          "deve_abster": true,
+          "returned_ids": [
+            "rev_000294",
+            "rev_001829",
+            "rev_001416",
+            "rev_001760",
+            "rev_000403",
+            "rev_000679",
+            "rev_000673",
+            "rev_000752"
+          ],
+          "scores": [
+            0.5424808859825134,
+            0.5152117013931274,
+            0.5041768550872803,
+            0.5013086795806885,
+            0.4962005615234375,
+            0.49198615550994873,
+            0.4701356887817383,
+            0.46062856912612915
+          ],
+          "relevant_ids": [],
+          "recall_at_k": null,
+          "reciprocal_rank": null
+        },
+        {
+          "id": "q28",
+          "tipo": "sem_resposta",
+          "deve_abster": true,
+          "returned_ids": [
+            "rev_000300",
+            "rev_001051",
+            "rev_001212",
+            "rev_002417",
+            "rev_001533",
+            "rev_002959",
+            "rev_001829",
+            "rev_000345"
+          ],
+          "scores": [
+            0.35532712936401367,
+            0.3235540986061096,
+            0.3196920156478882,
+            0.3146839737892151,
+            0.3036413788795471,
+            0.3022785186767578,
+            0.30030930042266846,
+            0.29564058780670166
+          ],
+          "relevant_ids": [],
+          "recall_at_k": null,
+          "reciprocal_rank": null
+        },
+        {
+          "id": "q29",
+          "tipo": "sem_resposta",
+          "deve_abster": true,
+          "returned_ids": [
+            "rev_001076",
+            "rev_000294",
+            "rev_000604",
+            "rev_000797",
+            "rev_002980",
+            "rev_000673",
+            "rev_001661",
+            "rev_002335"
+          ],
+          "scores": [
+            0.7479546070098877,
+            0.7352356910705566,
+            0.73117995262146,
+            0.7217035293579102,
+            0.7123615741729736,
+            0.6991678476333618,
+            0.6868581771850586,
+            0.6489267349243164
+          ],
+          "relevant_ids": [],
+          "recall_at_k": null,
+          "reciprocal_rank": null
+        },
+        {
+          "id": "q30",
+          "tipo": "sem_resposta",
+          "deve_abster": true,
+          "returned_ids": [
+            "rev_002476",
+            "rev_000400",
+            "rev_001027",
+            "rev_001973",
+            "rev_002675",
+            "rev_001629",
+            "rev_000908",
+            "rev_002234"
+          ],
+          "scores": [
+            0.45655137300491333,
+            0.4329864978790283,
+            0.4138895869255066,
+            0.41164594888687134,
+            0.40910208225250244,
+            0.39774978160858154,
+            0.3954682946205139,
+            0.39364302158355713
+          ],
+          "relevant_ids": [],
+          "recall_at_k": null,
+          "reciprocal_rank": null
+        }
+      ]
+    },
+    "com_filtro": {
+      "summary": {
+        "questions": 30,
+        "answerable_questions": 24,
+        "unanswerable_questions": 6,
+        "recall_at_k": 0.8190972222222223,
+        "mrr_at_k": 0.6819444444444445,
+        "answerable_abstention_rate": 0.041666666666666664,
+        "correct_abstention_rate": 0.3333333333333333,
+        "false_answer_rate": 0.6666666666666666
+      },
+      "per_type": {
+        "item": {
+          "questions": 5,
+          "answerable_questions": 5,
+          "unanswerable_questions": 0,
+          "recall_at_k": 1.0,
+          "mrr_at_k": 0.85,
+          "answerable_abstention_rate": 0,
+          "correct_abstention_rate": null,
+          "false_answer_rate": null
+        },
+        "parafrase": {
+          "questions": 6,
+          "answerable_questions": 6,
+          "unanswerable_questions": 0,
+          "recall_at_k": 0.7902777777777777,
+          "mrr_at_k": 0.5,
+          "answerable_abstention_rate": 0,
+          "correct_abstention_rate": null,
+          "false_answer_rate": null
+        },
+        "restaurante_aspecto": {
+          "questions": 8,
+          "answerable_questions": 8,
+          "unanswerable_questions": 0,
+          "recall_at_k": 0.7395833333333334,
+          "mrr_at_k": 0.6395833333333333,
+          "answerable_abstention_rate": 0,
+          "correct_abstention_rate": null,
+          "false_answer_rate": null
+        },
+        "sem_resposta": {
+          "questions": 6,
+          "answerable_questions": 0,
+          "unanswerable_questions": 6,
+          "recall_at_k": null,
+          "mrr_at_k": null,
+          "answerable_abstention_rate": null,
+          "correct_abstention_rate": 0.3333333333333333,
+          "false_answer_rate": 0.6666666666666666
+        },
+        "temporal": {
+          "questions": 5,
+          "answerable_questions": 5,
+          "unanswerable_questions": 0,
+          "recall_at_k": 0.8,
+          "mrr_at_k": 0.8,
+          "answerable_abstention_rate": 0.2,
+          "correct_abstention_rate": null,
+          "false_answer_rate": null
+        }
+      },
+      "questions": [
+        {
+          "id": "q01",
+          "tipo": "restaurante_aspecto",
+          "deve_abster": false,
+          "returned_ids": [
+            "rev_000294",
+            "rev_002980",
+            "rev_002549",
+            "rev_000673",
+            "rev_000650",
+            "rev_001661",
+            "rev_001076",
+            "rev_000797"
+          ],
+          "scores": [
+            0.575579047203064,
+            0.5520856380462646,
+            0.5466112494468689,
+            0.5437333583831787,
+            0.5430165529251099,
+            0.5420664548873901,
+            0.5323131084442139,
+            0.5252994894981384
+          ],
+          "relevant_ids": [
+            "rev_001661"
+          ],
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 0.16666666666666666
+        },
+        {
+          "id": "q02",
+          "tipo": "restaurante_aspecto",
+          "deve_abster": false,
+          "returned_ids": [
+            "rev_002257",
+            "rev_000799",
+            "rev_002289",
+            "rev_001685",
+            "rev_002089",
+            "rev_002191",
+            "rev_000212",
+            "rev_002917"
+          ],
+          "scores": [
+            0.5647338628768921,
+            0.4884869456291199,
+            0.3726862668991089,
+            0.34717631340026855,
+            0.33636921644210815,
+            0.33030062913894653,
+            0.2890745997428894,
+            0.27928870916366577
+          ],
+          "relevant_ids": [
+            "rev_002257"
+          ],
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0
+        },
+        {
+          "id": "q03",
+          "tipo": "restaurante_aspecto",
+          "deve_abster": false,
+          "returned_ids": [
+            "rev_002562",
+            "rev_002759",
+            "rev_002142",
+            "rev_000908",
+            "rev_001339"
+          ],
+          "scores": [
+            0.3372347354888916,
+            0.2883117198944092,
+            0.2706441879272461,
+            0.26813769340515137,
+            0.2626413106918335
+          ],
+          "relevant_ids": [
+            "rev_001339",
+            "rev_001629"
+          ],
+          "recall_at_k": 0.5,
+          "reciprocal_rank": 0.2
+        },
+        {
+          "id": "q04",
+          "tipo": "restaurante_aspecto",
+          "deve_abster": false,
+          "returned_ids": [
+            "rev_000345",
+            "rev_000400",
+            "rev_001212",
+            "rev_001829",
+            "rev_002438",
+            "rev_000934",
+            "rev_002598",
+            "rev_000645"
+          ],
+          "scores": [
+            0.5290642976760864,
+            0.5033572912216187,
+            0.4910649061203003,
+            0.47925007343292236,
+            0.45910918712615967,
+            0.45060449838638306,
+            0.4396533966064453,
+            0.38478344678878784
+          ],
+          "relevant_ids": [
+            "rev_000400",
+            "rev_000934",
+            "rev_001212",
+            "rev_001552"
+          ],
+          "recall_at_k": 0.75,
+          "reciprocal_rank": 0.5
+        },
+        {
+          "id": "q05",
+          "tipo": "restaurante_aspecto",
+          "deve_abster": false,
+          "returned_ids": [
+            "rev_001123",
+            "rev_002058"
+          ],
+          "scores": [
+            0.3475527763366699,
+            0.2723767161369324
+          ],
+          "relevant_ids": [
+            "rev_001123",
+            "rev_002302",
+            "rev_002693"
+          ],
+          "recall_at_k": 0.3333333333333333,
+          "reciprocal_rank": 1.0
+        },
+        {
+          "id": "q06",
+          "tipo": "restaurante_aspecto",
+          "deve_abster": false,
+          "returned_ids": [
+            "rev_002234",
+            "rev_000403",
+            "rev_000300",
+            "rev_001760",
+            "rev_001051",
+            "rev_002800",
+            "rev_002684",
+            "rev_002665"
+          ],
+          "scores": [
+            0.48845934867858887,
+            0.4817150831222534,
+            0.4425758123397827,
+            0.42183607816696167,
+            0.38319265842437744,
+            0.3774597644805908,
+            0.35926294326782227,
+            0.2871382236480713
+          ],
+          "relevant_ids": [
+            "rev_001051",
+            "rev_001760",
+            "rev_002684"
+          ],
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 0.25
+        },
+        {
+          "id": "q07",
+          "tipo": "restaurante_aspecto",
+          "deve_abster": false,
+          "returned_ids": [
+            "rev_002417",
+            "rev_000351",
+            "rev_001715",
+            "rev_001172",
+            "rev_001416",
+            "rev_002476",
+            "rev_001286",
+            "rev_002021"
+          ],
+          "scores": [
+            0.484006404876709,
+            0.4344560503959656,
+            0.4235879182815552,
+            0.4204126000404358,
+            0.40858083963394165,
+            0.39007556438446045,
+            0.3721582889556885,
+            0.3721405267715454
+          ],
+          "relevant_ids": [
+            "rev_000351",
+            "rev_001172",
+            "rev_001416",
+            "rev_002021",
+            "rev_002417"
+          ],
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0
+        },
+        {
+          "id": "q08",
+          "tipo": "restaurante_aspecto",
+          "deve_abster": false,
+          "returned_ids": [
+            "rev_002833"
+          ],
+          "scores": [
+            0.35044920444488525
+          ],
+          "relevant_ids": [
+            "rev_002176",
+            "rev_002490",
+            "rev_002833"
+          ],
+          "recall_at_k": 0.3333333333333333,
+          "reciprocal_rank": 1.0
+        },
+        {
+          "id": "q09",
+          "tipo": "temporal",
+          "deve_abster": false,
+          "returned_ids": [
+            "rev_000212"
+          ],
+          "scores": [
+            0.2963661551475525
+          ],
+          "relevant_ids": [
+            "rev_000212"
+          ],
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0
+        },
+        {
+          "id": "q10",
+          "tipo": "temporal",
+          "deve_abster": false,
+          "returned_ids": [
+            "rev_002237"
+          ],
+          "scores": [
+            0.3093187212944031
+          ],
+          "relevant_ids": [
+            "rev_002237"
+          ],
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0
+        },
+        {
+          "id": "q11",
+          "tipo": "temporal",
+          "deve_abster": false,
+          "returned_ids": [
+            "rev_002289",
+            "rev_000796"
+          ],
+          "scores": [
+            0.3920760154724121,
+            0.3053576946258545
+          ],
+          "relevant_ids": [
+            "rev_002289"
+          ],
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0
+        },
+        {
+          "id": "q12",
+          "tipo": "temporal",
+          "deve_abster": false,
+          "returned_ids": [
+            "rev_002675"
+          ],
+          "scores": [
+            0.39423656463623047
+          ],
+          "relevant_ids": [
+            "rev_002675"
+          ],
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0
+        },
+        {
+          "id": "q13",
+          "tipo": "temporal",
+          "deve_abster": false,
+          "returned_ids": [],
+          "scores": [],
+          "relevant_ids": [
+            "rev_002234"
+          ],
+          "recall_at_k": 0.0,
+          "reciprocal_rank": 0.0
+        },
+        {
+          "id": "q14",
+          "tipo": "item",
+          "deve_abster": false,
+          "returned_ids": [
+            "rev_001076",
+            "rev_002549",
+            "rev_000813"
+          ],
+          "scores": [
+            0.6744610071182251,
+            0.5439044237136841,
+            0.49548453092575073
+          ],
+          "relevant_ids": [
+            "rev_000813",
+            "rev_001076"
+          ],
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0
+        },
+        {
+          "id": "q15",
+          "tipo": "item",
+          "deve_abster": false,
+          "returned_ids": [
+            "rev_001685",
+            "rev_002089",
+            "rev_001291",
+            "rev_000796"
+          ],
+          "scores": [
+            0.5832892060279846,
+            0.5696771144866943,
+            0.46644771099090576,
+            0.31597667932510376
+          ],
+          "relevant_ids": [
+            "rev_001685",
+            "rev_002089"
+          ],
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0
+        },
+        {
+          "id": "q16",
+          "tipo": "item",
+          "deve_abster": false,
+          "returned_ids": [
+            "rev_001010",
+            "rev_002494",
+            "rev_002141",
+            "rev_001998",
+            "rev_002675"
+          ],
+          "scores": [
+            0.5854532718658447,
+            0.49084365367889404,
+            0.47654610872268677,
+            0.47002625465393066,
+            0.2764286994934082
+          ],
+          "relevant_ids": [
+            "rev_001998"
+          ],
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 0.25
+        },
+        {
+          "id": "q17",
+          "tipo": "item",
+          "deve_abster": false,
+          "returned_ids": [
+            "rev_000934",
+            "rev_000345",
+            "rev_002015",
+            "rev_001552",
+            "rev_001916",
+            "rev_000645"
+          ],
+          "scores": [
+            0.3998234272003174,
+            0.36239296197891235,
+            0.3507598042488098,
+            0.33140861988067627,
+            0.3276479244232178,
+            0.30650901794433594
+          ],
+          "relevant_ids": [
+            "rev_000934",
+            "rev_001552"
+          ],
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0
+        },
+        {
+          "id": "q18",
+          "tipo": "item",
+          "deve_abster": false,
+          "returned_ids": [
+            "rev_000267",
+            "rev_002302",
+            "rev_001190",
+            "rev_001551",
+            "rev_002959",
+            "rev_000613",
+            "rev_002693"
+          ],
+          "scores": [
+            0.6689848899841309,
+            0.6327997446060181,
+            0.6222329139709473,
+            0.5911955237388611,
+            0.5253449082374573,
+            0.51366126537323,
+            0.4875526428222656
+          ],
+          "relevant_ids": [
+            "rev_000267",
+            "rev_002959"
+          ],
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0
+        },
+        {
+          "id": "q19",
+          "tipo": "parafrase",
+          "deve_abster": false,
+          "returned_ids": [
+            "rev_000604",
+            "rev_001661",
+            "rev_001076",
+            "rev_000673",
+            "rev_000752",
+            "rev_000797",
+            "rev_002335",
+            "rev_000294"
+          ],
+          "scores": [
+            0.672990620136261,
+            0.6312263607978821,
+            0.5862710475921631,
+            0.5722775459289551,
+            0.5690838098526001,
+            0.5612680912017822,
+            0.5536254048347473,
+            0.5399917364120483
+          ],
+          "relevant_ids": [
+            "rev_000673",
+            "rev_000813",
+            "rev_001661"
+          ],
+          "recall_at_k": 0.6666666666666666,
+          "reciprocal_rank": 0.5
+        },
+        {
+          "id": "q20",
+          "tipo": "parafrase",
+          "deve_abster": false,
+          "returned_ids": [
+            "rev_002142",
+            "rev_002494",
+            "rev_002675",
+            "rev_001998",
+            "rev_001339",
+            "rev_002562",
+            "rev_000908",
+            "rev_001010"
+          ],
+          "scores": [
+            0.3395124673843384,
+            0.29278671741485596,
+            0.28784096240997314,
+            0.272676944732666,
+            0.2714868187904358,
+            0.26963895559310913,
+            0.2695361375808716,
+            0.25957030057907104
+          ],
+          "relevant_ids": [
+            "rev_000802",
+            "rev_000908",
+            "rev_001010",
+            "rev_001998",
+            "rev_002142",
+            "rev_002494",
+            "rev_002562",
+            "rev_002675"
+          ],
+          "recall_at_k": 0.875,
+          "reciprocal_rank": 1.0
+        },
+        {
+          "id": "q21",
+          "tipo": "parafrase",
+          "deve_abster": false,
+          "returned_ids": [
+            "rev_002833",
+            "rev_002355",
+            "rev_000357"
+          ],
+          "scores": [
+            0.3174999952316284,
+            0.27118396759033203,
+            0.2658469080924988
+          ],
+          "relevant_ids": [
+            "rev_000445",
+            "rev_002127",
+            "rev_002355",
+            "rev_002363",
+            "rev_002485"
+          ],
+          "recall_at_k": 0.2,
+          "reciprocal_rank": 0.5
+        },
+        {
+          "id": "q22",
+          "tipo": "parafrase",
+          "deve_abster": false,
+          "returned_ids": [
+            "rev_000300",
+            "rev_001760",
+            "rev_001051",
+            "rev_002684",
+            "rev_002234",
+            "rev_000403",
+            "rev_002800",
+            "rev_000407"
+          ],
+          "scores": [
+            0.533312976360321,
+            0.48356950283050537,
+            0.4799126386642456,
+            0.4783208966255188,
+            0.46421945095062256,
+            0.45742905139923096,
+            0.4316211938858032,
+            0.2550644278526306
+          ],
+          "relevant_ids": [
+            "rev_001051",
+            "rev_002234",
+            "rev_002684",
+            "rev_002800"
+          ],
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 0.3333333333333333
+        },
+        {
+          "id": "q23",
+          "tipo": "parafrase",
+          "deve_abster": false,
+          "returned_ids": [
+            "rev_002058",
+            "rev_001123",
+            "rev_001265",
+            "rev_002370"
+          ],
+          "scores": [
+            0.39558011293411255,
+            0.3752419352531433,
+            0.31363677978515625,
+            0.3025776743888855
+          ],
+          "relevant_ids": [
+            "rev_001265"
+          ],
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 0.3333333333333333
+        },
+        {
+          "id": "q24",
+          "tipo": "parafrase",
+          "deve_abster": false,
+          "returned_ids": [
+            "rev_002417",
+            "rev_002021",
+            "rev_001715",
+            "rev_001172",
+            "rev_001027",
+            "rev_002298",
+            "rev_000351",
+            "rev_002476"
+          ],
+          "scores": [
+            0.49562937021255493,
+            0.4035484194755554,
+            0.3860817551612854,
+            0.35456061363220215,
+            0.34988081455230713,
+            0.2916056513786316,
+            0.285519540309906,
+            0.2557266354560852
+          ],
+          "relevant_ids": [
+            "rev_001715"
+          ],
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 0.3333333333333333
+        },
+        {
+          "id": "q25",
+          "tipo": "sem_resposta",
+          "deve_abster": true,
+          "returned_ids": [
+            "rev_002257",
+            "rev_002289",
+            "rev_000799",
+            "rev_002089",
+            "rev_001685",
+            "rev_000212",
+            "rev_002191",
+            "rev_001291"
+          ],
+          "scores": [
+            0.5842241644859314,
+            0.42366355657577515,
+            0.41823428869247437,
+            0.3545345664024353,
+            0.3519275188446045,
+            0.3501163125038147,
+            0.34965944290161133,
+            0.319430410861969
+          ],
+          "relevant_ids": [],
+          "recall_at_k": null,
+          "reciprocal_rank": null
+        },
+        {
+          "id": "q26",
+          "tipo": "sem_resposta",
+          "deve_abster": true,
+          "returned_ids": [
+            "rev_002759",
+            "rev_001998",
+            "rev_002142",
+            "rev_001629",
+            "rev_002675",
+            "rev_002494",
+            "rev_002562"
+          ],
+          "scores": [
+            0.4145684838294983,
+            0.3943949341773987,
+            0.38335853815078735,
+            0.3452056646347046,
+            0.327095091342926,
+            0.29455435276031494,
+            0.2909442186355591
+          ],
+          "relevant_ids": [],
+          "recall_at_k": null,
+          "reciprocal_rank": null
+        },
+        {
+          "id": "q27",
+          "tipo": "sem_resposta",
+          "deve_abster": true,
+          "returned_ids": [
+            "rev_001829",
+            "rev_000400",
+            "rev_000345",
+            "rev_002438",
+            "rev_002598",
+            "rev_001212",
+            "rev_000645"
+          ],
+          "scores": [
+            0.5152117013931274,
+            0.40266257524490356,
+            0.38441944122314453,
+            0.36899054050445557,
+            0.3617960810661316,
+            0.3149558901786804,
+            0.27611660957336426
+          ],
+          "relevant_ids": [],
+          "recall_at_k": null,
+          "reciprocal_rank": null
+        },
+        {
+          "id": "q28",
+          "tipo": "sem_resposta",
+          "deve_abster": true,
+          "returned_ids": [
+            "rev_002833",
+            "rev_002121",
+            "rev_002355",
+            "rev_000357"
+          ],
+          "scores": [
+            0.28670310974121094,
+            0.2642477750778198,
+            0.26392054557800293,
+            0.262570858001709
+          ],
+          "relevant_ids": [],
+          "recall_at_k": null,
+          "reciprocal_rank": null
+        },
+        {
+          "id": "q29",
+          "tipo": "sem_resposta",
+          "deve_abster": true,
+          "returned_ids": [],
+          "scores": [],
+          "relevant_ids": [],
+          "recall_at_k": null,
+          "reciprocal_rank": null
+        },
+        {
+          "id": "q30",
+          "tipo": "sem_resposta",
+          "deve_abster": true,
+          "returned_ids": [],
+          "scores": [],
+          "relevant_ids": [],
+          "recall_at_k": null,
+          "reciprocal_rank": null
+        }
+      ]
+    }
+  },
+  "model_revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42",
+  "runtime_versions": {
+    "chromadb": "1.5.9",
+    "sentence-transformers": "6.2.0",
+    "transformers": "5.22.1",
+    "torch": "2.15.0",
+    "pydantic": "2.14.2"
+  },
+  "embedding_prefixes": {
+    "document": "",
+    "query": ""
+  },
+  "rescore_provenance": {
+    "method": "Reuse frozen rankings and scores; recompute relevance-dependent metrics",
+    "parent_snapshot_sha256_lf": {
+      "questions.jsonl": "25b218ddc5369b2187be44699a781723a0d8f6f2870257923270a76321dd9cc4",
+      "corpus.jsonl": "74f04a4bf0407de3a4302f9a869dbeadde6541bd9fa56bb74e5e2fe0a832c95f",
+      "relevance_audit.jsonl": "a18f13fe9f79a8b2390ffd331134ac3f754aa66a85a70f7eb73ae5bf1d2ded10"
+    },
+    "changed_question_ids": [
+      "q22"
+    ],
+    "assisted_human_reviewed_questions": 15,
+    "independent_blind_human_review": false,
+    "embeddings_recomputed": false
+  }
+}

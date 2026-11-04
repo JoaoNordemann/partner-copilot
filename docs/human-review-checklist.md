@@ -1,29 +1,30 @@
-# Checklist de revisão humana
+# Registro de revisão humana
 
-Esta lista não certifica revisão humana. Os campos humanos continuam pendentes.
-Para cada pergunta, leia a pergunta, os relevantes e os distratores em
-`data/eval/relevance_audit.jsonl`; confira a regra no guia de anotação e explique
-com suas próprias palavras se concorda ou discorda. Identifique alterações sem
-sobrescrever os artefatos congelados antes de criar uma nova versão.
+Concluído no chat: 15 perguntas e 56 pares pergunta–review.
+A revisão foi humana assistida por IA, após exposição aos resultados.
+Revisão humana cega independente e revisão exaustiva do corpus continuam pendentes.
 
-| Pergunta | Inspeção de IA | Revisão humana independente | Observação do responsável |
+| Questão | Revisão humana assistida | Independente/cega | Decisão |
 | --- | --- | --- | --- |
-| q01 | Concluída | Pendente | |
-| q02 | Concluída | Pendente | |
-| q03 | Concluída | Pendente | |
-| q04 | Concluída | Pendente | |
-| q09 | Concluída | Pendente | |
-| q10 | Concluída | Pendente | |
-| q14 | Concluída | Pendente | |
-| q17 | Concluída | Pendente | |
-| q19 | Concluída | Pendente | |
-| q22 | Concluída | Pendente | |
+| q01 | Concluída no chat | Não | Confirmou julgamento no pool apresentado |
+| q02 | Concluída no chat | Não | Confirmou julgamento no pool apresentado |
+| q03 | Concluída no chat | Não | Confirmou julgamento no pool apresentado |
+| q04 | Concluída no chat | Não | Confirmou julgamento no pool apresentado |
+| q09 | Concluída no chat | Não | Confirmou julgamento no pool apresentado |
+| q10 | Concluída no chat | Não | Confirmou julgamento no pool apresentado |
+| q13 | Concluída no chat | Não | Confirmou julgamento no pool apresentado |
+| q14 | Concluída no chat | Não | Confirmou julgamento no pool apresentado |
+| q17 | Concluída no chat | Não | Confirmou julgamento no pool apresentado |
+| q19 | Concluída no chat | Não | Confirmou julgamento no pool apresentado |
+| q22 | Concluída no chat | Não | Incluiu rev_002800 |
+| q25 | Concluída no chat | Não | Confirmou julgamento no pool apresentado |
+| q26 | Concluída no chat | Não | Confirmou julgamento no pool apresentado |
+| q27 | Concluída no chat | Não | Confirmou julgamento no pool apresentado |
+| q28 | Concluída no chat | Não | Confirmou julgamento no pool apresentado |
 
-Casos de falha para leitura complementar: q13, q25, q26, q27 e q28. Leia
-`docs/retrieval-failure-analysis.md` e os trechos completos no JSON correspondente.
-Para q13, separe os três aspectos da review: calor positivo, atraso negativo e
-sabor negativo; para q25–q28, procure a evidência do fato específico solicitado.
-
-Identificação do revisor humano: ______
-Data da revisão: ______
-Conclusões próprias: ______
+Revisor: responsável pelo projeto, identificado pela conversa; sem nome adicional inferido.
+As seleções, justificativas, dúvidas, correções e assistência estão em
+`data/eval/human-v2/human_review.jsonl`. A comparação das métricas está em
+[human-review-results.md](human-review-results.md).
+As quatro decisões de nenhuma evidência se referem aos candidatos mostrados;
+a ausência em todo o corpus continua baseada na inspeção anterior de IA.

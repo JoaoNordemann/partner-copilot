@@ -174,3 +174,14 @@ domínio, mas não recalibra o cosseno: similaridade temática não certifica su
 Tabelas completas, distribuições, origem das relevâncias e CI remoto verificado estão
 em [revisão de resultados](docs/retrieval-checkpoint.md). A inspeção de IA está marcada;
 a [revisão humana independente](docs/human-review-checklist.md) continua pendente.
+
+## Revisão humana dos julgamentos
+
+O responsável concluiu no chat a revisão assistida de 15 perguntas, em 56 pares
+pergunta–review. Uma decisão alterou a avaliação: rev_002800 foi incluída em q22.
+A exceção de relevância não altera os rótulos ABSA e continua registrada como divergência
+do guia anterior. Os snapshots históricos foram preservados; a revisão não foi cega
+nem exaustiva. Novos julgamentos, proveniência e métricas estão em
+[resultado da revisão humana](docs/human-review-results.md).
+
+Baselines sem embeddings: no corpus revisado com filtros, o aleatório já atinge Hit@8 de 93,1% e palavras-chave 95,8%, contra 100% semântico. O ganho de ordenação deve ser avaliado em Hit@1/MRR/precision. [Resultados e comando sem modelo](docs/cheap-baselines-check.md).

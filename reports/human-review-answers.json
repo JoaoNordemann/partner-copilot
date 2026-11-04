@@ -1,0 +1,150 @@
+{
+  "q01": {
+    "selected": [
+      "rev_001661"
+    ],
+    "reason_original": "Embalagem rasgou no caminho, esfriando a pizza",
+    "reason_supported": "A embalagem rasgou no caminho.",
+    "causal_inference_flag": "O texto não estabelece que a embalagem rasgada causou o esfriamento.",
+    "doubts": ""
+  },
+  "q02": {
+    "selected": [
+      "rev_002257"
+    ],
+    "reason_original": "Demora de tempo de resposta",
+    "reason_supported": "Demora para responder à dúvida.",
+    "doubts": ""
+  },
+  "q03": {
+    "selected": [
+      "rev_001339",
+      "rev_001629"
+    ],
+    "reason_original": "Temaki não refrigerado no B, Hot roll esfriou no C",
+    "reason_supported": "B informa falta de refrigeração; C informa que o hot roll veio frio.",
+    "doubts": "",
+    "inference_note": "O texto C não estabelece quando o hot roll esfriou."
+  },
+  "q04": {
+    "selected": [
+      "rev_000400",
+      "rev_000934",
+      "rev_001212",
+      "rev_001552"
+    ],
+    "reason_original": "Na E citou que estava com gosto de produto velho",
+    "doubts": "Todos casos não citam o motivo com exceção do E, apenas que não gostaram",
+    "guide_note": "Crítica explícita ao sabor é suficiente para relevância, mesmo sem causa detalhada; E especifica gosto de produto velho."
+  },
+  "q09": {
+    "selected": [
+      "rev_000212"
+    ],
+    "reason_original": "A - Mais de uma hora esperando, B - Levou 80 min",
+    "reason_supported": "A relata mais de uma hora de espera e está dentro de 19/10 a 01/11/2026.",
+    "doubts": "",
+    "correction": {
+      "initial_selected": [
+        "rev_000212",
+        "rev_001291"
+      ],
+      "user_confirmation": "Desconsidere o B erro meu, continue",
+      "reason": "B tem data 28/08/2026, fora do período solicitado.",
+      "assistance_disclosed": true
+    }
+  },
+  "q10": {
+    "selected": [
+      "rev_002237"
+    ],
+    "reason_original": "aguardo de 97 min",
+    "reason_supported": "Espera de 97 minutos em 23/10/2026, dentro da janela solicitada.",
+    "doubts": ""
+  },
+  "q14": {
+    "selected": [
+      "rev_000813",
+      "rev_001076"
+    ],
+    "reason_original": "A- Sabor pizza calabresa pior, B- Não pediria de novo pelo sabor",
+    "doubts": ""
+  },
+  "q17": {
+    "selected": [
+      "rev_000934",
+      "rev_001552"
+    ],
+    "reason_original": "B-Não gostou do sabor, C-gosto de produto velho",
+    "doubts": ""
+  },
+  "q19": {
+    "selected": [
+      "rev_000673",
+      "rev_000813",
+      "rev_001661"
+    ],
+    "reason_original": "Errei no q19 as 3 consideram perder temperatura, são relevantes",
+    "initial_selected": [
+      "rev_001661"
+    ],
+    "initial_doubts": "D - estava morno quando abri",
+    "clarification_exposure": "Guia explicou frio ou morno como evidência de temperatura inadequada; pergunta não comprova momento exato da perda de calor.",
+    "doubts": "",
+    "assistance_disclosed": true
+  },
+  "q22": {
+    "selected": [
+      "rev_001051",
+      "rev_002234",
+      "rev_002684",
+      "rev_002800"
+    ],
+    "reason_original": "No q22 pode considerar com desagradavel todas minhas dúvidas, são relevantes",
+    "initial_doubts": "A,D,E - todos dizem que estava pior do que da outra vez mas não que desagradavel C-Esperava mais, mas não falou que estava ruim",
+    "interpretation": "Todas minhas dúvidas = A,C,D,E; B não incluída.",
+    "disagreement": {
+      "review_id": "rev_002800",
+      "previous_rule": "Diferente do habitual sem avaliação explícita fica ambíguo.",
+      "human_decision": "Considerar relevante à pergunta sobre paladar desagradável.",
+      "requires_separate_query_judgment_not_automatic_absa_relabel": true
+    },
+    "assistance_disclosed": true
+  },
+  "q13": {
+    "selected": [
+      "rev_002234"
+    ],
+    "reason_original": "B-92 minutos de espera",
+    "doubts": ""
+  },
+  "q25": {
+    "selected": [],
+    "reason_original": "",
+    "user_confirmation": "exato",
+    "doubts": "",
+    "review_scope": "Três candidatos apresentados; não equivale a reinspeção humana exaustiva de todo o corpus.",
+    "supported_interpretation": "Nenhuma das três reviews relata reação alérgica a amendoim."
+  },
+  "q26": {
+    "selected": [],
+    "reason_original": "",
+    "user_answer": "Nenhum",
+    "doubts": "",
+    "review_scope": "Três candidatos apresentados; não equivale a reinspeção humana exaustiva de todo o corpus."
+  },
+  "q27": {
+    "selected": [],
+    "reason_original": "",
+    "user_answer": "Nenhum",
+    "doubts": "",
+    "review_scope": "Três candidatos apresentados; não equivale a reinspeção humana exaustiva de todo o corpus."
+  },
+  "q28": {
+    "selected": [],
+    "reason_original": "",
+    "user_answer": "nenhum",
+    "doubts": "",
+    "review_scope": "Três candidatos apresentados; não equivale a reinspeção humana exaustiva de todo o corpus."
+  }
+}
