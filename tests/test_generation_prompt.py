@@ -11,6 +11,7 @@ from partner_copilot.generation.contracts import (
     ABSTENTION_MARKER,
     ABSTENTION_MESSAGE,
     GenerationContractError,
+    InvalidCitationError,
 )
 from partner_copilot.generation.output import parse_generation
 from partner_copilot.pipeline import RAGPipeline
@@ -86,6 +87,7 @@ def test_exact_abstention_and_valid_citations():
     [
         "",
         "Não tenho dados suficientes.",
+        ABSTENTION_MESSAGE,
         ABSTENTION_MARKER + " Explicação",
         "[fonte_a]",
         "A caixa abriu [inventada].",
@@ -114,6 +116,8 @@ def test_pipeline_records_both_abstention_paths_and_prompt_version(monkeypatch):
     monkeypatch.setattr("partner_copilot.pipeline.perf_counter", lambda: next(times))
     answer = pipeline.ask("O adesivo foi danificado?", "rest_fixture")
     assert answer.abstained and answer.abstention_reason == "llm_insufficient_evidence"
+    assert answer.answer == ABSTENTION_MESSAGE
+    llm.generate.assert_called_once()
     assert answer.sources == [] and answer.metadata.llm_called
     assert answer.metadata.context_documents == answer.metadata.retrieved_documents == 1
     assert answer.metadata.latency_ms == pytest.approx(25)
@@ -126,7 +130,11 @@ def test_pipeline_limits_context_and_sources_to_sent_documents():
     llm.generate.return_value = "O adesivo soltou [fonte_2]."
     pipeline = RAGPipeline(retriever, llm)
     answer = pipeline.ask("O adesivo foi danificado?", "rest_fixture")
+    llm.generate.assert_called_once()
     prompt = llm.generate.call_args.args[0]
+    assert "evidência explícita" in prompt and "Cada afirmação" in prompt
+    assert ABSTENTION_MARKER in prompt and "DADOS NÃO CONFIÁVEIS" in prompt
+    assert "Não force um número de ações" in prompt
     assert '"review_id":"fonte_4"' in prompt and '"review_id":"fonte_5"' not in prompt
     assert answer.sources == ["fonte_2"] and not answer.abstained
     assert answer.metadata.retrieved_documents == 8 and answer.metadata.context_documents == 5
@@ -134,6 +142,12 @@ def test_pipeline_limits_context_and_sources_to_sent_documents():
     llm.generate.return_value = "O adesivo soltou [fonte_7]."
     with pytest.raises(GenerationContractError, match="outside"):
         pipeline.ask("O adesivo foi danificado?", "rest_fixture")
+    llm.generate.return_value = "Afirmação [inventada]. Outra afirmação [inventada]."
+    with pytest.raises(InvalidCitationError) as exc:
+        pipeline.ask("O adesivo foi danificado?", "rest_fixture")
+    assert exc.value.invalid_ids == ("inventada",)
+    assert exc.value.invalid_citation_count == 2
+    assert set(exc.value.allowed_context_ids) == {f"fonte_{i}" for i in range(5)}
     shorter = RAGPipeline(retriever, llm, settings=Settings(context_k=3))
     llm.generate.return_value = ABSTENTION_MARKER
     assert shorter.ask("O adesivo foi danificado?", "rest_fixture").metadata.context_documents == 3

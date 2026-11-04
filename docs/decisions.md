@@ -416,3 +416,9 @@ registrado, preservando a separação de treino/gold. Não cria índice vazio qu
 nome/modelo está errado, nem ingere/reset a base. Coleção existente sem resultados
 leva à abstenção normal sem carregar o LLM. Datasets de avaliação isolados continuam
 sendo responsabilidade dos seus runners, não desta CLI de consulta de produção.
+
+## Testes sem GPU e teste real separado
+
+O grupo leve testa a pipeline com retriever/LLM falsos e confirma explicitamente ausência de chamada com lista vazia, instruções/IDs no prompt enviado, erro contável para fontes fora do retrieval/contexto e normalização do marcador para a frase pública de abstenção. Texto livre não é contado silenciosamente como recusa válida.
+
+Testes reais de Mistral ficam marcados gpu e desabilitados por padrão via --run-gpu; CI seleciona arquivos leves e -m not gpu. Dois casos sintéticos usam pesos reais em cache, uma carga por módulo, seed fixa e temperatura zero; loaders proíbem download. Ambiente sem CUDA é skip explícito, não aprovação de inferência real. Protocolo: [testing.md](testing.md).

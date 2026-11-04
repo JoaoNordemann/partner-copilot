@@ -33,3 +33,42 @@ Remove-Item Env:HF_HUB_OFFLINE
 Se usar o cache padrão do Hugging Face, omita `SENTENCE_TRANSFORMERS_HOME`.
 O banco criado pelo teste é temporário; o índice persistente do projeto permanece intacto.
 A sanidade verifica um exemplo controlado e não substitui uma avaliação de retrieval.
+
+## Testes de geração sem GPU e execução real opt-in
+
+O grupo leve usa retriever e LLM falsos e não carrega pesos. Verifica explicitamente:
+
+- Retrieval vazio: abstained=true, retriever_empty e llm.generate.assert_not_called().
+- Prompt efetivamente recebido pelo LLM falso: IDs das fontes, exigência de evidência
+  explícita, citações, marcador de abstenção e instruções de dados não confiáveis.
+- Citação inexistente em qualquer documento recuperado: InvalidCitationError com
+  contagem de ocorrências. Também verifica citação de review recuperada mas não enviada.
+- Marcador [[SEM_EVIDENCIA]] emitido pelo LLM: llm_insufficient_evidence, frase pública
+  fixa, fontes vazias e chamada ao LLM confirmada. Uma recusa livre ou a frase pública
+  emitida diretamente sem o marcador não substitui o protocolo interno.
+
+Comando equivalente ao grupo leve de CI:
+
+```powershell
+.\.venv\Scripts\python.exe -m pytest tests/test_retriever.py tests/test_retriever_dependencies.py tests/test_generation_prompt.py tests/test_generation_provider.py tests/test_ask_cli.py -m "not gpu" -v
+```
+
+O teste real está em tests/test_generation_gpu.py, marcado gpu. Por padrão o conftest
+aplica skip antes de executar fixtures de GPU; o CI também usa seleção explícita de
+arquivos leves e -m "not gpu". Para habilitar deliberadamente em uma máquina com CUDA,
+bitsandbytes compatível e pesos/tokenizer Mistral v0.2 já disponíveis em cache:
+
+```powershell
+.\.venv\Scripts\python.exe -m pytest tests/test_generation_gpu.py --run-gpu -m gpu -v -s
+```
+
+O fixture carrega uma instância real para os dois casos sintéticos (resposta com
+citação e abstenção por informação ausente), usando seed 42 e temperatura 0. Os loaders
+reais recebem local_files_only=True: não há download automático. Sem CUDA o teste é
+ignorado com motivo explícito; com CUDA e cache incompleto, falha sem baixar pesos.
+O retriever continua falso para isolar a geração; tokenizer, pesos NF4 e inferência
+são reais. A saída inclui os metadados medidos quando a execução acontece.
+
+As perguntas desse teste não vêm do eval set. Um caso real de abstenção não substitui
+uma avaliação da taxa de abstenção; se a versão v1 falhar, registrar o erro e preservar
+o template antes de criar v2. Neste ambiente CPU, o teste real não foi executado.

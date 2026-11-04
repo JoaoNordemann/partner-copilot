@@ -208,3 +208,5 @@ CLI de consulta:
 Mostra resposta, fontes e metadados. Citação fora do contexto rejeita a resposta com
 código invalid_citation e contagem de referências inválidas.
 [Uso, filtros e códigos de saída](docs/ask-cli.md).
+
+Testes sem GPU: a pipeline usa doubles e confirma que lista vazia não chama o LLM, que o prompt leva IDs/instruções e que citações inválidas e abstenção são detectáveis. Teste real marcado gpu só roda com --run-gpu e pesos em cache; fica fora do CI. [Comandos e escopo](docs/testing.md).
