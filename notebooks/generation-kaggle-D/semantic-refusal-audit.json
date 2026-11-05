@@ -1,0 +1,255 @@
+{
+  "reviewer": "Codex",
+  "origin": "AI qualitative reading",
+  "source_sha256": "5befbf9d0d7087f6d3e4f2c6d2b289f426605c835799ee2e3bc1d42a0a2b77fe",
+  "criterion": "Clear denial of the requested information despite a frozen-labeled relevant document in the actual context. Contradictory markers with an answer are not automatically full refusal.",
+  "clear_refusals_with_evidence": {
+    "numerator": 8,
+    "denominator": 24,
+    "ids": [
+      "q09",
+      "q11",
+      "q12",
+      "q14",
+      "q16",
+      "q21",
+      "q22",
+      "q24"
+    ]
+  },
+  "partial_denials_with_evidence": {
+    "numerator": 2,
+    "denominator": 24,
+    "ids": [
+      "q07",
+      "q19"
+    ]
+  },
+  "formal_abstentions": {
+    "numerator": 1,
+    "denominator": 24
+  },
+  "context_evidence": {
+    "numerator": 22,
+    "denominator": 24
+  },
+  "caveat": "Counts use frozen relevance labels, not newly adjudicated ground truth. q24 has a price-versus-portion ambiguity; excluding it gives 7/24 conservative clear cases. This is AI review, not blind human annotation.",
+  "questions": [
+    {
+      "question_id": "q01",
+      "context_evidence_present": false,
+      "category": "no_context_evidence",
+      "clear_refusal_with_context_evidence": false,
+      "partial_denial_with_context_evidence": false,
+      "formal_abstention": false,
+      "note": "Recusa sem fonte rotulada relevante no contexto; fonte ficou na posicao 6."
+    },
+    {
+      "question_id": "q02",
+      "context_evidence_present": true,
+      "category": "answer_with_spurious_marker_or_noise",
+      "clear_refusal_with_context_evidence": false,
+      "partial_denial_with_context_evidence": false,
+      "formal_abstention": false,
+      "note": "Ha resposta ao tema; marcador ou negacao sobre aspectos nao perguntados nao e contado automaticamente como recusa total."
+    },
+    {
+      "question_id": "q03",
+      "context_evidence_present": true,
+      "category": "answer_with_spurious_marker_or_noise",
+      "clear_refusal_with_context_evidence": false,
+      "partial_denial_with_context_evidence": false,
+      "formal_abstention": false,
+      "note": "Ha resposta ao tema; marcador ou negacao sobre aspectos nao perguntados nao e contado automaticamente como recusa total."
+    },
+    {
+      "question_id": "q04",
+      "context_evidence_present": true,
+      "category": "answer_with_spurious_marker_or_noise",
+      "clear_refusal_with_context_evidence": false,
+      "partial_denial_with_context_evidence": false,
+      "formal_abstention": false,
+      "note": "Ha resposta ao tema; marcador ou negacao sobre aspectos nao perguntados nao e contado automaticamente como recusa total."
+    },
+    {
+      "question_id": "q05",
+      "context_evidence_present": true,
+      "category": "answer_or_justified_limitation",
+      "clear_refusal_with_context_evidence": false,
+      "partial_denial_with_context_evidence": false,
+      "formal_abstention": false,
+      "note": "Ha resposta ao tema; marcador ou negacao sobre aspectos nao perguntados nao e contado automaticamente como recusa total."
+    },
+    {
+      "question_id": "q06",
+      "context_evidence_present": true,
+      "category": "answer_with_spurious_marker_or_noise",
+      "clear_refusal_with_context_evidence": false,
+      "partial_denial_with_context_evidence": false,
+      "formal_abstention": false,
+      "note": "Ha resposta ao tema; marcador ou negacao sobre aspectos nao perguntados nao e contado automaticamente como recusa total."
+    },
+    {
+      "question_id": "q07",
+      "context_evidence_present": true,
+      "category": "partial_answer_with_evidence_denial",
+      "clear_refusal_with_context_evidence": false,
+      "partial_denial_with_context_evidence": true,
+      "formal_abstention": false,
+      "note": "Responde com uma fonte, mas nega criticas explicitas de sabor em outras reviews presentes."
+    },
+    {
+      "question_id": "q08",
+      "context_evidence_present": true,
+      "category": "answer_or_justified_limitation",
+      "clear_refusal_with_context_evidence": false,
+      "partial_denial_with_context_evidence": false,
+      "formal_abstention": false,
+      "note": "Responde a opiniao de preco injusto e limita a generalizacao. A pergunta por que nao recebe causa explicita na fonte; nao contar essa limitacao como recusa indevida clara."
+    },
+    {
+      "question_id": "q09",
+      "context_evidence_present": true,
+      "category": "clear_refusal",
+      "clear_refusal_with_context_evidence": true,
+      "partial_denial_with_context_evidence": false,
+      "formal_abstention": false,
+      "note": "Nega atraso apesar de mais de uma hora esperando, alem do combinado."
+    },
+    {
+      "question_id": "q10",
+      "context_evidence_present": true,
+      "category": "answer_with_spurious_marker_or_noise",
+      "clear_refusal_with_context_evidence": false,
+      "partial_denial_with_context_evidence": false,
+      "formal_abstention": false,
+      "note": "Ha resposta ao tema; marcador ou negacao sobre aspectos nao perguntados nao e contado automaticamente como recusa total."
+    },
+    {
+      "question_id": "q11",
+      "context_evidence_present": true,
+      "category": "clear_refusal",
+      "clear_refusal_with_context_evidence": true,
+      "partial_denial_with_context_evidence": false,
+      "formal_abstention": false,
+      "note": "Nega espera apesar dos 112 minutos; tambem troca duas semanas por dois meses."
+    },
+    {
+      "question_id": "q12",
+      "context_evidence_present": true,
+      "category": "clear_refusal",
+      "clear_refusal_with_context_evidence": true,
+      "partial_denial_with_context_evidence": false,
+      "formal_abstention": false,
+      "note": "Nega reclamacoes de prazo apesar de O prazo passou e o pedido nada de chegar."
+    },
+    {
+      "question_id": "q13",
+      "context_evidence_present": false,
+      "category": "no_context_evidence",
+      "clear_refusal_with_context_evidence": false,
+      "partial_denial_with_context_evidence": false,
+      "formal_abstention": true,
+      "note": "Abstencao da pipeline com contexto vazio, nao recusa semantica gerada pelo LLM."
+    },
+    {
+      "question_id": "q14",
+      "context_evidence_present": true,
+      "category": "clear_refusal",
+      "clear_refusal_with_context_evidence": true,
+      "partial_denial_with_context_evidence": false,
+      "formal_abstention": false,
+      "note": "Reformula a pergunta impondo temperatura/embalagem e recusa, embora as fontes critiquem sabor. Reproduzir o contexto depois nao e responder."
+    },
+    {
+      "question_id": "q15",
+      "context_evidence_present": true,
+      "category": "answer_with_spurious_marker_or_noise",
+      "clear_refusal_with_context_evidence": false,
+      "partial_denial_with_context_evidence": false,
+      "formal_abstention": false,
+      "note": "Ha resposta ao tema; marcador ou negacao sobre aspectos nao perguntados nao e contado automaticamente como recusa total."
+    },
+    {
+      "question_id": "q16",
+      "context_evidence_present": true,
+      "category": "clear_refusal",
+      "clear_refusal_with_context_evidence": true,
+      "partial_denial_with_context_evidence": false,
+      "formal_abstention": false,
+      "note": "Nega criticas de sabor apesar da review gosto ruim no final."
+    },
+    {
+      "question_id": "q17",
+      "context_evidence_present": true,
+      "category": "answer_with_spurious_marker_or_noise",
+      "clear_refusal_with_context_evidence": false,
+      "partial_denial_with_context_evidence": false,
+      "formal_abstention": false,
+      "note": "Ha resposta ao tema; marcador ou negacao sobre aspectos nao perguntados nao e contado automaticamente como recusa total."
+    },
+    {
+      "question_id": "q18",
+      "context_evidence_present": true,
+      "category": "answer_with_spurious_marker_or_noise",
+      "clear_refusal_with_context_evidence": false,
+      "partial_denial_with_context_evidence": false,
+      "formal_abstention": false,
+      "note": "Ha resposta ao tema; marcador ou negacao sobre aspectos nao perguntados nao e contado automaticamente como recusa total."
+    },
+    {
+      "question_id": "q19",
+      "context_evidence_present": true,
+      "category": "partial_answer_with_evidence_denial",
+      "clear_refusal_with_context_evidence": false,
+      "partial_denial_with_context_evidence": true,
+      "formal_abstention": false,
+      "note": "Responde parcialmente, depois nega outros casos apesar de outra fonte rotulada relevante no contexto."
+    },
+    {
+      "question_id": "q20",
+      "context_evidence_present": true,
+      "category": "answer_with_spurious_marker_or_noise",
+      "clear_refusal_with_context_evidence": false,
+      "partial_denial_with_context_evidence": false,
+      "formal_abstention": false,
+      "note": "Ha resposta ao tema; marcador ou negacao sobre aspectos nao perguntados nao e contado automaticamente como recusa total."
+    },
+    {
+      "question_id": "q21",
+      "context_evidence_present": true,
+      "category": "clear_refusal",
+      "clear_refusal_with_context_evidence": true,
+      "partial_denial_with_context_evidence": false,
+      "formal_abstention": false,
+      "note": "Nega recipiente desprotegido apesar da embalagem nao fechada direito."
+    },
+    {
+      "question_id": "q22",
+      "context_evidence_present": true,
+      "category": "clear_refusal",
+      "clear_refusal_with_context_evidence": true,
+      "partial_denial_with_context_evidence": false,
+      "formal_abstention": false,
+      "note": "Nega insatisfacao de sabor apesar das criticas explicitas nas reviews."
+    },
+    {
+      "question_id": "q23",
+      "context_evidence_present": true,
+      "category": "off_topic_no_refusal",
+      "clear_refusal_with_context_evidence": false,
+      "partial_denial_with_context_evidence": false,
+      "formal_abstention": false,
+      "note": "Resposta fora do assunto (embalagem), sem recusa explicita; nao contar como abstencao."
+    },
+    {
+      "question_id": "q24",
+      "context_evidence_present": true,
+      "category": "clear_refusal",
+      "clear_refusal_with_context_evidence": true,
+      "partial_denial_with_context_evidence": false,
+      "formal_abstention": false,
+      "note": "Nega evidencia de custo/porcao; a fonte rotulada relevante critica preco. Ressalva: quantidade/porcao nao e explicitada na fonte; rotulo merece auditoria separada."
+    }
+  ]
+}

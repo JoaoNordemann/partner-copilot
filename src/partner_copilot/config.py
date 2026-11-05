@@ -60,7 +60,9 @@ class Settings(BaseSettings):
 
     context_k: int = Field(default=5, ge=1, le=50)
     prompt_version: str = DEFAULT_PROMPT_VERSION
-    parser_version: Literal["parser-v1", "parser-v2", "parser-json-v1"] = DEFAULT_PARSER_VERSION
+    parser_version: Literal["parser-v1", "parser-v2", "parser-json-v1", "parser-v3"] = (
+        DEFAULT_PARSER_VERSION
+    )
 
     # --- Geração ---------------------------------------------------------
     max_new_tokens: int = Field(default=400, ge=16, le=2048)

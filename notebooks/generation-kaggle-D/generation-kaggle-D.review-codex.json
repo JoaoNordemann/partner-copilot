@@ -1,0 +1,69 @@
+{
+  "reviewer": "Codex",
+  "origin": "AI",
+  "completed": true,
+  "human_review_completed": false,
+  "source_sha256": "5befbf9d0d7087f6d3e4f2c6d2b289f426605c835799ee2e3bc1d42a0a2b77fe",
+  "reviews": [
+    {
+      "question_id": "q01",
+      "factual_support": "sim",
+      "abstention_adequacy": "sim",
+      "notes": "Nao ha reclamacao explicita de embalagem nos cinco trechos. A recusa principal e adequada, mas a lista de IDs e o marcador de colchete simples sao invalidos. A fonte relevante estava fora do contexto."
+    },
+    {
+      "question_id": "q09",
+      "factual_support": "nao",
+      "abstention_adequacy": "nao",
+      "notes": "Nega atraso apesar de rev_000212 dizer Mais de uma hora esperando, muito alem do combinado. Tambem produz frases e tags em vez de IDs e marcador correto."
+    },
+    {
+      "question_id": "q13",
+      "factual_support": "sim",
+      "abstention_adequacy": "sim",
+      "notes": "Contexto vazio, sem nova chamada nem chamada original ao LLM. Abster e adequado ao contexto; a evidencia existente na base foi perdida pelo retrieval."
+    },
+    {
+      "question_id": "q22",
+      "factual_support": "nao",
+      "abstention_adequacy": "nao",
+      "notes": "Nega reclamacoes de sabor presentes em rev_001051 e rev_002684, alem da insatisfacao em rev_002234. A exclusao apenas por causa do sabor nao consta da pergunta. Mistura texto, lista de IDs e marcador."
+    },
+    {
+      "question_id": "q25",
+      "factual_support": "parcial",
+      "abstention_adequacy": "sim quanto ao fato principal",
+      "notes": "Nenhum trecho relata alergia. A resposta reconhece isso, mas tambem afirma que os cinco trechos comentam embalagem, o que nao ocorre. Mantem escapes Unicode literais e nao usa o marcador exigido."
+    },
+    {
+      "question_id": "q26",
+      "factual_support": "sim, limitado ao contexto",
+      "abstention_adequacy": "sim quanto ao fato principal",
+      "notes": "Nenhum trecho informa reembolso Pix. A resposta reconhece a insuficiencia, mas conserva prefixos review_ e agrupamento de IDs, sem marcador de abstencao."
+    },
+    {
+      "question_id": "q27",
+      "factual_support": "sim, limitado ao contexto",
+      "abstention_adequacy": "sim quanto ao fato principal",
+      "notes": "Nao ha receita completa ou comprovacao de ausencia de gluten. A recusa do fato principal e adequada; fontes com prefixo errado e escapes literais continuam invalidas."
+    },
+    {
+      "question_id": "q28",
+      "factual_support": "sim, limitado ao contexto",
+      "abstention_adequacy": "sim quanto ao fato principal",
+      "notes": "Nenhum trecho fala de insetos. A recusa e semanticamente adequada; o texto conserva escapes literais e cita AVALIACOES_JSONL, que nao e ID de review."
+    },
+    {
+      "question_id": "q29",
+      "factual_support": "sim",
+      "abstention_adequacy": "sim",
+      "notes": "Contexto vazio; absteve sem LLM. Nao atribuir o resultado a geracao do modelo."
+    },
+    {
+      "question_id": "q30",
+      "factual_support": "sim",
+      "abstention_adequacy": "sim",
+      "notes": "Contexto vazio para o periodo solicitado; absteve sem LLM. Nao houve correcao nem geracao nesse caso."
+    }
+  ]
+}

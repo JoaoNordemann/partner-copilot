@@ -519,3 +519,35 @@ usam corpus ja conhecido e rotulos definidos por IA a partir do texto; sao checa
 adicional, nao holdout independente de documentos nem gold humano. Congelar a
 primeira versao do prompt antes da criacao das perguntas. Nenhum resultado de GPU
 sera anunciado antes da execucao. Timebox maximo de duas horas para esta etapa.
+
+
+## V3 congelada: JSON com trecho literal e primeiro objeto
+
+Preservar versoes anteriores. partner-copilot-v3 e parser-v3 sao novos registros.
+A consistencia estrutural abstem == (afirmacoes vazias) ja existe e sera mantida;
+ela nao detecta n10 quando a propria afirmacao diz ausencia mas abstem=false.
+Nao converter flags por heuristica textual. Sem resposta, o modelo deve produzir
+abstem=true e afirmacoes=[]; coerencia semantica segue sujeita a leitura.
+
+Parser v3 exige que o texto comece com objeto JSON (apos whitespace), usa raw_decode
+para o primeiro objeto completo e ignora sufixo, registrando bytes/caracteres
+ignorados e preservando a saida bruta. Nao usar stop em } porque objetos aninhados
+seriam cortados. Chaves duplicadas e tipos/constantes invalidos seguem rejeitados.
+Cada afirmacao traz fontes [{review_id, trecho}]. Cada ID deve estar no contexto,
+e cada trecho nao vazio deve aparecer literalmente na review correspondente.
+Nao normalizar o trecho, acentos ou espacos. O teste verifica a existencia do
+excerto, nao entailment entre excerto e afirmacao, nem relevancia para a pergunta.
+Um trecho irrelevante real ainda pode sustentar uma afirmacao inventada no parser;
+nao declarar que a regra elimina automaticamente n09.
+
+Contexto v3: ate 8 reviews; retrieval_k=8, min_score=0.25, seed=42, temperatura=0,
+max_new_tokens=512 para acomodar JSON com trechos. Mudanca conjunta de prompt,
+parser, contexto e reserva de geracao: nao e ablacao causal isolada. A janela
+32768 nao estava esgotada: B mediu 711-1236 tokens e JSON v1 638-1020; 1550 nao
+e uma medida fixa de instrucoes. Registrar contagens reais por pergunta.
+
+Congelar prompt/parser antes de criar n11-n20 (3 negativas). Nao executar inferencia
+exploratoria nem ajustar usando n11-n20; testes de geracao usam fixtures inventadas.
+Mesma base conhecida e rotulos por IA: checagem nova de perguntas, nao gold humano
+cego ou holdout de documentos. Execucao final: primeiro novas, depois as 30 originais
+marcadas contaminadas, mesma instancia de modelo, arquivos distintos, sem retry.

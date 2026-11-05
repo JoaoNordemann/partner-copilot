@@ -26,6 +26,15 @@
       "examples": true,
       "prior_exposure": "Designed after v1/v2/C/D results on the original 30 questions. Frozen before creation of the ten new verification questions; corpus already known.",
       "model_generation_results_used_for_tuning": true
+    },
+    "partner-copilot-v3": {
+      "file": "partner-copilot-v3.txt",
+      "sha256": "c602b3a7ce341f66d2e43f77c49072e6c74a19b7442ba3d6f7d4d22d93aac6eb",
+      "role": "user",
+      "data_format": "escaped-jsonl-v1",
+      "examples": true,
+      "prior_exposure": "Designed after old 30 and n01-n10 results. Freeze before n11-n20 generation. New-question final check and contaminated old-set record are separate.",
+      "model_generation_results_used_for_tuning": true
     }
   },
   "archive": {

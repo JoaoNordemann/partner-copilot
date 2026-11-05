@@ -34,6 +34,8 @@ def parse_generation(
         from partner_copilot.generation.output_v1 import parse_generation as parse
     elif parser_version == "parser-v2":
         from partner_copilot.generation.output_v2 import parse_generation as parse
-    else:
+    elif parser_version == "parser-json-v1":
         from partner_copilot.generation.output_json_v1 import parse_generation as parse
+    else:
+        from partner_copilot.generation.output_v3 import parse_generation as parse
     return parse(text, docs)

@@ -37,7 +37,9 @@ def build_parser() -> argparse.ArgumentParser:
     ask.add_argument("--seed", type=int)
     ask.add_argument("--max-new-tokens", type=int)
     ask.add_argument("--prompt-version")
-    ask.add_argument("--parser-version", choices=("parser-v1", "parser-v2", "parser-json-v1"))
+    ask.add_argument(
+        "--parser-version", choices=("parser-v1", "parser-v2", "parser-json-v1", "parser-v3")
+    )
     ask.add_argument(
         "--json", action="store_true", help="JSON on stdout for answers or application errors"
     )

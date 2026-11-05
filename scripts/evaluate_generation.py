@@ -90,7 +90,9 @@ def main() -> int:
     parser.add_argument("--eval-dir", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--prompt-version")
-    parser.add_argument("--parser-version", choices=("parser-v1", "parser-v2", "parser-json-v1"))
+    parser.add_argument(
+        "--parser-version", choices=("parser-v1", "parser-v2", "parser-json-v1", "parser-v3")
+    )
     parser.add_argument("--resume", action="store_true")
     parser.add_argument("--check-only", action="store_true")
     parser.add_argument("--summarize-only", action="store_true")

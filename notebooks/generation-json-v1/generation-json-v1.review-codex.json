@@ -1,0 +1,157 @@
+{
+  "reviewer": "Codex",
+  "origin": "AI",
+  "scope": "Qualitative reading of all ten raw responses and their contexts, separate from the frozen automatic metrics. Human confirmation pending.",
+  "reviewed_ids": [
+    "n01",
+    "n02",
+    "n03",
+    "n04",
+    "n05",
+    "n06",
+    "n07",
+    "n08",
+    "n09",
+    "n10"
+  ],
+  "ai_review_completed": true,
+  "human_review_completed": false,
+  "source_sha256": "29c1511078ab6293e35fa6d109ecec4d395cee919025fedc229d74fc87af4960",
+  "reviews": [
+    {
+      "question_id": "n01",
+      "reviewer": "Codex",
+      "origin": "AI",
+      "schema_valid": true,
+      "ids_in_context": true,
+      "parser_accepted": true,
+      "factual_support": "sim",
+      "task_alignment": "sim",
+      "abstention_adequacy": "nao se aplica",
+      "notes": "A afirmacao sobre porcao e valor reproduz rev_001076. Elogio a porcao nao implica elogio de sabor, e a resposta nao faz essa inferencia. A primeira pessoa vem da review; uma exibicao de produto pode explicitar que e relato do cliente."
+    },
+    {
+      "question_id": "n02",
+      "reviewer": "Codex",
+      "origin": "AI",
+      "schema_valid": false,
+      "ids_in_context": null,
+      "parser_accepted": false,
+      "factual_support": "sim",
+      "task_alignment": "sim",
+      "abstention_adequacy": "nao se aplica",
+      "notes": "O elogio de custo-beneficio esta em rev_000799. A resposta repete a mesma ideia e depois copia a fonte. Conteudo principal apoiado, mas texto apos JSON invalida a saida inteira; nenhuma recuperacao de prefixo foi aplicada."
+    },
+    {
+      "question_id": "n03",
+      "reviewer": "Codex",
+      "origin": "AI",
+      "schema_valid": false,
+      "ids_in_context": null,
+      "parser_accepted": false,
+      "factual_support": "sim",
+      "task_alignment": "sim",
+      "abstention_adequacy": "nao se aplica",
+      "notes": "As duas afirmacoes resumem preco favoravel. rev_002759 diz que o valor coube no bolso; preco estava bom e uma parafrase, nao citacao literal. A expressao exata preco estava bom aparece em rev_001629, tambem no contexto. O bloco Fonte apos o JSON causa rejeicao de esquema."
+    },
+    {
+      "question_id": "n04",
+      "reviewer": "Codex",
+      "origin": "AI",
+      "schema_valid": true,
+      "ids_in_context": true,
+      "parser_accepted": true,
+      "factual_support": "sim",
+      "task_alignment": "sim",
+      "abstention_adequacy": "nao se aplica",
+      "notes": "rev_000400 relata explicitamente 26 minutos e antes do previsto. A resposta atende as duas partes da pergunta sem deduzir prazo da temperatura."
+    },
+    {
+      "question_id": "n05",
+      "reviewer": "Codex",
+      "origin": "AI",
+      "schema_valid": true,
+      "ids_in_context": true,
+      "parser_accepted": true,
+      "factual_support": "sim",
+      "task_alignment": "sim",
+      "abstention_adequacy": "nao se aplica",
+      "notes": "rev_002370 diz que a entrega foi rapida, uns 20 minutos. A resposta usa aproximadamente vinte minutos e cita a fonte correta."
+    },
+    {
+      "question_id": "n06",
+      "reviewer": "Codex",
+      "origin": "AI",
+      "schema_valid": true,
+      "ids_in_context": true,
+      "parser_accepted": true,
+      "factual_support": "parcial",
+      "task_alignment": "parcial",
+      "abstention_adequacy": "nao se aplica",
+      "notes": "A fonte diz O valor coube no bolso. A resposta muda isso para valor considerado valido, expressao ambigua que nao preserva com precisao a ideia de acessibilidade. Nao inventa um preco numerico, mas a reformulacao merece revisao humana; nao contar automaticamente como factualidade plena."
+    },
+    {
+      "question_id": "n07",
+      "reviewer": "Codex",
+      "origin": "AI",
+      "schema_valid": true,
+      "ids_in_context": true,
+      "parser_accepted": true,
+      "factual_support": "sim",
+      "task_alignment": "sim",
+      "abstention_adequacy": "nao se aplica",
+      "notes": "O trecho Falei com o restaurante e foram bem prestativos esta em rev_002787. Fonte e aspecto correspondem a pergunta; a primeira pessoa e reproduzida do cliente."
+    },
+    {
+      "question_id": "n08",
+      "reviewer": "Codex",
+      "origin": "AI",
+      "schema_valid": false,
+      "ids_in_context": null,
+      "parser_accepted": false,
+      "factual_support": "nao",
+      "task_alignment": "nao",
+      "abstention_adequacy": "nao",
+      "notes": "A pergunta pede numero de lote industrial. O modelo responde sobre entrega rapida, que nao responde ao lote. Na explicacao adicional, afirma ausencia de informacao de temperatura e sabor, contrariando as reviews: rev_001478 elogia sabor e rev_002370 diz que veio refrigerado. Precisava abster; ainda acrescentou texto apos o JSON."
+    },
+    {
+      "question_id": "n09",
+      "reviewer": "Codex",
+      "origin": "AI",
+      "schema_valid": true,
+      "ids_in_context": true,
+      "parser_accepted": true,
+      "factual_support": "nao",
+      "task_alignment": "nao",
+      "abstention_adequacy": "nao",
+      "notes": "O modelo afirma que houve analise microbiologica em algum laboratorio. rev_002142 apenas relata temperatura, sabor, custo-beneficio e 115 minutos de atraso. Nenhum trecho comprova exame. E uma afirmacao factual sem apoio, aceita pelo esquema e pela verificacao de ID. A fonte existe, mas nao sustenta a afirmacao. Precisava abster."
+    },
+    {
+      "question_id": "n10",
+      "reviewer": "Codex",
+      "origin": "AI",
+      "schema_valid": true,
+      "ids_in_context": true,
+      "parser_accepted": true,
+      "factual_support": "sim, limitado ao contexto",
+      "task_alignment": "parcial: reconhece ausencia de CNPJ",
+      "abstention_adequacy": "nao no contrato; recusa semantica com flag errada",
+      "notes": "Nao ha CNPJ nos quatro trechos. O conteudo reconhece a falta de informacao, mas usa abstem=false e uma afirmacao com fontes em vez de abstem=true e afirmacoes vazias. Continua falha na metrica de abstencao. A conclusao de ausencia deve ser limitada ao contexto, nao tomada como garantia sobre todas as avaliacoes existentes."
+    }
+  ],
+  "schema_failure_causes": {
+    "n02": "text after complete JSON",
+    "n03": "text after complete JSON",
+    "n08": "text after complete JSON"
+  },
+  "runtime": {
+    "gpu": [
+      "Tesla T4"
+    ],
+    "source_commit": "b6c2ed69ce80e370a1251d2810f10ca9bfff74aa",
+    "generation_total_ms": 72913.12672299989,
+    "generation_median_ms": 6184.890750999955,
+    "single_model_load_latency_ms": 99491.99820900003,
+    "max_token_cap_hits": 0
+  }
+}

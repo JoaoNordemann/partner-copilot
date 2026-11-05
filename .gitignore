@@ -51,3 +51,8 @@ data/eval/json-verification-v1/*
 !data/eval/json-verification-v1/manifest.json
 
 .codex-remote-attachments/
+
+!data/eval/v3-final-check/
+data/eval/v3-final-check/*
+!data/eval/v3-final-check/questions.jsonl
+!data/eval/v3-final-check/manifest.json

@@ -1,0 +1,54 @@
+{
+  "complete": true,
+  "questions": 10,
+  "llm_calls": 10,
+  "schema_valid": {
+    "numerator": 7,
+    "denominator": 10,
+    "rate": 0.7
+  },
+  "ids_in_context": {
+    "numerator": 7,
+    "denominator": 7,
+    "rate": 1.0
+  },
+  "correct_negative_abstention": {
+    "numerator": 0,
+    "denominator": 3,
+    "rate": 0.0
+  },
+  "negative_llm_calls": 3,
+  "correct_negative_llm_abstention": {
+    "numerator": 0,
+    "denominator": 3,
+    "rate": 0.0
+  },
+  "retriever_empty_abstentions": 0,
+  "undue_positive_abstention": {
+    "numerator": 0,
+    "denominator": 7,
+    "rate": 0.0
+  },
+  "parser_accepted_llm": 7,
+  "errors": 3,
+  "context_evidence_positive": {
+    "numerator": 7,
+    "denominator": 7,
+    "rate": 1.0
+  },
+  "content_supported": null,
+  "factual_review_completed": false,
+  "review_ids": [
+    "n01",
+    "n02",
+    "n03",
+    "n04",
+    "n05",
+    "n06",
+    "n07",
+    "n08",
+    "n09",
+    "n10"
+  ],
+  "corrective_calls": 0
+}

@@ -250,9 +250,27 @@ mensagens sem retorno. Aceitacao e sustentacao factual sao medidas separadas.
 A estrategia nova e partner-copilot-json-v1 + parser-json-v1: Pydantic valida o
 JSON, IDs sao conferidos diretamente no contexto e citacoes sao renderizadas por
 codigo. Sem retry. A execucao dedicada usa apenas dez perguntas novas, tres negativas;
-nao usa as 30 antigas para medir esse prompt. Ainda nao ha resultados reais dessa
-checagem. Defaults legados continuam disponiveis para reproducao, e o novo runner
+nao usa as 30 antigas para medir esse prompt. A primeira checagem JSON teve 7/10 saidas validas no esquema, IDs no contexto em
+7/7 respostas estruturadas e abstencao correta em 0/3 negativas. n09 passou no
+parser, mas afirmou uma analise laboratorial sem evidencia. Resultados e leitura
+qualitativa estao em [verificacao JSON](notebooks/generation-json-v1/README.md). Defaults legados continuam disponiveis para reproducao, e o novo runner
 seleciona explicitamente o par JSON.
 
 [Analise de falhas e citacoes](docs/generation-output-analysis.md) e
 [como executar a checagem JSON](docs/structured-verification.md).
+
+
+### Rodada final V3
+
+O modelo corrompeu o ID em alguns casos e ignorou o formato na maioria das 14
+rejeicoes de citacao de D; nao foi encontrada review existente citada fora do
+contexto nesses casos. Resultado negativo preservado, retry descartado.
+
+partner-copilot-v3 e parser-v3 usam o primeiro objeto JSON completo, consistencia
+estrutural de abstencao e fonte com trecho literal conferido por codigo. O sufixo
+ignorado fica registrado; nao ha reparo de introducao ou nova tentativa. Trecho
+literal nao comprova que a afirmacao decorre dele ou responda a pergunta.
+
+A rodada congelada usa n11-n20 (3 negativas) primeiro e registra separadamente as
+30 antigas com contaminated=true. Contexto de ate oito reviews. Nenhum resultado
+real V3 foi obtido durante a preparacao local. [Protocolo e limites](docs/final-v3.md).

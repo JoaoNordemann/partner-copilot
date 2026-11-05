@@ -19,6 +19,14 @@
         "output_json_v1.py": "715c4a0b86a545421f0177dfcc22fdf227a1f1aaedf1de23f7a3a49257694d44"
       },
       "policy": "Strict JSON/Pydantic schema, direct source membership, citations rendered by code. No retry."
+    },
+    "parser-v3": {
+      "files": {
+        "output_v1.py": "51138a231bb47c17e71f8d23fb0f8549a0983a2a1a3cec7679831778e0e1031c",
+        "output_json_v1.py": "715c4a0b86a545421f0177dfcc22fdf227a1f1aaedf1de23f7a3a49257694d44",
+        "output_v3.py": "8acd8fa5d3d506dcf307449dedd1c04e09cb85642f0d194a44bdd1b4f1d98c2e"
+      },
+      "policy": "First JSON object only; consistent abstention; exact source IDs and literal excerpts. No entailment or relevance guarantee."
     }
   }
 }
