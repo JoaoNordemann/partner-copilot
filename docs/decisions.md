@@ -472,3 +472,24 @@ Uma alteracao de comportamento exige uma nova versao. Registrar no README:
 v2 foi criada depois de ver a v1 nas mesmas 30 perguntas. Nao e avaliacao independente.
 Comparacoes: prompt v1/parser v1, prompt v1/parser v2, prompt v2/parser v1 e prompt v2/parser v2.
 Nenhuma nova rodada ou resultado de GPU sera anunciado sem execucao real.
+
+
+## Diagnostico de abstencao e experimento corretivo D
+
+Decisao anterior a implementacao: nao alterar prompt-v2, parser-v1 ou parser-v2.
+Metricas novas sao diagnosticas sobre texto bruto: estrita exige saida inteira
+igual ao marcador apos strip; tolerante exige marcador literal presente e nenhuma
+citacao sintaticamente valida cujo ID exista no contexto. Reportar tambem a mesma
+analise apos normalizar underscores, como visao separada e declarada. A tolerante
+nao autoriza aceitar respostas na pipeline e nao comprova ausencia de alucinacao.
+Abstencoes sem LLM sao contabilizadas separadamente e nas taxas de pipeline.
+
+D sera experimento separado: reutilizar a primeira saida bruta de B e revalidar
+com parser-v2 (baseline C), sem nova busca e sem gerar a primeira resposta novamente.
+So se a validacao falhar, permitir UMA chamada corretiva, com o erro e a saida anterior
+como dado delimitado/escapado. Prompt corretivo tem versao e hash proprios. Validar
+a correcao com o mesmo parser. Preservar cada tentativa em checkpoint duravel antes
+de prosseguir, inclusive a primeira antes da chamada corretiva. Na retomada, uma
+chamada sem resultado salvo fica indeterminada e nao e repetida automaticamente.
+Registrar latencia e VRAM da nova chamada separadas das metricas originais de B.
+Falhas de runtime nao disparam retry de contrato. Nenhum resultado real de D sem GPU.

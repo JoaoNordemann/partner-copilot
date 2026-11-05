@@ -236,5 +236,5 @@ parser-v2`. A CLI `partner-copilot ask` aceita as mesmas duas flags. Tambem e po
 usar as variaveis de ambiente PROMPT_VERSION e PARSER_VERSION.
 Versoes e hashes entram na identidade do experimento (schema 2), impedindo retomada
 com outra combinacao. Checkpoints v1 existentes permanecem intactos; para novas
-execucoes use outro arquivo. Metricas tolerantes e retry nao foram implementados
-nesta etapa. Detalhes: [versionamento da geracao](docs/generation-versioning.md).
+execucoes use outro arquivo. Metricas estrita/tolerante e o experimento corretivo D estao descritos em
+[geracao corretiva](docs/generation-correction.md); a tolerante nao altera o parser. Detalhes: [versionamento da geracao](docs/generation-versioning.md).
