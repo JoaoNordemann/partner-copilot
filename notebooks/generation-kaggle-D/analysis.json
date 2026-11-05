@@ -1,0 +1,41 @@
+{
+  "reviewer": "Codex",
+  "origin": "AI",
+  "scope": "Integrity checks and C/D comparison, plus qualitative inspection of the two accepted outputs only; not a human review of all corrected outputs.",
+  "questions": 30,
+  "ledger_events": 90,
+  "corrections_requested": 25,
+  "correction_outputs_saved": 25,
+  "corrections_accepted": 0,
+  "corrections_rejected": 25,
+  "accepted_llm_outputs": 2,
+  "llm_outputs": 27,
+  "accepted_ids": [
+    "q05",
+    "q23"
+  ],
+  "no_llm_ids": [
+    "q13",
+    "q29",
+    "q30"
+  ],
+  "error_types": {
+    "InvalidCitationError": 14,
+    "GenerationContractError": 11
+  },
+  "error_messages": {
+    "Citation references a review outside the context": 14,
+    "Abstention marker must be the complete output": 6,
+    "Every output line must end with a source citation": 5
+  },
+  "correction_generation_latency_ms": 289872.65823500056,
+  "correction_wall_latency_ms": 405662.3637640007,
+  "source_sha256": {
+    "generation-kaggle-D.jsonl.attempts.jsonl": "27bf08bf7e2498460c75fed9dca98a0f05ac57cc4433886c89805d984516f690",
+    "generation-kaggle-D.jsonl": "5befbf9d0d7087f6d3e4f2c6d2b289f426605c835799ee2e3bc1d42a0a2b77fe",
+    "generation-kaggle-D.summary.json": "3ca6bfc5e0ce0040d350b55f8b30ca0e27bdd10055a152f82d6e8f04c0146723"
+  },
+  "source_B_unchanged": true,
+  "contexts_equal_to_B": true,
+  "interpretation": "No improvement in strict acceptance over C. q23 passes parser but answers packaging instead of unanswered messages; acceptance is not factual or task accuracy."
+}

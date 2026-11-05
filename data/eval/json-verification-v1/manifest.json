@@ -1,0 +1,25 @@
+{
+  "version": "json-verification-v1",
+  "question_count": 10,
+  "negative_count": 3,
+  "question_ids": [
+    "n01",
+    "n02",
+    "n03",
+    "n04",
+    "n05",
+    "n06",
+    "n07",
+    "n08",
+    "n09",
+    "n10"
+  ],
+  "questions_sha256_lf": "ceb7ee715426dcd553d89d0afacb627fc2822346db72f4d909bb141b51bde90d",
+  "corpus_relative_path": "../human-v2/corpus.jsonl",
+  "corpus_sha256_lf": "74f04a4bf0407de3a4302f9a869dbeadde6541bd9fa56bb74e5e2fe0a832c95f",
+  "prompt_version": "partner-copilot-json-v1",
+  "prompt_sha256": "1f6ff34db4deb9b3bea0af927b3741640906effa23e80aeb920e9eafa58cfdbe",
+  "parser_version": "parser-json-v1",
+  "label_origin": "AI textual judgments; human confirmation pending",
+  "limitations": "New questions frozen before first JSON generation, same known 100-review corpus and domain. Not a document-level heldout or independent human gold. Do not tune on these outputs."
+}

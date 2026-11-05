@@ -17,6 +17,15 @@
       "examples": true,
       "prior_exposure": "v2 was designed after reviewing v1 on the same 30 questions; not held out.",
       "model_generation_results_used_for_tuning": true
+    },
+    "partner-copilot-json-v1": {
+      "file": "partner-copilot-json-v1.txt",
+      "sha256": "1f6ff34db4deb9b3bea0af927b3741640906effa23e80aeb920e9eafa58cfdbe",
+      "role": "user",
+      "data_format": "escaped-jsonl-v1",
+      "examples": true,
+      "prior_exposure": "Designed after v1/v2/C/D results on the original 30 questions. Frozen before creation of the ten new verification questions; corpus already known.",
+      "model_generation_results_used_for_tuning": true
     }
   },
   "archive": {

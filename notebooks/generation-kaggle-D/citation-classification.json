@@ -1,0 +1,352 @@
+{
+  "source_sha256": "5befbf9d0d7087f6d3e4f2c6d2b289f426605c835799ee2e3bc1d42a0a2b77fe",
+  "classification_version": "citation-diagnostic-v1",
+  "reviewer": "Codex",
+  "origin": "AI/code",
+  "primary_category_counts": {
+    "grouped_context_ids": 6,
+    "altered_or_unknown_id": 2,
+    "marker_as_citation": 4,
+    "boundary_as_citation": 2
+  },
+  "all_error_messages": {
+    "Citation references a review outside the context": 14,
+    "Abstention marker must be the complete output": 6,
+    "Every output line must end with a source citation": 5
+  },
+  "real_outside_context_cases": 0,
+  "cases": [
+    {
+      "question_id": "q01",
+      "primary_category": "grouped_context_ids",
+      "rejected_tokens_after_parser_v2_normalization": [
+        "rev_000294, rev_002549, rev_000650, rev_000673, rev_002980",
+        "SEM_EVIDENCIA"
+      ],
+      "context_ids": [
+        "rev_000294",
+        "rev_002980",
+        "rev_002549",
+        "rev_000673",
+        "rev_000650"
+      ],
+      "mentioned_review_ids": [
+        "rev_000294",
+        "rev_000650",
+        "rev_000673",
+        "rev_002549",
+        "rev_002980"
+      ],
+      "real_ids_outside_context": [],
+      "altered_or_unknown_ids": [],
+      "grouped_ids": true,
+      "marker_as_citation": true,
+      "boundary_as_citation": false,
+      "escaped_underscores_present_but_already_normalized": false
+    },
+    {
+      "question_id": "q02",
+      "primary_category": "grouped_context_ids",
+      "rejected_tokens_after_parser_v2_normalization": [
+        "rev_000799, rev_002257",
+        "rev_001685, rev_002089",
+        "SEM_EVIDENCIA"
+      ],
+      "context_ids": [
+        "rev_002257",
+        "rev_000799",
+        "rev_002289",
+        "rev_001685",
+        "rev_002089"
+      ],
+      "mentioned_review_ids": [
+        "rev_000799",
+        "rev_001685",
+        "rev_002089",
+        "rev_002257"
+      ],
+      "real_ids_outside_context": [],
+      "altered_or_unknown_ids": [],
+      "grouped_ids": true,
+      "marker_as_citation": true,
+      "boundary_as_citation": false,
+      "escaped_underscores_present_but_already_normalized": true
+    },
+    {
+      "question_id": "q04",
+      "primary_category": "altered_or_unknown_id",
+      "rejected_tokens_after_parser_v2_normalization": [
+        "rev_000345, rev_1212",
+        "SEM_EVIDENCIA"
+      ],
+      "context_ids": [
+        "rev_000345",
+        "rev_000400",
+        "rev_001212",
+        "rev_001829",
+        "rev_002438"
+      ],
+      "mentioned_review_ids": [
+        "rev_000345",
+        "rev_1212"
+      ],
+      "real_ids_outside_context": [],
+      "altered_or_unknown_ids": [
+        "rev_1212"
+      ],
+      "grouped_ids": true,
+      "marker_as_citation": true,
+      "boundary_as_citation": false,
+      "escaped_underscores_present_but_already_normalized": true
+    },
+    {
+      "question_id": "q08",
+      "primary_category": "marker_as_citation",
+      "rejected_tokens_after_parser_v2_normalization": [
+        "SEM_EVIDENCIA"
+      ],
+      "context_ids": [
+        "rev_002833"
+      ],
+      "mentioned_review_ids": [],
+      "real_ids_outside_context": [],
+      "altered_or_unknown_ids": [],
+      "grouped_ids": false,
+      "marker_as_citation": true,
+      "boundary_as_citation": false,
+      "escaped_underscores_present_but_already_normalized": true
+    },
+    {
+      "question_id": "q09",
+      "primary_category": "boundary_as_citation",
+      "rejected_tokens_after_parser_v2_normalization": [
+        "\"Nao ha evidencia sobre reclamos de atraso do Burger do Zé na base de dados fornecida\"",
+        "PERGUNTA_JSON",
+        "\"Nao ha informacao sobre atraso especifico do Burger do Zé nas avaliacoes fornecidas\"",
+        "\"Avaliacoes_JSONL\""
+      ],
+      "context_ids": [
+        "rev_000212"
+      ],
+      "mentioned_review_ids": [],
+      "real_ids_outside_context": [],
+      "altered_or_unknown_ids": [],
+      "grouped_ids": false,
+      "marker_as_citation": false,
+      "boundary_as_citation": true,
+      "escaped_underscores_present_but_already_normalized": false
+    },
+    {
+      "question_id": "q10",
+      "primary_category": "marker_as_citation",
+      "rejected_tokens_after_parser_v2_normalization": [
+        "SEM_EVIDENCIA"
+      ],
+      "context_ids": [
+        "rev_002237"
+      ],
+      "mentioned_review_ids": [],
+      "real_ids_outside_context": [],
+      "altered_or_unknown_ids": [],
+      "grouped_ids": false,
+      "marker_as_citation": true,
+      "boundary_as_citation": false,
+      "escaped_underscores_present_but_already_normalized": true
+    },
+    {
+      "question_id": "q14",
+      "primary_category": "marker_as_citation",
+      "rejected_tokens_after_parser_v2_normalization": [
+        "SEM_EVIDENCIA"
+      ],
+      "context_ids": [
+        "rev_001076",
+        "rev_002549",
+        "rev_000813"
+      ],
+      "mentioned_review_ids": [],
+      "real_ids_outside_context": [],
+      "altered_or_unknown_ids": [],
+      "grouped_ids": false,
+      "marker_as_citation": true,
+      "boundary_as_citation": false,
+      "escaped_underscores_present_but_already_normalized": true
+    },
+    {
+      "question_id": "q15",
+      "primary_category": "grouped_context_ids",
+      "rejected_tokens_after_parser_v2_normalization": [
+        "rev_001685, rev_002089",
+        "SEM_EVIDENCIA"
+      ],
+      "context_ids": [
+        "rev_001685",
+        "rev_002089",
+        "rev_001291",
+        "rev_000796"
+      ],
+      "mentioned_review_ids": [
+        "rev_001685",
+        "rev_002089"
+      ],
+      "real_ids_outside_context": [],
+      "altered_or_unknown_ids": [],
+      "grouped_ids": true,
+      "marker_as_citation": true,
+      "boundary_as_citation": false,
+      "escaped_underscores_present_but_already_normalized": true
+    },
+    {
+      "question_id": "q17",
+      "primary_category": "grouped_context_ids",
+      "rejected_tokens_after_parser_v2_normalization": [
+        "rev_000934, rev_001552"
+      ],
+      "context_ids": [
+        "rev_000934",
+        "rev_000345",
+        "rev_002015",
+        "rev_001552",
+        "rev_001916"
+      ],
+      "mentioned_review_ids": [
+        "rev_000934",
+        "rev_001552"
+      ],
+      "real_ids_outside_context": [],
+      "altered_or_unknown_ids": [],
+      "grouped_ids": true,
+      "marker_as_citation": false,
+      "boundary_as_citation": false,
+      "escaped_underscores_present_but_already_normalized": true
+    },
+    {
+      "question_id": "q18",
+      "primary_category": "grouped_context_ids",
+      "rejected_tokens_after_parser_v2_normalization": [
+        "rev_000267, rev_002302",
+        "SEM_EVIDENCIA"
+      ],
+      "context_ids": [
+        "rev_000267",
+        "rev_002302",
+        "rev_001190",
+        "rev_001551",
+        "rev_002959"
+      ],
+      "mentioned_review_ids": [
+        "rev_000267",
+        "rev_002302"
+      ],
+      "real_ids_outside_context": [],
+      "altered_or_unknown_ids": [],
+      "grouped_ids": true,
+      "marker_as_citation": true,
+      "boundary_as_citation": false,
+      "escaped_underscores_present_but_already_normalized": false
+    },
+    {
+      "question_id": "q20",
+      "primary_category": "grouped_context_ids",
+      "rejected_tokens_after_parser_v2_normalization": [
+        "SEM_EVIDENCIA",
+        "rev_002675, rev_002494, rev_001998"
+      ],
+      "context_ids": [
+        "rev_002142",
+        "rev_002494",
+        "rev_002675",
+        "rev_001998",
+        "rev_001339"
+      ],
+      "mentioned_review_ids": [
+        "rev_001998",
+        "rev_002494",
+        "rev_002675"
+      ],
+      "real_ids_outside_context": [],
+      "altered_or_unknown_ids": [],
+      "grouped_ids": true,
+      "marker_as_citation": true,
+      "boundary_as_citation": false,
+      "escaped_underscores_present_but_already_normalized": true
+    },
+    {
+      "question_id": "q24",
+      "primary_category": "marker_as_citation",
+      "rejected_tokens_after_parser_v2_normalization": [
+        "SEM_EVIDENCIA",
+        "AVALIACOES_JSONL"
+      ],
+      "context_ids": [
+        "rev_002417",
+        "rev_002021",
+        "rev_001715",
+        "rev_001172",
+        "rev_001027"
+      ],
+      "mentioned_review_ids": [],
+      "real_ids_outside_context": [],
+      "altered_or_unknown_ids": [],
+      "grouped_ids": false,
+      "marker_as_citation": true,
+      "boundary_as_citation": true,
+      "escaped_underscores_present_but_already_normalized": true
+    },
+    {
+      "question_id": "q26",
+      "primary_category": "altered_or_unknown_id",
+      "rejected_tokens_after_parser_v2_normalization": [
+        "review_002759, review_001998, review_002142, review_001629, review_002675"
+      ],
+      "context_ids": [
+        "rev_002759",
+        "rev_001998",
+        "rev_002142",
+        "rev_001629",
+        "rev_002675"
+      ],
+      "mentioned_review_ids": [
+        "review_001629",
+        "review_001998",
+        "review_002142",
+        "review_002675",
+        "review_002759"
+      ],
+      "real_ids_outside_context": [],
+      "altered_or_unknown_ids": [
+        "review_001629",
+        "review_001998",
+        "review_002142",
+        "review_002675",
+        "review_002759"
+      ],
+      "grouped_ids": true,
+      "marker_as_citation": false,
+      "boundary_as_citation": false,
+      "escaped_underscores_present_but_already_normalized": false
+    },
+    {
+      "question_id": "q28",
+      "primary_category": "boundary_as_citation",
+      "rejected_tokens_after_parser_v2_normalization": [
+        "AVALIACOES_JSONL"
+      ],
+      "context_ids": [
+        "rev_002833",
+        "rev_002121",
+        "rev_002355",
+        "rev_000357"
+      ],
+      "mentioned_review_ids": [],
+      "real_ids_outside_context": [],
+      "altered_or_unknown_ids": [],
+      "grouped_ids": false,
+      "marker_as_citation": false,
+      "boundary_as_citation": true,
+      "escaped_underscores_present_but_already_normalized": false
+    }
+  ],
+  "known_corpus_id_count": 3000,
+  "raw_corpus_sha256": "c8cc49f3971ad9ace7896f4ec5065fcb9b2c221f55c5d51b46272f321e03b642"
+}

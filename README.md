@@ -238,3 +238,21 @@ Versoes e hashes entram na identidade do experimento (schema 2), impedindo retom
 com outra combinacao. Checkpoints v1 existentes permanecem intactos; para novas
 execucoes use outro arquivo. Metricas estrita/tolerante e o experimento corretivo D estao descritos em
 [geracao corretiva](docs/generation-correction.md); a tolerante nao altera o parser. Detalhes: [versionamento da geracao](docs/generation-versioning.md).
+
+
+### Saida estruturada e verificacao nova
+
+O experimento corretivo D nao trouxe ganho: 25 chamadas extras, aceitacao mantida
+em 2/27. Retry descartado da pipeline; artefatos historicos preservados.
+q23 passou no parser e respondeu sobre embalagem, embora a pergunta fosse sobre
+mensagens sem retorno. Aceitacao e sustentacao factual sao medidas separadas.
+
+A estrategia nova e partner-copilot-json-v1 + parser-json-v1: Pydantic valida o
+JSON, IDs sao conferidos diretamente no contexto e citacoes sao renderizadas por
+codigo. Sem retry. A execucao dedicada usa apenas dez perguntas novas, tres negativas;
+nao usa as 30 antigas para medir esse prompt. Ainda nao ha resultados reais dessa
+checagem. Defaults legados continuam disponiveis para reproducao, e o novo runner
+seleciona explicitamente o par JSON.
+
+[Analise de falhas e citacoes](docs/generation-output-analysis.md) e
+[como executar a checagem JSON](docs/structured-verification.md).

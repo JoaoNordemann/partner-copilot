@@ -12,6 +12,13 @@
         "output_v2.py": "6e894ebbaf68c008f10774dfa0fed83751005698c5daa382aa478f8f88b4887a"
       },
       "policy": "Normalize escaped underscores only, then apply v1 strict validation."
+    },
+    "parser-json-v1": {
+      "files": {
+        "output_v1.py": "51138a231bb47c17e71f8d23fb0f8549a0983a2a1a3cec7679831778e0e1031c",
+        "output_json_v1.py": "715c4a0b86a545421f0177dfcc22fdf227a1f1aaedf1de23f7a3a49257694d44"
+      },
+      "policy": "Strict JSON/Pydantic schema, direct source membership, citations rendered by code. No retry."
     }
   }
 }

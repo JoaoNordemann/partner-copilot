@@ -44,3 +44,10 @@ data/eval/human-v2/*
 !data/eval/human-v2/relevance_audit.jsonl
 !data/eval/human-v2/human_review.jsonl
 !data/eval/human-v2/manifest.json
+
+!data/eval/json-verification-v1/
+data/eval/json-verification-v1/*
+!data/eval/json-verification-v1/questions.jsonl
+!data/eval/json-verification-v1/manifest.json
+
+.codex-remote-attachments/

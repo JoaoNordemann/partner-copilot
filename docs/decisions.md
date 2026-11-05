@@ -493,3 +493,29 @@ de prosseguir, inclusive a primeira antes da chamada corretiva. Na retomada, uma
 chamada sem resultado salvo fica indeterminada e nao e repetida automaticamente.
 Registrar latencia e VRAM da nova chamada separadas das metricas originais de B.
 Falhas de runtime nao disparam retry de contrato. Nenhum resultado real de D sem GPU.
+
+
+## Resultado negativo D e saida estruturada
+
+D nao recuperou nenhuma das 25 rejeicoes de C: 25 chamadas corretivas adicionais,
+aceitacao mantida em 2/27. Retry descartado para a pipeline; o runner D permanece
+apenas como artefato experimental historico, sem integracao no fluxo normal.
+Aderencia a instrucoes e formato e hipotese de gargalo, nao causalidade isolada;
+comprimento de prompt nao foi isolado em ablacao. q23 passa parser e nao responde
+sobre mensagens ignoradas: manter aceita_pelo_parser e sustentada_para_pergunta
+como dimensoes separadas, com leitura explicita para a segunda.
+
+Nova estrategia: partner-copilot-json-v1 + parser-json-v1, sem alterar v1/v2.
+Saida JSON estrita: abstem bool; afirmacoes lista de texto e review_ids. Extra fields,
+chaves duplicadas, NaN, tipos coercivos, abstencao com afirmacoes ou resposta sem
+fontes sao rejeitados. A schema e validada separadamente da pertinencia dos IDs.
+O codigo renderiza as referencias. Nao ha retry nem normalizacao silenciosa JSON.
+Quatro medidas: schema valido, abstencao correta, IDs no contexto e sustentacao
+factual (leitura qualitativa, pendente ate ser realizada).
+
+Criar dez perguntas novas, tres negativas, com corpus e rotulos congelados antes
+da primeira inferencia. Nao executar o novo prompt nas 30 antigas. As novas perguntas
+usam corpus ja conhecido e rotulos definidos por IA a partir do texto; sao checagem
+adicional, nao holdout independente de documentos nem gold humano. Congelar a
+primeira versao do prompt antes da criacao das perguntas. Nenhum resultado de GPU
+sera anunciado antes da execucao. Timebox maximo de duas horas para esta etapa.
