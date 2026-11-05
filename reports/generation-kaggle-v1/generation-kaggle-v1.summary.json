@@ -1,0 +1,58 @@
+{
+  "complete": true,
+  "completed_questions": 30,
+  "expected_questions": 30,
+  "backend": "real_mistral_nf4",
+  "negative_abstention": {
+    "numerator": 2,
+    "denominator": 6,
+    "rate": 0.3333333333333333
+  },
+  "hard_negative_abstention": {
+    "numerator": 0,
+    "denominator": 4,
+    "rate": 0.0
+  },
+  "hard_negative_llm_calls": 4,
+  "hard_negative_llm_abstention": {
+    "numerator": 0,
+    "denominator": 4,
+    "rate": 0.0
+  },
+  "negative_answers_without_abstention": 0,
+  "positive_answers_without_abstention": 0,
+  "negative_errors": 4,
+  "positive_errors": 23,
+  "positive_undue_abstention": {
+    "numerator": 1,
+    "denominator": 24,
+    "rate": 0.041666666666666664
+  },
+  "citation_scope_valid": {
+    "numerator": 0,
+    "denominator": 27,
+    "rate": 0.0
+  },
+  "errors": {
+    "invalid_citation": 3,
+    "generation_contract_error": 24,
+    "runtime_error": 0
+  },
+  "negative_abstention_reasons": {
+    "retriever_empty": 2,
+    "llm_insufficient_evidence": 0
+  },
+  "manual_review_ids": [
+    "q01",
+    "q09",
+    "q13",
+    "q22",
+    "q25",
+    "q26",
+    "q27",
+    "q28",
+    "q29",
+    "q30"
+  ],
+  "manual_review_completed": false
+}

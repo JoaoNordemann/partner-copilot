@@ -1,0 +1,17 @@
+{
+  "python": "3.13.16",
+  "packages": {
+    "torch": "2.11.0+cu130",
+    "transformers": "5.20.2",
+    "bitsandbytes": "0.50.2",
+    "accelerate": "1.15.0",
+    "chromadb": "1.5.9",
+    "sentence-transformers": "5.7.0"
+  },
+  "gpu_names": [
+    "Tesla T4"
+  ],
+  "torch_cuda_version": "13.0",
+  "source_commit": "5ebe981c36db75f28ddc2e94e319de95e2a77cbf",
+  "source_code_sha256": "14dddf0b538762e27b797fc1289bb8dc8a18a5ef610cb3e5fb89323521ebf25f"
+}
