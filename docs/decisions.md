@@ -453,3 +453,22 @@ A leitura qualitativa será preparada para q25–q30 e q01/q09/q13/q22: dez perg
 fixadas antes da geração, incluindo todas as negativas. O relatório de leitura nasce
 pendente; gerar um checklist não significa que respostas do modelo foram lidas ou
 revisadas por uma pessoa. Respostas reais ainda dependem do ambiente com GPU.
+
+
+## Versoes independentes de prompt e parser
+
+Decisao anterior a implementacao: preservar o template e o comportamento do parser v1.
+PROMPT_VERSION e PARSER_VERSION sao eixos independentes, ambos com default v1.
+Prompt partner-copilot-v2 sera uma instrucao mais curta, em portugues, com um exemplo
+inventado e regra de saida ao final. Parser parser-v2 normalizara apenas barra
+invertida seguida de underscore antes de aplicar as mesmas validacoes estritas de v1.
+Nao relaxar abstencao, remover citacoes, alterar evidencias ou adicionar retry nesta etapa.
+
+Registrar versao e hash do parser no experimento e versao na resposta, inclusive
+abstencoes sem LLM. Identidades novas de avaliacao usam schema_version 2; checkpoints
+antigos ficam preservados e nao podem ser retomados como um experimento novo.
+Preservar os hashes dos templates existentes; registrar hashes dos parsers congelados.
+Uma alteracao de comportamento exige uma nova versao. Registrar no README:
+v2 foi criada depois de ver a v1 nas mesmas 30 perguntas. Nao e avaliacao independente.
+Comparacoes: prompt v1/parser v1, prompt v1/parser v2, prompt v2/parser v1 e prompt v2/parser v2.
+Nenhuma nova rodada ou resultado de GPU sera anunciado sem execucao real.

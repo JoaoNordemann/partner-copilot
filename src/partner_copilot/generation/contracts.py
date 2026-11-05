@@ -7,6 +7,7 @@ from typing import Literal, Protocol
 from pydantic import BaseModel, ConfigDict, Field, NonNegativeInt
 
 DEFAULT_PROMPT_VERSION = "partner-copilot-v1"
+DEFAULT_PARSER_VERSION = "parser-v1"
 ABSTENTION_MARKER = "[[SEM_EVIDENCIA]]"
 ABSTENTION_MESSAGE = "Não há evidência suficiente nas avaliações fornecidas."
 

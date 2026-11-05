@@ -37,6 +37,7 @@ def build_parser() -> argparse.ArgumentParser:
     ask.add_argument("--seed", type=int)
     ask.add_argument("--max-new-tokens", type=int)
     ask.add_argument("--prompt-version")
+    ask.add_argument("--parser-version", choices=("parser-v1", "parser-v2"))
     ask.add_argument(
         "--json", action="store_true", help="JSON on stdout for answers or application errors"
     )
@@ -69,6 +70,7 @@ def main(argv: list[str] | None = None) -> int:
         "generation_seed": args.seed,
         "max_new_tokens": args.max_new_tokens,
         "prompt_version": args.prompt_version,
+        "parser_version": args.parser_version,
     }
     try:
         settings = Settings(**{key: value for key, value in fields.items() if value is not None})

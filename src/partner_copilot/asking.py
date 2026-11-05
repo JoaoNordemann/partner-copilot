@@ -8,6 +8,7 @@ from pydantic import BaseModel, ConfigDict, Field, field_validator, model_valida
 
 from partner_copilot.config import Settings
 from partner_copilot.data_splits import validate_rag_collection_ids
+from partner_copilot.generation.output import parser_identity
 from partner_copilot.generation.prompts import load_prompt_template
 from partner_copilot.pipeline import RAGPipeline
 from partner_copilot.retrieval.retriever import Retriever
@@ -64,6 +65,7 @@ def _open_store(settings: Settings, collection: str | None) -> "ChromaStore":
 
 def run_ask(settings: Settings, request: AskRequest, *, collection: str | None = None) -> Answer:
     load_prompt_template(settings.prompt_version)
+    parser_identity(settings.parser_version)
     store = _open_store(settings, collection)
     try:
         validate_rag_collection_ids(store.review_ids(), settings.data_splits_dir)

@@ -8,6 +8,15 @@
       "examples": false,
       "prior_exposure": "Designed after retrieval analysis of the existing evaluation set; not blind or held out.",
       "model_generation_results_used_for_tuning": false
+    },
+    "partner-copilot-v2": {
+      "file": "partner-copilot-v2.txt",
+      "sha256": "693d3ecedd59587704061dd453c4c47c3ba5f87c872797409f2eccbd94c6dc9e",
+      "role": "user",
+      "data_format": "escaped-jsonl-v1",
+      "examples": true,
+      "prior_exposure": "v2 was designed after reviewing v1 on the same 30 questions; not held out.",
+      "model_generation_results_used_for_tuning": true
     }
   },
   "archive": {

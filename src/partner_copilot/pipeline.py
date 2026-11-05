@@ -11,7 +11,7 @@ from partner_copilot.generation.contracts import (
     InvalidCitationError,
     MeasuredLLM,
 )
-from partner_copilot.generation.output import parse_generation
+from partner_copilot.generation.output import parse_generation, parser_identity
 from partner_copilot.generation.prompts import build_prompt, load_prompt_template
 from partner_copilot.generation.provider import get_llm
 from partner_copilot.retrieval.retriever import Retriever
@@ -27,6 +27,7 @@ class RAGPipeline:
         self.retriever, self.llm = retriever, llm
         self.settings = settings if settings is not None else get_settings()
         load_prompt_template(self.settings.prompt_version)
+        parser_identity(self.settings.parser_version)
 
     def ask(
         self,
@@ -67,7 +68,9 @@ class RAGPipeline:
             else:
                 generated_text = llm.generate(prompt)
             try:
-                parsed = parse_generation(generated_text, context)
+                parsed = parse_generation(
+                    generated_text, context, parser_version=self.settings.parser_version
+                )
             except InvalidCitationError as exc:
                 logger.warning(
                     "generation_rejected code=%s invalid_citation_count=%d",
@@ -87,6 +90,7 @@ class RAGPipeline:
                 retrieved_documents=len(docs),
                 context_documents=len(context),
                 prompt_version=self.settings.prompt_version,
+                parser_version=self.settings.parser_version,
                 llm_called=bool(docs),
                 generation=generation_metrics,
             ),

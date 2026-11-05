@@ -1,52 +1,37 @@
-"""Validate citation syntax and normalize the machine-readable refusal marker."""
+"""Independent, hash-checked parser versions; v1 remains the default."""
 
-import re
+import hashlib
+import json
 from collections.abc import Sequence
-from dataclasses import dataclass
+from importlib.resources import files
 
-from partner_copilot.generation.contracts import (
-    ABSTENTION_MARKER,
-    ABSTENTION_MESSAGE,
-    GenerationContractError,
-    InvalidCitationError,
-)
+from partner_copilot.generation.contracts import DEFAULT_PARSER_VERSION, GenerationContractError
+from partner_copilot.generation.output_v1 import ParsedGeneration
 from partner_copilot.schemas import RetrievedDoc
 
 
-@dataclass(frozen=True)
-class ParsedGeneration:
-    answer: str
-    sources: list[str]
-    abstained: bool
+def parser_identity(version: str = DEFAULT_PARSER_VERSION) -> dict[str, str]:
+    root = files("partner_copilot.generation")
+    manifest = json.loads(
+        root.joinpath("templates/parser-manifest.json").read_text(encoding="utf-8")
+    )
+    entry = manifest["active_versions"].get(version)
+    if entry is None:
+        raise GenerationContractError(f"Unknown parser version: {version}")
+    for name, expected in entry["files"].items():
+        source = root.joinpath(name).read_text(encoding="utf-8")
+        if hashlib.sha256(source.encode("utf-8")).hexdigest() != expected:
+            raise GenerationContractError("Parser hash differs; register a new version before use")
+    digest = hashlib.sha256(json.dumps(entry["files"], sort_keys=True).encode()).hexdigest()
+    return {"parser_version": version, "parser_sha256": digest}
 
 
-def parse_generation(text: str, docs: Sequence[RetrievedDoc]) -> ParsedGeneration:
-    if not isinstance(text, str) or not text.strip():
-        raise GenerationContractError("Empty or non-text model output")
-    text = text.strip()
-    if text == ABSTENTION_MARKER:
-        return ParsedGeneration(ABSTENTION_MESSAGE, [], True)
-    if ABSTENTION_MARKER in text:
-        raise GenerationContractError("Abstention marker must be the complete output")
-    valid_ids = {doc.review.id for doc in docs}
-    invalid = [
-        identifier
-        for identifier in re.findall(r"\[([^\[\]\r\n]+)\]", text)
-        if identifier not in valid_ids
-    ]
-    if invalid:
-        raise InvalidCitationError(invalid, valid_ids)
-    sources = []
-    for line in text.splitlines():
-        if not line.strip():
-            continue
-        content = re.sub(r"\[[^\[\]\r\n]+\]", "", line).strip(" .!?-")
-        if not content:
-            raise GenerationContractError("Citation-only output is not an answer")
-        citations = re.findall(r"\[([^\[\]\r\n]+)\]", line)
-        if not citations or not re.search(r"(?:\[[A-Za-z0-9_-]+\]\s*)+[.!?]?$", line):
-            raise GenerationContractError("Every output line must end with a source citation")
-        for identifier in citations:
-            if identifier not in sources:
-                sources.append(identifier)
-    return ParsedGeneration(text, sources, False)
+def parse_generation(
+    text: str, docs: Sequence[RetrievedDoc], *, parser_version: str = DEFAULT_PARSER_VERSION
+) -> ParsedGeneration:
+    parser_identity(parser_version)
+    if parser_version == "parser-v1":
+        from partner_copilot.generation.output_v1 import parse_generation as parse
+    else:
+        from partner_copilot.generation.output_v2 import parse_generation as parse
+    return parse(text, docs)

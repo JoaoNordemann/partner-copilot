@@ -13,6 +13,8 @@ from tempfile import TemporaryDirectory
 from partner_copilot.config import Settings
 from partner_copilot.evaluation.dataset import load_eval_set
 from partner_copilot.evaluation.generation import run_generation, summarize_generation
+from partner_copilot.generation.output import parser_identity
+from partner_copilot.generation.prompts import load_prompt_template
 
 logger = logging.getLogger(__name__)
 
@@ -87,13 +89,26 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--eval-dir", type=Path)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--prompt-version")
+    parser.add_argument("--parser-version", choices=("parser-v1", "parser-v2"))
     parser.add_argument("--resume", action="store_true")
     parser.add_argument("--check-only", action="store_true")
     parser.add_argument("--summarize-only", action="store_true")
     args = parser.parse_args()
     logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
     try:
-        settings = Settings()
+        settings = Settings(
+            **{
+                key: value
+                for key, value in {
+                    "prompt_version": args.prompt_version,
+                    "parser_version": args.parser_version,
+                }.items()
+                if value is not None
+            }
+        )
+        load_prompt_template(settings.prompt_version)
+        parser_identity(settings.parser_version)
         folder = args.eval_dir if args.eval_dir is not None else settings.data_eval_dir
         if any(
             args.output.resolve().is_relative_to(path.resolve())
@@ -118,6 +133,8 @@ def main() -> int:
             print(
                 json.dumps(
                     {
+                        "prompt_version": settings.prompt_version,
+                        "parser_version": settings.parser_version,
                         "questions": len(questions),
                         "corpus": len(corpus),
                         "eval_dir": str(folder),

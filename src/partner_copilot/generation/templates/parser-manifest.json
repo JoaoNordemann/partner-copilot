@@ -1,0 +1,17 @@
+{
+  "active_versions": {
+    "parser-v1": {
+      "files": {
+        "output_v1.py": "51138a231bb47c17e71f8d23fb0f8549a0983a2a1a3cec7679831778e0e1031c"
+      },
+      "policy": "Original strict parser; no normalization."
+    },
+    "parser-v2": {
+      "files": {
+        "output_v1.py": "51138a231bb47c17e71f8d23fb0f8549a0983a2a1a3cec7679831778e0e1031c",
+        "output_v2.py": "6e894ebbaf68c008f10774dfa0fed83751005698c5daa382aa478f8f88b4887a"
+      },
+      "policy": "Normalize escaped underscores only, then apply v1 strict validation."
+    }
+  }
+}

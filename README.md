@@ -210,3 +210,31 @@ código invalid_citation e contagem de referências inválidas.
 [Uso, filtros e códigos de saída](docs/ask-cli.md).
 
 Testes sem GPU: a pipeline usa doubles e confirma que lista vazia não chama o LLM, que o prompt leva IDs/instruções e que citações inválidas e abstenção são detectáveis. Teste real marcado gpu só roda com --run-gpu e pesos em cache; fica fora do CI. [Comandos e escopo](docs/testing.md).
+
+
+### Versoes independentes de geracao
+
+PROMPT_VERSION e PARSER_VERSION sao selecionados separadamente; os defaults
+continuam partner-copilot-v1 e parser-v1. v2 foi criada depois de ver a v1 nas
+mesmas 30 perguntas: os resultados futuros nesse conjunto sao de desenvolvimento,
+nao uma avaliacao independente. Nenhuma rodada v2 foi executada nesta alteracao.
+
+- partner-copilot-v2: prompt mais curto, idioma explicito, exemplo inventado e
+  formato de saida ao final. Usa o mesmo contexto JSONL escapado.
+- parser-v2: apenas normaliza `\_` para `_`, depois aplica o contrato estrito v1.
+  Nao aceita marcador acompanhado de texto, IDs ausentes ou linhas sem citacao.
+
+Selecione as quatro combinacoes em arquivos separados. Exemplo para medir apenas
+mudanca de prompt, mantendo o parser original:
+
+```bash
+python scripts/evaluate_generation.py --prompt-version partner-copilot-v2 --parser-version parser-v1 --output /caminho/generation-p2-s1.jsonl
+```
+
+Para apenas mudar o parser use `--prompt-version partner-copilot-v1 --parser-version
+parser-v2`. A CLI `partner-copilot ask` aceita as mesmas duas flags. Tambem e possivel
+usar as variaveis de ambiente PROMPT_VERSION e PARSER_VERSION.
+Versoes e hashes entram na identidade do experimento (schema 2), impedindo retomada
+com outra combinacao. Checkpoints v1 existentes permanecem intactos; para novas
+execucoes use outro arquivo. Metricas tolerantes e retry nao foram implementados
+nesta etapa. Detalhes: [versionamento da geracao](docs/generation-versioning.md).

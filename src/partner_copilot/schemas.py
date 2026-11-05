@@ -5,7 +5,11 @@ from typing import Literal
 
 from pydantic import BaseModel, Field, computed_field, field_validator, model_validator
 
-from partner_copilot.generation.contracts import ABSTENTION_MESSAGE, GenerationMetrics
+from partner_copilot.generation.contracts import (
+    ABSTENTION_MESSAGE,
+    DEFAULT_PARSER_VERSION,
+    GenerationMetrics,
+)
 
 
 class Review(BaseModel):
@@ -49,6 +53,7 @@ class AnswerMetadata(BaseModel):
     retrieved_documents: int = Field(ge=0)
     context_documents: int = Field(ge=0)
     prompt_version: str = Field(min_length=1)
+    parser_version: str = Field(default=DEFAULT_PARSER_VERSION, min_length=1)
     llm_called: bool
     generation: GenerationMetrics | None = None
 

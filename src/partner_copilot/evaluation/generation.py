@@ -18,6 +18,7 @@ from partner_copilot.generation.contracts import (
     InvalidCitationError,
     MeasuredLLM,
 )
+from partner_copilot.generation.output import parser_identity
 from partner_copilot.generation.prompts import build_prompt, load_prompt_template
 from partner_copilot.pipeline import RAGPipeline
 from partner_copilot.retrieval.retriever import Retriever
@@ -37,13 +38,15 @@ PUBLIC_SETTINGS = (
     "generation_seed",
     "generation_context_margin_tokens",
     "prompt_version",
+    "parser_version",
 )
 
 
 def experiment(settings: Settings, manifest: dict, environment: dict, backend: str) -> dict:
     template = load_prompt_template(settings.prompt_version)
     value = {
-        "schema_version": 1,
+        "schema_version": 2,
+        **parser_identity(settings.parser_version),
         "backend": backend,
         "settings": {name: getattr(settings, name) for name in PUBLIC_SETTINGS},
         "snapshot_sha256_lf": manifest["file_sha256_lf"],

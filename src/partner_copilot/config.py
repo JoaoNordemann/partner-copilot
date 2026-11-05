@@ -14,7 +14,7 @@ from typing import Literal
 from pydantic import Field, SecretStr, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-from partner_copilot.generation.contracts import DEFAULT_PROMPT_VERSION
+from partner_copilot.generation.contracts import DEFAULT_PARSER_VERSION, DEFAULT_PROMPT_VERSION
 
 MULTILINGUAL_MINILM_MODEL = "paraphrase-multilingual-MiniLM-L12-v2"
 MISTRAL_INSTRUCT_MODEL = "mistralai/Mistral-7B-Instruct-v0.2"
@@ -60,6 +60,7 @@ class Settings(BaseSettings):
 
     context_k: int = Field(default=5, ge=1, le=50)
     prompt_version: str = DEFAULT_PROMPT_VERSION
+    parser_version: Literal["parser-v1", "parser-v2"] = DEFAULT_PARSER_VERSION
 
     # --- Geração ---------------------------------------------------------
     max_new_tokens: int = Field(default=400, ge=16, le=2048)
