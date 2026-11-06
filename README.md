@@ -1,5 +1,7 @@
 # PartnerCopilot
 
+[![CI](https://github.com/JoaoNordemann/partner-copilot/actions/workflows/retriever-unit.yml/badge.svg)](https://github.com/JoaoNordemann/partner-copilot/actions/workflows/retriever-unit.yml)
+
 <!-- BEGIN GENERATED RESULTS -->
 - RAG de reviews sintéticas, com citações verificadas e abstenção; sem dados reais do iFood.
 - Retrieval: recall limitado@5 sem filtro de 0,2514 no multilíngue e 0,2583 no inglês; 4V/16E/4D em 24 perguntas respondíveis expostas.

@@ -1014,3 +1014,16 @@ Transformers/PyTorch em CPU para o embedder quando ligado a um índice real.
 Replay usa só o catálogo/contexto arquivado e não importa runtimes de modelos.
 Isso esclarece a restrição anterior sobre carga de Transformers, que não exclui
 o encoder de embeddings CPU necessário ao caminho fake com busca real.
+
+
+### CI CPU e isolamento dos testes HTTP
+
+A matriz remota usa Python 3.12 e 3.13; 3.13 acompanha Kaggle, 3.12 cobre servidor.
+O mínimo 3.10 declarado no pacote não implica cobertura de todas as versões.
+Instalar apenas requirements-ci.txt, com cache pip e Ruff 0.17.3; executar lint,
+formatação, seleção explícita de testes CPU com exclusão gpu e reprodução dos
+resultados. Não instalar os extras completos nem baixar modelos no CI.
+Um subprocesso bloqueia imports pesados e executa a importação da API e todos os
+testes HTTP fake/replay; isso verifica o isolamento mesmo no PC com torch instalado.
+A suíte completa com Chroma é uma verificação local distinta. Badge aponta para o
+workflow real; sucesso só deve ser declarado após a execução remota terminar.

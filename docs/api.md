@@ -121,3 +121,30 @@ a única diferença na versão final é quebra de linha, com AST idêntica regis
 
 Testes sem GPU cobrem startup único/degradado, erros e privacidade dos logs, validação,
 menus, replay exato/recusado, serialização e retenção do semáforo após timeout.
+
+## Testes e CI sem runtime de ML
+
+O workflow `retriever-unit.yml` verifica Python 3.12 e 3.13 no Linux. 3.13 acompanha
+o ambiente Kaggle registrado; 3.12 cobre uma versão amplamente usada em servidores.
+O mínimo 3.10 do pyproject é uma faixa de instalação, não uma promessa de teste
+em todas as versões. O ambiente local Windows usa 3.14 e é verificado separadamente.
+A matriz CPU não certifica compatibilidade CUDA/quantização nessas versões.
+
+O CI instala somente `requirements-ci.txt`, sem `pip install -e .`, torch, Chroma ou
+pesos. O setup-python mantém cache pip identificado por esse arquivo. Ruff fica na
+versão 0.17.3 para que formatação não mude silenciosamente. Pytest usa uma lista
+explícita de testes sem dependências de ML, com `-m "not gpu"`; testes que precisam
+de Chroma ou embeddings reais continuam fora dessa instalação mínima.
+
+`tests/test_api_dependencies.py` inicia outro processo com imports de torch,
+transformers, sentence-transformers, Chroma, bitsandbytes, accelerate e HF Hub
+bloqueados. Ele importa a API e executa os testes fake/replay, em modo offline.
+Isso detecta imports pesados mesmo quando os pacotes existem na máquina local.
+
+Para repetir o contrato da API localmente:
+
+```powershell
+python -m pytest tests/test_api.py tests/test_api_replay.py tests/test_api_dependencies.py -m "not gpu" -v
+python -m ruff check .
+python -m ruff format --check .
+```
