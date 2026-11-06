@@ -1027,3 +1027,20 @@ Um subprocesso bloqueia imports pesados e executa a importação da API e todos 
 testes HTTP fake/replay; isso verifica o isolamento mesmo no PC com torch instalado.
 A suíte completa com Chroma é uma verificação local distinta. Badge aponta para o
 workflow real; sucesso só deve ser declarado após a execução remota terminar.
+
+
+### Empacotamento CPU e bootstrap persistente
+
+Imagem CPU com Python 3.13 e torch da distribuição CPU, sem dependências de
+quantização. Backend permitido fake ou replay. Usuário UID/GID 10001; HEALTHCHECK
+consulta saúde real; configuração por ambiente; contexto Docker por allowlist.
+Nenhum `.env`, peso, cache, Chroma ou relatório de experimento entra na imagem.
+Fake reconstrói somente o RAG versionado no primeiro uso do volume, com lock,
+upserts idempotentes, validação completa e marcador atômico. Mudança de identidade
+exige novo volume, sem apagar o anterior. Replay não precisa de índice, pois usa
+contexto arquivado validado; catálogo aprovado é montado externamente, sem falsear
+aprovações. Bootstrap libera seu encoder antes de iniciar o processo da API.
+Docker está ausente no PC: testes unitários não atestam build/execução da imagem.
+A orientação CUDA/--gpus é explicitamente não testada, sem alegação de suporte
+verificado. Faixas de dependências e revisão de encoder não fixada limitam a
+reprodução bit a bit; dados/splits permanecem checados por hash.

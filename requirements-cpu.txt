@@ -1,0 +1,10 @@
+# torch CPU is installed separately from the official CPU wheel index.
+# No bitsandbytes/accelerate/Mistral weights in this image.
+fastapi>=0.110,<1
+uvicorn>=0.29,<1
+pydantic>=2.6,<3
+pydantic-settings>=2.2,<3
+filelock>=3.13,<4
+chromadb>=1.5.9,<2
+sentence-transformers>=3,<6
+transformers>=4.40,<6

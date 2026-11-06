@@ -13,3 +13,8 @@
 <!-- END GENERATED RESULTS -->
 
 [API HTTP](docs/api.md) · [Instalação e uso](docs/project-guide.md) · [Decisões](docs/decisions.md) · [Medições pendentes](docs/future-measurements.md)
+
+
+[Container CPU e caminho GPU](docs/docker.md): receita CPU com fake/replay,
+índice criado no primeiro uso e sem pesos/segredos embutidos. **Build e execução
+Docker não testados localmente (Docker ausente); caminho GPU também não testado.**

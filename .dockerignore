@@ -1,0 +1,21 @@
+# Allowlist: credentials, caches, Chroma and experiment artifacts never enter context.
+**
+!Dockerfile
+!requirements-cpu.txt
+!pyproject.toml
+!README.md
+!src/
+!src/**
+!configs/
+!configs/*.json
+!data/
+!data/raw/
+!data/raw/restaurants.json
+!data/splits/
+!data/splits/*.json
+!data/splits/*.jsonl
+**/__pycache__/
+**/*.pyc
+**/.env
+**/.env.*
+**/.git/
