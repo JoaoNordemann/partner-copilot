@@ -659,3 +659,50 @@ Publicar resultados contrários às hipóteses e limitações de exposição, ta
 do conjunto, rótulos e ausência de revisão independente, sem reescrever este
 protocolo para ajustá-lo aos resultados. Mudança futura exige nova entrada datada,
 anterior à nova execução, preservando esta versão e os artefatos anteriores.
+
+
+### Extensão prévia da matriz de retrieval CPU — 2026-11-06
+
+Antes de executar esta nova rodada, incorporar o pedido de k=3,5,8,12. Manter
+k=1 como referência adicional do protocolo anterior, sem substituir ou selecionar
+a medida primária: recall limitado@5 sem filtros, multilíngue versus inglês.
+Executar os dois MiniLM previstos; E5 é opcional e não integra esta rodada.
+
+O fator filtro nesta ablação significa **somente restaurant_id** versus nenhum
+filtro. Item e datas não são aplicados em nenhum dos dois modos, diferentemente
+do benchmark histórico com filtros estruturais completos. Não comparar seus
+números como se o escopo fosse igual. Não inserir labels de aspecto no filtro.
+
+Reconstruir o mesmo corpus de 100 reviews de human-v2 em collections novas e
+separadas por modelo, em banco temporário isolado, sem tocar o índice operacional.
+Cada review permanece inteira; impedir truncamento de documentos e consultas
+nos limites reais dos dois modelos. Se alguma exceder, interromper e registrar
+uma decisão de chunking antes de medir, sem truncamento silencioso. Recuperar todos
+os candidatos elegíveis, ordenar por cosseno e desempatar por ID, para remover a
+aproximação/top-k de candidatos como fator nesta base pequena. Não medir latência
+como benchmark de produção com esse procedimento exaustivo.
+
+Relatar a matriz completa: dois embeddings, lexical e aleatório; dois modos;
+k=1,3,5,8,12; ranking sem corte e operacional com cortes já definidos. Aleatório:
+200 seeds 42..241, com média por pergunta para comparações e dispersão dos agregados.
+Negativas continuam separadas das métricas de ranking das 24 respondíveis.
+
+Salvar métricas e IDs por pergunta; placares pareados por métrica/k/modo para
+multilíngue versus inglês e cada embedding versus lexical/aleatório. Comparar
+com/sem restaurante por método e os incrementos entre k sucessivos. Exibir também
+recall clássico, número de relevantes recuperados e irrelevantes adicionados,
+pois recall limitado muda de denominador com k e não é monotônico. Não escolher
+k automaticamente nem alterar defaults após ver a matriz. Reportar todas as
+configurações, erros e modelos tentados; registrar revisões dos pesos, ambiente,
+hashes de código/dados/protocolo e critérios já escolhidos por idioma. Esta rodada
+é retrieval de desenvolvimento exposto; não contém avaliação nova de geração.
+
+
+### Resultado da ablação CPU registrada
+
+Rodada concluída sem alterar o protocolo: a hipótese direcional primária não foi
+corroborada (recall limitado@5 sem filtros: delta multilíngue menos inglês
+-0,006944; 4 vitórias, 16 empates, 4 derrotas nas 24 respondíveis).
+A matriz completa, os incrementos de ruído por k e as comparações pareadas estão
+em [análise CPU](../reports/retrieval-cpu-ablation-v1/ANALISE.md). Não promover
+configurações nem limiares com base nesta avaliação de desenvolvimento exposta.

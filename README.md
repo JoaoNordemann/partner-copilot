@@ -158,6 +158,8 @@ Perguntas, relevâncias e baseline de retrieval: [protocolo de avaliação](docs
 
 Métricas em quatro valores de k e comparação semântica/lexical/aleatória: [baselines de retrieval](docs/retrieval-baselines.md).
 
+Ablações CPU com dois MiniLM, filtro apenas por restaurante, k=1,3,5,8,12 e placares por pergunta: [análise completa](reports/retrieval-cpu-ablation-v1/ANALISE.md). Na medida primária sem filtros, a hipótese de maior recall do multilíngue não se confirmou; os resultados históricos com filtros completos permanecem separados.
+
 Calibração de abstenção: o melhor score do embedding apresenta sobreposição entre perguntas respondíveis e sem resposta. O candidato experimental 0,287 não melhorou a rejeição nas dez perguntas separadas e perdeu evidências válidas; não foi promovido ao default. Contagens, distribuições e limitações: [calibração de min_score](docs/min-score-calibration.md).
 
 Análise das cinco piores perguntas: um falso negativo por ranking/corte e quatro falsas aceitações por falta de suporte factual. Filtros corretos não garantem relevância; tema parecido não basta. Evidências e testes unitários de CI: [análise de falhas](docs/retrieval-failure-analysis.md).
