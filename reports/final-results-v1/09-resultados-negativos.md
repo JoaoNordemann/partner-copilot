@@ -1,0 +1,23 @@
+# O que foi tentado e não sustentou a conclusão esperada?
+
+| Configuração / caso | O que mede | Conjunto / exposição | n | Resultado | Contagens brutas | Limitação |
+| --- | --- | --- | --- | --- | --- | --- |
+| D versus C | Ganho da correção por chamada adicional | q01–q30; contaminado por iterações anteriores | 27 saídas; 25 correções novas | C=2/27; D=2/27; sem ganho | 0/25 recuperadas; 25 chamadas extras | Resultado neste conjunto contaminado não prova que todo retry seja inútil em outros contratos. |
+| Texto livre | Melhor aceitação estrita observada em C/D | q01–q30; contaminado por iterações anteriores | 27 saídas por experimento | v1=0/27; C/D=2/27 | C rejeitou 25/27; D herdou as duas aceitas | Aceitação estrita não equivale a erro factual nem é comparação controlada com coortes JSON diferentes. |
+| Hipótese primária do embedding | Recall limitado@5 sem filtros | human-v2 q01–q30; desenvolvimento exposto/contaminado | 24 respondíveis | delta multilíngue-inglês=-0,006944 | V/E/D=4/16/4 | Conjunto pequeno e exposto; não é estimativa independente de generalização. |
+| v3-new/n12 | Trecho literal não implica sustentação | n11–n20; limpo na execução congelada; corpus conhecido/rótulos IA; caso selecionado | 1 caso lido | parser aceitou=True; humana=sem_suporte; responde=nao | 1/1 caso observado; A resposta afirma sabor bom, mas rev_001172 descreve gosto ruim no final. Elogio ao custo-benefício não equivale a elogio ao sabor; rev_000708 é outra avaliação. | Exemplo confirmado em leitura assistida; não é prevalência global da falha. |
+| C/q23 | Resposta irrelevante aceita | q01–q30; contaminado por iterações anteriores; caso selecionado | 1 caso lido | parser aceitou=True; humana=sustentada; responde=nao | 1/1 caso observado; O problema de embalagem tem apoio na rev_001123, mas a pergunta era sobre falta de retorno. A fonte pertinente seria rev_001265. | Exemplo confirmado em leitura assistida; não é prevalência global da falha. |
+| json-v1/n09 | Fato inventado com ID válido | n01–n10; contaminado nesta consolidação retrospectiva; caso selecionado | 1 caso lido | parser aceitou=True; humana=sem_suporte; responde=nao | 1/1 caso observado; A rev_002142 não menciona análise microbiológica. O modelo afirma que ela ocorreu sem apoio na fonte; deveria abster-se, mas respondeu com abstem=false. | Exemplo confirmado em leitura assistida; não é prevalência global da falha. |
+| v3-new/n14 | Conteúdo sustentado bloqueado por transcrição | n11–n20; limpo na execução congelada; corpus conhecido/rótulos IA; caso selecionado | 1 caso lido | parser aceitou=False; humana=sustentada; responde=sim | 1/1 caso observado; A afirmação está apoiada na rev_000797, que reúne as duas condições pedidas. Velo em vez de velho no trecho é falha de transcrição literal, separada da sustentação factual. | Exemplo confirmado em leitura assistida; não é prevalência global da falha. |
+| k=8→12; multilíngue filtrado | Ruído adicional com k maior | human-v2 q01–q30; desenvolvimento exposto/contaminado | 24 respondíveis | Hit não aumenta; recall clássico aumenta | 6 relevantes e 90 irrelevantes adicionais | O custo para a geração não foi isolado; não escolher k ótimo apenas por estes números. |
+| v3 nova: JSON puro | Aderência sem ignorar sufixo | n11–n20; limpo na execução congelada; corpus conhecido/rótulos IA | 9 saídas | Primeiro objeto pode ser válido mesmo com sufixo | schema 9/9; sufixos ignorados 9/9; JSON sem sufixo 0/9 | A regra de primeiro objeto foi pré-definida e preserva o bruto; isso não demonstra JSON puro. |
+
+Commit dos arquivos de entrada: `1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8`.
+Gerador: `scripts/build_results.py`; SHA256 LF `977761362c39f42705713b3de73ed418e447e6b8fd654d19d110116231f0b895`.
+R/I somam documentos por pergunta, não IDs únicos no corpus. Aleatório: 24 perguntas x 200 repetições; contagens em 4.800 pares pergunta-seed, que não são amostras independentes.
+Entradas desta tabela:
+
+- [reports/generation-kaggle-D/analysis.json](https://github.com/JoaoNordemann/partner-copilot/blob/1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8/reports/generation-kaggle-D/analysis.json)
+- [reports/generation-retrospective-v1/human-review.jsonl](https://github.com/JoaoNordemann/partner-copilot/blob/1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8/reports/generation-retrospective-v1/human-review.jsonl)
+- [reports/generation-retrospective-v1/metrics.json](https://github.com/JoaoNordemann/partner-copilot/blob/1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8/reports/generation-retrospective-v1/metrics.json)
+- [reports/retrieval-cpu-ablation-v1/results.json](https://github.com/JoaoNordemann/partner-copilot/blob/1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8/reports/retrieval-cpu-ablation-v1/results.json)
