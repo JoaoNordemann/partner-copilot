@@ -1,0 +1,30 @@
+{
+  "question": "Quais avaliações mencionam problemas na entrega deste restaurante?",
+  "restaurants": [
+    "rest_001",
+    "rest_002",
+    "rest_003",
+    "rest_004",
+    "rest_005",
+    "rest_006",
+    "rest_007",
+    "rest_008"
+  ],
+  "repetitions": 5,
+  "warmup": "one pass over 8 requests, excluded",
+  "expected_samples": 40,
+  "preflight_note": "Relative-path handling repaired before any model load or timed sample; no measured run discarded.",
+  "k": 8,
+  "min_score": 0.25,
+  "generation_calls": 0,
+  "http_transport_included": false,
+  "metric_scope": "real CPUIndex.retrieve used by API; not LLM or network latency",
+  "source_sha256_lf": {
+    "scripts/benchmark_api_cpu.py": "cb8b33d50ce545dca1c9047094fe33e58a9e3f362efecca44e142d37120fb142",
+    "src/partner_copilot/api_runtime.py": "4e59c804bd93e16d860ae3048bdd08e03b9d935d0a8f47bd4296965307bc76c7",
+    "src/partner_copilot/api_models.py": "242c4911a363d9f06788a4d1eb3b176b6396018fb93b435456b3234932eee080",
+    "src/partner_copilot/ingestion/embedder.py": "7e9362a95e1da6ddb77ce8a14ab322e14bf71943f1c73edec2166a6c484e147c",
+    "data/splits/rag.jsonl": "68a5338ec2924a79081e894e0a9de640fe8c1ece87075e1d07402a9208f175c8",
+    "docs/decisions.md": "cfb9488c1891ed844da76798a3366c07354873bdb8928a21459c5dcb528040ea"
+  }
+}

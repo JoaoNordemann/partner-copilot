@@ -1,0 +1,28 @@
+{
+  "scope": "HTTP smoke with real CPU index and unavailable real GPU backend; not part of the 40 latency samples",
+  "cuda_available": false,
+  "health_status": 503,
+  "components": {
+    "index": {
+      "status": "ready",
+      "documents": 862
+    },
+    "embedder": {
+      "status": "ready"
+    },
+    "llm": {
+      "status": "unavailable",
+      "error": "model_unavailable",
+      "error_type": "RuntimeError"
+    },
+    "replay": {
+      "status": "not_required"
+    }
+  },
+  "restaurants_status": 200,
+  "restaurants_count": 8,
+  "items_status": 200,
+  "items_count": 4,
+  "ask_status": 503,
+  "ask_error_code": "model_unavailable"
+}

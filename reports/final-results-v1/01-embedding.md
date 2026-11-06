@@ -24,7 +24,7 @@
 | multilingual; restaurante; k=12 | Ranking cosseno sem corte de score | human-v2 q01–q30; desenvolvimento exposto/contaminado | 24 respondíveis de 30 | Hit=1,0000; recall limitado=1,0000; recall clássico=1,0000; MRR=0,5296; precision=0,2014 | Hit 24/24; relevantes 58; irrelevantes 230; contra inglês V/E/D=2/22/0 | Conjunto pequeno e exposto; não é estimativa independente de generalização. |
 
 Commit dos arquivos de entrada: `1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8`.
-Gerador: `scripts/build_results.py`; SHA256 LF `bbb4bbf9c6292fbd5874618c6c35f8688cd35a05e32d4538669abe1cb3c08c81`.
+Gerador: `scripts/build_results.py`; SHA256 LF `5e2ea19ea0c4d3591af5c327bd13c73053f3f876605aeb671ce6480e503a17b8`.
 R/I somam documentos por pergunta, não IDs únicos no corpus. Aleatório: 24 perguntas x 200 repetições; contagens em 4.800 pares pergunta-seed, que não são amostras independentes.
 Entradas desta tabela:
 

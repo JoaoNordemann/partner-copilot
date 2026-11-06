@@ -1,0 +1,10 @@
+{
+  ".gitattributes": "f06202a408fef9b9ea69bb6b1cb8160dbb0378c5bb67a444d510d231813824c8",
+  "benchmark-source.py.txt": "cb8b33d50ce545dca1c9047094fe33e58a9e3f362efecca44e142d37120fb142",
+  "http-smoke.json": "d7750324318dfffc68424dd166549007a12185eea645be3b027a8ef271455ef0",
+  "metrics.json": "4bc85ca74cfcd660491cd89384c0530ca420c32779f0f4812c1cbbb2de7eaa54",
+  "protocol-decisions.md": "cfb9488c1891ed844da76798a3366c07354873bdb8928a21459c5dcb528040ea",
+  "protocol.json": "8c774f82407f53c40b0cfe00bbae26d28cc800c81ca603e118d48cb242ebdab5",
+  "README.md": "ff2c459a590830a558940acaa6163d01d71f2ca08721997241dd25dd8beaf8ac",
+  "source-format-audit.json": "acd8e4b9b489bbc19a02c53f92073107f2f5991d79827991acb7cf27ee69c354"
+}

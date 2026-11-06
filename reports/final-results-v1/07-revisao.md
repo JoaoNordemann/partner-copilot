@@ -14,7 +14,7 @@
 | v3-old/q21 | Sustentação e pertinência na revisão humana assistida | q01–q30; contaminado por iterações anteriores; seleção retrospectiva de entrevista | 1 caso | sem_suporte; responde=nao; abstenção=indevida | leitura 1; concordância conjunta 1/1; A rev_002355 relata que não fecharam direito a embalagem. A recusa do modelo ignora evidência pertinente no contexto. | IA ajudou no enquadramento e houve exposição aos julgamentos; não é revisão cega nem acurácia global. |
 
 Commit dos arquivos de entrada: `1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8`.
-Gerador: `scripts/build_results.py`; SHA256 LF `bbb4bbf9c6292fbd5874618c6c35f8688cd35a05e32d4538669abe1cb3c08c81`.
+Gerador: `scripts/build_results.py`; SHA256 LF `5e2ea19ea0c4d3591af5c327bd13c73053f3f876605aeb671ce6480e503a17b8`.
 Entradas desta tabela:
 
 - [reports/generation-retrospective-v1/ai-review.jsonl](https://github.com/JoaoNordemann/partner-copilot/blob/1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8/reports/generation-retrospective-v1/ai-review.jsonl)

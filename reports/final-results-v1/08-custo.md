@@ -15,7 +15,7 @@
 | Pesos integrais FP16 em T4 16 GB | Lacuna de medição | Não executado; limpo/contaminado não se aplica | 0 medições isoladas | Pendente; sem valor estimado | 0 benchmarks novos nesta consolidação | Não inferir tempo pela diferença pipeline menos geração nem confundir compute FP16 com pesos FP16. |
 
 Commit dos arquivos de entrada: `1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8`.
-Gerador: `scripts/build_results.py`; SHA256 LF `bbb4bbf9c6292fbd5874618c6c35f8688cd35a05e32d4538669abe1cb3c08c81`.
+Gerador: `scripts/build_results.py`; SHA256 LF `5e2ea19ea0c4d3591af5c327bd13c73053f3f876605aeb671ce6480e503a17b8`.
 Entradas desta tabela:
 
 - [reports/cost-latency-consolidation-v1/metrics.json](https://github.com/JoaoNordemann/partner-copilot/blob/1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8/reports/cost-latency-consolidation-v1/metrics.json)

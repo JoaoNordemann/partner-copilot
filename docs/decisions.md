@@ -973,3 +973,44 @@ embedding e sem gold no índice operacional; chave divergente é 404; snapshot d
 Incluir casos de conteúdo incorreto que passam a estrutura para não prometer que o
 parser resolve fidelidade. Curadoria do catálogo continua uma pendência anterior
 à demo; nenhuma aprovação humana nova foi produzida por esta especificação.
+
+
+## Implementação da API: startup, concorrência e logs
+
+A inicialização da API tentará carregar índice, embedder e backend uma única vez
+por processo. Isso substitui a carga lazy por requisição descrita anteriormente
+para a fachada HTTP; a CLI e o núcleo congelado permanecem intactos. Falhas de
+componentes degradam /health (503), sem impedir o serviço de subir, e são expostas
+por códigos estáveis, não mensagens de exceção. Endpoints /health, /ask e menus de
+restaurantes/itens, com aliases /v1, usam os DTOs já decididos.
+Geração usa um semáforo único por processo; servir um único worker por GPU.
+Timeout total padrão 60 s, configurável, e máximo de oito requests pendentes;
+fila cheia retorna 429 resource_busy. Timeout não cancela CUDA/threads: o semáforo
+fica ocupado até a chamada terminar e a saída atrasada é descartada. Requisições
+expiradas na fila não iniciam inferência. Nenhum retry automático.
+Logs estruturados contêm request_id gerado pelo serviço, restaurant_id, backend,
+versão do prompt, latências e código/tipo de erro. Não registrar question, resposta,
+reviews, prompts, segredos ou stack trace por hábito. Dados reais exigem análise
+de anonimização/retenção e controles adequados à LGPD; não afirmar conformidade
+legal automática. Artefatos brutos de avaliação não viram logs padrão da API.
+Antes da medição CPU, fixar oito consultas operacionais inventadas (uma por
+restaurante), uma passagem de warm-up e cinco repetições, total 40 amostras.
+Modelo/índice carregados antes do timer; medir embedding e busca separadamente
+por relógio monotônico, sem subtração. Corpus somente split RAG registrado;
+nenhum gold/reservado. Registrar hardware, RAM, threads, versões e hashes.
+Não repetir a rodada para escolher resultado; na ausência de índice válido,
+registrar indisponibilidade e não publicar latência baseada em doubles.
+
+API implementada em fachada nova, sem alterar o núcleo congelado. Tempos isolados
+embedding_ms/search_ms são intervalos diretos, além da etapa combinada. A coleta
+CPU foi concluída uma única vez, 40 amostras e 862 reviews RAG; fontes, hardware,
+versões e limitações em reports/api-cpu-latency-v1/. Falha de pré-flight ocorreu
+antes de carga/amostras; nenhuma medição foi descartada. Catálogo replay continua
+vazio até curadoria explícita; não houve aprovação humana ou inferência nova.
+[Uso, erros e concorrência](api.md).
+
+Esclarecimento de dependências: fake não carrega o LLM/quantização, mas usa
+Transformers/PyTorch em CPU para o embedder quando ligado a um índice real.
+Replay usa só o catálogo/contexto arquivado e não importa runtimes de modelos.
+Isso esclarece a restrição anterior sobre carga de Transformers, que não exclui
+o encoder de embeddings CPU necessário ao caminho fake com busca real.

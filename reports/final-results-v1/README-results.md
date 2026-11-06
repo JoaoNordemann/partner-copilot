@@ -30,8 +30,10 @@ No Kaggle/Tesla T4 com NF4, a v1 teve mediana de geração de
 8,80 s, carga de
 87,84 s e pico alocado de
 5,56 GB. Esses tempos não pertencem ao PC local;
-carga não se soma por pergunta e reservado difere de alocado. Latências isoladas
-de CPU, pesos integrais FP16 e custo monetário seguem pendentes. Nenhuma nova
-inferência foi feita para gerar estas tabelas.
+carga não se soma por pergunta e reservado difere de alocado. As latências isoladas
+de CPU não integram este snapshot histórico; foram medidas depois no
+[relatório da API](../api-cpu-latency-v1/README.md), com hardware próprio.
+Pesos integrais FP16 e custo monetário seguem pendentes. Nenhuma nova inferência
+foi feita para gerar estas tabelas.
 
 [Tabelas, contagens e proveniência](RESULTADOS.md).

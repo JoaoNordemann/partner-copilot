@@ -10,7 +10,7 @@
 | v3-new | Schema, IDs, trecho, aceitação e conteúdo separados | n11–n20; limpo na execução congelada; corpus conhecido/rótulos IA | 10 perguntas; 9 saídas; 1 sem LLM | schema 9/9; parser 6/9; IDs 7/7; literal 4/7 | sustentadas IA 6/9 lidas; humanas assistidas 1/4 (4 lidas); humanas sustentadas e pertinentes 1/4 | Denominadores variam por ramo; sustentação só cobre casos lidos e N/A não significa falha. |
 
 Commit dos arquivos de entrada: `1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8`.
-Gerador: `scripts/build_results.py`; SHA256 LF `bbb4bbf9c6292fbd5874618c6c35f8688cd35a05e32d4538669abe1cb3c08c81`.
+Gerador: `scripts/build_results.py`; SHA256 LF `5e2ea19ea0c4d3591af5c327bd13c73053f3f876605aeb671ce6480e503a17b8`.
 Entradas desta tabela:
 
 - [reports/generation-retrospective-v1/ai-review.jsonl](https://github.com/JoaoNordemann/partner-copilot/blob/1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8/reports/generation-retrospective-v1/ai-review.jsonl)

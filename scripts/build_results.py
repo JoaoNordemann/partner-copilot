@@ -643,9 +643,11 @@ No Kaggle/Tesla T4 com NF4, a v1 teve mediana de geração de
 {number(v1["generation_seconds"]["median"], 2)} s, carga de
 {number(v1["load_seconds_distinct_attributes"][0], 2)} s e pico alocado de
 {number(v1["vram_peak_allocated"]["GB"], 2)} GB. Esses tempos não pertencem ao PC local;
-carga não se soma por pergunta e reservado difere de alocado. Latências isoladas
-de CPU, pesos integrais FP16 e custo monetário seguem pendentes. Nenhuma nova
-inferência foi feita para gerar estas tabelas.
+carga não se soma por pergunta e reservado difere de alocado. As latências isoladas
+de CPU não integram este snapshot histórico; foram medidas depois no
+[relatório da API](reports/api-cpu-latency-v1/README.md), com hardware próprio.
+Pesos integrais FP16 e custo monetário seguem pendentes. Nenhuma nova inferência
+foi feita para gerar estas tabelas.
 
 [Tabelas, contagens e proveniência](reports/final-results-v1/RESULTADOS.md).
 """
@@ -683,7 +685,7 @@ def headlines(context: dict) -> str:
         f"{correction['corrections_accepted']} rejeições recuperadas; "
         "formato válido não garante resposta correta.",
         "- Evidência limitada: corpus conhecido, amostras pequenas e revisão humana assistida; "
-        "latências isoladas de CPU e pesos FP16 ainda pendentes.",
+        "pesos integrais FP16 ainda pendentes.",
     ]
     return (
         "\n".join(lines)
@@ -758,7 +760,7 @@ def main() -> int:
     section = prose(context)
     rendered["README-results.md"] = section.replace(
         "(reports/final-results-v1/RESULTADOS.md)", "(RESULTADOS.md)"
-    )
+    ).replace("(reports/api-cpu-latency-v1/README.md)", "(../api-cpu-latency-v1/README.md)")
     intro = "# Resultados e limitações: documento final\n\n"
     intro += "Consolidação de artefatos existentes, sem modelos, downloads ou novas avaliações.\n"
     intro += (

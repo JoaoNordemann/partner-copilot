@@ -3,9 +3,14 @@
 Estas pendências não impedem reproduzir as tabelas existentes. Não foram realizadas
 novas inferências, consultas de retrieval ou benchmarks nesta revisão documental.
 
-## Na integração da API: uma medição de CPU
+## CPU: medição única concluída na integração da API
 
-Medir uma única vez, com o código da API integrado, a latência isolada do embedding
+A rodada única foi realizada no componente real da API: 40 amostras (8 consultas x 5),
+após warm-up, com 862 reviews do RAG, em CPU local.
+[Resultados e hardware](../reports/api-cpu-latency-v1/README.md). O plano anterior abaixo
+foi registrado antes da coleta e não autoriza repetir a rodada para escolher tempos.
+
+Plano preservado: medir uma única vez, com o código da API integrado, a latência isolada do embedding
 de consulta e a latência da busca vetorial. Registrar separadamente o retrieval
 total, declarando se inclui embedding, filtros e reconstrução dos documentos.
 

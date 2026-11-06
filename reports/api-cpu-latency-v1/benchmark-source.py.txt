@@ -1,0 +1,247 @@
+#!/usr/bin/env python
+"""One preregistered CPU measurement of the real HTTP retrieval component, without LLM."""
+
+import argparse
+import hashlib
+import json
+import math
+import os
+import platform
+import subprocess
+from importlib.metadata import version
+from pathlib import Path
+from statistics import mean, median
+from time import perf_counter
+
+from partner_copilot.api_models import APISettings, AskRequest, Timings
+from partner_copilot.api_runtime import CPUIndex, load_embedder, load_index, profile
+from partner_copilot.config import Settings
+from partner_copilot.data_splits import validate_rag_input
+from partner_copilot.schemas import Review
+
+ROOT = Path(__file__).resolve().parents[1]
+QUESTION = "Quais avaliações mencionam problemas na entrega deste restaurante?"
+RESTAURANTS = [f"rest_{i:03}" for i in range(1, 9)]
+REPETITIONS = 5
+
+
+def digest(path):
+    return hashlib.sha256(path.read_text(encoding="utf-8").encode()).hexdigest()
+
+
+def summarize(values):
+    values = sorted(values)
+    return {
+        "n": len(values),
+        "min_ms": min(values),
+        "median_ms": median(values),
+        "mean_ms": mean(values),
+        "p95_nearest_rank_ms": values[math.ceil(0.95 * len(values)) - 1],
+        "max_ms": max(values),
+    }
+
+
+def hardware():
+    result = {
+        "os": platform.platform(),
+        "logical_cpus": os.cpu_count(),
+        "device": "cpu",
+        "cpu_model": platform.processor(),
+        "ram_bytes": None,
+    }
+    if os.name == "nt":
+        command = (
+            "@{cpu=(Get-CimInstance Win32_Processor | Select-Object "
+            "-ExpandProperty Name);ram=(Get-CimInstance "
+            "Win32_ComputerSystem).TotalPhysicalMemory} | ConvertTo-Json "
+            "-Compress"
+        )
+        try:
+            raw = subprocess.check_output(
+                ["powershell", "-NoProfile", "-Command", command], text=True
+            )
+            data = json.loads(raw)
+            result.update(cpu_model=data["cpu"], ram_bytes=data["ram"])
+        except (OSError, subprocess.CalledProcessError, ValueError):
+            result["hardware_query"] = "unavailable; no hardware inferred"
+    return result
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--db-path", type=Path, default=ROOT / "work/api-cpu-benchmark/chroma")
+    parser.add_argument("--output-dir", type=Path, default=ROOT / "reports/api-cpu-latency-v1")
+    parser.add_argument("--prepare-index", action="store_true")
+    args = parser.parse_args()
+    out = args.output_dir.resolve()
+    database = args.db_path.resolve()
+    if out.parent != (ROOT / "reports").resolve() or out.exists():
+        parser.error("Use a new direct child of reports/")
+    if not database.is_relative_to((ROOT / "work").resolve()):
+        parser.error("Benchmark database must be isolated under work/")
+    if args.prepare_index and database.exists():
+        parser.error("Preparation requires a new database, not an existing index")
+    config = APISettings(_env_file=None, llm_backend="fake")
+    base = Settings(chroma_path=database)
+    settings = profile(base, config)
+    validate_rag_input(settings.data_splits_dir / "rag.jsonl", settings.data_splits_dir)
+    out.mkdir(parents=True, exist_ok=False)
+    protocol = {
+        "question": QUESTION,
+        "restaurants": RESTAURANTS,
+        "repetitions": REPETITIONS,
+        "warmup": "one pass over 8 requests, excluded",
+        "expected_samples": 40,
+        "preflight_note": "Relative-path handling repaired before any model load or timed sample; no measured run discarded.",
+        "k": 8,
+        "min_score": 0.25,
+        "generation_calls": 0,
+        "http_transport_included": False,
+        "metric_scope": "real CPUIndex.retrieve used by API; not LLM or network latency",
+        "source_sha256_lf": {
+            p.resolve().relative_to(ROOT).as_posix(): digest(p)
+            for p in [
+                Path(__file__).resolve(),
+                ROOT / "src/partner_copilot/api_runtime.py",
+                ROOT / "src/partner_copilot/api_models.py",
+                ROOT / "src/partner_copilot/ingestion/embedder.py",
+                settings.data_splits_dir / "rag.jsonl",
+                ROOT / "docs/decisions.md",
+            ]
+        },
+    }
+    (out / "protocol.json").write_text(
+        json.dumps(protocol, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+    started = perf_counter()
+    embedder = load_embedder(settings, config)
+    load_ms = (perf_counter() - started) * 1000
+    if args.prepare_index:
+        from partner_copilot.ingestion.chroma_store import ChromaStore
+
+        reviews = [
+            Review.model_validate_json(line)
+            for line in (settings.data_splits_dir / "rag.jsonl")
+            .read_text(encoding="utf-8")
+            .splitlines()
+        ]
+        tokenizer, limit, prefix = embedder.document_tokenizer()
+        if any(len(tokenizer(prefix + r.text)["input_ids"]) > limit for r in reviews):
+            raise ValueError("Explicit chunking needed before indexing; no timing published")
+        store = ChromaStore(path=database, settings=settings, embedder=embedder)
+        store.upsert(reviews)
+    index = load_index(settings, config, embedder)
+    assert isinstance(index, CPUIndex) and index.store.count() > 0
+    requests = [AskRequest(restaurant_id=r, question=QUESTION, k=8) for r in RESTAURANTS]
+    for request in requests:
+        index.retrieve(request, Timings())
+    rows = []
+    for repetition in range(REPETITIONS):
+        for request in requests:
+            timings = Timings()
+            docs = index.retrieve(request, timings)
+            rows.append(
+                {
+                    "repetition": repetition + 1,
+                    "restaurant_id": request.restaurant_id,
+                    "returned_documents": len(docs),
+                    **timings.model_dump(),
+                }
+            )
+    assert len(rows) == 40
+    import torch
+
+    encoder = embedder._get_encoder()
+    revision = getattr(encoder[0].auto_model.config, "_commit_hash", None)
+    payload = {
+        "hardware": hardware(),
+        "runtime": {
+            name: version(name)
+            for name in ["torch", "transformers", "sentence-transformers", "chromadb", "pydantic"]
+        },
+        "torch_threads": torch.get_num_threads(),
+        "torch_interop_threads": torch.get_num_interop_threads(),
+        "git_base_commit": subprocess.check_output(
+            ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True
+        ).strip(),
+        "protocol": protocol,
+        "model": embedder.model_name,
+        "model_revision": revision,
+        "model_load_ms_excluded": load_ms,
+        "collection": index.store.collection_name,
+        "documents": index.store.count(),
+        "samples": rows,
+        "summary": {
+            field: summarize([r[field] for r in rows])
+            for field in ["embedding_ms", "search_ms", "embedding_search_ms"]
+        },
+        "limitations": (
+            "One warm local CPU run, 8 fixed queries x 5 repetitions; not "
+            "independent questions or production SLA. No GPU/LLM. No "
+            "replay/eval-gold/reserved questions."
+        ),
+    }
+    (out / "metrics.json").write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+    lines = [
+        "# Latências isoladas de CPU na integração da API",
+        "",
+        (
+            "Rodada única pré-definida: 8 consultas operacionais x 5 "
+            "repetições, após uma passagem de warm-up. Sem GPU/LLM, sem "
+            "conjunto reservado. Índice somente do split RAG registrado."
+        ),
+        "",
+        "Hardware: " + json.dumps(payload["hardware"], ensure_ascii=False) + ".",
+        f"Modelo: {embedder.model_name}; revisão: {revision}; "
+        f"documentos: {payload['documents']}. Threads torch: {payload['torch_threads']}; "
+        f"interop: {payload['torch_interop_threads']}.",
+        "",
+        "| Etapa atual em CPU local | n | Mediana ms | Média ms | p95 ms |",
+        "| --- | --- | --- | --- | --- |",
+    ]
+    for stage, s in payload["summary"].items():
+        lines.append(
+            f"| {stage} | {s['n']} | {s['median_ms']:.3f} | "
+            f"{s['mean_ms']:.3f} | {s['p95_nearest_rank_ms']:.3f} |"
+        )
+    lines += [
+        "",
+        f"Carga do embedder excluída das amostras: {load_ms:.3f} ms. "
+        "Indexação e warm-up excluídos.",
+        (
+            "Busca mede count/query Chroma, filtros/corte e conversão dos "
+            "documentos. Embedding e busca têm intervalos próprios, sem "
+            "inferência por subtração. A etapa combinada também é medida "
+            "diretamente."
+        ),
+        (
+            "São tempos do componente CPUIndex usado pela API, não transporte "
+            "HTTP ou Mistral. Uma execução local sem carga concorrente "
+            "controlada não define SLA. Os 40 registros são repetições de oito "
+            "consultas, não quarenta perguntas independentes."
+        ),
+        (
+            "Versões, hashes e observações individuais em metrics.json; "
+            "protocolo salvo antes da carga e das amostras. Não foi escolhida "
+            "a melhor entre rodadas. FP16 permanece pendente."
+        ),
+    ]
+    (out / "README.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
+    (out / ".gitattributes").write_text("* -text whitespace=cr-at-eol\n", encoding="ascii")
+    print(
+        json.dumps(
+            {
+                "samples": 40,
+                "generation_calls": 0,
+                "output": str(out),
+                "summary": payload["summary"],
+            }
+        )
+    )
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

@@ -1,0 +1,7 @@
+{
+  "measured_source_sha256_lf": "cb8b33d50ce545dca1c9047094fe33e58a9e3f362efecca44e142d37120fb142",
+  "published_source_sha256_lf": "1818c6362da65a65c554656722141b236c6d158000862b2564eefd0f40f03ccd",
+  "ast_equal": true,
+  "change": "Only line wrapping of preflight_note after measurement; no rerun or result selection.",
+  "measured_source_snapshot": "benchmark-source.py.txt"
+}

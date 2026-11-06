@@ -5,6 +5,7 @@ from pathlib import Path
 import pytest
 from pydantic import ValidationError
 
+from partner_copilot.api_models import APISettings
 from partner_copilot.config import Settings
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -26,7 +27,10 @@ def test_derived_paths_follow_configured_roots(monkeypatch):
 def test_example_documents_all_settings_and_is_valid():
     example = ROOT / ".env.example"
     keys = re.findall(r"^\s*(?:#\s*)?([A-Z_]+)=", example.read_text(encoding="utf-8-sig"), re.M)
-    assert set(keys) == {name.upper() for name in Settings.model_fields}
+    assert set(keys) == {
+        name.upper() for model in (Settings, APISettings) for name in model.model_fields
+    }
+    assert APISettings(_env_file=example).llm_backend == "replay"
     settings = Settings(_env_file=example)
     assert settings.hf_token is None
     assert settings.data_eval_dir == Path("data/eval/human-v2")

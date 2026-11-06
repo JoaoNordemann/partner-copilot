@@ -13,8 +13,8 @@ jobs:
         with:
           python-version: '3.12'
       - name: Install unit-test dependencies
-        run: python -m pip install "pytest>=8" "pydantic>=2.6" "pydantic-settings>=2.2" "filelock>=3.13"
+        run: python -m pip install "pytest>=8" "pydantic>=2.6" "pydantic-settings>=2.2" "filelock>=3.13" "fastapi>=0.110" "httpx>=0.27"
       - name: Run retriever unit tests without Chroma or models
-        run: python -m pytest tests/test_retriever.py tests/test_retriever_dependencies.py tests/test_generation_prompt.py tests/test_generation_versions.py tests/test_generation_retrospective.py tests/test_results_tables.py tests/test_generation_correction.py tests/test_structured_generation.py tests/test_final_v3.py tests/test_generation_provider.py tests/test_ask_cli.py tests/test_generation_journal.py tests/test_generation_evaluation.py -m "not gpu" -v
+        run: python -m pytest tests/test_retriever.py tests/test_retriever_dependencies.py tests/test_generation_prompt.py tests/test_generation_versions.py tests/test_generation_retrospective.py tests/test_results_tables.py tests/test_api.py tests/test_api_replay.py tests/test_generation_correction.py tests/test_structured_generation.py tests/test_final_v3.py tests/test_generation_provider.py tests/test_ask_cli.py tests/test_generation_journal.py tests/test_generation_evaluation.py -m "not gpu" -v
       - name: Verify generated results and README
         run: python scripts/build_results.py --check --update-readme
