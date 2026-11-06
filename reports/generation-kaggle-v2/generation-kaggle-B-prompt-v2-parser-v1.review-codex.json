@@ -1,0 +1,206 @@
+{
+  "reviewer": "Jo\u00e3o",
+  "origin": "human_confirmation",
+  "review_date": "2026-11-05",
+  "completed": true,
+  "human_review_completed": true,
+  "source": "generation-kaggle-B-prompt-v2-parser-v1.jsonl",
+  "source_sha256": "bdfca1a4966d25ed8757c0f79f2d8940811417c26ed2e645363a7ea21de147bf",
+  "scope": "Ten preselected questions from experiment B; qualitative content review of actual context and raw response, separate from parser acceptance. Not an independent human annotation or a metric over all 30 questions.",
+  "reviewed_ids": [
+    "q01",
+    "q09",
+    "q13",
+    "q22",
+    "q25",
+    "q26",
+    "q27",
+    "q28",
+    "q29",
+    "q30"
+  ],
+  "reviews": [
+    {
+      "question_id": "q01",
+      "reviewer": "Jo\u00e3o",
+      "origin": "human_confirmation",
+      "reviewed": true,
+      "source_llm_called": true,
+      "suporte_factual": "sim",
+      "abstencao_adequada_ao_contexto": "sim",
+      "citacoes_sustentam_afirmacoes": "IDs existentes agrupados em formato invalido",
+      "observacoes": "A conclusao sobre ausencia de reclamacao explicita de embalagem e compativel com o contexto recebido. Ha elogios a embalagem e uma reclamacao de temperatura, que nao prova defeito de embalagem. A fonte rotulada relevante ficou na posicao 6, fora do contexto. A lista de IDs separados por virgulas em um unico colchete nao segue [id] [id], e o marcador acompanhado de texto viola o contrato.",
+      "strict_pipeline_status": "error",
+      "strict_error": {
+        "code": "generation_contract_error",
+        "type": "GenerationContractError",
+        "message": "Abstention marker must be the complete output"
+      }
+    },
+    {
+      "question_id": "q09",
+      "reviewer": "Jo\u00e3o",
+      "origin": "human_confirmation",
+      "reviewed": true,
+      "source_llm_called": true,
+      "suporte_factual": "nao",
+      "abstencao_adequada_ao_contexto": "nao",
+      "citacoes_sustentam_afirmacoes": "sem citacoes de reviews; frase entre colchetes interpretada como referencia invalida",
+      "observacoes": "A review rev_000212 diz Mais de uma hora esperando, muito alem do combinado. Negar evidencia de atraso contradiz o trecho. O filtro da pergunta forneceu o escopo de restaurante e periodo; nao e necessario que o texto repita o nome do restaurante. EXATAMENTE seguido de frase entre colchetes nao e o marcador de abstencao. Ha falha de leitura da evidencia e de formato.",
+      "strict_pipeline_status": "error",
+      "strict_error": {
+        "code": "invalid_citation",
+        "type": "InvalidCitationError",
+        "message": "Citation references a review outside the context",
+        "invalid_ids": [
+          "Nao ha evidencia sobre reclamos de atraso do Burger do Z\u00e9 na base de dados fornecida"
+        ],
+        "invalid_citation_count": 1
+      }
+    },
+    {
+      "question_id": "q13",
+      "reviewer": "Jo\u00e3o",
+      "origin": "human_confirmation",
+      "reviewed": true,
+      "source_llm_called": false,
+      "suporte_factual": "sim",
+      "abstencao_adequada_ao_contexto": "sim",
+      "citacoes_sustentam_afirmacoes": "sem citacoes",
+      "observacoes": "O contexto e vazio e o LLM nao foi chamado. A abstencao e apropriada aos documentos disponiveis na pipeline. Isso nao prova ausencia na base: rev_002234 relata 92 minutos de espera, mas ficou abaixo do limiar de retrieval. Classificar a causa como falso negativo de retrieval, nao como recusa do Mistral.",
+      "strict_pipeline_status": "ok",
+      "strict_error": null
+    },
+    {
+      "question_id": "q22",
+      "reviewer": "Jo\u00e3o",
+      "origin": "human_confirmation",
+      "reviewed": true,
+      "source_llm_called": true,
+      "suporte_factual": "parcial",
+      "abstencao_adequada_ao_contexto": "nao",
+      "citacoes_sustentam_afirmacoes": "parcial no conteudo; agrupamento de IDs em formato invalido",
+      "observacoes": "A frase nhoque ao sugo encontrou sabor indesejado contradiz rev_000300, que elogia o sabor. As fontes rev_001760 e rev_001051 sustentam lasanha fria, mas temperatura nao responde sozinha a pergunta de paladar. rev_002684 e rev_002234 sustentam insatisfacao de sabor do ravioli, e rev_001051 tambem reclama do sabor da lasanha. O encerramento de que nao ha review com essa insatisfacao contradiz essas evidencias e a propria resposta. O marcador misturado com afirmacoes e outra violacao. Ha erros factuais, nao apenas citacoes mal formatadas.",
+      "strict_pipeline_status": "error",
+      "strict_error": {
+        "code": "generation_contract_error",
+        "type": "GenerationContractError",
+        "message": "Abstention marker must be the complete output"
+      }
+    },
+    {
+      "question_id": "q25",
+      "reviewer": "Jo\u00e3o",
+      "origin": "human_confirmation",
+      "reviewed": true,
+      "source_llm_called": true,
+      "suporte_factual": "parcial",
+      "abstencao_adequada_ao_contexto": "sim",
+      "citacoes_sustentam_afirmacoes": "sem citacoes de reviews; frase entre colchetes nao e ID",
+      "observacoes": "O contexto nao relata alergia ou amendoim; a recusa do fato principal e adequada. A frase auxiliar de que as reviews comentam embalagem nao tem suporte nesses cinco trechos, por isso suporte factual parcial para o texto completo. A conclusao deve ser limitada aos trechos fornecidos, nao a todos os clientes ou a seguranca do alimento. A resposta substitui o marcador por uma frase e acrescenta explicacao.",
+      "strict_pipeline_status": "error",
+      "strict_error": {
+        "code": "invalid_citation",
+        "type": "InvalidCitationError",
+        "message": "Citation references a review outside the context",
+        "invalid_ids": [
+          "Nenhuma revis\u00e3o relatou rea\u00e7\u00e3o al\u00e9rgica a amendoim"
+        ],
+        "invalid_citation_count": 1
+      }
+    },
+    {
+      "question_id": "q26",
+      "reviewer": "Jo\u00e3o",
+      "origin": "human_confirmation",
+      "reviewed": true,
+      "source_llm_called": true,
+      "suporte_factual": "sim",
+      "abstencao_adequada_ao_contexto": "sim",
+      "citacoes_sustentam_afirmacoes": "nao: prefixo review_ no lugar de rev_ e IDs agrupados",
+      "observacoes": "Nenhuma fonte apresenta valor de reembolso ou transacao Pix. A conclusao de insuficiencia e adequada ao contexto. O modelo muda o prefixo dos IDs e agrupa varias referencias em um colchete. Isso invalida as referencias, sem demonstrar que inventou um pagamento ou valor. A recusa nao usa o marcador fixo.",
+      "strict_pipeline_status": "error",
+      "strict_error": {
+        "code": "invalid_citation",
+        "type": "InvalidCitationError",
+        "message": "Citation references a review outside the context",
+        "invalid_ids": [
+          "review_002759, review_001998, review_002142, review_001629, review_002675"
+        ],
+        "invalid_citation_count": 1
+      }
+    },
+    {
+      "question_id": "q27",
+      "reviewer": "Jo\u00e3o",
+      "origin": "human_confirmation",
+      "reviewed": true,
+      "source_llm_called": true,
+      "suporte_factual": "sim",
+      "abstencao_adequada_ao_contexto": "sim",
+      "citacoes_sustentam_afirmacoes": "nao: prefixos alterados, zero omitido e IDs agrupados",
+      "observacoes": "As reviews nao apresentam ingredientes completos, preparo ou comprovacao de ausencia de gluten. Nao produzir a receita e adequado. As referencias usam review_ em lugar de rev_, uma perde um zero (review_00345 versus rev_000345), e ficam agrupadas em um colchete. A resposta nao usa o marcador exigido. A falta de receita nao autoriza afirmar que o prato seja seguro para restricoes alimentares.",
+      "strict_pipeline_status": "error",
+      "strict_error": {
+        "code": "invalid_citation",
+        "type": "InvalidCitationError",
+        "message": "Citation references a review outside the context",
+        "invalid_ids": [
+          "review_001829, review_000400, review_00345, review_002438, review_002598"
+        ],
+        "invalid_citation_count": 1
+      }
+    },
+    {
+      "question_id": "q28",
+      "reviewer": "Jo\u00e3o",
+      "origin": "human_confirmation",
+      "reviewed": true,
+      "source_llm_called": true,
+      "suporte_factual": "sim",
+      "abstencao_adequada_ao_contexto": "sim",
+      "citacoes_sustentam_afirmacoes": "sem citacoes de reviews; frase entre colchetes nao e ID",
+      "observacoes": "Nenhum trecho menciona insetos. Embalagem mal fechada e sabor ruim nao permitem inferir contaminacao por insetos. A recusa e adequada ao contexto, mas a frase EXATAMENTE seguida de texto entre colchetes nao e [[SEM_EVIDENCIA]]. A conclusao nao prova que nunca houve esse evento fora dos trechos.",
+      "strict_pipeline_status": "error",
+      "strict_error": {
+        "code": "invalid_citation",
+        "type": "InvalidCitationError",
+        "message": "Citation references a review outside the context",
+        "invalid_ids": [
+          "N\u00e3o h\u00e1 evidencia sobre insetos na comida em nenhum dos reviews"
+        ],
+        "invalid_citation_count": 1
+      }
+    },
+    {
+      "question_id": "q29",
+      "reviewer": "Jo\u00e3o",
+      "origin": "human_confirmation",
+      "reviewed": true,
+      "source_llm_called": false,
+      "suporte_factual": "sim",
+      "abstencao_adequada_ao_contexto": "sim",
+      "citacoes_sustentam_afirmacoes": "sem citacoes",
+      "observacoes": "O retriever nao retornou documentos; a pipeline absteve sem chamar o LLM. A resposta e adequada ao contexto vazio e nao representa uma recusa gerada pelo modelo. Nao inferir inexistencia universal do item apenas a partir do contexto vazio.",
+      "strict_pipeline_status": "ok",
+      "strict_error": null
+    },
+    {
+      "question_id": "q30",
+      "reviewer": "Jo\u00e3o",
+      "origin": "human_confirmation",
+      "reviewed": true,
+      "source_llm_called": false,
+      "suporte_factual": "sim",
+      "abstencao_adequada_ao_contexto": "sim",
+      "citacoes_sustentam_afirmacoes": "sem citacoes",
+      "observacoes": "O retriever retornou vazio para o periodo solicitado em 2030; a pipeline absteve sem chamar o LLM. Adequado ao contexto e ao escopo temporal. Nao atribuir esse sucesso ao Mistral, que nao foi chamado.",
+      "strict_pipeline_status": "ok",
+      "strict_error": null
+    }
+  ],
+  "initial_analysis_author": "Codex",
+  "initial_analysis_origin": "AI",
+  "human_confirmation": "Jo\u00e3o leu e confirmou como corretos os dez julgamentos apresentados no chat.",
+  "review_method": "Human validation of the initial AI analysis, not independent blind annotation."
+}

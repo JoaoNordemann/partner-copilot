@@ -1,0 +1,51 @@
+{
+  "complete": true,
+  "questions": 10,
+  "cohort": "new",
+  "contaminated": false,
+  "llm_calls": 9,
+  "schema_first_object_valid": {
+    "numerator": 9,
+    "denominator": 9,
+    "rate": 1.0
+  },
+  "schema_valid_without_ignored_suffix": {
+    "numerator": 0,
+    "denominator": 9,
+    "rate": 0.0
+  },
+  "output_token_cap_hits": 0,
+  "trailing_text_ignored": 9,
+  "ids_in_context": {
+    "numerator": 7,
+    "denominator": 7,
+    "rate": 1.0
+  },
+  "quotes_literal": {
+    "numerator": 4,
+    "denominator": 7,
+    "rate": 0.5714285714285714
+  },
+  "parser_accepted_llm": 6,
+  "correct_negative_abstention": {
+    "numerator": 3,
+    "denominator": 3,
+    "rate": 1.0
+  },
+  "negative_llm_calls": 2,
+  "retriever_empty_abstentions": 1,
+  "undue_positive_abstention": {
+    "numerator": 0,
+    "denominator": 7,
+    "rate": 0.0
+  },
+  "context_evidence_positive": {
+    "numerator": 7,
+    "denominator": 7,
+    "rate": 1.0
+  },
+  "errors": 3,
+  "content_supported": null,
+  "factual_review_completed": false,
+  "corrective_calls": 0
+}

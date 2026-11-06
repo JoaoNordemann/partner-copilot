@@ -1,0 +1,14 @@
+{
+  "experiment": "A",
+  "new_inference": false,
+  "completed_questions": 30,
+  "llm_outputs": 27,
+  "accepted": 0,
+  "rejected": 27,
+  "no_llm": 3,
+  "errors": {
+    "Abstention marker must be the complete output": 20,
+    "Citation references a review outside the context": 2,
+    "Every output line must end with a source citation": 5
+  }
+}

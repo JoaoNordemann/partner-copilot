@@ -1,0 +1,632 @@
+{
+  "source": "generation-kaggle-B-prompt-v2-parser-v1.jsonl",
+  "source_sha256": "bdfca1a4966d25ed8757c0f79f2d8940811417c26ed2e645363a7ea21de147bf",
+  "metric_version": "abstention-diagnostic-v1",
+  "complete": true,
+  "warning": "Tolerant detection is diagnostic, not evidence validation or parser acceptance.",
+  "views": {
+    "raw": {
+      "metrics": {
+        "all_llm_calls": {
+          "strict": {
+            "numerator": 0,
+            "denominator": 27,
+            "rate": 0.0
+          },
+          "tolerant": {
+            "numerator": 5,
+            "denominator": 27,
+            "rate": 0.18518518518518517
+          }
+        },
+        "negative_llm_calls": {
+          "strict": {
+            "numerator": 0,
+            "denominator": 4,
+            "rate": 0.0
+          },
+          "tolerant": {
+            "numerator": 0,
+            "denominator": 4,
+            "rate": 0.0
+          }
+        },
+        "positive_llm_calls": {
+          "strict": {
+            "numerator": 0,
+            "denominator": 23,
+            "rate": 0.0
+          },
+          "tolerant": {
+            "numerator": 5,
+            "denominator": 23,
+            "rate": 0.21739130434782608
+          }
+        },
+        "hard_negative_llm_calls": {
+          "strict": {
+            "numerator": 0,
+            "denominator": 4,
+            "rate": 0.0
+          },
+          "tolerant": {
+            "numerator": 0,
+            "denominator": 4,
+            "rate": 0.0
+          }
+        },
+        "negative_pipeline": {
+          "strict": {
+            "numerator": 2,
+            "denominator": 6,
+            "rate": 0.3333333333333333
+          },
+          "tolerant": {
+            "numerator": 2,
+            "denominator": 6,
+            "rate": 0.3333333333333333
+          }
+        },
+        "positive_pipeline": {
+          "strict": {
+            "numerator": 1,
+            "denominator": 24,
+            "rate": 0.041666666666666664
+          },
+          "tolerant": {
+            "numerator": 6,
+            "denominator": 24,
+            "rate": 0.25
+          }
+        }
+      },
+      "questions": [
+        {
+          "question_id": "q01",
+          "llm_called": true,
+          "strict": false,
+          "tolerant": true,
+          "valid_citation_ids": []
+        },
+        {
+          "question_id": "q02",
+          "llm_called": true,
+          "strict": false,
+          "tolerant": false,
+          "valid_citation_ids": []
+        },
+        {
+          "question_id": "q03",
+          "llm_called": true,
+          "strict": false,
+          "tolerant": false,
+          "valid_citation_ids": [
+            "rev_001339",
+            "rev_002562"
+          ]
+        },
+        {
+          "question_id": "q04",
+          "llm_called": true,
+          "strict": false,
+          "tolerant": false,
+          "valid_citation_ids": [
+            "rev_000345"
+          ]
+        },
+        {
+          "question_id": "q05",
+          "llm_called": true,
+          "strict": false,
+          "tolerant": false,
+          "valid_citation_ids": []
+        },
+        {
+          "question_id": "q06",
+          "llm_called": true,
+          "strict": false,
+          "tolerant": false,
+          "valid_citation_ids": []
+        },
+        {
+          "question_id": "q07",
+          "llm_called": true,
+          "strict": false,
+          "tolerant": false,
+          "valid_citation_ids": []
+        },
+        {
+          "question_id": "q08",
+          "llm_called": true,
+          "strict": false,
+          "tolerant": false,
+          "valid_citation_ids": [
+            "rev_002833"
+          ]
+        },
+        {
+          "question_id": "q09",
+          "llm_called": true,
+          "strict": false,
+          "tolerant": false,
+          "valid_citation_ids": []
+        },
+        {
+          "question_id": "q10",
+          "llm_called": true,
+          "strict": false,
+          "tolerant": false,
+          "valid_citation_ids": [
+            "rev_002237"
+          ]
+        },
+        {
+          "question_id": "q11",
+          "llm_called": true,
+          "strict": false,
+          "tolerant": false,
+          "valid_citation_ids": []
+        },
+        {
+          "question_id": "q12",
+          "llm_called": true,
+          "strict": false,
+          "tolerant": true,
+          "valid_citation_ids": []
+        },
+        {
+          "question_id": "q13",
+          "llm_called": false,
+          "strict": false,
+          "tolerant": false,
+          "valid_citation_ids": []
+        },
+        {
+          "question_id": "q14",
+          "llm_called": true,
+          "strict": false,
+          "tolerant": false,
+          "valid_citation_ids": []
+        },
+        {
+          "question_id": "q15",
+          "llm_called": true,
+          "strict": false,
+          "tolerant": false,
+          "valid_citation_ids": [
+            "rev_000796",
+            "rev_001291"
+          ]
+        },
+        {
+          "question_id": "q16",
+          "llm_called": true,
+          "strict": false,
+          "tolerant": false,
+          "valid_citation_ids": [
+            "rev_001998"
+          ]
+        },
+        {
+          "question_id": "q17",
+          "llm_called": true,
+          "strict": false,
+          "tolerant": false,
+          "valid_citation_ids": []
+        },
+        {
+          "question_id": "q18",
+          "llm_called": true,
+          "strict": false,
+          "tolerant": true,
+          "valid_citation_ids": []
+        },
+        {
+          "question_id": "q19",
+          "llm_called": true,
+          "strict": false,
+          "tolerant": false,
+          "valid_citation_ids": []
+        },
+        {
+          "question_id": "q20",
+          "llm_called": true,
+          "strict": false,
+          "tolerant": true,
+          "valid_citation_ids": []
+        },
+        {
+          "question_id": "q21",
+          "llm_called": true,
+          "strict": false,
+          "tolerant": true,
+          "valid_citation_ids": []
+        },
+        {
+          "question_id": "q22",
+          "llm_called": true,
+          "strict": false,
+          "tolerant": false,
+          "valid_citation_ids": [
+            "rev_000300"
+          ]
+        },
+        {
+          "question_id": "q23",
+          "llm_called": true,
+          "strict": false,
+          "tolerant": false,
+          "valid_citation_ids": []
+        },
+        {
+          "question_id": "q24",
+          "llm_called": true,
+          "strict": false,
+          "tolerant": false,
+          "valid_citation_ids": []
+        },
+        {
+          "question_id": "q25",
+          "llm_called": true,
+          "strict": false,
+          "tolerant": false,
+          "valid_citation_ids": []
+        },
+        {
+          "question_id": "q26",
+          "llm_called": true,
+          "strict": false,
+          "tolerant": false,
+          "valid_citation_ids": []
+        },
+        {
+          "question_id": "q27",
+          "llm_called": true,
+          "strict": false,
+          "tolerant": false,
+          "valid_citation_ids": []
+        },
+        {
+          "question_id": "q28",
+          "llm_called": true,
+          "strict": false,
+          "tolerant": false,
+          "valid_citation_ids": []
+        },
+        {
+          "question_id": "q29",
+          "llm_called": false,
+          "strict": false,
+          "tolerant": false,
+          "valid_citation_ids": []
+        },
+        {
+          "question_id": "q30",
+          "llm_called": false,
+          "strict": false,
+          "tolerant": false,
+          "valid_citation_ids": []
+        }
+      ]
+    },
+    "normalized_underscores": {
+      "metrics": {
+        "all_llm_calls": {
+          "strict": {
+            "numerator": 0,
+            "denominator": 27,
+            "rate": 0.0
+          },
+          "tolerant": {
+            "numerator": 8,
+            "denominator": 27,
+            "rate": 0.2962962962962963
+          }
+        },
+        "negative_llm_calls": {
+          "strict": {
+            "numerator": 0,
+            "denominator": 4,
+            "rate": 0.0
+          },
+          "tolerant": {
+            "numerator": 0,
+            "denominator": 4,
+            "rate": 0.0
+          }
+        },
+        "positive_llm_calls": {
+          "strict": {
+            "numerator": 0,
+            "denominator": 23,
+            "rate": 0.0
+          },
+          "tolerant": {
+            "numerator": 8,
+            "denominator": 23,
+            "rate": 0.34782608695652173
+          }
+        },
+        "hard_negative_llm_calls": {
+          "strict": {
+            "numerator": 0,
+            "denominator": 4,
+            "rate": 0.0
+          },
+          "tolerant": {
+            "numerator": 0,
+            "denominator": 4,
+            "rate": 0.0
+          }
+        },
+        "negative_pipeline": {
+          "strict": {
+            "numerator": 2,
+            "denominator": 6,
+            "rate": 0.3333333333333333
+          },
+          "tolerant": {
+            "numerator": 2,
+            "denominator": 6,
+            "rate": 0.3333333333333333
+          }
+        },
+        "positive_pipeline": {
+          "strict": {
+            "numerator": 1,
+            "denominator": 24,
+            "rate": 0.041666666666666664
+          },
+          "tolerant": {
+            "numerator": 9,
+            "denominator": 24,
+            "rate": 0.375
+          }
+        }
+      },
+      "questions": [
+        {
+          "question_id": "q01",
+          "llm_called": true,
+          "strict": false,
+          "tolerant": true,
+          "valid_citation_ids": []
+        },
+        {
+          "question_id": "q02",
+          "llm_called": true,
+          "strict": false,
+          "tolerant": false,
+          "valid_citation_ids": [
+            "rev_002257",
+            "rev_002289"
+          ]
+        },
+        {
+          "question_id": "q03",
+          "llm_called": true,
+          "strict": false,
+          "tolerant": false,
+          "valid_citation_ids": [
+            "rev_001339",
+            "rev_002562"
+          ]
+        },
+        {
+          "question_id": "q04",
+          "llm_called": true,
+          "strict": false,
+          "tolerant": false,
+          "valid_citation_ids": [
+            "rev_000345"
+          ]
+        },
+        {
+          "question_id": "q05",
+          "llm_called": true,
+          "strict": false,
+          "tolerant": false,
+          "valid_citation_ids": [
+            "rev_001123"
+          ]
+        },
+        {
+          "question_id": "q06",
+          "llm_called": true,
+          "strict": false,
+          "tolerant": true,
+          "valid_citation_ids": []
+        },
+        {
+          "question_id": "q07",
+          "llm_called": true,
+          "strict": false,
+          "tolerant": false,
+          "valid_citation_ids": []
+        },
+        {
+          "question_id": "q08",
+          "llm_called": true,
+          "strict": false,
+          "tolerant": false,
+          "valid_citation_ids": [
+            "rev_002833"
+          ]
+        },
+        {
+          "question_id": "q09",
+          "llm_called": true,
+          "strict": false,
+          "tolerant": false,
+          "valid_citation_ids": []
+        },
+        {
+          "question_id": "q10",
+          "llm_called": true,
+          "strict": false,
+          "tolerant": false,
+          "valid_citation_ids": [
+            "rev_002237"
+          ]
+        },
+        {
+          "question_id": "q11",
+          "llm_called": true,
+          "strict": false,
+          "tolerant": true,
+          "valid_citation_ids": []
+        },
+        {
+          "question_id": "q12",
+          "llm_called": true,
+          "strict": false,
+          "tolerant": true,
+          "valid_citation_ids": []
+        },
+        {
+          "question_id": "q13",
+          "llm_called": false,
+          "strict": false,
+          "tolerant": false,
+          "valid_citation_ids": []
+        },
+        {
+          "question_id": "q14",
+          "llm_called": true,
+          "strict": false,
+          "tolerant": false,
+          "valid_citation_ids": [
+            "rev_000813",
+            "rev_001076"
+          ]
+        },
+        {
+          "question_id": "q15",
+          "llm_called": true,
+          "strict": false,
+          "tolerant": false,
+          "valid_citation_ids": [
+            "rev_000796",
+            "rev_001291"
+          ]
+        },
+        {
+          "question_id": "q16",
+          "llm_called": true,
+          "strict": false,
+          "tolerant": false,
+          "valid_citation_ids": [
+            "rev_001998"
+          ]
+        },
+        {
+          "question_id": "q17",
+          "llm_called": true,
+          "strict": false,
+          "tolerant": false,
+          "valid_citation_ids": [
+            "rev_002015"
+          ]
+        },
+        {
+          "question_id": "q18",
+          "llm_called": true,
+          "strict": false,
+          "tolerant": true,
+          "valid_citation_ids": []
+        },
+        {
+          "question_id": "q19",
+          "llm_called": true,
+          "strict": false,
+          "tolerant": false,
+          "valid_citation_ids": [
+            "rev_000752",
+            "rev_001661"
+          ]
+        },
+        {
+          "question_id": "q20",
+          "llm_called": true,
+          "strict": false,
+          "tolerant": true,
+          "valid_citation_ids": []
+        },
+        {
+          "question_id": "q21",
+          "llm_called": true,
+          "strict": false,
+          "tolerant": true,
+          "valid_citation_ids": []
+        },
+        {
+          "question_id": "q22",
+          "llm_called": true,
+          "strict": false,
+          "tolerant": false,
+          "valid_citation_ids": [
+            "rev_000300"
+          ]
+        },
+        {
+          "question_id": "q23",
+          "llm_called": true,
+          "strict": false,
+          "tolerant": false,
+          "valid_citation_ids": [
+            "rev_001123"
+          ]
+        },
+        {
+          "question_id": "q24",
+          "llm_called": true,
+          "strict": false,
+          "tolerant": true,
+          "valid_citation_ids": []
+        },
+        {
+          "question_id": "q25",
+          "llm_called": true,
+          "strict": false,
+          "tolerant": false,
+          "valid_citation_ids": []
+        },
+        {
+          "question_id": "q26",
+          "llm_called": true,
+          "strict": false,
+          "tolerant": false,
+          "valid_citation_ids": []
+        },
+        {
+          "question_id": "q27",
+          "llm_called": true,
+          "strict": false,
+          "tolerant": false,
+          "valid_citation_ids": []
+        },
+        {
+          "question_id": "q28",
+          "llm_called": true,
+          "strict": false,
+          "tolerant": false,
+          "valid_citation_ids": []
+        },
+        {
+          "question_id": "q29",
+          "llm_called": false,
+          "strict": false,
+          "tolerant": false,
+          "valid_citation_ids": []
+        },
+        {
+          "question_id": "q30",
+          "llm_called": false,
+          "strict": false,
+          "tolerant": false,
+          "valid_citation_ids": []
+        }
+      ]
+    }
+  }
+}

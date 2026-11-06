@@ -1,0 +1,13 @@
+{
+  "experiment": "C",
+  "new_inference": false,
+  "completed_questions": 30,
+  "llm_outputs": 27,
+  "accepted": 2,
+  "rejected": 25,
+  "no_llm": 3,
+  "errors": {
+    "Abstention marker must be the complete output": 15,
+    "Citation references a review outside the context": 10
+  }
+}

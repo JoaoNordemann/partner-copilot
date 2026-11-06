@@ -1,0 +1,83 @@
+{
+  "source_sha256": {
+    "generation-v3-contaminated.jsonl": "b0e3674d175c7bdd8241c1cdc9bd09e6fe53b59477ee7d8bdf24c8679a5f9a61",
+    "generation-v3-contaminated.review.md": "0555f0a2e31b25194dafc9b660e6505b727206fca1f260f85a9e68f21021ab5c",
+    "generation-v3-contaminated.summary.json": "17d7b9541bd7eeb4345d75863e06ed3bd1ec042a35cc4de3a0dde15c4b06037d",
+    "generation-v3-new.review.md": "ae453967ea0cbcd11172dfa3b91260bdc9074b45d514cf7f81f38d958d845baa",
+    "generation-v3-new.jsonl": "b424bc5d3af972fdf42cccdb14a467bd144f8a6b15904b70d93dcad8c644f0e7",
+    "generation-v3-new.summary.json": "7cdc62b8ff5bd8318851668c41f1605fffc3ac03d034e4816461eefc69144558"
+  },
+  "summaries_recomputed_match": true,
+  "new_questions": 10,
+  "old_contaminated_questions": 30,
+  "new_review_origin": "Codex/AI",
+  "new_human_review_completed": false,
+  "quote_failures": [
+    {
+      "question_id": "n14",
+      "claim_index": 0,
+      "review_id": "rev_000797",
+      "quote": "pizza portuguesa estava com gosto de produto velo.",
+      "source_text": "O preço de pizza portuguesa estava bom. pizza portuguesa estava com gosto de produto velho. O lacre estava inteiro quando recebi.",
+      "category": "transcription_typo",
+      "other_context_review_ids": []
+    },
+    {
+      "question_id": "n15",
+      "claim_index": 0,
+      "review_id": "rev_002127",
+      "quote": "Não valeu a pena",
+      "source_text": "A tampa veio solta, não gostei disso. O sabor de bolo de pote valeu o pedido. Chegou fresco e bem refrigerado. Dá pra melhorar.",
+      "category": "quote_belongs_to_other_review",
+      "other_context_review_ids": [
+        "rev_002490"
+      ]
+    },
+    {
+      "question_id": "n16",
+      "claim_index": 0,
+      "review_id": "rev_001339",
+      "quote": "Não mantiveram temaki salmão refrigerado. ",
+      "source_text": "Achei temaki salmão uma delícia. Não mantiveram temaki salmão refrigerado.",
+      "category": "whitespace_only",
+      "other_context_review_ids": []
+    },
+    {
+      "question_id": "n16",
+      "claim_index": 0,
+      "review_id": "rev_000908",
+      "quote": "O gosto não estava bom. Esperei quase duas horas e já tinha passado da previsão.",
+      "source_text": "Chegou fresco e bem refrigerado. Não consegui terminar temaki salmão, o gosto não estava bom. Esperei quase duas horas e já tinha passado da previsão. Não valeu a pena.",
+      "category": "case_change_only",
+      "other_context_review_ids": []
+    }
+  ],
+  "new_suffix_categories": {
+    "period_only": 5,
+    "extra_closers_or_punctuation": 1,
+    "substantive_suffix": 3
+  },
+  "new_accepted_positive_ids": [
+    "n11",
+    "n12",
+    "n13",
+    "n17"
+  ],
+  "new_accepted_positive_supported_core_ids": [
+    "n11",
+    "n13",
+    "n17"
+  ],
+  "new_accepted_positive_unsupported_id": "n12",
+  "old_selected_content_review_ids": [
+    "q01",
+    "q09",
+    "q21",
+    "q22",
+    "q23"
+  ],
+  "old_full_factual_review_completed": false,
+  "new_generation_ms": 85900.79002099992,
+  "old_generation_ms": 453278.3027159999,
+  "single_model_load_ms": 97161.18049
+}

@@ -1,0 +1,584 @@
+{
+  "source": "generation-kaggle-v1.jsonl",
+  "source_sha256": "23f8945599009e4f1bf454e6dd0130494ecf10ae18296ef81ccd2651c9051974",
+  "definition": "At least one labeled relevant review ID intersects the actual context_ids sent to the LLM; answerable questions only. This is context hit rate, not semantic/factual adjudication.",
+  "context_limit": 5,
+  "answerable_questions": 24,
+  "context_evidence": {
+    "numerator": 22,
+    "denominator": 24,
+    "rate": 0.9166666666666666
+  },
+  "retrieval_evidence": {
+    "numerator": 23,
+    "denominator": 24,
+    "rate": 0.9583333333333334
+  },
+  "contract_errors_by_message": {
+    "Abstention marker must be the complete output": 19,
+    "Every output line must end with a source citation": 5
+  },
+  "invalid_citation_errors": 3,
+  "human_review_completed": false,
+  "questions": [
+    {
+      "question_id": "q01",
+      "context_count": 5,
+      "relevant_ids": [
+        "rev_001661"
+      ],
+      "context_ids": [
+        "rev_000294",
+        "rev_002980",
+        "rev_002549",
+        "rev_000673",
+        "rev_000650"
+      ],
+      "relevant_in_context": [],
+      "context_hit": false,
+      "retrieval_hit": true,
+      "relevant_retrieval_positions": {
+        "rev_001661": 6
+      }
+    },
+    {
+      "question_id": "q02",
+      "context_count": 5,
+      "relevant_ids": [
+        "rev_002257"
+      ],
+      "context_ids": [
+        "rev_002257",
+        "rev_000799",
+        "rev_002289",
+        "rev_001685",
+        "rev_002089"
+      ],
+      "relevant_in_context": [
+        "rev_002257"
+      ],
+      "context_hit": true,
+      "retrieval_hit": true,
+      "relevant_retrieval_positions": {
+        "rev_002257": 1
+      }
+    },
+    {
+      "question_id": "q03",
+      "context_count": 5,
+      "relevant_ids": [
+        "rev_001339",
+        "rev_001629"
+      ],
+      "context_ids": [
+        "rev_002562",
+        "rev_002759",
+        "rev_002142",
+        "rev_000908",
+        "rev_001339"
+      ],
+      "relevant_in_context": [
+        "rev_001339"
+      ],
+      "context_hit": true,
+      "retrieval_hit": true,
+      "relevant_retrieval_positions": {
+        "rev_001339": 5
+      }
+    },
+    {
+      "question_id": "q04",
+      "context_count": 5,
+      "relevant_ids": [
+        "rev_000400",
+        "rev_000934",
+        "rev_001212",
+        "rev_001552"
+      ],
+      "context_ids": [
+        "rev_000345",
+        "rev_000400",
+        "rev_001212",
+        "rev_001829",
+        "rev_002438"
+      ],
+      "relevant_in_context": [
+        "rev_000400",
+        "rev_001212"
+      ],
+      "context_hit": true,
+      "retrieval_hit": true,
+      "relevant_retrieval_positions": {
+        "rev_000400": 2,
+        "rev_001212": 3,
+        "rev_000934": 6
+      }
+    },
+    {
+      "question_id": "q05",
+      "context_count": 2,
+      "relevant_ids": [
+        "rev_001123",
+        "rev_002302",
+        "rev_002693"
+      ],
+      "context_ids": [
+        "rev_001123",
+        "rev_002058"
+      ],
+      "relevant_in_context": [
+        "rev_001123"
+      ],
+      "context_hit": true,
+      "retrieval_hit": true,
+      "relevant_retrieval_positions": {
+        "rev_001123": 1
+      }
+    },
+    {
+      "question_id": "q06",
+      "context_count": 5,
+      "relevant_ids": [
+        "rev_001051",
+        "rev_001760",
+        "rev_002684"
+      ],
+      "context_ids": [
+        "rev_002234",
+        "rev_000403",
+        "rev_000300",
+        "rev_001760",
+        "rev_001051"
+      ],
+      "relevant_in_context": [
+        "rev_001051",
+        "rev_001760"
+      ],
+      "context_hit": true,
+      "retrieval_hit": true,
+      "relevant_retrieval_positions": {
+        "rev_001760": 4,
+        "rev_001051": 5,
+        "rev_002684": 7
+      }
+    },
+    {
+      "question_id": "q07",
+      "context_count": 5,
+      "relevant_ids": [
+        "rev_000351",
+        "rev_001172",
+        "rev_001416",
+        "rev_002021",
+        "rev_002417"
+      ],
+      "context_ids": [
+        "rev_002417",
+        "rev_000351",
+        "rev_001715",
+        "rev_001172",
+        "rev_001416"
+      ],
+      "relevant_in_context": [
+        "rev_000351",
+        "rev_001172",
+        "rev_001416",
+        "rev_002417"
+      ],
+      "context_hit": true,
+      "retrieval_hit": true,
+      "relevant_retrieval_positions": {
+        "rev_002417": 1,
+        "rev_000351": 2,
+        "rev_001172": 4,
+        "rev_001416": 5,
+        "rev_002021": 8
+      }
+    },
+    {
+      "question_id": "q08",
+      "context_count": 1,
+      "relevant_ids": [
+        "rev_002176",
+        "rev_002490",
+        "rev_002833"
+      ],
+      "context_ids": [
+        "rev_002833"
+      ],
+      "relevant_in_context": [
+        "rev_002833"
+      ],
+      "context_hit": true,
+      "retrieval_hit": true,
+      "relevant_retrieval_positions": {
+        "rev_002833": 1
+      }
+    },
+    {
+      "question_id": "q09",
+      "context_count": 1,
+      "relevant_ids": [
+        "rev_000212"
+      ],
+      "context_ids": [
+        "rev_000212"
+      ],
+      "relevant_in_context": [
+        "rev_000212"
+      ],
+      "context_hit": true,
+      "retrieval_hit": true,
+      "relevant_retrieval_positions": {
+        "rev_000212": 1
+      }
+    },
+    {
+      "question_id": "q10",
+      "context_count": 1,
+      "relevant_ids": [
+        "rev_002237"
+      ],
+      "context_ids": [
+        "rev_002237"
+      ],
+      "relevant_in_context": [
+        "rev_002237"
+      ],
+      "context_hit": true,
+      "retrieval_hit": true,
+      "relevant_retrieval_positions": {
+        "rev_002237": 1
+      }
+    },
+    {
+      "question_id": "q11",
+      "context_count": 2,
+      "relevant_ids": [
+        "rev_002289"
+      ],
+      "context_ids": [
+        "rev_002289",
+        "rev_000796"
+      ],
+      "relevant_in_context": [
+        "rev_002289"
+      ],
+      "context_hit": true,
+      "retrieval_hit": true,
+      "relevant_retrieval_positions": {
+        "rev_002289": 1
+      }
+    },
+    {
+      "question_id": "q12",
+      "context_count": 1,
+      "relevant_ids": [
+        "rev_002675"
+      ],
+      "context_ids": [
+        "rev_002675"
+      ],
+      "relevant_in_context": [
+        "rev_002675"
+      ],
+      "context_hit": true,
+      "retrieval_hit": true,
+      "relevant_retrieval_positions": {
+        "rev_002675": 1
+      }
+    },
+    {
+      "question_id": "q13",
+      "context_count": 0,
+      "relevant_ids": [
+        "rev_002234"
+      ],
+      "context_ids": [],
+      "relevant_in_context": [],
+      "context_hit": false,
+      "retrieval_hit": false,
+      "relevant_retrieval_positions": {}
+    },
+    {
+      "question_id": "q14",
+      "context_count": 3,
+      "relevant_ids": [
+        "rev_000813",
+        "rev_001076"
+      ],
+      "context_ids": [
+        "rev_001076",
+        "rev_002549",
+        "rev_000813"
+      ],
+      "relevant_in_context": [
+        "rev_000813",
+        "rev_001076"
+      ],
+      "context_hit": true,
+      "retrieval_hit": true,
+      "relevant_retrieval_positions": {
+        "rev_001076": 1,
+        "rev_000813": 3
+      }
+    },
+    {
+      "question_id": "q15",
+      "context_count": 4,
+      "relevant_ids": [
+        "rev_001685",
+        "rev_002089"
+      ],
+      "context_ids": [
+        "rev_001685",
+        "rev_002089",
+        "rev_001291",
+        "rev_000796"
+      ],
+      "relevant_in_context": [
+        "rev_001685",
+        "rev_002089"
+      ],
+      "context_hit": true,
+      "retrieval_hit": true,
+      "relevant_retrieval_positions": {
+        "rev_001685": 1,
+        "rev_002089": 2
+      }
+    },
+    {
+      "question_id": "q16",
+      "context_count": 5,
+      "relevant_ids": [
+        "rev_001998"
+      ],
+      "context_ids": [
+        "rev_001010",
+        "rev_002494",
+        "rev_002141",
+        "rev_001998",
+        "rev_002675"
+      ],
+      "relevant_in_context": [
+        "rev_001998"
+      ],
+      "context_hit": true,
+      "retrieval_hit": true,
+      "relevant_retrieval_positions": {
+        "rev_001998": 4
+      }
+    },
+    {
+      "question_id": "q17",
+      "context_count": 5,
+      "relevant_ids": [
+        "rev_000934",
+        "rev_001552"
+      ],
+      "context_ids": [
+        "rev_000934",
+        "rev_000345",
+        "rev_002015",
+        "rev_001552",
+        "rev_001916"
+      ],
+      "relevant_in_context": [
+        "rev_000934",
+        "rev_001552"
+      ],
+      "context_hit": true,
+      "retrieval_hit": true,
+      "relevant_retrieval_positions": {
+        "rev_000934": 1,
+        "rev_001552": 4
+      }
+    },
+    {
+      "question_id": "q18",
+      "context_count": 5,
+      "relevant_ids": [
+        "rev_000267",
+        "rev_002959"
+      ],
+      "context_ids": [
+        "rev_000267",
+        "rev_002302",
+        "rev_001190",
+        "rev_001551",
+        "rev_002959"
+      ],
+      "relevant_in_context": [
+        "rev_000267",
+        "rev_002959"
+      ],
+      "context_hit": true,
+      "retrieval_hit": true,
+      "relevant_retrieval_positions": {
+        "rev_000267": 1,
+        "rev_002959": 5
+      }
+    },
+    {
+      "question_id": "q19",
+      "context_count": 5,
+      "relevant_ids": [
+        "rev_000673",
+        "rev_000813",
+        "rev_001661"
+      ],
+      "context_ids": [
+        "rev_000604",
+        "rev_001661",
+        "rev_001076",
+        "rev_000673",
+        "rev_000752"
+      ],
+      "relevant_in_context": [
+        "rev_000673",
+        "rev_001661"
+      ],
+      "context_hit": true,
+      "retrieval_hit": true,
+      "relevant_retrieval_positions": {
+        "rev_001661": 2,
+        "rev_000673": 4
+      }
+    },
+    {
+      "question_id": "q20",
+      "context_count": 5,
+      "relevant_ids": [
+        "rev_000802",
+        "rev_000908",
+        "rev_001010",
+        "rev_001998",
+        "rev_002142",
+        "rev_002494",
+        "rev_002562",
+        "rev_002675"
+      ],
+      "context_ids": [
+        "rev_002142",
+        "rev_002494",
+        "rev_002675",
+        "rev_001998",
+        "rev_001339"
+      ],
+      "relevant_in_context": [
+        "rev_001998",
+        "rev_002142",
+        "rev_002494",
+        "rev_002675"
+      ],
+      "context_hit": true,
+      "retrieval_hit": true,
+      "relevant_retrieval_positions": {
+        "rev_002142": 1,
+        "rev_002494": 2,
+        "rev_002675": 3,
+        "rev_001998": 4,
+        "rev_002562": 6,
+        "rev_000908": 7,
+        "rev_001010": 8
+      }
+    },
+    {
+      "question_id": "q21",
+      "context_count": 3,
+      "relevant_ids": [
+        "rev_000445",
+        "rev_002127",
+        "rev_002355",
+        "rev_002363",
+        "rev_002485"
+      ],
+      "context_ids": [
+        "rev_002833",
+        "rev_002355",
+        "rev_000357"
+      ],
+      "relevant_in_context": [
+        "rev_002355"
+      ],
+      "context_hit": true,
+      "retrieval_hit": true,
+      "relevant_retrieval_positions": {
+        "rev_002355": 2
+      }
+    },
+    {
+      "question_id": "q22",
+      "context_count": 5,
+      "relevant_ids": [
+        "rev_001051",
+        "rev_002234",
+        "rev_002684",
+        "rev_002800"
+      ],
+      "context_ids": [
+        "rev_000300",
+        "rev_001760",
+        "rev_001051",
+        "rev_002684",
+        "rev_002234"
+      ],
+      "relevant_in_context": [
+        "rev_001051",
+        "rev_002234",
+        "rev_002684"
+      ],
+      "context_hit": true,
+      "retrieval_hit": true,
+      "relevant_retrieval_positions": {
+        "rev_001051": 3,
+        "rev_002684": 4,
+        "rev_002234": 5,
+        "rev_002800": 7
+      }
+    },
+    {
+      "question_id": "q23",
+      "context_count": 4,
+      "relevant_ids": [
+        "rev_001265"
+      ],
+      "context_ids": [
+        "rev_002058",
+        "rev_001123",
+        "rev_001265",
+        "rev_002370"
+      ],
+      "relevant_in_context": [
+        "rev_001265"
+      ],
+      "context_hit": true,
+      "retrieval_hit": true,
+      "relevant_retrieval_positions": {
+        "rev_001265": 3
+      }
+    },
+    {
+      "question_id": "q24",
+      "context_count": 5,
+      "relevant_ids": [
+        "rev_001715"
+      ],
+      "context_ids": [
+        "rev_002417",
+        "rev_002021",
+        "rev_001715",
+        "rev_001172",
+        "rev_001027"
+      ],
+      "relevant_in_context": [
+        "rev_001715"
+      ],
+      "context_hit": true,
+      "retrieval_hit": true,
+      "relevant_retrieval_positions": {
+        "rev_001715": 3
+      }
+    }
+  ]
+}

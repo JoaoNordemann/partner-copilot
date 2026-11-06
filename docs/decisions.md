@@ -551,3 +551,111 @@ exploratoria nem ajustar usando n11-n20; testes de geracao usam fixtures inventa
 Mesma base conhecida e rotulos por IA: checagem nova de perguntas, nao gold humano
 cego ou holdout de documentos. Execucao final: primeiro novas, depois as 30 originais
 marcadas contaminadas, mesma instancia de modelo, arquivos distintos, sem retry.
+
+
+## Protocolo prospectivo de ablações e comparação pareada — 2026-11-06
+
+Registro anterior a qualquer novo cálculo ou execução desta etapa. Resultados
+históricos permanecem históricos; este protocolo não os torna pré-registrados nem
+apaga a exposição às perguntas. Nenhuma métrica nova foi calculada para este registro.
+
+### Uso permitido das perguntas e exposição
+
+| Conjunto | Exposição já ocorrida | Uso e identificação obrigatória |
+| --- | --- | --- |
+| q01–q30, human-v2 | Iterações de prompt, análise de falhas e calibração de limiar | Retrieval: benchmark de desenvolvimento exposto. Geração: contaminado. |
+| n01–n10 | Iterações de geração, prompt e parser | Geração: contaminado; não usar como confirmação independente. |
+| n11–n20 | Uma execução final da configuração v3 congelada; resultados agora conhecidos | A execução histórica pode ser identificada como limpo quanto a ajuste prévio nessas perguntas. Qualquer variante ajustada após a leitura: contaminado. |
+
+Retrieval pode usar q01–q30: o embedding multilíngue foi escolhido por adequação ao
+português, antes da comparação de desempenho nessas perguntas, não por busca da
+melhor pontuação no conjunto. Declarar esse critério no relatório. Isso não torna
+o benchmark independente: perguntas, relevâncias, filtros e limiar já foram vistos.
+A ablação mede desempenho de desenvolvimento, não generalização fora da amostra.
+
+Todo número de geração deve acompanhar conjunto/IDs, configuração, versões/hashes
+de prompt e parser e o rótulo **limpo** ou **contaminado**, com motivo. Limpo refere-se
+à ausência de ajuste prévio naquela configuração usando aquelas perguntas, não a
+gold humano cego ou holdout de documentos. n11–n20 usam corpus conhecido e rótulos
+de IA; sua rodada final não permite novas tentativas confirmatórias independentes.
+Não mudar retrospectivamente o rótulo da execução original porque os resultados
+foram lidos depois. Para nova avaliação limpa, congelar a configuração antes de
+criar e executar um novo conjunto, sem ajustes intermediários e com origem dos
+julgamentos registrada. Resultados legados sem proveniência suficiente devem ser
+marcados contaminado, com a lacuna explicitada.
+
+### Hipóteses e variáveis antes de executar
+
+A ablação autorizada por este protocolo é de **modelo de embedding**:
+
+- Referência: sentence-transformers/all-MiniLM-L6-v2 (inglês).
+- Variante: sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2.
+- Hipótese direcional: a variante multilíngue supera a referência em recall
+  limitado@5 sem filtros nas perguntas respondíveis em pt-BR. Essa é a medida
+  primária pré-definida; os demais k, métricas e o modo filtrado são complementares.
+- Hipótese nula operacional: a diferença média pareada da medida primária é zero;
+  resultado negativo ou empate será publicado sem trocar a medida primária.
+
+Manter corpus gold isolado, revisão human-v2, IDs/relevâncias, texto, chunking,
+normalização L2, distância cosseno, filtros, desempate e procedimento de ranking
+iguais. Usar coleções separadas, reconstruídas do mesmo corpus, e registrar revisão
+dos modelos, hashes de dados/código e ambiente. A dimensão diferente dos vetores
+é parte da troca de modelo. Não usar coleção histórica de outro corpus. Sem pesos
+ou ambiente necessários, registrar não executado; não substituir silenciosamente.
+
+Comparações com aleatório e lexical usam os baselines já definidos; seus resultados
+já foram observados e não constituem hipótese prospectiva de superioridade. Caso
+se decida testar contexto, chunking, busca híbrida, reranker ou geração, registrar
+antes da execução uma hipótese específica, referência, única variável alterada e
+medida primária. Não executar essas variantes por este registro. O pacote v3 mudou
+vários eixos juntos e continua sem interpretação causal de ablação isolada.
+
+### Métricas congeladas
+
+Reutilizar exatamente as definições acima e evaluation/baselines.py: para pergunta
+respondível, R são IDs relevantes congelados, L_k contém até k IDs distintos,
+H = |R interseção L_k|; k = 1, 3, 5, 8.
+
+- hit@k = 1 quando H > 0; senão 0.
+- recall@k limitado = H / min(k, |R|).
+- MRR@k por pergunta = 1 / posição do primeiro relevante até k, ou zero sem acerto;
+  o agregado é a média desses valores.
+- precision@k = H / k, inclusive quando há menos resultados que k.
+
+Médias macro nas 24 respondíveis, sem remover erros ou perguntas difíceis. Recall
+clássico H/|R|, se apresentado, terá nome próprio. O campo recall_at_k no avaliador
+legado retrieval.py é clássico; não misturar esse campo com recall limitado.
+As seis negativas ficam fora dessas quatro médias e têm abstenção/falsa aceitação
+reportadas separadamente, com contagens e denominadores. Falha de execução não é
+abstenção e deve impedir apresentar uma rodada incompleta como comparação completa.
+
+Ranking principal sem corte por score, nos dois modos: sem filtro e com os mesmos
+filtros estruturais. A comparação operacional usa o corte fixo 0.25 para embeddings,
+score > 0 no lexical e nenhum limiar no aleatório, declarando que esses cortes não
+são equivalentes. Não recalibrar min_score, selecionar k ou alterar relevâncias
+com base nos novos valores. O candidato histórico 0.287 não será promovido.
+
+### Unidade de comparação: pergunta, não apenas média
+
+Parear estritamente por ID, conjunto/revisão, modo e k. Para cada métrica, salvar
+valor da referência, valor da variante e delta = variante - referência. Vitória
+se delta > 1e-12; derrota se delta < -1e-12; empate nos demais casos. A tolerância
+serve só a ruído numérico, não a relevância prática. Reportar vitórias/empates/
+derrotas e denominador, diferenças por pergunta e média dos deltas, além das médias
+macro. Nenhuma pergunta ausente pode ser descartada silenciosamente; comparações
+incompletas devem ser identificadas como tais. Não escolher a variante vencedora
+apenas por uma média ou pela métrica que mais melhorou depois da execução.
+
+O resumo primário é recall limitado@5 sem filtros; os demais resultados permanecem
+visíveis, inclusive se mostrarem trade-offs. Vitória por hit@k pode ser empate em
+outra métrica: contar separadamente, sem inventar placar único pós-resultado.
+Para o aleatório, manter as 200 seeds 42..241 e a mesma permutação por pergunta/seed
+entre k. A referência pareada de cada pergunta é a média dessa métrica nas 200
+repetições; não tratar seeds como perguntas independentes. Preservar também a
+dispersão entre repetições do agregado. Não alegar significância estatística a
+partir da simples contagem de vitórias.
+
+Publicar resultados contrários às hipóteses e limitações de exposição, tamanho
+do conjunto, rótulos e ausência de revisão independente, sem reescrever este
+protocolo para ajustá-lo aos resultados. Mudança futura exige nova entrada datada,
+anterior à nova execução, preservando esta versão e os artefatos anteriores.

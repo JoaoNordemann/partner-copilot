@@ -1,0 +1,31 @@
+{
+  "reviewer": "Jo\u00e3o",
+  "origin": "human",
+  "method": "Judgments submitted in chat; assistant presented excerpts, translated model responses, transcribed judgments and requested clarification on q22. Human confirmed final judgments.",
+  "completed": true,
+  "reviewed_questions": [
+    "q01",
+    "q09",
+    "q13",
+    "q22",
+    "q25",
+    "q26",
+    "q27",
+    "q28",
+    "q29",
+    "q30"
+  ],
+  "count": 10,
+  "source_jsonl_sha256": "23f8945599009e4f1bf454e6dd0130494ecf10ae18296ef81ccd2651c9051974",
+  "factual_support_counts": {
+    "sim": 8,
+    "n\u00e3o": 1,
+    "parcial": 1
+  },
+  "abstention_appropriateness_counts": {
+    "sim": 8,
+    "n\u00e3o": 1,
+    "n\u00e3o se aplica \u2014 n\u00e3o absteve": 1
+  },
+  "scope": "Selected qualitative review only, not a new estimate over all 30 questions; content judgments separate from strict parser acceptance."
+}

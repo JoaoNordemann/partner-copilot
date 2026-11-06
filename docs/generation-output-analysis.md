@@ -80,7 +80,7 @@ Na leitura das 24 respondiveis de D: 8/24 recusas claras com fonte rotulada rele
 no contexto e mais 2/24 negacoes parciais, separadas. A taxa formal 1/24 so contou
 q13; nao e taxa de todas as recusas semanticas. q24 tem ambiguidade preco/porcao;
 a contagem conservadora excluindo esse rotulo discutivel e 7/24. Origem: leitura
-por Codex/IA, nao anotacao humana cega. [Auditoria por pergunta](../notebooks/generation-kaggle-D/semantic-refusal-audit.md).
+por Codex/IA, nao anotacao humana cega. [Auditoria por pergunta](../reports/generation-kaggle-D/semantic-refusal-audit.md).
 
 Evidencia no contexto em B/D: 22/24; antes do corte para cinco, 23/24. As sete
 respondiveis da primeira rodada JSON tinham evidencia no contexto (7/7), o que

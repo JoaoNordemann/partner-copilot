@@ -253,7 +253,7 @@ codigo. Sem retry. A execucao dedicada usa apenas dez perguntas novas, tres nega
 nao usa as 30 antigas para medir esse prompt. A primeira checagem JSON teve 7/10 saidas validas no esquema, IDs no contexto em
 7/7 respostas estruturadas e abstencao correta em 0/3 negativas. n09 passou no
 parser, mas afirmou uma analise laboratorial sem evidencia. Resultados e leitura
-qualitativa estao em [verificacao JSON](notebooks/generation-json-v1/README.md). Defaults legados continuam disponiveis para reproducao, e o novo runner
+qualitativa estao em [verificacao JSON](reports/generation-json-v1/README.md). Defaults legados continuam disponiveis para reproducao, e o novo runner
 seleciona explicitamente o par JSON.
 
 [Analise de falhas e citacoes](docs/generation-output-analysis.md) e
