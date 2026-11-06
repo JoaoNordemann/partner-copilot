@@ -763,3 +763,213 @@ benchmark dedicado, sem execução agora e sem presumir que caberá na memória.
 As perguntas reservadas não entram nessas medições exploratórias.
 [Plano e separação dos tempos](future-measurements.md). README reduzido a cinco
 manchetes geradas; instalação e histórico preservados em project-guide.md.
+
+
+## Contrato da API e seleção de backends — decisão anterior à implementação
+
+Status: especificação prospectiva api-v1. api.py ainda está vazio; backends, DTOs,
+rotas e tempos por etapa descritos abaixo NÃO estão implementados. Nenhuma inferência
+ou medição será feita nesta etapa. Preservar o núcleo/prompt/parser v3 congelados e
+os contratos legados da CLI; implementar a fachada da API em adaptadores próprios.
+
+### Três backends explícitos, sem fallback silencioso
+
+LLM_BACKEND é configuração do servidor, obrigatória para a API, com valores real,
+fake ou replay. O cliente não escolhe o backend no corpo da pergunta. Valor inválido
+é erro de configuração antes de atender requisições. Indisponibilidade de dependência
+com configuração válida é comunicada como 503 quando necessária ao atendimento.
+
+| Backend | Comportamento | Identificação obrigatória na resposta e interface |
+| --- | --- | --- |
+| real | Mistral-7B-Instruct-v0.2 em GPU, NF4 4-bits, uma instância lazy por processo; sem GPU/modelo acessível, falha explícita. | backend=real; is_replay=false; is_simulation=false; rótulo Inferência ao vivo. |
+| fake | JSON v3 fixo de fixture configurada; sem baixar/carregar LLM. Pode simular recusa; respostas com fontes exigem fixtures compatíveis com o contexto de teste e a mesma validação. | backend=fake; is_simulation=true; rótulo SIMULAÇÃO — resposta fixa de teste. |
+| replay | Resposta gravada de uma pergunta conhecida, com contexto arquivado e identidade verificável; sem LLM ou retrieval ao vivo. | backend=replay; is_replay=true; rótulo REPLAY — resposta gravada no Kaggle; não gerada agora. |
+
+A interface mantém o rótulo visível junto da resposta, não apenas em tooltip ou log.
+Replays mostram a origem da rodada e identificam tempos históricos separadamente.
+Nunca apresentar spinner/texto de geração ao vivo em replay ou fake. Não mudar de
+real para fake/replay ao falhar. Backend/configuração são imutáveis por instância;
+testes podem injetar doubles explicitamente. Importar/iniciar fake ou replay não
+pode carregar Transformers/bitsandbytes nem verificar GPU como pré-condição.
+
+A API seleciona explicitamente prompt partner-copilot-v3, parser-v3, context_k=8,
+max_new_tokens=512, temperatura=0 e seed=42, com min_score=0.25. Configuração explícita
+incompatível com esse perfil é rejeitada, sem substituição silenciosa. Não mudar
+os defaults legados globais de v1 da CLI para cumprir esse perfil da API.
+
+### Entrada: POST /v1/ask
+
+Objeto JSON estrito, extra=forbid em todos os níveis. Não aceitar coerção de bool ou
+strings para k. Remover apenas whitespace externo de strings; não alterar caixa,
+acentos ou espaços internos da pergunta. Validar antes de acessar backend/índice.
+
+| Campo | Regra |
+| --- | --- |
+| restaurant_id | Obrigatório, str de 1 a 64 caracteres após strip; padrão [A-Za-z0-9][A-Za-z0-9_-]{0,63}. Sempre restringe a busca; nunca inferir do texto da pergunta. |
+| question | Obrigatório, str não vazia após strip, no máximo 2.000 caracteres Unicode; o orçamento real de tokens continua obrigatório antes de chamar o modelo. |
+| filters | Objeto opcional; omitido ou null equivale a ausência de filtros adicionais; campos extras rejeitados. |
+| filters.start_date / end_date | Datas ISO YYYY-MM-DD opcionais, limites inclusivos; aceitar uma ponta aberta, rejeitar início maior que fim. Chroma usa created_at_int, nunca comparação numérica sobre texto ISO. |
+| filters.aspect | Opcional: sabor, tempo_entrega, temperatura, embalagem, preco ou atendimento. Mantém o contrato atual: filtra aspect_<nome>=neg, isto é, reclamações desse aspecto, não qualquer menção. |
+| filters.item | Str opcional, 1 a 200 caracteres após strip, igualdade exata; vazio é inválido. |
+| k | Int opcional, default 8, mínimo 1 e teto público 12; fora do intervalo é 422, nunca clamp silencioso. |
+
+Campos opcionais null equivalem a ausentes, sem criar filtros vazios. Não expor where
+arbitrário do Chroma, limiar, backend ou versões do prompt no request. Categoria,
+cidade/bairro e polaridade positiva não entram neste primeiro DTO; não aceitar
+campos ignorados silenciosamente. A interface deve chamar o filtro aspect de
+reclamações do aspecto, para não prometer a seleção de elogios.
+
+k controla o limite do retrieval; até 2*k candidatos antes do corte fixo por score.
+O contexto contém até min(k, 8, documentos retornados), sem relaxar filtro/limiar.
+Documentos/chunks e IDs distintos de reviews continuam unidades separadas. Não
+mutar um Retriever compartilhado por requisição para trocar k; usar configuração
+local ao request com store/embedder reutilizados. Teto 12 é da API, embora o núcleo
+legado admita até 50. Essas opções não alteram os números de avaliação já publicados.
+
+### Replay: catálogo explícito e contexto de origem preservado
+
+Replay é reprodução de um resultado inteiro de avaliação, não um LLM falso ligado
+a uma nova busca. Isso evita reutilizar uma citação do corpus gold em um contexto
+diferente do índice RAG operacional. Usar exclusivamente o contexto arquivado,
+com os hashes do corpus/arquivo, versões de prompt/parser e configuração da rodada.
+Não inserir gold no índice de produção nem declarar que consultou dados atuais.
+
+O catálogo é uma allowlist aprovada: saída real de Kaggle, aceita pelo parser v3,
+IDs/trechos válidos no contexto arquivado e conteúdo sustentado/pertinente aprovado
+explicitamente pelo responsável, com origem e método da revisão registrados.
+Aceitação de schema sozinha não aprova replay; n12 e a q23 irrelevante não entram.
+Não converter texto legado v2 em JSON v3 alegando que foi essa a saída do modelo.
+Não corrigir n14 para fazê-la parecer aceita na rodada original.
+
+Pendência concreta: na seleção humana assistida atual, os dois casos sustentados
+e pertinentes são n14-v3 (rejeitada pelo parser) e q05-C (contrato textual v2).
+Nenhum satisfaz simultaneamente a política de replay v3. Portanto o catálogo não
+está pronto; requer curadoria/aprovação de outros registros v3 já existentes, sem
+novas inferências. Não inventar essa aprovação para desbloquear a demo. Catálogo
+vazio/ilegível é replay_unavailable (503), não uma resposta fictícia de sucesso.
+
+Chave de seleção: JSON canônico de restaurant_id, question após strip externo,
+filtros normalizados (null/ausente equivalentes; datas ISO), k efetivo, versões e
+configuração efetiva registrada. Preservar caixa/acentos/espaços internos; não usar
+similaridade semântica, substring ou fuzzy match para escolher uma gravação.
+Mudança de pergunta, restaurante, período, aspecto, item ou k exige outra entrada.
+Sem correspondência: replay_not_found (404), sem gerar resposta nem fingir abstenção
+por falta de evidência. A demo pode oferecer apenas perguntas aprovadas do catálogo.
+
+Revalidar entrada, integridade e saída arquivada no contexto correspondente antes
+de servir. Manter o JSON original e seu bruto/sufixo no artefato; a resposta pública
+expõe apenas a parte validada. Se o arquivo válido mudou de snapshot/versão em relação
+ao catálogo, retornar replay_snapshot_mismatch (409). Não trocar a evidência ou
+abrir exceção ao parser. Não incluir perguntas do conjunto reservado em catálogo,
+fixtures, exemplos de interface ou testes de desenvolvimento.
+
+### Saída de sucesso: envelope api-v1 com objeto v3 preservado
+
+HTTP 200 somente para resposta validada ou abstenção válida. DTO público versionado
+separado do Answer legado: hoje a pipeline descarta as afirmações/trechos ao renderizar
+o texto, e seu llm_called também é usado para doubles. A fachada deverá preservar o
+objeto v3 e distinguir chamada do backend de inferência real, sem alterar o parser
+congelado nem falsificar os invariantes do modelo legado.
+
+| Campo | Conteúdo e invariantes |
+| --- | --- |
+| schema_version | api-v1; distinto da versão do prompt e da versão interna do journal. |
+| result | Objeto v3: abstem: bool e afirmacoes: lista de {texto, fontes: [{review_id, trecho}]}; tipos estritos e sem campos extras. |
+| answer | Texto renderizado por código a partir das afirmações e IDs validados; em abstenção, a frase pública fixa já definida. |
+| sources | IDs de reviews citadas, únicos e na ordem da primeira citação; não a lista completa do retrieval. |
+| abstained | Igual a result.abstem, que é true se e somente se afirmacoes está vazia. |
+| abstention_reason | null em resposta normal; retriever_empty ou llm_insufficient_evidence em abstenção, preservando a origem histórica em replay. |
+| metadata.request_id | Identificador opaco gerado pelo serviço para correlacionar resposta e logs. |
+| metadata.backend / is_replay / is_simulation / mode_label | Origem atual e rótulo fixo, sempre presentes, inclusive nas abstenções. |
+| metadata.prompt_version / parser_version | Versões configuradas/validadas; replay usa as versões efetivas do registro aprovado. |
+| metadata.backend_called / llm_called | Backend atual foi invocado versus inferência Mistral real nesta requisição; fake/replay têm llm_called=false. |
+| metadata.retrieved_documents / context_documents | Contagens de documentos/chunks; em replay são históricas e metadata.context_origin=recorded_eval_snapshot; nos demais, current_request. |
+| metadata.timings_ms | Tempos atuais por etapa, definidos abaixo; nunca preencher com valores históricos de Kaggle. |
+| metadata.source_run | null em real/fake; em replay, experimento/question_id de origem, corpus isolado, commit, hashes, método de aprovação e ambiente/hardware de origem. Datas ausentes no arquivo permanecem null, sem usar mtime como se fosse data da execução. |
+| metadata.source_run.historical_metrics | Métricas originais, com hardware/tempo/unidades, em bloco separado; não entram em timings_ms da requisição atual. |
+
+Resposta normal exige pelo menos uma afirmação com fontes. Todos os IDs precisam
+estar no contexto efetivamente usado e todos os trechos nele contidos literalmente;
+qualquer fonte inválida rejeita a resposta inteira. Não remover uma citação para
+publicar o restante. Ter fonte/trecho não prova sustentação semântica; manter esse
+limite também na interface e nos relatórios. Excertos são dados, não HTML confiável.
+
+No caminho real/fake com retrieval vazio: result={abstem:true, afirmacoes:[]},
+answer=Não há evidência suficiente nas avaliações fornecidas., sources=[],
+abstained=true, abstention_reason=retriever_empty, contagens zero e nenhuma chamada
+do backend/LLM. Em real com recusa válida pelo modelo, manter contagens reais,
+llm_called=true e llm_insufficient_evidence. Fake identifica simulação; replay
+preserva o motivo da gravação, mas nunca atribui inferência à requisição atual.
+
+### Tempos: medir etapas atuais, sem transplantar latência da T4
+
+Todos em milissegundos, finitos e não negativos, com perf_counter. total_ms começa
+após a validação da entrada na aplicação e termina após validar/montar a saída;
+não inclui transporte HTTP. A soma das etapas não precisa ser igual ao total:
+existe orquestração fora dos intervalos. Não estimar uma etapa por subtração.
+
+| Campo em metadata.timings_ms | Intervalo |
+| --- | --- |
+| embedding_search_ms | Chamada completa do retriever: embedding de consulta, busca vetorial, filtros/corte e conversão dos documentos; inclui carga lazy de embedding, se ocorrer. |
+| generation_ms | Etapa de preparação do prompt, obtenção/carga lazy do backend, espera e chamada até a saída bruta/decode; exclui validação de conteúdo/contrato. Em fake mede só o caminho simulado, rotulado como tal. |
+| validation_ms | Decode/schema v3, IDs, trechos, consistência e construção/validação do DTO público; não certifica entailment. |
+| replay_lookup_ms | Somente em replay: seleção da gravação/artefato; separado de geração. |
+| total_ms | Tempo da operação na aplicação, no hardware atual, com as exclusões acima. |
+
+Em abstenção real/fake por contexto vazio, generation_ms=0 (etapa pulada). Em replay,
+embedding_search_ms e generation_ms são null (não executados), replay_lookup_ms,
+validation_ms e total_ms são medidos de verdade. Zero não é benchmark de modelo
+instantâneo e null não é métrica faltante a ser preenchida com o tempo antigo.
+Se for exposto model_load_ms, medir apenas a carga ocorrida nesta requisição, como
+subconjunto de generation_ms, não somá-la novamente. generation_metrics do provider
+(exclui carga/espera pelo lock) é outra medida e deve ser nomeada separadamente.
+
+O backend fake permite testes sem GPU com relógio/doubles; não valida desempenho.
+A medição isolada de embedding e busca em CPU será feita uma vez na integração da
+API, conforme future-measurements.md; a dupla embedding+busca é o contrato público,
+mas a instrumentação deve permitir separar os dois no benchmark definido previamente.
+Nenhuma nova medição ou comparação FP16 é autorizada por esta decisão documental.
+
+### Erros: códigos estáveis e nenhuma saída bruta como resposta válida
+
+Envelope único de erro: {error: {code, message, details}, request_id, backend}.
+Os códigos/mensagens/detalhes são próprios de cada situação; nunca devolver Answer
+ou result junto de um erro. A interface exibe erro e request_id, não tenta renderizar
+raw_response de um HTTP não-200. Modelos rejeitados não viram abstenção silenciosa.
+
+| Situação | HTTP | error.code | Corpo público / comportamento |
+| --- | --- | --- | --- |
+| JSON malformado, campo ausente/extra, tamanho, tipo, enum, datas ou k inválidos | 422 | invalid_request | Mensagem de entrada inválida e lista de campos/regras/limites; sem ecoar o conteúdo recebido. Nenhum retrieval/backend iniciado. |
+| Nenhum documento satisfaz restaurante/filtros/limiar | 200 | Não é erro | Envelope de abstenção retriever_empty acima; sem LLM. Restaurante válido sem reviews segue esse caminho, sem fallback para outro restaurante. |
+| Schema do modelo, ID, trecho ou consistência rejeitados | 502 | generation_contract_failed | Mensagem Não foi possível validar uma resposta; details.reason=invalid_schema, invalid_source_id ou quote_mismatch; contagens opcionais, sem resposta bruta ou citações inválidas. Sem retry automático. |
+| Modelo/GPU inacessível, download/load/OOM ou backend necessário indisponível | 503 | model_unavailable | Mensagem de indisponibilidade temporária/configurada; sem fingir resposta ou trocar backend. Detalhes técnicos ficam fora do corpo público. |
+| Replay sem entrada para a chave exata | 404 | replay_not_found | Informar que a pergunta/configuração não está disponível na demonstração gravada; não declarar ausência de evidência nos dados. |
+| Catálogo de replay vazio, ilegível ou sem aprovação | 503 | replay_unavailable | Informar que o catálogo de demonstração não está pronto, sem gerar resposta substituta. |
+| Gravação diverge do snapshot/versões configurados | 409 | replay_snapshot_mismatch | Informar incompatibilidade da gravação e configuração; não revalidar contra um contexto diferente. |
+| Índice/embedder obrigatório indisponível | 503 | retrieval_unavailable | Informar indisponibilidade da consulta; não confundir falha de infraestrutura com lista vazia. |
+| Tempo limite configurado excedido | 504 | backend_timeout | Informar interrupção por tempo, sem resposta parcial e sem nova chamada automática. |
+| Exceção inesperada de programação | 500 | internal_error | Envelope padronizado e request_id, sem stack trace; só este fallback usa 500, nunca os cenários conhecidos acima. |
+
+Em 502, a geração pode ter ocorrido, mas seu texto não será mostrado como resposta,
+parcial ou alternativa. O cliente só vê o motivo estável e o identificador de suporte.
+O bruto pode permanecer no journal de avaliação/diagnóstico controlado, ligado ao
+request_id, nunca em logs normais/UI por padrão. Não expor token, prompt, contexto,
+caminho local, stack trace ou mensagens internas das bibliotecas no corpo do erro.
+Validação do request deve converter os erros do framework para esse envelope,
+sem repassar input/context de ValidationError indiscriminadamente.
+
+Retry-After só será enviado se houver estimativa real de recuperação; 502 não
+sugere retry corretivo. Em erros, metadados parciais de tempo podem ser registrados
+internamente; não inventar valores para etapas não concluídas. Os códigos conhecidos
+não dependem de procurar frases em str(exception): usar exceções/tipos próprios.
+
+### Critérios de aceite para a implementação posterior
+
+Verificar com testes sem GPU: limites/filtros/k; todos os backends rotulados; real
+indisponível sem fallback; vazio não chama backend; estrutura v3 preservada; rejeição
+não vaza bruto; IDs/trechos inválidos rejeitam tudo; replay exato sem inferência/
+embedding e sem gold no índice operacional; chave divergente é 404; snapshot divergente
+é 409; indisponibilidade é 503; métricas históricas não se passam por latência atual.
+Incluir casos de conteúdo incorreto que passam a estrutura para não prometer que o
+parser resolve fidelidade. Curadoria do catálogo continua uma pendência anterior
+à demo; nenhuma aprovação humana nova foi produzida por esta especificação.
