@@ -10,7 +10,7 @@
 | v3-new | Abstenção formal e presença de fonte relevante | n11–n20; limpo na execução congelada; corpus conhecido/rótulos IA | 7 respondíveis; 3 negativas | evidência nas positivas 7/7; recusa indevida formal 0/7 | negativas abstidas 3/3; LLM 2/2 chamadas negativas; 1 sem LLM; erros de contrato 3/10 | Recusas semânticas em saídas rejeitadas ficam fora da taxa formal; lista relevante não comprova fidelidade. |
 
 Commit dos arquivos de entrada: `1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8`.
-Gerador: `scripts/build_results.py`; SHA256 LF `977761362c39f42705713b3de73ed418e447e6b8fd654d19d110116231f0b895`.
+Gerador: `scripts/build_results.py`; SHA256 LF `bbb4bbf9c6292fbd5874618c6c35f8688cd35a05e32d4538669abe1cb3c08c81`.
 Entradas desta tabela:
 
 - [reports/final-v3/generation-v3-contaminated.jsonl](https://github.com/JoaoNordemann/partner-copilot/blob/1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8/reports/final-v3/generation-v3-contaminated.jsonl)

@@ -651,6 +651,46 @@ inferência foi feita para gerar estas tabelas.
 """
 
 
+def headlines(context: dict) -> str:
+    pair = context["primary"]
+    g = context["generation"]["experiments"]["v3-new"]
+    correction = context["correction"]
+    english = sum(p["reference"] for p in pair["per_question"]) / pair["questions"]
+    multilingual = sum(p["variant"] for p in pair["per_question"]) / pair["questions"]
+    substantive = {
+        q
+        for q, d in g["diagnostics"].items()
+        if d["parser_accepted"] and d.get("abstained") is False
+    }
+    factual = sum(
+        r["question_id"] in substantive
+        and r["support"] == "sustentada"
+        and r["answers_question"] == "sim"
+        for r in context["ai"]
+        if r["experiment"] == "v3-new"
+    )
+    lines = [
+        "- RAG de reviews sintéticas, com citações verificadas e abstenção; "
+        "sem dados reais do iFood.",
+        "- Retrieval: recall limitado@5 sem filtro de "
+        f"{number(multilingual)} no multilíngue "
+        f"e {number(english)} no inglês; {pair['wins']}V/{pair['ties']}E/{pair['losses']}D "
+        f"em {pair['questions']} perguntas respondíveis expostas.",
+        f"- Geração v3: {fraction(g['accepted'])} saídas aceitas, incluindo duas abstenções; "
+        f"{factual}/{len(substantive)} substantivas aceitas sustentadas "
+        "e pertinentes na leitura de IA.",
+        f"- Retry descartado: {correction['corrections_requested']} chamadas extras, "
+        f"{correction['corrections_accepted']} rejeições recuperadas; "
+        "formato válido não garante resposta correta.",
+        "- Evidência limitada: corpus conhecido, amostras pequenas e revisão humana assistida; "
+        "latências isoladas de CPU e pesos FP16 ainda pendentes.",
+    ]
+    return (
+        "\n".join(lines)
+        + "\n\n[Resultados, tabelas e limitações](reports/final-results-v1/RESULTADOS.md).\n"
+    )
+
+
 def escape(value) -> str:
     return str(value).replace("|", r"\|").replace("\n", "<br>")
 
@@ -762,7 +802,7 @@ def main() -> int:
     )
     rendered[".gitattributes"] = "* -text whitespace=cr-at-eol\n"
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
-    expected_readme = replace_section(readme, section)
+    expected_readme = replace_section(readme, headlines(context))
     if args.check:
         for name, content in rendered.items():
             if (output / name).read_text(encoding="utf-8") != content:

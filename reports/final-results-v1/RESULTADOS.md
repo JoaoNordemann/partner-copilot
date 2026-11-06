@@ -40,7 +40,7 @@ O segundo comando exige diretório novo; --check não escreve arquivos.
 | multilingual; restaurante; k=12 | Ranking cosseno sem corte de score | human-v2 q01–q30; desenvolvimento exposto/contaminado | 24 respondíveis de 30 | Hit=1,0000; recall limitado=1,0000; recall clássico=1,0000; MRR=0,5296; precision=0,2014 | Hit 24/24; relevantes 58; irrelevantes 230; contra inglês V/E/D=2/22/0 | Conjunto pequeno e exposto; não é estimativa independente de generalização. |
 
 Commit dos arquivos de entrada: `1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8`.
-Gerador: `scripts/build_results.py`; SHA256 LF `977761362c39f42705713b3de73ed418e447e6b8fd654d19d110116231f0b895`.
+Gerador: `scripts/build_results.py`; SHA256 LF `bbb4bbf9c6292fbd5874618c6c35f8688cd35a05e32d4538669abe1cb3c08c81`.
 R/I somam documentos por pergunta, não IDs únicos no corpus. Aleatório: 24 perguntas x 200 repetições; contagens em 4.800 pares pergunta-seed, que não são amostras independentes.
 Entradas desta tabela:
 
@@ -73,7 +73,7 @@ Entradas desta tabela:
 | random; k=12 | Efeito de filtrar somente restaurant_id | human-v2 q01–q30; desenvolvimento exposto/contaminado | 24 perguntas; 200 repetições | recall limitado: 0,1228 → 0,9549; delta 0,8321 | V/E/D=24/0/0; sem: Hit 1233/4800; relevantes 1428; irrelevantes 56172; com: Hit 4692/4800; relevantes 11141; irrelevantes 46459 | O filtro fornece escopo; item/data não são aplicados e o efeito não isola entendimento semântico. |
 
 Commit dos arquivos de entrada: `1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8`.
-Gerador: `scripts/build_results.py`; SHA256 LF `977761362c39f42705713b3de73ed418e447e6b8fd654d19d110116231f0b895`.
+Gerador: `scripts/build_results.py`; SHA256 LF `bbb4bbf9c6292fbd5874618c6c35f8688cd35a05e32d4538669abe1cb3c08c81`.
 R/I somam documentos por pergunta, não IDs únicos no corpus. Aleatório: 24 perguntas x 200 repetições; contagens em 4.800 pares pergunta-seed, que não são amostras independentes.
 Entradas desta tabela:
 
@@ -118,7 +118,7 @@ Entradas desta tabela:
 | random; restaurante; 8→12 | Ganho de recall clássico versus ruído ao ampliar k | human-v2 q01–q30; desenvolvimento exposto/contaminado | 24 perguntas; 200 repetições | recall clássico 0,6458→0,9549; precision 0,1954→0,1934 | R adicionais=3637; I adicionais=15563; V/E/D=24/0/0 | Recall limitado muda de denominador com k; estes dados de retrieval não determinam o melhor contexto de geração. |
 
 Commit dos arquivos de entrada: `1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8`.
-Gerador: `scripts/build_results.py`; SHA256 LF `977761362c39f42705713b3de73ed418e447e6b8fd654d19d110116231f0b895`.
+Gerador: `scripts/build_results.py`; SHA256 LF `bbb4bbf9c6292fbd5874618c6c35f8688cd35a05e32d4538669abe1cb3c08c81`.
 R/I somam documentos por pergunta, não IDs únicos no corpus. Aleatório: 24 perguntas x 200 repetições; contagens em 4.800 pares pergunta-seed, que não são amostras independentes.
 Entradas desta tabela:
 
@@ -211,7 +211,7 @@ Entradas desta tabela:
 | random; restaurante; operational; k=12 | Matriz completa com aleatório e palavras-chave | human-v2 q01–q30; desenvolvimento exposto/contaminado | 24 perguntas; 200 permutações | Hit=0,9775; recall limitado=0,9549; recall clássico=0,9549; MRR=0,3978; precision=0,1934; DP recall entre seeds=0,0354 | Hit 4692/4800; relevantes 11141; irrelevantes 46459 | Seeds não são perguntas independentes; os cortes operacionais dos métodos não são confiança equivalente. |
 
 Commit dos arquivos de entrada: `1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8`.
-Gerador: `scripts/build_results.py`; SHA256 LF `977761362c39f42705713b3de73ed418e447e6b8fd654d19d110116231f0b895`.
+Gerador: `scripts/build_results.py`; SHA256 LF `bbb4bbf9c6292fbd5874618c6c35f8688cd35a05e32d4538669abe1cb3c08c81`.
 R/I somam documentos por pergunta, não IDs únicos no corpus. Aleatório: 24 perguntas x 200 repetições; contagens em 4.800 pares pergunta-seed, que não são amostras independentes.
 Entradas desta tabela:
 
@@ -230,7 +230,7 @@ Entradas desta tabela:
 | v3-new | Schema, IDs, trecho, aceitação e conteúdo separados | n11–n20; limpo na execução congelada; corpus conhecido/rótulos IA | 10 perguntas; 9 saídas; 1 sem LLM | schema 9/9; parser 6/9; IDs 7/7; literal 4/7 | sustentadas IA 6/9 lidas; humanas assistidas 1/4 (4 lidas); humanas sustentadas e pertinentes 1/4 | Denominadores variam por ramo; sustentação só cobre casos lidos e N/A não significa falha. |
 
 Commit dos arquivos de entrada: `1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8`.
-Gerador: `scripts/build_results.py`; SHA256 LF `977761362c39f42705713b3de73ed418e447e6b8fd654d19d110116231f0b895`.
+Gerador: `scripts/build_results.py`; SHA256 LF `bbb4bbf9c6292fbd5874618c6c35f8688cd35a05e32d4538669abe1cb3c08c81`.
 Entradas desta tabela:
 
 - [reports/generation-retrospective-v1/ai-review.jsonl](https://github.com/JoaoNordemann/partner-copilot/blob/1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8/reports/generation-retrospective-v1/ai-review.jsonl)
@@ -250,7 +250,7 @@ Entradas desta tabela:
 | v3-new | Abstenção formal e presença de fonte relevante | n11–n20; limpo na execução congelada; corpus conhecido/rótulos IA | 7 respondíveis; 3 negativas | evidência nas positivas 7/7; recusa indevida formal 0/7 | negativas abstidas 3/3; LLM 2/2 chamadas negativas; 1 sem LLM; erros de contrato 3/10 | Recusas semânticas em saídas rejeitadas ficam fora da taxa formal; lista relevante não comprova fidelidade. |
 
 Commit dos arquivos de entrada: `1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8`.
-Gerador: `scripts/build_results.py`; SHA256 LF `977761362c39f42705713b3de73ed418e447e6b8fd654d19d110116231f0b895`.
+Gerador: `scripts/build_results.py`; SHA256 LF `bbb4bbf9c6292fbd5874618c6c35f8688cd35a05e32d4538669abe1cb3c08c81`.
 Entradas desta tabela:
 
 - [reports/final-v3/generation-v3-contaminated.jsonl](https://github.com/JoaoNordemann/partner-copilot/blob/1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8/reports/final-v3/generation-v3-contaminated.jsonl)
@@ -279,7 +279,7 @@ Entradas desta tabela:
 | v3-old/q21 | Sustentação e pertinência na revisão humana assistida | q01–q30; contaminado por iterações anteriores; seleção retrospectiva de entrevista | 1 caso | sem_suporte; responde=nao; abstenção=indevida | leitura 1; concordância conjunta 1/1; A rev_002355 relata que não fecharam direito a embalagem. A recusa do modelo ignora evidência pertinente no contexto. | IA ajudou no enquadramento e houve exposição aos julgamentos; não é revisão cega nem acurácia global. |
 
 Commit dos arquivos de entrada: `1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8`.
-Gerador: `scripts/build_results.py`; SHA256 LF `977761362c39f42705713b3de73ed418e447e6b8fd654d19d110116231f0b895`.
+Gerador: `scripts/build_results.py`; SHA256 LF `bbb4bbf9c6292fbd5874618c6c35f8688cd35a05e32d4538669abe1cb3c08c81`.
 Entradas desta tabela:
 
 - [reports/generation-retrospective-v1/ai-review.jsonl](https://github.com/JoaoNordemann/partner-copilot/blob/1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8/reports/generation-retrospective-v1/ai-review.jsonl)
@@ -303,7 +303,7 @@ Entradas desta tabela:
 | Pesos integrais FP16 em T4 16 GB | Lacuna de medição | Não executado; limpo/contaminado não se aplica | 0 medições isoladas | Pendente; sem valor estimado | 0 benchmarks novos nesta consolidação | Não inferir tempo pela diferença pipeline menos geração nem confundir compute FP16 com pesos FP16. |
 
 Commit dos arquivos de entrada: `1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8`.
-Gerador: `scripts/build_results.py`; SHA256 LF `977761362c39f42705713b3de73ed418e447e6b8fd654d19d110116231f0b895`.
+Gerador: `scripts/build_results.py`; SHA256 LF `bbb4bbf9c6292fbd5874618c6c35f8688cd35a05e32d4538669abe1cb3c08c81`.
 Entradas desta tabela:
 
 - [reports/cost-latency-consolidation-v1/metrics.json](https://github.com/JoaoNordemann/partner-copilot/blob/1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8/reports/cost-latency-consolidation-v1/metrics.json)
@@ -324,7 +324,7 @@ Entradas desta tabela:
 | v3 nova: JSON puro | Aderência sem ignorar sufixo | n11–n20; limpo na execução congelada; corpus conhecido/rótulos IA | 9 saídas | Primeiro objeto pode ser válido mesmo com sufixo | schema 9/9; sufixos ignorados 9/9; JSON sem sufixo 0/9 | A regra de primeiro objeto foi pré-definida e preserva o bruto; isso não demonstra JSON puro. |
 
 Commit dos arquivos de entrada: `1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8`.
-Gerador: `scripts/build_results.py`; SHA256 LF `977761362c39f42705713b3de73ed418e447e6b8fd654d19d110116231f0b895`.
+Gerador: `scripts/build_results.py`; SHA256 LF `bbb4bbf9c6292fbd5874618c6c35f8688cd35a05e32d4538669abe1cb3c08c81`.
 R/I somam documentos por pergunta, não IDs únicos no corpus. Aleatório: 24 perguntas x 200 repetições; contagens em 4.800 pares pergunta-seed, que não são amostras independentes.
 Entradas desta tabela:
 

@@ -68,3 +68,51 @@ def test_k_comparison_validates_nested_paired_counts():
     record["metrics"]["recall_classic_at_k"]["questions"] = 5
     with pytest.raises(ValueError, match="Inconsistent"):
         builder.find_pair(report, "k_increments", method="multilingual")
+
+
+def test_readme_has_five_headlines_and_links_to_full_results():
+    context = {
+        "primary": {
+            "questions": 2,
+            "wins": 1,
+            "ties": 1,
+            "losses": 0,
+            "per_question": [
+                {"reference": 0.2, "variant": 0.4},
+                {"reference": 0.4, "variant": 0.4},
+            ],
+        },
+        "generation": {
+            "experiments": {
+                "v3-new": {
+                    "accepted": {"passed": 3, "applicable": 4},
+                    "diagnostics": {
+                        "good": {"parser_accepted": True, "abstained": False},
+                        "bad": {"parser_accepted": True, "abstained": False},
+                        "refusal": {"parser_accepted": True, "abstained": True},
+                    },
+                }
+            }
+        },
+        "correction": {"corrections_requested": 25, "corrections_accepted": 0},
+        "ai": [
+            {
+                "experiment": "v3-new",
+                "question_id": "good",
+                "support": "sustentada",
+                "answers_question": "sim",
+            },
+            {
+                "experiment": "v3-new",
+                "question_id": "bad",
+                "support": "sem_suporte",
+                "answers_question": "nao",
+            },
+        ],
+    }
+    text = builder.headlines(context)
+    assert sum(line.startswith("- ") for line in text.splitlines()) == 5
+    assert "1/2 substantivas" in text
+    assert "3/4 saídas" in text
+    assert "reports/final-results-v1/RESULTADOS.md" in text
+    assert len(text.splitlines()) <= 7

@@ -1,6 +1,6 @@
 {
   "generator": "scripts/build_results.py",
-  "generator_sha256_lf": "977761362c39f42705713b3de73ed418e447e6b8fd654d19d110116231f0b895",
+  "generator_sha256_lf": "bbb4bbf9c6292fbd5874618c6c35f8688cd35a05e32d4538669abe1cb3c08c81",
   "input_commit": "1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8",
   "inputs": {
     "reports/cost-latency-consolidation-v1/metrics.json": {

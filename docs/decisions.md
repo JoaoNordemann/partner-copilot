@@ -752,3 +752,14 @@ já medida permanece em nove chamadas. Runner de entrada/ledger e revisão dos p
 devem ser preparados antes da abertura, sem mudar o comportamento congelado.
 [Protocolo e pendências](reserved-evaluation.md). Se não houver execução, manter
 a amostra pequena como limitação e este conjunto como trabalho futuro.
+
+
+## Momento das medições ainda pendentes
+
+Latências isoladas de embedding de consulta e retrieval em CPU serão medidas uma
+única vez na integração da API, com protocolo/repetições fixados antes e hardware
+identificado. Comparação NF4 versus pesos integrais FP16 em T4 16 GB fica para o
+benchmark dedicado, sem execução agora e sem presumir que caberá na memória.
+As perguntas reservadas não entram nessas medições exploratórias.
+[Plano e separação dos tempos](future-measurements.md). README reduzido a cinco
+manchetes geradas; instalação e histórico preservados em project-guide.md.
