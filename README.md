@@ -321,3 +321,5 @@ inferência foi feita para gerar estas tabelas.
 
 [Tabelas, contagens e proveniência](reports/final-results-v1/RESULTADOS.md).
 <!-- END GENERATED RESULTS -->
+
+Dez perguntas novas estão reservadas, sem execução, para uma única avaliação final: [protocolo do conjunto reservado](docs/reserved-evaluation.md). Não entram nos resultados publicados; a amostra limpa medida continua em nove chamadas.

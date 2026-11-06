@@ -737,3 +737,18 @@ pendentes. O total das ablações CPU inclui carga/cache/download e não é lat�
 consulta. Comparação com pesos integrais FP16 em ambiente T4 16 GB fica pendente,
 sem execução nesta etapa. Sem tarifa/duração de sessão, não calcular custo monetário.
 [Valores, ambientes e fontes](../reports/cost-latency-consolidation-v1/README.md).
+
+
+## Reserva de perguntas para avaliação final sem novos ajustes
+
+Reservar dez perguntas novas (n21–n30), com sete respondíveis e três negativas,
+antes de qualquer resultado delas. V3, configuração e corpus preservados por hashes;
+nenhum retrieval ou LLM executado. Uma única rodada futura, no máximo uma chamada
+por pergunta, sem retry corretivo nem ajuste posterior; indeterminadas não são
+repetidas automaticamente. O conjunto não entra em calibração, treino ou demos.
+Fechamento procedural, não criptografia; autoria/labels de IA em corpus conhecido
+não constituem holdout de documentos ou gold humano independente. A geração limpa
+já medida permanece em nove chamadas. Runner de entrada/ledger e revisão dos pesos
+devem ser preparados antes da abertura, sem mudar o comportamento congelado.
+[Protocolo e pendências](reserved-evaluation.md). Se não houver execução, manter
+a amostra pequena como limitação e este conjunto como trabalho futuro.

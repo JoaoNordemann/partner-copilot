@@ -56,3 +56,10 @@ data/eval/json-verification-v1/*
 data/eval/v3-final-check/*
 !data/eval/v3-final-check/questions.jsonl
 !data/eval/v3-final-check/manifest.json
+
+!data/eval/reserved-final-v1/
+data/eval/reserved-final-v1/*
+!data/eval/reserved-final-v1/questions.jsonl
+!data/eval/reserved-final-v1/label-audit.jsonl
+!data/eval/reserved-final-v1/manifest.json
+!data/eval/reserved-final-v1/.gitattributes
