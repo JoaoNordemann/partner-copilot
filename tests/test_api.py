@@ -332,3 +332,35 @@ def test_cpu_stage_timers_measure_each_interval_directly(doc, monkeypatch):
     assert timing.embedding_search_ms == 14000
     assert collection.query.call_args.kwargs["where"] == {"restaurant_id": "rest_fixture"}
     embedder.embed_query.assert_called_once()
+
+
+def test_chunk_citation_returns_complete_original_review(doc):
+    chunk = doc.model_copy(update={"chunk_count": 2})
+    full = doc.review.model_copy(
+        update={"text": doc.review.text + " Mas o sabor ficou ruim no final."}
+    )
+    build, state = factory(Index([chunk]), Model(raw()))
+    with TestClient(create_app(settings(), resources_factory=build)) as client:
+        state["resources"].full_reviews[doc.review.id] = full
+        response = client.post("/ask", json=BODY)
+        assert response.status_code == 200
+        assert response.json()["source_reviews"][0]["text"] == full.text
+
+
+def test_chunk_without_complete_source_is_not_presented_as_full_review(doc):
+    chunk = doc.model_copy(update={"chunk_count": 2})
+    build, _ = factory(Index([chunk]), Model(raw()))
+    with TestClient(create_app(settings(), resources_factory=build)) as client:
+        response = client.post("/ask", json=BODY)
+        assert response.status_code == 503
+
+
+def test_quote_must_also_exist_in_complete_original_source(doc):
+    build, state = factory(Index([doc]), Model(raw()))
+    with TestClient(create_app(settings(), resources_factory=build)) as client:
+        state["resources"].full_reviews[doc.review.id] = doc.review.model_copy(
+            update={"text": "Texto original diferente do chunk corrompido."}
+        )
+        response = client.post("/ask", json=BODY)
+        assert response.status_code == 502
+        assert response.json()["error"]["details"]["reason"] == "quote_mismatch"

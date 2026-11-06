@@ -8,6 +8,7 @@ from pydantic import BaseModel, ConfigDict, Field, field_validator, model_valida
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 from partner_copilot.generation.output_v3 import GroundedOutput
+from partner_copilot.schemas import Review
 
 
 class APISettings(BaseSettings):
@@ -114,6 +115,7 @@ class AskResponse(BaseModel):
     result: GroundedOutput
     answer: str
     sources: list[str]
+    source_reviews: list[Review]
     abstained: bool
     abstention_reason: Literal["retriever_empty", "llm_insufficient_evidence"] | None
     metadata: Metadata
@@ -125,6 +127,8 @@ class AskResponse(BaseModel):
         expected = list(
             dict.fromkeys(s.review_id for c in self.result.afirmacoes for s in c.fontes)
         )
+        if [review.id for review in self.source_reviews] != self.sources:
+            raise ValueError("Full source reviews must match cited IDs")
         if expected != self.sources:
             raise ValueError("Sources must match structured claims")
         if self.abstained != (self.abstention_reason is not None):

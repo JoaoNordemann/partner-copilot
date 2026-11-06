@@ -164,10 +164,29 @@ class AskService:
             raise APIError(502, "generation_contract_failed", {"reason": reason_code}) from exc
         if parsed.abstained and reason is None:
             reason = "llm_insufficient_evidence"
+        by_id = {doc.review.id: doc for doc in context}
+        source_reviews = []
+        for identifier in parsed.sources:
+            doc = by_id[identifier]
+            review = resources.full_reviews.get(identifier) if backend != "replay" else None
+            if review is None:
+                if doc.chunk_count != 1:
+                    raise APIError(503, "retrieval_unavailable")
+                review = doc.review
+            if review.restaurant_id != request.restaurant_id:
+                raise APIError(503, "retrieval_unavailable")
+            for claim in value.afirmacoes:
+                for evidence in claim.fontes:
+                    if evidence.review_id == identifier and evidence.trecho not in review.text:
+                        raise APIError(
+                            502, "generation_contract_failed", {"reason": "quote_mismatch"}
+                        )
+            source_reviews.append(review)
         result = AskResponse(
             result=value,
             answer=parsed.answer,
             sources=parsed.sources,
+            source_reviews=source_reviews,
             abstained=parsed.abstained,
             abstention_reason=reason,
             metadata=Metadata(

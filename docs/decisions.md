@@ -1044,3 +1044,31 @@ Docker está ausente no PC: testes unitários não atestam build/execução da i
 A orientação CUDA/--gpus é explicitamente não testada, sem alegação de suporte
 verificado. Faixas de dependências e revisão de encoder não fixada limitam a
 reprodução bit a bit; dados/splits permanecem checados por hash.
+
+
+### Demo local com contexto integral e exemplos honestos
+
+Cliente Gradio 6, em processo separado da API, sem carga de modelos na interface.
+Cada afirmação mostra as fontes completas em paralelo, além da saída estruturada,
+abstenção e versão do prompt. A API adiciona source_reviews; com chunks, obtém
+originais do RAG validado carregados uma vez. Não rotular chunk como fonte inteira;
+verificar também a presença literal do trecho no original e o restaurante da fonte.
+Dados sintéticos, fake e replay são explicitamente rotulados. Replay preserva
+contexto arquivado, não busca ao vivo. A área histórica mostra n01, n20 e n12,
+com hashes, saída original, limites de revisão e indicação de gravação. Não é um
+atalho para o catálogo de replay aprovado, que continua pendente. Exemplos são
+regenerados sem inferência; nenhum conjunto reservado é aberto. Sem Space nesta
+entrega; publicação, link temporário GPU e tag não são executados automaticamente.
+
+
+### Fechamento da versão MVP
+
+README com execução CPU em três comandos, testes, cinco linhas de arquitetura,
+resultados e limites. O launcher local monta API e Gradio no mesmo serviço, mas
+mantém a chamada HTTP à API e prepara o índice em subprocesso para liberar o
+encoder do bootstrap. Não carrega Mistral no modo fake. Configuração de ambiente
+ou .env prevalece sobre defaults locais; real é recusado nesse launcher CPU.
+Notas v0.1-rag-mvp declaram n12/n15/n16, QLoRA, FP16/T4, Space e Docker não testado.
+Documento de status do estudo criado a pedido de João por não existir no repositório.
+Commit enviado deve passar no CI remoto antes de criar/enviar tag anotada; verificar
+que o SHA da execução bem-sucedida é exatamente o SHA da tag, sem mover tag existente.

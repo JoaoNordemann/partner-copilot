@@ -2,6 +2,51 @@
 
 [![CI](https://github.com/JoaoNordemann/partner-copilot/actions/workflows/retriever-unit.yml/badge.svg)](https://github.com/JoaoNordemann/partner-copilot/actions/workflows/retriever-unit.yml)
 
+Ajuda parceiros de restaurantes a investigar avaliações em linguagem natural,
+com fontes e abstenção quando falta evidência. Projeto de portfólio com **dados
+sintéticos**, sem dados reais ou vínculo oficial com o iFood.
+
+## Rodar em CPU: três comandos
+
+Na raiz do clone, com Python 3.12 ou 3.13 e ambiente virtual ativo:
+
+```powershell
+python -m pip install --index-url https://download.pytorch.org/whl/cpu "torch>=2.2,<3"
+python -m pip install -r requirements-cpu.txt "gradio>=6,<7" "httpx>=0.27,<1"
+python scripts/run_mvp.py
+```
+
+Abrir [demo](http://127.0.0.1:8000/demo/) ou [API](http://127.0.0.1:8000/docs).
+O primeiro uso baixa o encoder multilíngue e reconstrói o índice RAG; reinícios
+reutilizam o banco. O padrão é **LLM fake: abstenção fixa, rotulada como simulação**.
+A aba histórica mostra sucesso, abstenção e falha n12, todos como respostas gravadas.
+Replay exige catálogo aprovado externo; não há um catálogo pronto incluído.
+**Geração real com Mistral NF4 requer GPU CUDA** e segue [instruções próprias](docs/demo.md).
+
+## Testar
+
+```powershell
+python -m pip install -r requirements-ci.txt
+python -m pip install --no-deps -e .
+python -m pytest -m "not gpu"
+python -m ruff check .
+python -m ruff format --check .
+python scripts/build_results.py --check --update-readme
+```
+
+A suíte completa usa Chroma/encoder fake, sem downloads; os testes semânticos são
+opt-in. CI mínimo usa seleção explícita sem runtime ML, Python 3.12 e 3.13.
+
+## Arquitetura em cinco linhas
+
+1. Reviews Pydantic e splits versionados separam gold, treino e índice RAG.
+2. Ingestão valida dados, divide textos longos e faz upsert idempotente no Chroma persistente.
+3. Embeddings multilíngues e filtros recuperam contexto por restaurante, data, aspecto e item.
+4. Geração v3 produz JSON; validação confere esquema, IDs e trechos literais, com abstenção.
+5. FastAPI gerencia recursos/concorrência; Gradio mostra afirmações e reviews completas lado a lado.
+
+## Resultados
+
 <!-- BEGIN GENERATED RESULTS -->
 - RAG de reviews sintéticas, com citações verificadas e abstenção; sem dados reais do iFood.
 - Retrieval: recall limitado@5 sem filtro de 0,2514 no multilíngue e 0,2583 no inglês; 4V/16E/4D em 24 perguntas respondíveis expostas.
@@ -12,9 +57,14 @@
 [Resultados, tabelas e limitações](reports/final-results-v1/RESULTADOS.md).
 <!-- END GENERATED RESULTS -->
 
-[API HTTP](docs/api.md) · [Instalação e uso](docs/project-guide.md) · [Decisões](docs/decisions.md) · [Medições pendentes](docs/future-measurements.md)
+## Limitações
 
+Formato válido e trecho literal não garantem resposta correta: n12 seleciona elogio
+ignorando crítica; n15 atribui trecho à review errada; n16 combina relatos distintos.
+Amostras pequenas, sintéticas e perguntas expostas limitam as conclusões; revisões
+humanas são assistidas. QLoRA, comparação FP16 na T4 16 GB e Space estão pendentes.
+[Docker CPU](docs/docker.md) está preparado, mas build/execução não foram testados
+localmente por falta de Docker; o caminho GPU em container também não foi testado.
 
-[Container CPU e caminho GPU](docs/docker.md): receita CPU com fake/replay,
-índice criado no primeiro uso e sem pesos/segredos embutidos. **Build e execução
-Docker não testados localmente (Docker ausente); caminho GPU também não testado.**
+[Notas v0.1-rag-mvp](docs/releases/v0.1-rag-mvp.md) · [Status do estudo](docs/study-status.md) ·
+[Demo](docs/demo.md) · [API](docs/api.md) · [Decisões](docs/decisions.md)

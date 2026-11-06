@@ -148,3 +148,14 @@ python -m pytest tests/test_api.py tests/test_api_replay.py tests/test_api_depen
 python -m ruff check .
 python -m ruff format --check .
 ```
+
+
+## Reviews integrais para a demo
+
+A resposta api-v1 inclui `source_reviews`, em ordem igual a sources. Cada item
+contém a review original completa, mesmo que o trecho recuperado seja um chunk.
+Os originais do RAG são carregados uma vez na inicialização; replay já verifica
+a igualdade com o corpus do próprio snapshot. Fonte completa ausente em chunk
+produz retrieval_unavailable; trecho ausente do original produz quote_mismatch.
+Ver a [demo Gradio](demo.md). Essa adição não altera prompt/parser ou métricas
+históricas e não cria um critério automático de sustentação semântica.

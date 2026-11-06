@@ -195,6 +195,7 @@ class Resources:
         self.settings, self.api = settings, api
         self.index = self.llm = self.replay = None
         self.menu = []
+        self.full_reviews = {}
         self.components = {
             name: {"status": "not_required"} for name in ["index", "embedder", "llm", "replay"]
         }
@@ -250,6 +251,14 @@ class Resources:
             if embedder is None:
                 raise APIError(503, "retrieval_unavailable")
             self.index = load_index(self.settings, self.api, embedder)
+            self.full_reviews = {
+                review.id: review
+                for line in (self.settings.data_splits_dir / "rag.jsonl")
+                .read_text(encoding="utf-8")
+                .splitlines()
+                if line.strip()
+                for review in [Review.model_validate_json(line)]
+            }
             self.menu = self.index.restaurants()
             self.components["index"] = {"status": "ready", "documents": self.index.store.count()}
         except Exception as exc:
