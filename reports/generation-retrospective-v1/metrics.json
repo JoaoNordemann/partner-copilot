@@ -1,0 +1,1354 @@
+{
+  "new_inference": false,
+  "source_sha256": {
+    "reports/generation-kaggle-v1/generation-kaggle-v1.jsonl": "23f8945599009e4f1bf454e6dd0130494ecf10ae18296ef81ccd2651c9051974",
+    "reports/generation-kaggle-v2/generation-kaggle-B-prompt-v2-parser-v1.jsonl": "bdfca1a4966d25ed8757c0f79f2d8940811417c26ed2e645363a7ea21de147bf",
+    "reports/generation-kaggle-v2/generation-kaggle-C-parser-v2.jsonl": "bf07ad04aa432e6a5b994b2a6c92c523c6b409915256af580410a1d343d27101",
+    "reports/generation-kaggle-D/generation-kaggle-D.jsonl": "5befbf9d0d7087f6d3e4f2c6d2b289f426605c835799ee2e3bc1d42a0a2b77fe",
+    "reports/generation-json-v1/generation-json-v1.jsonl": "29c1511078ab6293e35fa6d109ecec4d395cee919025fedc229d74fc87af4960",
+    "reports/final-v3/generation-v3-contaminated.jsonl": "b0e3674d175c7bdd8241c1cdc9bd09e6fe53b59477ee7d8bdf24c8679a5f9a61",
+    "reports/final-v3/generation-v3-new.jsonl": "b424bc5d3af972fdf42cccdb14a467bd144f8a6b15904b70d93dcad8c644f0e7"
+  },
+  "parser_versions": {
+    "v1": "parser-v1",
+    "C": "parser-v2",
+    "D": "parser-v2",
+    "json-v1": "parser-json-v1",
+    "v3-old": "parser-v3",
+    "v3-new": "parser-v3"
+  },
+  "experiments": {
+    "v1": {
+      "questions": 30,
+      "llm_outputs": 27,
+      "no_llm": 3,
+      "schema": {
+        "passed": 0,
+        "applicable": 0
+      },
+      "accepted": {
+        "passed": 0,
+        "applicable": 27
+      },
+      "ids": {
+        "passed": 0,
+        "applicable": 27
+      },
+      "quotes": {
+        "passed": 0,
+        "applicable": 0
+      },
+      "positive_context_evidence": {
+        "passed": 22,
+        "applicable": 24
+      },
+      "ignored_suffix": 0,
+      "error_types": {
+        "GenerationContractError": 24,
+        "InvalidCitationError": 3
+      },
+      "diagnostics": {
+        "q01": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q02": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q03": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q04": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q05": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q06": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q07": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q08": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q09": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q10": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q11": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q12": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q13": {
+          "llm_called": false,
+          "schema_valid": null,
+          "parser_accepted": null,
+          "ids_in_context": null,
+          "quotes_literal": null
+        },
+        "q14": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q15": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q16": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q17": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q18": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q19": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q20": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q21": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q22": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q23": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q24": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q25": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q26": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q27": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q28": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q29": {
+          "llm_called": false,
+          "schema_valid": null,
+          "parser_accepted": null,
+          "ids_in_context": null,
+          "quotes_literal": null
+        },
+        "q30": {
+          "llm_called": false,
+          "schema_valid": null,
+          "parser_accepted": null,
+          "ids_in_context": null,
+          "quotes_literal": null
+        }
+      }
+    },
+    "C": {
+      "questions": 30,
+      "llm_outputs": 27,
+      "no_llm": 3,
+      "schema": {
+        "passed": 0,
+        "applicable": 0
+      },
+      "accepted": {
+        "passed": 2,
+        "applicable": 27
+      },
+      "ids": {
+        "passed": 2,
+        "applicable": 27
+      },
+      "quotes": {
+        "passed": 0,
+        "applicable": 0
+      },
+      "positive_context_evidence": {
+        "passed": 22,
+        "applicable": 24
+      },
+      "ignored_suffix": 0,
+      "error_types": {
+        "GenerationContractError": 15,
+        "InvalidCitationError": 10
+      },
+      "diagnostics": {
+        "q01": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q02": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q03": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q04": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q05": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": true,
+          "ids_in_context": true,
+          "quotes_literal": null
+        },
+        "q06": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q07": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q08": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q09": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q10": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q11": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q12": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q13": {
+          "llm_called": false,
+          "schema_valid": null,
+          "parser_accepted": null,
+          "ids_in_context": null,
+          "quotes_literal": null
+        },
+        "q14": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q15": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q16": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q17": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q18": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q19": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q20": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q21": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q22": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q23": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": true,
+          "ids_in_context": true,
+          "quotes_literal": null
+        },
+        "q24": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q25": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q26": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q27": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q28": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q29": {
+          "llm_called": false,
+          "schema_valid": null,
+          "parser_accepted": null,
+          "ids_in_context": null,
+          "quotes_literal": null
+        },
+        "q30": {
+          "llm_called": false,
+          "schema_valid": null,
+          "parser_accepted": null,
+          "ids_in_context": null,
+          "quotes_literal": null
+        }
+      }
+    },
+    "D": {
+      "questions": 30,
+      "llm_outputs": 27,
+      "no_llm": 3,
+      "schema": {
+        "passed": 0,
+        "applicable": 0
+      },
+      "accepted": {
+        "passed": 2,
+        "applicable": 27
+      },
+      "ids": {
+        "passed": 4,
+        "applicable": 27
+      },
+      "quotes": {
+        "passed": 0,
+        "applicable": 0
+      },
+      "positive_context_evidence": {
+        "passed": 22,
+        "applicable": 24
+      },
+      "ignored_suffix": 0,
+      "error_types": {
+        "InvalidCitationError": 14,
+        "GenerationContractError": 11
+      },
+      "diagnostics": {
+        "q01": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q02": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q03": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q04": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q05": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": true,
+          "ids_in_context": true,
+          "quotes_literal": null
+        },
+        "q06": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q07": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": true,
+          "quotes_literal": null
+        },
+        "q08": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q09": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q10": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q11": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q12": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q13": {
+          "llm_called": false,
+          "schema_valid": null,
+          "parser_accepted": null,
+          "ids_in_context": null,
+          "quotes_literal": null
+        },
+        "q14": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q15": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q16": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q17": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q18": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q19": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": true,
+          "quotes_literal": null
+        },
+        "q20": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q21": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q22": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q23": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": true,
+          "ids_in_context": true,
+          "quotes_literal": null
+        },
+        "q24": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q25": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q26": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q27": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q28": {
+          "llm_called": true,
+          "schema_valid": null,
+          "parser_accepted": false,
+          "ids_in_context": false,
+          "quotes_literal": null
+        },
+        "q29": {
+          "llm_called": false,
+          "schema_valid": null,
+          "parser_accepted": null,
+          "ids_in_context": null,
+          "quotes_literal": null
+        },
+        "q30": {
+          "llm_called": false,
+          "schema_valid": null,
+          "parser_accepted": null,
+          "ids_in_context": null,
+          "quotes_literal": null
+        }
+      }
+    },
+    "json-v1": {
+      "questions": 10,
+      "llm_outputs": 10,
+      "no_llm": 0,
+      "schema": {
+        "passed": 7,
+        "applicable": 10
+      },
+      "accepted": {
+        "passed": 7,
+        "applicable": 10
+      },
+      "ids": {
+        "passed": 7,
+        "applicable": 7
+      },
+      "quotes": {
+        "passed": 0,
+        "applicable": 0
+      },
+      "positive_context_evidence": {
+        "passed": 7,
+        "applicable": 7
+      },
+      "ignored_suffix": 0,
+      "error_types": {
+        "GenerationContractError": 3
+      },
+      "diagnostics": {
+        "n01": {
+          "llm_called": true,
+          "schema_valid": true,
+          "abstained": false,
+          "ids_in_context": true,
+          "parser_accepted": true,
+          "content_supported": null
+        },
+        "n02": {
+          "llm_called": true,
+          "schema_valid": false,
+          "abstained": null,
+          "ids_in_context": null,
+          "parser_accepted": false,
+          "content_supported": null
+        },
+        "n03": {
+          "llm_called": true,
+          "schema_valid": false,
+          "abstained": null,
+          "ids_in_context": null,
+          "parser_accepted": false,
+          "content_supported": null
+        },
+        "n04": {
+          "llm_called": true,
+          "schema_valid": true,
+          "abstained": false,
+          "ids_in_context": true,
+          "parser_accepted": true,
+          "content_supported": null
+        },
+        "n05": {
+          "llm_called": true,
+          "schema_valid": true,
+          "abstained": false,
+          "ids_in_context": true,
+          "parser_accepted": true,
+          "content_supported": null
+        },
+        "n06": {
+          "llm_called": true,
+          "schema_valid": true,
+          "abstained": false,
+          "ids_in_context": true,
+          "parser_accepted": true,
+          "content_supported": null
+        },
+        "n07": {
+          "llm_called": true,
+          "schema_valid": true,
+          "abstained": false,
+          "ids_in_context": true,
+          "parser_accepted": true,
+          "content_supported": null
+        },
+        "n08": {
+          "llm_called": true,
+          "schema_valid": false,
+          "abstained": null,
+          "ids_in_context": null,
+          "parser_accepted": false,
+          "content_supported": null
+        },
+        "n09": {
+          "llm_called": true,
+          "schema_valid": true,
+          "abstained": false,
+          "ids_in_context": true,
+          "parser_accepted": true,
+          "content_supported": null
+        },
+        "n10": {
+          "llm_called": true,
+          "schema_valid": true,
+          "abstained": false,
+          "ids_in_context": true,
+          "parser_accepted": true,
+          "content_supported": null
+        }
+      }
+    },
+    "v3-old": {
+      "questions": 30,
+      "llm_outputs": 27,
+      "no_llm": 3,
+      "schema": {
+        "passed": 16,
+        "applicable": 27
+      },
+      "accepted": {
+        "passed": 14,
+        "applicable": 27
+      },
+      "ids": {
+        "passed": 10,
+        "applicable": 11
+      },
+      "quotes": {
+        "passed": 9,
+        "applicable": 10
+      },
+      "positive_context_evidence": {
+        "passed": 23,
+        "applicable": 24
+      },
+      "ignored_suffix": 16,
+      "error_types": {
+        "GenerationContractError": 11,
+        "QuoteMismatchError": 1,
+        "InvalidCitationError": 1
+      },
+      "diagnostics": {
+        "q01": {
+          "llm_called": true,
+          "schema_valid": true,
+          "abstained": false,
+          "ids_in_context": true,
+          "quotes_literal": true,
+          "parser_accepted": true,
+          "content_supported": null,
+          "trailing_text_ignored": true,
+          "ignored_suffix_chars": 1
+        },
+        "q02": {
+          "llm_called": true,
+          "schema_valid": false,
+          "abstained": null,
+          "ids_in_context": null,
+          "quotes_literal": null,
+          "parser_accepted": false,
+          "content_supported": null,
+          "trailing_text_ignored": false,
+          "ignored_suffix_chars": 0
+        },
+        "q03": {
+          "llm_called": true,
+          "schema_valid": false,
+          "abstained": null,
+          "ids_in_context": null,
+          "quotes_literal": null,
+          "parser_accepted": false,
+          "content_supported": null,
+          "trailing_text_ignored": false,
+          "ignored_suffix_chars": 0
+        },
+        "q04": {
+          "llm_called": true,
+          "schema_valid": false,
+          "abstained": null,
+          "ids_in_context": null,
+          "quotes_literal": null,
+          "parser_accepted": false,
+          "content_supported": null,
+          "trailing_text_ignored": false,
+          "ignored_suffix_chars": 0
+        },
+        "q05": {
+          "llm_called": true,
+          "schema_valid": true,
+          "abstained": false,
+          "ids_in_context": true,
+          "quotes_literal": true,
+          "parser_accepted": true,
+          "content_supported": null,
+          "trailing_text_ignored": true,
+          "ignored_suffix_chars": 1
+        },
+        "q06": {
+          "llm_called": true,
+          "schema_valid": true,
+          "abstained": false,
+          "ids_in_context": true,
+          "quotes_literal": false,
+          "parser_accepted": false,
+          "content_supported": null,
+          "trailing_text_ignored": true,
+          "ignored_suffix_chars": 1
+        },
+        "q07": {
+          "llm_called": true,
+          "schema_valid": false,
+          "abstained": null,
+          "ids_in_context": null,
+          "quotes_literal": null,
+          "parser_accepted": false,
+          "content_supported": null,
+          "trailing_text_ignored": false,
+          "ignored_suffix_chars": 0
+        },
+        "q08": {
+          "llm_called": true,
+          "schema_valid": true,
+          "abstained": false,
+          "ids_in_context": true,
+          "quotes_literal": true,
+          "parser_accepted": true,
+          "content_supported": null,
+          "trailing_text_ignored": true,
+          "ignored_suffix_chars": 1
+        },
+        "q09": {
+          "llm_called": true,
+          "schema_valid": true,
+          "abstained": false,
+          "ids_in_context": true,
+          "quotes_literal": true,
+          "parser_accepted": true,
+          "content_supported": null,
+          "trailing_text_ignored": true,
+          "ignored_suffix_chars": 1
+        },
+        "q10": {
+          "llm_called": true,
+          "schema_valid": true,
+          "abstained": false,
+          "ids_in_context": true,
+          "quotes_literal": true,
+          "parser_accepted": true,
+          "content_supported": null,
+          "trailing_text_ignored": true,
+          "ignored_suffix_chars": 1
+        },
+        "q11": {
+          "llm_called": true,
+          "schema_valid": true,
+          "abstained": false,
+          "ids_in_context": true,
+          "quotes_literal": true,
+          "parser_accepted": true,
+          "content_supported": null,
+          "trailing_text_ignored": true,
+          "ignored_suffix_chars": 1
+        },
+        "q12": {
+          "llm_called": true,
+          "schema_valid": true,
+          "abstained": false,
+          "ids_in_context": true,
+          "quotes_literal": true,
+          "parser_accepted": true,
+          "content_supported": null,
+          "trailing_text_ignored": true,
+          "ignored_suffix_chars": 1
+        },
+        "q13": {
+          "llm_called": false,
+          "schema_valid": null,
+          "parser_accepted": null,
+          "ids_in_context": null,
+          "quotes_literal": null
+        },
+        "q14": {
+          "llm_called": true,
+          "schema_valid": true,
+          "abstained": false,
+          "ids_in_context": false,
+          "quotes_literal": null,
+          "parser_accepted": false,
+          "content_supported": null,
+          "trailing_text_ignored": true,
+          "ignored_suffix_chars": 397
+        },
+        "q15": {
+          "llm_called": true,
+          "schema_valid": false,
+          "abstained": null,
+          "ids_in_context": null,
+          "quotes_literal": null,
+          "parser_accepted": false,
+          "content_supported": null,
+          "trailing_text_ignored": false,
+          "ignored_suffix_chars": 0
+        },
+        "q16": {
+          "llm_called": true,
+          "schema_valid": false,
+          "abstained": null,
+          "ids_in_context": null,
+          "quotes_literal": null,
+          "parser_accepted": false,
+          "content_supported": null,
+          "trailing_text_ignored": false,
+          "ignored_suffix_chars": 0
+        },
+        "q17": {
+          "llm_called": true,
+          "schema_valid": false,
+          "abstained": null,
+          "ids_in_context": null,
+          "quotes_literal": null,
+          "parser_accepted": false,
+          "content_supported": null,
+          "trailing_text_ignored": false,
+          "ignored_suffix_chars": 0
+        },
+        "q18": {
+          "llm_called": true,
+          "schema_valid": false,
+          "abstained": null,
+          "ids_in_context": null,
+          "quotes_literal": null,
+          "parser_accepted": false,
+          "content_supported": null,
+          "trailing_text_ignored": false,
+          "ignored_suffix_chars": 0
+        },
+        "q19": {
+          "llm_called": true,
+          "schema_valid": true,
+          "abstained": false,
+          "ids_in_context": true,
+          "quotes_literal": true,
+          "parser_accepted": true,
+          "content_supported": null,
+          "trailing_text_ignored": true,
+          "ignored_suffix_chars": 358
+        },
+        "q20": {
+          "llm_called": true,
+          "schema_valid": false,
+          "abstained": null,
+          "ids_in_context": null,
+          "quotes_literal": null,
+          "parser_accepted": false,
+          "content_supported": null,
+          "trailing_text_ignored": false,
+          "ignored_suffix_chars": 0
+        },
+        "q21": {
+          "llm_called": true,
+          "schema_valid": true,
+          "abstained": true,
+          "ids_in_context": null,
+          "quotes_literal": null,
+          "parser_accepted": true,
+          "content_supported": null,
+          "trailing_text_ignored": true,
+          "ignored_suffix_chars": 302
+        },
+        "q22": {
+          "llm_called": true,
+          "schema_valid": false,
+          "abstained": null,
+          "ids_in_context": null,
+          "quotes_literal": null,
+          "parser_accepted": false,
+          "content_supported": null,
+          "trailing_text_ignored": false,
+          "ignored_suffix_chars": 0
+        },
+        "q23": {
+          "llm_called": true,
+          "schema_valid": true,
+          "abstained": false,
+          "ids_in_context": true,
+          "quotes_literal": true,
+          "parser_accepted": true,
+          "content_supported": null,
+          "trailing_text_ignored": true,
+          "ignored_suffix_chars": 1
+        },
+        "q24": {
+          "llm_called": true,
+          "schema_valid": false,
+          "abstained": null,
+          "ids_in_context": null,
+          "quotes_literal": null,
+          "parser_accepted": false,
+          "content_supported": null,
+          "trailing_text_ignored": false,
+          "ignored_suffix_chars": 0
+        },
+        "q25": {
+          "llm_called": true,
+          "schema_valid": true,
+          "abstained": true,
+          "ids_in_context": null,
+          "quotes_literal": null,
+          "parser_accepted": true,
+          "content_supported": null,
+          "trailing_text_ignored": true,
+          "ignored_suffix_chars": 155
+        },
+        "q26": {
+          "llm_called": true,
+          "schema_valid": true,
+          "abstained": true,
+          "ids_in_context": null,
+          "quotes_literal": null,
+          "parser_accepted": true,
+          "content_supported": null,
+          "trailing_text_ignored": true,
+          "ignored_suffix_chars": 134
+        },
+        "q27": {
+          "llm_called": true,
+          "schema_valid": true,
+          "abstained": true,
+          "ids_in_context": null,
+          "quotes_literal": null,
+          "parser_accepted": true,
+          "content_supported": null,
+          "trailing_text_ignored": true,
+          "ignored_suffix_chars": 122
+        },
+        "q28": {
+          "llm_called": true,
+          "schema_valid": true,
+          "abstained": true,
+          "ids_in_context": null,
+          "quotes_literal": null,
+          "parser_accepted": true,
+          "content_supported": null,
+          "trailing_text_ignored": true,
+          "ignored_suffix_chars": 223
+        },
+        "q29": {
+          "llm_called": false,
+          "schema_valid": null,
+          "parser_accepted": null,
+          "ids_in_context": null,
+          "quotes_literal": null
+        },
+        "q30": {
+          "llm_called": false,
+          "schema_valid": null,
+          "parser_accepted": null,
+          "ids_in_context": null,
+          "quotes_literal": null
+        }
+      }
+    },
+    "v3-new": {
+      "questions": 10,
+      "llm_outputs": 9,
+      "no_llm": 1,
+      "schema": {
+        "passed": 9,
+        "applicable": 9
+      },
+      "accepted": {
+        "passed": 6,
+        "applicable": 9
+      },
+      "ids": {
+        "passed": 7,
+        "applicable": 7
+      },
+      "quotes": {
+        "passed": 4,
+        "applicable": 7
+      },
+      "positive_context_evidence": {
+        "passed": 7,
+        "applicable": 7
+      },
+      "ignored_suffix": 9,
+      "error_types": {
+        "QuoteMismatchError": 3
+      },
+      "diagnostics": {
+        "n11": {
+          "llm_called": true,
+          "schema_valid": true,
+          "abstained": false,
+          "ids_in_context": true,
+          "quotes_literal": true,
+          "parser_accepted": true,
+          "content_supported": null,
+          "trailing_text_ignored": true,
+          "ignored_suffix_chars": 1
+        },
+        "n12": {
+          "llm_called": true,
+          "schema_valid": true,
+          "abstained": false,
+          "ids_in_context": true,
+          "quotes_literal": true,
+          "parser_accepted": true,
+          "content_supported": null,
+          "trailing_text_ignored": true,
+          "ignored_suffix_chars": 1
+        },
+        "n13": {
+          "llm_called": true,
+          "schema_valid": true,
+          "abstained": false,
+          "ids_in_context": true,
+          "quotes_literal": true,
+          "parser_accepted": true,
+          "content_supported": null,
+          "trailing_text_ignored": true,
+          "ignored_suffix_chars": 1
+        },
+        "n14": {
+          "llm_called": true,
+          "schema_valid": true,
+          "abstained": false,
+          "ids_in_context": true,
+          "quotes_literal": false,
+          "parser_accepted": false,
+          "content_supported": null,
+          "trailing_text_ignored": true,
+          "ignored_suffix_chars": 1
+        },
+        "n15": {
+          "llm_called": true,
+          "schema_valid": true,
+          "abstained": false,
+          "ids_in_context": true,
+          "quotes_literal": false,
+          "parser_accepted": false,
+          "content_supported": null,
+          "trailing_text_ignored": true,
+          "ignored_suffix_chars": 3
+        },
+        "n16": {
+          "llm_called": true,
+          "schema_valid": true,
+          "abstained": false,
+          "ids_in_context": true,
+          "quotes_literal": false,
+          "parser_accepted": false,
+          "content_supported": null,
+          "trailing_text_ignored": true,
+          "ignored_suffix_chars": 1155
+        },
+        "n17": {
+          "llm_called": true,
+          "schema_valid": true,
+          "abstained": false,
+          "ids_in_context": true,
+          "quotes_literal": true,
+          "parser_accepted": true,
+          "content_supported": null,
+          "trailing_text_ignored": true,
+          "ignored_suffix_chars": 1
+        },
+        "n18": {
+          "llm_called": false,
+          "schema_valid": null,
+          "parser_accepted": null,
+          "ids_in_context": null,
+          "quotes_literal": null
+        },
+        "n19": {
+          "llm_called": true,
+          "schema_valid": true,
+          "abstained": true,
+          "ids_in_context": null,
+          "quotes_literal": null,
+          "parser_accepted": true,
+          "content_supported": null,
+          "trailing_text_ignored": true,
+          "ignored_suffix_chars": 129
+        },
+        "n20": {
+          "llm_called": true,
+          "schema_valid": true,
+          "abstained": true,
+          "ids_in_context": null,
+          "quotes_literal": null,
+          "parser_accepted": true,
+          "content_supported": null,
+          "trailing_text_ignored": true,
+          "ignored_suffix_chars": 195
+        }
+      }
+    }
+  },
+  "notes": [
+    "C and D are experiment names, not prompt versions.",
+    "Text contracts do not have a JSON schema or excerpt field.",
+    "Each diagnostic has its own denominator; abstentions have no IDs/excerpts.",
+    "C creates no new LLM outputs; D reuses B plus 25 corrective calls.",
+    "Only v3-new was clean relative to adjustment on those questions at its frozen execution."
+  ]
+}

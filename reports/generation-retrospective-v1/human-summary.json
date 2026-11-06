@@ -1,0 +1,43 @@
+{
+  "reviewer": "João",
+  "rubric_version": "sustentacao-v1",
+  "new_cases_read": 10,
+  "comparable_pairs": 10,
+  "agreement_support": {
+    "agreed": 10,
+    "compared": 10,
+    "rate": 1.0
+  },
+  "agreement_answers_question": {
+    "agreed": 10,
+    "compared": 10,
+    "rate": 1.0
+  },
+  "agreement_both": {
+    "agreed": 10,
+    "compared": 10,
+    "rate": 1.0
+  },
+  "status": "completed",
+  "historical_v1_human_reviews": 10,
+  "historical_reviews_reclassified": false,
+  "target_cases": 10,
+  "method": "Revisão humana assistida no chat. João leu as fontes e destacou evidências; a IA auxiliou no enquadramento/transcrição. Parte dos rótulos foi confirmada explicitamente e parte foi derivada das observações humanas, conforme registrado em cada caso. Não é revisão cega ou validação independente do juiz.",
+  "completed_at": "2026-11-06T13:13:19.143316+00:00",
+  "support_counts": {
+    "sem_suporte": 5,
+    "parcial": 2,
+    "sustentada": 3
+  },
+  "answers_question_counts": {
+    "nao": 7,
+    "parcial": 1,
+    "sim": 2
+  },
+  "semantic_abstention_counts": {
+    "nao_se_aplica": 7,
+    "indevida": 3
+  },
+  "supported_and_answers": 2,
+  "selection": "Dez casos escolhidos para entrevista e análise de falhas, distribuídos por versões; não amostra aleatória nem as dez perguntas novas completas."
+}

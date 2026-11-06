@@ -1,0 +1,445 @@
+[
+  {
+    "experiment": "v3-new",
+    "question_id": "n12",
+    "question": "Como a review que elogia custo-beneficio da Linguica Artesanal descreve seu sabor?",
+    "raw_response": "{\"abstem\":false,\"afirmacoes\":[{\"texto\":\"O sabor da linguiça artesanal é descrito como bom no contexto do custo-benefício.\", \"fontes\":[{\"review_id\":\"rev_001172\", \"trecho\":\"Bom custo-benefício nesse linguiça artesanal.\"}]}]}.",
+    "context": [
+      {
+        "review_id": "rev_001172",
+        "document_id": "rev_001172",
+        "text": "linguiça artesanal estava com um gosto ruim no final. Bom custo-benefício nesse linguiça artesanal.",
+        "restaurant_id": "rest_007",
+        "item": "Linguiça Artesanal",
+        "created_at": "2026-10-19",
+        "score": 0.6305950284004211,
+        "chunk_index": 0,
+        "chunk_count": 1
+      },
+      {
+        "review_id": "rev_001286",
+        "document_id": "rev_001286",
+        "text": "Gostei bastante do sabor de linguiça artesanal.",
+        "restaurant_id": "rest_007",
+        "item": "Linguiça Artesanal",
+        "created_at": "2026-09-13",
+        "score": 0.5882769227027893,
+        "chunk_index": 0,
+        "chunk_count": 1
+      },
+      {
+        "review_id": "rev_000351",
+        "document_id": "rev_000351",
+        "text": "Pedi pra dividir aqui em casa. linguiça artesanal esfriou antes de chegar aqui. Veio numa embalagem bem resistente. Já pedi linguiça artesanal antes e dessa vez o sabor estava pior.",
+        "restaurant_id": "rest_007",
+        "item": "Linguiça Artesanal",
+        "created_at": "2026-09-27",
+        "score": 0.38636988401412964,
+        "chunk_index": 0,
+        "chunk_count": 1
+      },
+      {
+        "review_id": "rev_000708",
+        "document_id": "rev_000708",
+        "text": "Não achei caro pelo que veio. O lacre estava inteiro quando recebi. Aqui em casa todo mundo gostou de linguiça artesanal. Não precisei esquentar linguiça artesanal.",
+        "restaurant_id": "rest_007",
+        "item": "Linguiça Artesanal",
+        "created_at": "2026-08-29",
+        "score": 0.30139344930648804,
+        "chunk_index": 0,
+        "chunk_count": 1
+      }
+    ]
+  },
+  {
+    "experiment": "v3-new",
+    "question_id": "n15",
+    "question": "Que critica de preco aparece em Bolo de Pote mesmo numa avaliacao que elogia o sabor?",
+    "raw_response": "{\"abstem\":false,\"afirmacoes\":[{\"texto\":\"O preço foi considerado alto por algumas pessoas que elogiaram o sabor de bolo de pote.\", \"fontes\":[{\"review_id\":\"rev_000445\", \"trecho\":\"Não achei caro pelo que veio.\"}, {\"review_id\":\"rev_002127\", \"trecho\":\"Não valeu a pena\"}]}, {\"texto\":\"Outra pessoa também expressou que o preço não foi justificado por ela, apesar de gostar do sabor.\", \"fontes\":[{\"review_id\":\"rev_002176\", \"trecho\":\"Não pediria de novo.\"}]}]}]}.",
+    "context": [
+      {
+        "review_id": "rev_002127",
+        "document_id": "rev_002127",
+        "text": "A tampa veio solta, não gostei disso. O sabor de bolo de pote valeu o pedido. Chegou fresco e bem refrigerado. Dá pra melhorar.",
+        "restaurant_id": "rest_008",
+        "item": "Bolo de Pote",
+        "created_at": "2026-10-15",
+        "score": 0.4946288466453552,
+        "chunk_index": 0,
+        "chunk_count": 1
+      },
+      {
+        "review_id": "rev_002485",
+        "document_id": "rev_002485",
+        "text": "Gostei bastante do sabor de bolo de pote. Entregaram dentro do prazo. A tampa veio solta, não gostei disso.",
+        "restaurant_id": "rest_008",
+        "item": "Bolo de Pote",
+        "created_at": "2026-10-16",
+        "score": 0.4763704538345337,
+        "chunk_index": 0,
+        "chunk_count": 1
+      },
+      {
+        "review_id": "rev_002490",
+        "document_id": "rev_002490",
+        "text": "Sobre bolo de pote: Veio sem refrigeração, já estava morno. O sabor estava ótimo, pediria bolo de pote de novo. O preço subiu demais. Não valeu a pena",
+        "restaurant_id": "rest_008",
+        "item": "Bolo de Pote",
+        "created_at": "2026-09-01",
+        "score": 0.40162092447280884,
+        "chunk_index": 0,
+        "chunk_count": 1
+      },
+      {
+        "review_id": "rev_000445",
+        "document_id": "rev_000445",
+        "text": "Não achei caro pelo que veio. O sabor de bolo de pote estava muito bom. Entregaram dentro do prazo. Veio sem lacre na sacola.",
+        "restaurant_id": "rest_008",
+        "item": "Bolo de Pote",
+        "created_at": "2026-09-15",
+        "score": 0.380865216255188,
+        "chunk_index": 0,
+        "chunk_count": 1
+      },
+      {
+        "review_id": "rev_002176",
+        "document_id": "rev_002176",
+        "text": "bolo de pote veio com o sabor que eu esperava. Não achei o preço justo. Não pediria de novo.",
+        "restaurant_id": "rest_008",
+        "item": "Bolo de Pote",
+        "created_at": "2026-09-19",
+        "score": 0.37271904945373535,
+        "chunk_index": 0,
+        "chunk_count": 1
+      },
+      {
+        "review_id": "rev_002787",
+        "document_id": "rev_002787",
+        "text": "Achei bolo de pote uma delícia. Falei com o restaurante e foram bem prestativos. Tudo bem acomodado, sem embalagem aberta. Pelo valor, achei uma boa compra. A temperatura de bolo de pote estava boa. Valeu a compra.",
+        "restaurant_id": "rest_008",
+        "item": "Bolo de Pote",
+        "created_at": "2026-08-16",
+        "score": 0.3504263162612915,
+        "chunk_index": 0,
+        "chunk_count": 1
+      }
+    ]
+  },
+  {
+    "experiment": "v3-new",
+    "question_id": "n16",
+    "question": "Qual relato de Temaki Salmao combina refrigeracao adequada, insatisfacao com gosto e espera alem da previsao?",
+    "raw_response": "{\"abstem\": false, \"afirmacoes\": [{\"texto\": \"Não mantiveram temaki salmão refrigerado. O gosto não estava bom. Esperei quase duas horas e já tinha passado da previsão.\", \"fontes\": [{\"review_id\": \"rev_001339\", \"trecho\": \"Não mantiveram temaki salmão refrigerado. \"}, {\"review_id\": \"rev_000908\", \"trecho\": \"O gosto não estava bom. Esperei quase duas horas e já tinha passado da previsão.\"}]}]}.\n\nExplanation:\nThe question asks for a report of Temaki Salmon that includes inadequate refrigeration, dissatisfaction with taste, and waiting time beyond the prediction. The provided JSONL data includes three reviews of Temaki Salmon from the same restaurant. Two of these reviews mention inadequate refrigeration and dissatisfaction with taste, while the third review mentions that the Temaki Salmon arrived at the correct temperature. Therefore, the following afirmation is valid: \"Não mantiveram temaki salmão refrigerado. O gosto não estava bom. Esperei quase duas horas e já tinha passado da previsão.\" (They did not keep the Temaki Salmon refrigerated. The taste was not good. I waited almost two hours and it was past the prediction.)\n\nThe JSON output is:\n{\"abstem\": false, \"afirmacoes\": [{\"texto\": \"Não mantiveram temaki salmão refrigerado. O gosto não estava bom. Esperei quase duas horas e já tinha passado da previsão.\", \"fontes\": [{\"review_id\": \"rev_001339\", \"trecho\": \"Não mantiveram temaki salmão refrigerado.\"}, {\"review_id\": \"rev_000908\", \"trecho\": \"O gosto não estava bom. Esperei quase duas horas e já tinha passado da previsão.\"}]}]}.",
+    "context": [
+      {
+        "review_id": "rev_001339",
+        "document_id": "rev_001339",
+        "text": "Achei temaki salmão uma delícia. Não mantiveram temaki salmão refrigerado.",
+        "restaurant_id": "rest_003",
+        "item": "Temaki Salmão",
+        "created_at": "2026-11-01",
+        "score": 0.4912450313568115,
+        "chunk_index": 0,
+        "chunk_count": 1
+      },
+      {
+        "review_id": "rev_000908",
+        "document_id": "rev_000908",
+        "text": "Chegou fresco e bem refrigerado. Não consegui terminar temaki salmão, o gosto não estava bom. Esperei quase duas horas e já tinha passado da previsão. Não valeu a pena.",
+        "restaurant_id": "rest_003",
+        "item": "Temaki Salmão",
+        "created_at": "2026-10-07",
+        "score": 0.4436070919036865,
+        "chunk_index": 0,
+        "chunk_count": 1
+      },
+      {
+        "review_id": "rev_002562",
+        "document_id": "rev_002562",
+        "text": "Veio bem gelado, na temperatura certa. O sabor estava ótimo, pediria temaki salmão de novo. A embalagem veio bem fechada. A entrega demorou demais, deu 112 minutos.",
+        "restaurant_id": "rest_003",
+        "item": "Temaki Salmão",
+        "created_at": "2026-08-31",
+        "score": 0.41095077991485596,
+        "chunk_index": 0,
+        "chunk_count": 1
+      }
+    ]
+  },
+  {
+    "experiment": "v3-new",
+    "question_id": "n14",
+    "question": "Qual review de Pizza Portuguesa diz que o lacre estava inteiro, mas o sabor lembrava produto velho?",
+    "raw_response": "{\"abstem\": false, \"afirmacoes\": [{\"texto\": \"O lacre estava inteiro, mas o sabor lembrava produto velho.\", \"fontes\": [{\"review_id\": \"rev_000797\", \"trecho\": \"pizza portuguesa estava com gosto de produto velo.\"}]}]}.",
+    "context": [
+      {
+        "review_id": "rev_000797",
+        "document_id": "rev_000797",
+        "text": "O preço de pizza portuguesa estava bom. pizza portuguesa estava com gosto de produto velho. O lacre estava inteiro quando recebi.",
+        "restaurant_id": "rest_001",
+        "item": "Pizza Portuguesa",
+        "created_at": "2026-08-08",
+        "score": 0.837075412273407,
+        "chunk_index": 0,
+        "chunk_count": 1
+      },
+      {
+        "review_id": "rev_000604",
+        "document_id": "rev_000604",
+        "text": "Mais de uma hora esperando, muito além do combinado. Dessa vez acertaram no sabor de pizza portuguesa. A temperatura de pizza portuguesa estava ótima.",
+        "restaurant_id": "rest_001",
+        "item": "Pizza Portuguesa",
+        "created_at": "2026-10-07",
+        "score": 0.7852792143821716,
+        "chunk_index": 0,
+        "chunk_count": 1
+      },
+      {
+        "review_id": "rev_000294",
+        "document_id": "rev_000294",
+        "text": "Nada a reclamar do sabor de pizza portuguesa. Não precisei esquentar pizza portuguesa. Veio numa embalagem bem resistente.",
+        "restaurant_id": "rest_001",
+        "item": "Pizza Portuguesa",
+        "created_at": "2026-10-11",
+        "score": 0.7839683890342712,
+        "chunk_index": 0,
+        "chunk_count": 1
+      },
+      {
+        "review_id": "rev_002335",
+        "document_id": "rev_002335",
+        "text": "Pelo sabor, não pediria pizza portuguesa de novo. Paguei caro e esperava mais quantidade.",
+        "restaurant_id": "rest_001",
+        "item": "Pizza Portuguesa",
+        "created_at": "2026-10-26",
+        "score": 0.6897240877151489,
+        "chunk_index": 0,
+        "chunk_count": 1
+      }
+    ]
+  },
+  {
+    "experiment": "C",
+    "question_id": "q23",
+    "question": "Em quais relatos do Açaí Point a conversa com a loja ficou sem retorno?",
+    "raw_response": "EXATAMENTE, na revisão \"rev\\_001123\" do item \"Açaí 500ml\" do restaurante \"rest\\_005\", o revisor relatou que a embalagem se soltou [rev\\_001123].",
+    "context": [
+      {
+        "review_id": "rev_002058",
+        "document_id": "rev_002058",
+        "text": "O pedido levou só 18 minutos pra chegar. O gosto de açaí 500ml me surpreendeu pra melhor.",
+        "restaurant_id": "rest_005",
+        "item": "Açaí 500ml",
+        "created_at": "2026-08-28",
+        "score": 0.3955800533294678,
+        "chunk_index": 0,
+        "chunk_count": 1
+      },
+      {
+        "review_id": "rev_001123",
+        "document_id": "rev_001123",
+        "text": "Resolvi experimentar açaí 500ml. Entregaram dentro do prazo. Achei açaí 500ml uma delícia. açaí 500ml perdeu o gelado no caminho. A tampa veio solta, não gostei disso.",
+        "restaurant_id": "rest_005",
+        "item": "Açaí 500ml",
+        "created_at": "2026-08-31",
+        "score": 0.37524187564849854,
+        "chunk_index": 0,
+        "chunk_count": 1
+      },
+      {
+        "review_id": "rev_001265",
+        "document_id": "rev_001265",
+        "text": "O restaurante ignorou minhas mensagens. copo da felicidade estava uma delícia, gostei até o fim.",
+        "restaurant_id": "rest_005",
+        "item": "Copo da Felicidade",
+        "created_at": "2026-08-29",
+        "score": 0.3136368989944458,
+        "chunk_index": 0,
+        "chunk_count": 1
+      },
+      {
+        "review_id": "rev_002370",
+        "document_id": "rev_002370",
+        "text": "Sobre copo da felicidade: A entrega foi rápida, uns 20 minutos. Não achei caro pelo que veio. Veio refrigerado como deveria. Pediria novamente.",
+        "restaurant_id": "rest_005",
+        "item": "Copo da Felicidade",
+        "created_at": "2026-08-28",
+        "score": 0.3025777339935303,
+        "chunk_index": 0,
+        "chunk_count": 1
+      }
+    ]
+  },
+  {
+    "experiment": "C",
+    "question_id": "q05",
+    "question": "Quais falhas de acondicionamento aparecem nas avaliações do Açaí Point?",
+    "raw_response": "A tampa se soltou [rev\\_001123]",
+    "context": [
+      {
+        "review_id": "rev_001123",
+        "document_id": "rev_001123",
+        "text": "Resolvi experimentar açaí 500ml. Entregaram dentro do prazo. Achei açaí 500ml uma delícia. açaí 500ml perdeu o gelado no caminho. A tampa veio solta, não gostei disso.",
+        "restaurant_id": "rest_005",
+        "item": "Açaí 500ml",
+        "created_at": "2026-08-31",
+        "score": 0.3475527763366699,
+        "chunk_index": 0,
+        "chunk_count": 1
+      },
+      {
+        "review_id": "rev_002058",
+        "document_id": "rev_002058",
+        "text": "O pedido levou só 18 minutos pra chegar. O gosto de açaí 500ml me surpreendeu pra melhor.",
+        "restaurant_id": "rest_005",
+        "item": "Açaí 500ml",
+        "created_at": "2026-08-28",
+        "score": 0.2723765969276428,
+        "chunk_index": 0,
+        "chunk_count": 1
+      }
+    ]
+  },
+  {
+    "experiment": "D",
+    "question_id": "q09",
+    "question": "Quais relatos sustentam reclamações de atraso do Burger do Zé nas últimas duas semanas até 01/11/2026?",
+    "raw_response": "EXATAMENTE [\"Nao ha evidencia sobre reclamos de atraso do Burger do Zé na base de dados fornecida\"][[PERGUNTA_JSON]]\n[\"Nao ha informacao sobre atraso especifico do Burger do Zé nas avaliacoes fornecidas\"][[\"Avaliacoes_JSONL\"]]",
+    "context": [
+      {
+        "review_id": "rev_000212",
+        "document_id": "rev_000212",
+        "text": "Ainda estava quentinho quando abri. Mais de uma hora esperando, muito além do combinado. Já pedi x-salada antes e dessa vez o sabor estava pior.",
+        "restaurant_id": "rest_002",
+        "item": "X-Salada",
+        "created_at": "2026-11-01",
+        "score": 0.29636621475219727,
+        "chunk_index": 0,
+        "chunk_count": 1
+      }
+    ]
+  },
+  {
+    "experiment": "D",
+    "question_id": "q22",
+    "question": "Quem achou a refeição da Cantina Bella Massa desagradável ao paladar?",
+    "raw_response": "Nao ha review que achou a refeicao da Cantina Bella Massa desagradavel ao paladar apenas por causa do sabor, baseado nos dados fornecidos. [rev_000300, rev_001760, rev_001051, rev_002684, rev_002234]\n\n[[SEM_EVIDENCIA]]",
+    "context": [
+      {
+        "review_id": "rev_000300",
+        "document_id": "rev_000300",
+        "text": "Dessa vez acertaram no sabor de nhoque ao sugo. Pediria novamente.",
+        "restaurant_id": "rest_006",
+        "item": "Nhoque ao Sugo",
+        "created_at": "2026-10-18",
+        "score": 0.5333129167556763,
+        "chunk_index": 0,
+        "chunk_count": 1
+      },
+      {
+        "review_id": "rev_001760",
+        "document_id": "rev_001760",
+        "text": "Meu pedido foi lasanha bolonhesa. lasanha bolonhesa chegou frio. Gostei muito de lasanha bolonhesa.",
+        "restaurant_id": "rest_006",
+        "item": "Lasanha Bolonhesa",
+        "created_at": "2026-10-03",
+        "score": 0.4835693836212158,
+        "chunk_index": 0,
+        "chunk_count": 1
+      },
+      {
+        "review_id": "rev_001051",
+        "document_id": "rev_001051",
+        "text": "lasanha bolonhesa não estava gostoso como das outras vezes. lasanha bolonhesa chegou frio. A embalagem veio bem fechada. Foram grossos quando entrei em contato.",
+        "restaurant_id": "rest_006",
+        "item": "Lasanha Bolonhesa",
+        "created_at": "2026-08-28",
+        "score": 0.47991275787353516,
+        "chunk_index": 0,
+        "chunk_count": 1
+      },
+      {
+        "review_id": "rev_002684",
+        "document_id": "rev_002684",
+        "text": "Ja estava morno quando abri. ravioli de queijo nao estava gostoso como das outras vezes. Nao valeu a pena.",
+        "restaurant_id": "rest_006",
+        "item": "Ravióli de Queijo",
+        "created_at": "2026-10-06",
+        "score": 0.478320837020874,
+        "chunk_index": 0,
+        "chunk_count": 1
+      },
+      {
+        "review_id": "rev_002234",
+        "document_id": "rev_002234",
+        "text": "Chegou quente, deu pra comer na hora. Foram 92 minutos de espera, atrapalhou meu almoço. Esperava mais do sabor de ravióli de queijo.",
+        "restaurant_id": "rest_006",
+        "item": "Ravióli de Queijo",
+        "created_at": "2026-10-24",
+        "score": 0.46421951055526733,
+        "chunk_index": 0,
+        "chunk_count": 1
+      }
+    ]
+  },
+  {
+    "experiment": "json-v1",
+    "question_id": "n09",
+    "question": "Qual laboratorio realizou a analise microbiologica do Yakisoba segundo as reviews?",
+    "raw_response": "{\"abstem\":false,\"afirmacoes\":[{\"texto\":\"A Yakisoba foi analisada microbiologicamente em algum laboratorio, mas a revisao nao fornece informacao suficiente para identificar qual laboratorio foi utilizado.\", \"review_ids\":[\"rev_002142\"]}]}",
+    "context": [
+      {
+        "review_id": "rev_002142",
+        "document_id": "rev_002142",
+        "text": "Ainda estava quentinho quando abri. Gostei muito de yakisoba. Bom custo-beneficio nesse yakisoba. A entrega demorou demais, deu 115 minutos",
+        "restaurant_id": "rest_003",
+        "item": "Yakisoba",
+        "created_at": "2026-08-29",
+        "score": 0.306171178817749,
+        "chunk_index": 0,
+        "chunk_count": 1
+      }
+    ]
+  },
+  {
+    "experiment": "v3-old",
+    "question_id": "q21",
+    "question": "Em quais pedidos da Doceria Ateliê Doce o recipiente deixou o conteúdo desprotegido?",
+    "raw_response": "{\"abstem\":true,\"afirmacoes\":[]}.\n\nThere is no clear evidence in the given reviews to answer the question about which orders from Doceria Ateliê Doce had the content left unprotected by the container. None of the reviews mention the container being unsealed or the content being exposed. Therefore, an abstention is the safest option.",
+    "context": [
+      {
+        "review_id": "rev_002833",
+        "document_id": "rev_002833",
+        "text": "Não achei o preço justo. A temperatura de brigadeiro gourmet estava adequada. Entregaram dentro do prazo. Dessa vez acertaram no sabor de brigadeiro gourmet. O pedido teve pontos bons e ruins.",
+        "restaurant_id": "rest_008",
+        "item": "Brigadeiro Gourmet",
+        "created_at": "2026-09-07",
+        "score": 0.3174999952316284,
+        "chunk_index": 0,
+        "chunk_count": 1
+      },
+      {
+        "review_id": "rev_002355",
+        "document_id": "rev_002355",
+        "text": "Sobre torta de limão: Achei torta de limão uma delícia. Não fecharam direito a embalagem. Veio gelado e pronto pra consumir. Em 30 min já estava aqui.",
+        "restaurant_id": "rest_008",
+        "item": "Torta de Limão",
+        "created_at": "2026-10-29",
+        "score": 0.27118420600891113,
+        "chunk_index": 0,
+        "chunk_count": 1
+      },
+      {
+        "review_id": "rev_000357",
+        "document_id": "rev_000357",
+        "text": "Recebi agora meu pedido. Não precisei esperar muito, deu 18 min. O gosto de torta de limão me surpreendeu pra melhor. Demoraram demais pra responder minha dúvida.",
+        "restaurant_id": "rest_008",
+        "item": "Torta de Limão",
+        "created_at": "2026-09-16",
+        "score": 0.26584696769714355,
+        "chunk_index": 0,
+        "chunk_count": 1
+      }
+    ]
+  }
+]

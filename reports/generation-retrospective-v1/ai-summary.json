@@ -1,0 +1,96 @@
+{
+  "origin": "AI",
+  "rubric": "sustentacao-v1",
+  "selected_units_read": 26,
+  "llm_outputs_read": 24,
+  "no_llm_controls": 2,
+  "by_experiment": {
+    "v1": {
+      "model_outputs_read": 2,
+      "support_counts": {
+        "sem_suporte": 1,
+        "parcial": 1
+      },
+      "supported_and_answers": 0,
+      "read_ids": [
+        "q09",
+        "q22"
+      ]
+    },
+    "C": {
+      "model_outputs_read": 2,
+      "support_counts": {
+        "sustentada": 2
+      },
+      "supported_and_answers": 1,
+      "read_ids": [
+        "q05",
+        "q23"
+      ]
+    },
+    "D": {
+      "model_outputs_read": 4,
+      "support_counts": {
+        "sustentada": 2,
+        "sem_suporte": 2
+      },
+      "supported_and_answers": 1,
+      "read_ids": [
+        "q05",
+        "q09",
+        "q22",
+        "q23"
+      ]
+    },
+    "json-v1": {
+      "model_outputs_read": 4,
+      "support_counts": {
+        "sustentada": 3,
+        "sem_suporte": 1
+      },
+      "supported_and_answers": 3,
+      "read_ids": [
+        "n02",
+        "n03",
+        "n09",
+        "n10"
+      ]
+    },
+    "v3-old": {
+      "model_outputs_read": 3,
+      "support_counts": {
+        "sustentada": 1,
+        "sem_suporte": 1,
+        "parcial": 1
+      },
+      "supported_and_answers": 1,
+      "read_ids": [
+        "q09",
+        "q21",
+        "q23"
+      ]
+    },
+    "v3-new": {
+      "model_outputs_read": 9,
+      "support_counts": {
+        "sustentada": 6,
+        "sem_suporte": 1,
+        "parcial": 2
+      },
+      "supported_and_answers": 6,
+      "read_ids": [
+        "n11",
+        "n12",
+        "n13",
+        "n14",
+        "n15",
+        "n16",
+        "n17",
+        "n19",
+        "n20"
+      ]
+    }
+  },
+  "not_global_accuracy": true,
+  "human_confirmation_pending": true
+}

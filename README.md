@@ -276,3 +276,6 @@ literal nao comprova que a afirmacao decorre dele ou responda a pergunta.
 A rodada congelada usa n11-n20 (3 negativas) primeiro e registra separadamente as
 30 antigas com contaminated=true. Contexto de ate oito reviews. Nenhum resultado
 real V3 foi obtido durante a preparacao local. [Protocolo e limites](docs/final-v3.md).
+
+
+Consolidação de geração sem novas inferências: [funil, taxonomia de falhas e rubrica de revisão](reports/generation-retrospective-v1/README.md). Dez casos revisados por João de forma assistida, com origem e método registrados; métricas de formato e sustentação factual são separadas.

@@ -706,3 +706,19 @@ corroborada (recall limitado@5 sem filtros: delta multilíngue menos inglês
 A matriz completa, os incrementos de ruído por k e as comparações pareadas estão
 em [análise CPU](../reports/retrieval-cpu-ablation-v1/ANALISE.md). Não promover
 configurações nem limiares com base nesta avaliação de desenvolvimento exposta.
+
+
+## Consolidação retrospectiva de geração sem novas variantes
+
+Antes dos novos julgamentos, fixar a [rubrica v1](../reports/generation-retrospective-v1/RUBRICA.md):
+sustentada/parcial/sem_suporte e, separadamente, responde à pergunta. Leitura de IA
+com escopo explícito, revisão humana assistida somente após resposta de João.
+Funil distingue contrato textual (sem schema JSON), schema, IDs, trechos e aceitação;
+colunas têm denominadores próprios e não constituem uma sequência universal.
+Não executar inferência, LLM-as-judge ou novas variantes; preservar todos os brutos.
+
+Revisão humana assistida concluída nos dez casos de entrevista da retrospectiva:
+3 sustentados, 2 parciais, 5 sem suporte; 2 sustentados e pertinentes. Concordância
+assistida com IA: 10/10 nos dois eixos, sem caráter cego/independente e sem juiz LLM.
+A seleção dirigida por falhas e distribuída entre versões não estima acurácia global.
+Observações humanas, auxílio no enquadramento e confirmações estão preservados por caso.
