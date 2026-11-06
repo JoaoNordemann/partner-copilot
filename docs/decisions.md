@@ -722,3 +722,18 @@ Revisão humana assistida concluída nos dez casos de entrevista da retrospectiv
 assistida com IA: 10/10 nos dois eixos, sem caráter cego/independente e sem juiz LLM.
 A seleção dirigida por falhas e distribuída entre versões não estima acurácia global.
 Observações humanas, auxílio no enquadramento e confirmações estão preservados por caso.
+
+
+## Consolidação de custo e latência sem novos benchmarks
+
+Usar exclusivamente os artefatos medidos, com ambiente/commit ao lado dos valores.
+Separar smoke, estatísticas da rodada, tempo de geração e carga repetida como atributo;
+não somar a carga por pergunta nem duplicar a carga compartilhada de v3. D conta
+somente as 25 tentativas corretivas novas, não tempos herdados de B como outra rodada.
+GB e GiB, memória alocada e reservada são medidas distintas. Todas as rodadas GPU
+registradas usam Kaggle/Tesla T4 e pesos NF4, mesmo com compute_dtype=float16.
+Latências isoladas de embedding/retrieval em CPU não foram registradas; permanecem
+pendentes. O total das ablações CPU inclui carga/cache/download e não é latência de
+consulta. Comparação com pesos integrais FP16 em ambiente T4 16 GB fica pendente,
+sem execução nesta etapa. Sem tarifa/duração de sessão, não calcular custo monetário.
+[Valores, ambientes e fontes](../reports/cost-latency-consolidation-v1/README.md).

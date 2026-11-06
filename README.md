@@ -279,3 +279,5 @@ real V3 foi obtido durante a preparacao local. [Protocolo e limites](docs/final-
 
 
 Consolidação de geração sem novas inferências: [funil, taxonomia de falhas e rubrica de revisão](reports/generation-retrospective-v1/README.md). Dez casos revisados por João de forma assistida, com origem e método registrados; métricas de formato e sustentação factual são separadas.
+
+Custo e latência já medidos, com ambiente e limites: [consolidação T4 e CPU local](reports/cost-latency-consolidation-v1/README.md). Sem novos benchmarks; tempos isolados de CPU e baseline de pesos FP16 permanecem pendentes.
