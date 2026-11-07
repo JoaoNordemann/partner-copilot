@@ -34,3 +34,7 @@ jobs:
         env:
           PYTHONPATH: src
         run: python scripts/prepare_absa_splits.py --check
+      - name: Verify versioned ABSA dataset and provenance
+        env:
+          PYTHONPATH: src
+        run: python scripts/build_absa_dataset.py --check-static

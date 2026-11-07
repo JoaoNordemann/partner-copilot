@@ -2,9 +2,30 @@
   "dataset_version": "absa-chat-v1",
   "model": "Qwen/Qwen2.5-1.5B-Instruct",
   "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
-  "transformers_version": "5.22.1",
-  "chat_template_sha256": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+  "provenance": {
+    "origin": "synthetic_generator_labels",
+    "generator_commit": "d6aedfd3eff5acc58609ee75e04d8c46fa6a532e",
+    "generator_sha256_lf": "b8da98d182c18fd9e401fa58adabeb3331f3ccc07f195375695aa30fe90b58a0",
+    "corpus_sha256_lf": "7c92710c7f39f44310e1cad2cece86436b55c338fb7d106c689e0571e215a67d",
+    "generator_parameters": {
+      "n": 3000,
+      "seed": 42,
+      "end_date": "2026-11-01",
+      "days": 90
+    }
+  },
+  "split_counts": {
+    "train": 1263,
+    "validation": 140,
+    "template_test": 346,
+    "gold": 100
+  },
   "splits_manifest_sha256_lf": "5aa50b864d4c09e5468dfcb63314c36c48197a2a4b15d2abb7c33e0aa62b001e",
+  "gold_reference": {
+    "version": "absa-human-v1",
+    "annotations_sha256": "4aad038205fbfd2e3167f07dab86933ca9544fddf9c5c87a6205c96129555f93",
+    "review_manifest_sha256_lf": "c9a201ef720c396c67ee2fe9a174db7843064e673f59d8655ab4502daffd9cfd"
+  },
   "train_budget": 1500,
   "aspect_order": [
     "sabor",
@@ -50,14 +71,14 @@
         "3+": 495
       },
       "mixed_polarity_reviews": 447,
+      "sha256_lf": "5a2db6e333e4055a387f49d3fc3ef019668b8d28157d1c340d73e20354b644c2",
       "chat_tokens": {
         "min": 104,
         "median": 135,
         "p95": 170,
         "max": 219,
         "total": 172956
-      },
-      "sha256_lf": "5a2db6e333e4055a387f49d3fc3ef019668b8d28157d1c340d73e20354b644c2"
+      }
     },
     "validation": {
       "reviews": 140,
@@ -94,15 +115,17 @@
         "3+": 54
       },
       "mixed_polarity_reviews": 48,
+      "sha256_lf": "56ab6fe5921e8930f3c731da84f9349ccaf4bc65dab45a5f0c589307ac5136a5",
       "chat_tokens": {
         "min": 103,
         "median": 135.0,
         "p95": 174,
         "max": 200,
         "total": 19296
-      },
-      "sha256_lf": "56ab6fe5921e8930f3c731da84f9349ccaf4bc65dab45a5f0c589307ac5136a5"
+      }
     }
   },
+  "transformers_version": "5.22.1",
+  "chat_template_sha256": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
   "suggested_max_length": 256
 }

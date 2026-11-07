@@ -1,0 +1,140 @@
+stage=preflight
+stage=gpu_identified
+stage=install
+Requirement already satisfied: trl==1.17.1 in /usr/local/lib/python3.13/dist-packages (1.17.1)
+Requirement already satisfied: peft==0.21.2 in /usr/local/lib/python3.13/dist-packages (0.21.2)
+Requirement already satisfied: datasets==5.1.0 in /usr/local/lib/python3.13/dist-packages (5.1.0)
+Requirement already satisfied: accelerate>=1.11.0 in /usr/local/lib/python3.13/dist-packages (from trl==1.17.1) (1.15.0)
+Requirement already satisfied: huggingface_hub>=0.34.0 in /usr/local/lib/python3.13/dist-packages (from trl==1.17.1) (1.33.0)
+Requirement already satisfied: jinja2 in /usr/local/lib/python3.13/dist-packages (from trl==1.17.1) (3.1.6)
+Requirement already satisfied: numpy>=1.26.0 in /usr/local/lib/python3.13/dist-packages (from trl==1.17.1) (2.1.3)
+Requirement already satisfied: packaging>20.0 in /usr/local/lib/python3.13/dist-packages (from trl==1.17.1) (26.3)
+Requirement already satisfied: pandas>=2.1.1 in /usr/local/lib/python3.13/dist-packages (from trl==1.17.1) (2.3.3)
+Requirement already satisfied: psutil>=5.9.4 in /usr/local/lib/python3.13/dist-packages (from trl==1.17.1) (5.9.5)
+Requirement already satisfied: pyarrow>=21.0.0 in /usr/local/lib/python3.13/dist-packages (from trl==1.17.1) (26.0.1)
+Requirement already satisfied: pyyaml>=6.0.1 in /usr/local/lib/python3.13/dist-packages (from trl==1.17.1) (6.0.3)
+Requirement already satisfied: torch>=2.6.0 in /usr/local/lib/python3.13/dist-packages (from trl==1.17.1) (2.11.0+cu130)
+Requirement already satisfied: transformers>=4.56.2 in /usr/local/lib/python3.13/dist-packages (from trl==1.17.1) (5.20.2)
+Requirement already satisfied: tqdm in /usr/local/lib/python3.13/dist-packages (from peft==0.21.2) (4.67.3)
+Requirement already satisfied: safetensors in /usr/local/lib/python3.13/dist-packages (from peft==0.21.2) (0.8.0)
+Requirement already satisfied: filelock in /usr/local/lib/python3.13/dist-packages (from datasets==5.1.0) (4.2.4)
+Requirement already satisfied: dill<0.4.2,>=0.3.0 in /usr/local/lib/python3.13/dist-packages (from datasets==5.1.0) (0.4.1)
+Requirement already satisfied: xxhash in /usr/local/lib/python3.13/dist-packages (from datasets==5.1.0) (4.0.2)
+Requirement already satisfied: multiprocess<0.70.20 in /usr/local/lib/python3.13/dist-packages (from datasets==5.1.0) (0.70.19)
+Requirement already satisfied: fsspec<=2026.7.0,>=2023.1.0 in /usr/local/lib/python3.13/dist-packages (from fsspec[http]<=2026.7.0,>=2023.1.0->datasets==5.1.0) (2025.12.0)
+Requirement already satisfied: aiohttp!=4.0.0a0,!=4.0.0a1 in /usr/local/lib/python3.13/dist-packages (from fsspec[http]<=2026.7.0,>=2023.1.0->datasets==5.1.0) (3.14.5)
+Requirement already satisfied: click<9.0.0,>=8.4.2 in /usr/local/lib/python3.13/dist-packages (from huggingface_hub>=0.34.0->trl==1.17.1) (8.5.0)
+Requirement already satisfied: hf-xet<2.0.0,>=1.6.0 in /usr/local/lib/python3.13/dist-packages (from huggingface_hub>=0.34.0->trl==1.17.1) (1.7.0)
+Requirement already satisfied: httpx<1,>=0.23.0 in /usr/local/lib/python3.13/dist-packages (from huggingface_hub>=0.34.0->trl==1.17.1) (0.28.1)
+Requirement already satisfied: typing-extensions>=4.1.0 in /usr/local/lib/python3.13/dist-packages (from huggingface_hub>=0.34.0->trl==1.17.1) (4.16.0)
+Requirement already satisfied: anyio in /usr/local/lib/python3.13/dist-packages (from httpx<1,>=0.23.0->huggingface_hub>=0.34.0->trl==1.17.1) (4.15.1)
+Requirement already satisfied: certifi in /usr/local/lib/python3.13/dist-packages (from httpx<1,>=0.23.0->huggingface_hub>=0.34.0->trl==1.17.1) (2026.10.23)
+Requirement already satisfied: httpcore==1.* in /usr/local/lib/python3.13/dist-packages (from httpx<1,>=0.23.0->huggingface_hub>=0.34.0->trl==1.17.1) (1.0.9)
+Requirement already satisfied: idna in /usr/local/lib/python3.13/dist-packages (from httpx<1,>=0.23.0->huggingface_hub>=0.34.0->trl==1.17.1) (3.20)
+Requirement already satisfied: h11>=0.16 in /usr/local/lib/python3.13/dist-packages (from httpcore==1.*->httpx<1,>=0.23.0->huggingface_hub>=0.34.0->trl==1.17.1) (0.16.0)
+Requirement already satisfied: aiohappyeyeballs>=2.5.0 in /usr/local/lib/python3.13/dist-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2026.7.0,>=2023.1.0->datasets==5.1.0) (2.7.1)
+Requirement already satisfied: aiosignal>=1.4.0 in /usr/local/lib/python3.13/dist-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2026.7.0,>=2023.1.0->datasets==5.1.0) (1.4.0)
+Requirement already satisfied: attrs>=17.3.0 in /usr/local/lib/python3.13/dist-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2026.7.0,>=2023.1.0->datasets==5.1.0) (26.1.0)
+Requirement already satisfied: frozenlist>=1.1.1 in /usr/local/lib/python3.13/dist-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2026.7.0,>=2023.1.0->datasets==5.1.0) (1.8.0)
+Requirement already satisfied: multidict<8.0,>=4.5 in /usr/local/lib/python3.13/dist-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2026.7.0,>=2023.1.0->datasets==5.1.0) (6.9.1)
+Requirement already satisfied: propcache>=0.2.0 in /usr/local/lib/python3.13/dist-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2026.7.0,>=2023.1.0->datasets==5.1.0) (0.5.4)
+Requirement already satisfied: yarl<2.0,>=1.25.1 in /usr/local/lib/python3.13/dist-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2026.7.0,>=2023.1.0->datasets==5.1.0) (1.25.1)
+Requirement already satisfied: python-dateutil>=2.8.2 in /usr/local/lib/python3.13/dist-packages (from pandas>=2.1.1->trl==1.17.1) (2.9.0.post0)
+Requirement already satisfied: pytz>=2020.1 in /usr/local/lib/python3.13/dist-packages (from pandas>=2.1.1->trl==1.17.1) (2025.2)
+Requirement already satisfied: tzdata>=2022.7 in /usr/local/lib/python3.13/dist-packages (from pandas>=2.1.1->trl==1.17.1) (2026.5)
+Requirement already satisfied: six>=1.5 in /usr/local/lib/python3.13/dist-packages (from python-dateutil>=2.8.2->pandas>=2.1.1->trl==1.17.1) (1.17.0)
+Requirement already satisfied: setuptools<82 in /usr/local/lib/python3.13/dist-packages (from torch>=2.6.0->trl==1.17.1) (81.0.0)
+Requirement already satisfied: sympy>=1.13.3 in /usr/local/lib/python3.13/dist-packages (from torch>=2.6.0->trl==1.17.1) (1.14.0)
+Requirement already satisfied: networkx>=2.5.1 in /usr/local/lib/python3.13/dist-packages (from torch>=2.6.0->trl==1.17.1) (3.7)
+Requirement already satisfied: cuda-toolkit==13.0.2 in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.6.0->trl==1.17.1) (13.0.2)
+Requirement already satisfied: cuda-bindings<14,>=13.0.3 in /usr/local/lib/python3.13/dist-packages (from torch>=2.6.0->trl==1.17.1) (13.0.3)
+Requirement already satisfied: nvidia-cudnn-cu13==9.19.0.56 in /usr/local/lib/python3.13/dist-packages (from torch>=2.6.0->trl==1.17.1) (9.19.0.56)
+Requirement already satisfied: nvidia-cusparselt-cu13==0.8.0 in /usr/local/lib/python3.13/dist-packages (from torch>=2.6.0->trl==1.17.1) (0.8.0)
+Requirement already satisfied: nvidia-nccl-cu13==2.28.9 in /usr/local/lib/python3.13/dist-packages (from torch>=2.6.0->trl==1.17.1) (2.28.9)
+Requirement already satisfied: nvidia-nvshmem-cu13==3.4.5 in /usr/local/lib/python3.13/dist-packages (from torch>=2.6.0->trl==1.17.1) (3.4.5)
+Requirement already satisfied: triton==3.6.0 in /usr/local/lib/python3.13/dist-packages (from torch>=2.6.0->trl==1.17.1) (3.6.0)
+Requirement already satisfied: nvidia-cublas==13.1.0.3.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.6.0->trl==1.17.1) (13.1.0.3)
+Requirement already satisfied: nvidia-cuda-runtime==13.0.96.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.6.0->trl==1.17.1) (13.0.96)
+Requirement already satisfied: nvidia-cufft==12.0.0.61.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.6.0->trl==1.17.1) (12.0.0.61)
+Requirement already satisfied: nvidia-cufile==1.15.1.6.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.6.0->trl==1.17.1) (1.15.1.6)
+Requirement already satisfied: nvidia-cuda-cupti==13.0.85.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.6.0->trl==1.17.1) (13.0.85)
+Requirement already satisfied: nvidia-curand==10.4.0.35.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.6.0->trl==1.17.1) (10.4.0.35)
+Requirement already satisfied: nvidia-cusolver==12.0.4.66.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.6.0->trl==1.17.1) (12.0.4.66)
+Requirement already satisfied: nvidia-cusparse==12.6.3.3.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.6.0->trl==1.17.1) (12.6.3.3)
+Requirement already satisfied: nvidia-nvjitlink==13.0.88.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.6.0->trl==1.17.1) (13.0.88)
+Requirement already satisfied: nvidia-cuda-nvrtc==13.0.88.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.6.0->trl==1.17.1) (13.0.88)
+Requirement already satisfied: nvidia-nvtx==13.0.85.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.6.0->trl==1.17.1) (13.0.85)
+Requirement already satisfied: cuda-pathfinder~=1.1 in /usr/local/lib/python3.13/dist-packages (from cuda-bindings<14,>=13.0.3->torch>=2.6.0->trl==1.17.1) (1.8.4)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /usr/local/lib/python3.13/dist-packages (from sympy>=1.13.3->torch>=2.6.0->trl==1.17.1) (1.3.0)
+Requirement already satisfied: regex>=2025.10.22 in /usr/local/lib/python3.13/dist-packages (from transformers>=4.56.2->trl==1.17.1) (2025.11.3)
+Requirement already satisfied: tokenizers<0.24.0,>=0.23.1 in /usr/local/lib/python3.13/dist-packages (from transformers>=4.56.2->trl==1.17.1) (0.23.3)
+Requirement already satisfied: typer in /usr/local/lib/python3.13/dist-packages (from transformers>=4.56.2->trl==1.17.1) (0.27.3)
+Requirement already satisfied: MarkupSafe>=2.0 in /usr/local/lib/python3.13/dist-packages (from jinja2->trl==1.17.1) (3.0.4)
+Requirement already satisfied: shellingham>=1.3.0 in /usr/local/lib/python3.13/dist-packages (from typer->transformers>=4.56.2->trl==1.17.1) (1.5.4)
+Requirement already satisfied: rich>=13.8.0 in /usr/local/lib/python3.13/dist-packages (from typer->transformers>=4.56.2->trl==1.17.1) (13.9.4)
+Requirement already satisfied: annotated-doc>=0.0.2 in /usr/local/lib/python3.13/dist-packages (from typer->transformers>=4.56.2->trl==1.17.1) (0.0.5)
+Requirement already satisfied: markdown-it-py>=2.2.0 in /usr/local/lib/python3.13/dist-packages (from rich>=13.8.0->typer->transformers>=4.56.2->trl==1.17.1) (4.2.0)
+Requirement already satisfied: pygments<3.0.0,>=2.13.0 in /usr/local/lib/python3.13/dist-packages (from rich>=13.8.0->typer->transformers>=4.56.2->trl==1.17.1) (2.21.0)
+Requirement already satisfied: mdurl~=0.1 in /usr/local/lib/python3.13/dist-packages (from markdown-it-py>=2.2.0->rich>=13.8.0->typer->transformers>=4.56.2->trl==1.17.1) (0.1.2)
+stage=import
+stage=dataset
+Generating train split: 0 examples [00:00, ? examples/s]Generating train split: 100 examples [00:00, 13845.33 examples/s]
+stage=model_load
+Loading weights:   0%|          | 0/338 [00:00<?, ?it/s]Loading weights:   0%|          | 1/338 [00:00<02:14,  2.50it/s]Loading weights:   1%|          | 4/338 [00:00<00:35,  9.31it/s]Loading weights:   8%|▊         | 28/338 [00:00<00:04, 68.18it/s]Loading weights:  15%|█▌        | 51/338 [00:00<00:02, 111.24it/s]Loading weights:  22%|██▏       | 75/338 [00:00<00:01, 143.03it/s]Loading weights:  29%|██▉       | 99/338 [00:00<00:01, 165.67it/s]Loading weights:  36%|███▋      | 123/338 [00:01<00:01, 181.12it/s]Loading weights:  43%|████▎     | 147/338 [00:01<00:00, 191.32it/s]Loading weights:  51%|█████     | 171/338 [00:01<00:00, 198.41it/s]Loading weights:  58%|█████▊    | 195/338 [00:01<00:00, 205.44it/s]Loading weights:  65%|██████▍   | 219/338 [00:01<00:00, 209.35it/s]Loading weights:  72%|███████▏  | 243/338 [00:01<00:00, 212.86it/s]Loading weights:  79%|███████▉  | 267/338 [00:01<00:00, 214.38it/s]Loading weights:  86%|████████▌ | 291/338 [00:01<00:00, 215.94it/s]Loading weights:  93%|█████████▎| 315/338 [00:01<00:00, 216.84it/s]Loading weights: 100%|██████████| 338/338 [00:02<00:00, 166.29it/s]
+stage=sft_init
+Tokenizing train dataset:   0%|          | 0/100 [00:00<?, ? examples/s]Tokenizing train dataset: 100%|██████████| 100/100 [00:00<00:00, 923.39 examples/s]Tokenizing train dataset: 100%|██████████| 100/100 [00:00<00:00, 905.04 examples/s]
+Building labels for train dataset:   0%|          | 0/100 [00:00<?, ? examples/s]Building labels for train dataset: 100%|██████████| 100/100 [00:00<00:00, 5491.87 examples/s]
+Truncating train dataset:   0%|          | 0/100 [00:00<?, ? examples/s]Truncating train dataset: 100%|██████████| 100/100 [00:00<00:00, 8189.44 examples/s]
+Dropping fully masked examples from train dataset:   0%|          | 0/100 [00:00<?, ? examples/s]Dropping fully masked examples from train dataset: 100%|██████████| 100/100 [00:00<00:00, 22214.42 examples/s]
+stage=completion_mask
+prompt labels: [-100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100]
+completion labels: [4913, 300, 7973, 22317, 82, 4324, 3252, 28775, 2198, 870, 712, 24296, 3252, 966, 2198, 1726, 1015, 3252, 966, 30975, 151645, 198]
+completion: {"aspects":{"sabor":"neg","temperatura":"pos","preco":"pos"}}
+stage=probe_before
+stage=train
+  0%|          | 0/20 [00:00<?, ?it/s]stage=train
+  5%|▌         | 1/20 [00:04<01:28,  4.64s/it]                                              {'loss': '1.301', 'grad_norm': '6.034', 'learning_rate': '0.0002', 'entropy': '0.2575', 'mean_token_accuracy': '0.7029', 'num_tokens': '723', 'epoch': '0.05'}
+  5%|▌         | 1/20 [00:04<01:28,  4.64s/it]stage=train
+ 10%|█         | 2/20 [00:07<01:05,  3.64s/it]                                              {'loss': '0.4617', 'grad_norm': '3.207', 'learning_rate': '0.0002', 'entropy': '0.4422', 'mean_token_accuracy': '0.8485', 'num_tokens': '1424', 'epoch': '0.1'}
+ 10%|█         | 2/20 [00:07<01:05,  3.64s/it]stage=train
+ 15%|█▌        | 3/20 [00:10<00:56,  3.30s/it]                                              {'loss': '0.2223', 'grad_norm': '1.82', 'learning_rate': '0.0002', 'entropy': '0.3182', 'mean_token_accuracy': '0.9055', 'num_tokens': '2069', 'epoch': '0.15'}
+ 15%|█▌        | 3/20 [00:10<00:56,  3.30s/it]stage=train
+ 20%|██        | 4/20 [00:13<00:50,  3.17s/it]                                              {'loss': '0.2979', 'grad_norm': '2.612', 'learning_rate': '0.0002', 'entropy': '0.3148', 'mean_token_accuracy': '0.8941', 'num_tokens': '2805', 'epoch': '0.2'}
+ 20%|██        | 4/20 [00:13<00:50,  3.17s/it]stage=train
+ 25%|██▌       | 5/20 [00:16<00:46,  3.07s/it]                                              {'loss': '0.504', 'grad_norm': '2.965', 'learning_rate': '0.0002', 'entropy': '0.2632', 'mean_token_accuracy': '0.8261', 'num_tokens': '3569', 'epoch': '0.25'}
+ 25%|██▌       | 5/20 [00:16<00:46,  3.07s/it]stage=train
+ 30%|███       | 6/20 [00:19<00:42,  3.00s/it]                                              {'loss': '0.0887', 'grad_norm': '0.929', 'learning_rate': '0.0002', 'entropy': '0.1393', 'mean_token_accuracy': '0.9654', 'num_tokens': '4169', 'epoch': '0.3'}
+ 30%|███       | 6/20 [00:19<00:42,  3.00s/it]stage=train
+ 35%|███▌      | 7/20 [00:22<00:38,  2.97s/it]                                              {'loss': '0.1176', 'grad_norm': '0.5938', 'learning_rate': '0.0002', 'entropy': '0.1667', 'mean_token_accuracy': '0.9602', 'num_tokens': '4815', 'epoch': '0.35'}
+ 35%|███▌      | 7/20 [00:22<00:38,  2.97s/it]stage=train
+ 40%|████      | 8/20 [00:25<00:35,  2.96s/it]                                              {'loss': '0.1451', 'grad_norm': '0.8889', 'learning_rate': '0.0002', 'entropy': '0.1791', 'mean_token_accuracy': '0.9385', 'num_tokens': '5498', 'epoch': '0.4'}
+ 40%|████      | 8/20 [00:25<00:35,  2.96s/it]stage=train
+ 45%|████▌     | 9/20 [00:27<00:32,  2.94s/it]                                              {'loss': '0.1752', 'grad_norm': '1.724', 'learning_rate': '0.0002', 'entropy': '0.1468', 'mean_token_accuracy': '0.9417', 'num_tokens': '6140', 'epoch': '0.45'}
+ 45%|████▌     | 9/20 [00:27<00:32,  2.94s/it]stage=train
+ 50%|█████     | 10/20 [00:30<00:29,  2.95s/it]                                               {'loss': '0.1005', 'grad_norm': '0.8313', 'learning_rate': '0.0002', 'entropy': '0.139', 'mean_token_accuracy': '0.9729', 'num_tokens': '6824', 'epoch': '0.5'}
+ 50%|█████     | 10/20 [00:30<00:29,  2.95s/it]stage=train
+ 55%|█████▌    | 11/20 [00:33<00:26,  2.94s/it]                                               {'loss': '0.1873', 'grad_norm': '1.257', 'learning_rate': '0.0002', 'entropy': '0.1304', 'mean_token_accuracy': '0.922', 'num_tokens': '7521', 'epoch': '0.55'}
+ 55%|█████▌    | 11/20 [00:33<00:26,  2.94s/it]stage=train
+ 60%|██████    | 12/20 [00:36<00:23,  2.94s/it]                                               {'loss': '0.04985', 'grad_norm': '0.3223', 'learning_rate': '0.0002', 'entropy': '0.09258', 'mean_token_accuracy': '0.9933', 'num_tokens': '8218', 'epoch': '0.6'}
+ 60%|██████    | 12/20 [00:36<00:23,  2.94s/it]stage=train
+ 65%|██████▌   | 13/20 [00:39<00:20,  2.93s/it]                                               {'loss': '0.1501', 'grad_norm': '0.9829', 'learning_rate': '0.0002', 'entropy': '0.1199', 'mean_token_accuracy': '0.9583', 'num_tokens': '8878', 'epoch': '0.65'}
+ 65%|██████▌   | 13/20 [00:39<00:20,  2.93s/it]stage=train
+ 70%|███████   | 14/20 [00:42<00:17,  2.94s/it]                                               {'loss': '0.1733', 'grad_norm': '1.136', 'learning_rate': '0.0002', 'entropy': '0.1137', 'mean_token_accuracy': '0.9375', 'num_tokens': '9578', 'epoch': '0.7'}
+ 70%|███████   | 14/20 [00:42<00:17,  2.94s/it]stage=train
+ 75%|███████▌  | 15/20 [00:45<00:14,  2.94s/it]                                               {'loss': '0.1253', 'grad_norm': '1.21', 'learning_rate': '0.0002', 'entropy': '0.129', 'mean_token_accuracy': '0.9637', 'num_tokens': '1.028e+04', 'epoch': '0.75'}
+ 75%|███████▌  | 15/20 [00:45<00:14,  2.94s/it]stage=train
+ 80%|████████  | 16/20 [00:48<00:11,  2.93s/it]                                               {'loss': '0.02893', 'grad_norm': '0.513', 'learning_rate': '0.0002', 'entropy': '0.07353', 'mean_token_accuracy': '1', 'num_tokens': '1.089e+04', 'epoch': '0.8'}
+ 80%|████████  | 16/20 [00:48<00:11,  2.93s/it]stage=train
+ 85%|████████▌ | 17/20 [00:51<00:08,  2.92s/it]                                               {'loss': '0.1077', 'grad_norm': '1.014', 'learning_rate': '0.0002', 'entropy': '0.1282', 'mean_token_accuracy': '0.9605', 'num_tokens': '1.154e+04', 'epoch': '0.85'}
+ 85%|████████▌ | 17/20 [00:51<00:08,  2.92s/it]stage=train
+ 90%|█████████ | 18/20 [00:54<00:05,  2.92s/it]                                               {'loss': '0.09287', 'grad_norm': '0.8842', 'learning_rate': '0.0002', 'entropy': '0.1238', 'mean_token_accuracy': '0.9604', 'num_tokens': '1.22e+04', 'epoch': '0.9'}
+ 90%|█████████ | 18/20 [00:54<00:05,  2.92s/it]stage=train
+ 95%|█████████▌| 19/20 [00:57<00:02,  2.92s/it]                                               {'loss': '0.09603', 'grad_norm': '0.853', 'learning_rate': '0.0002', 'entropy': '0.1263', 'mean_token_accuracy': '0.958', 'num_tokens': '1.293e+04', 'epoch': '0.95'}
+ 95%|█████████▌| 19/20 [00:57<00:02,  2.92s/it]stage=train
+100%|██████████| 20/20 [01:00<00:00,  2.92s/it]                                               {'loss': '0.02527', 'grad_norm': '0.4013', 'learning_rate': '0.0002', 'entropy': '0.05656', 'mean_token_accuracy': '1', 'num_tokens': '1.355e+04', 'epoch': '1'}
+100%|██████████| 20/20 [01:00<00:00,  2.92s/it]                                               {'train_runtime': '60.17', 'train_samples_per_second': '1.662', 'train_steps_per_second': '0.332', 'train_loss': '0.2226', 'epoch': '1'}
+100%|██████████| 20/20 [01:00<00:00,  2.92s/it]100%|██████████| 20/20 [01:00<00:00,  3.01s/it]
+stage=save
+stage=reload
+Loading weights:   0%|          | 0/338 [00:00<?, ?it/s]Loading weights:   0%|          | 1/338 [00:00<02:17,  2.45it/s]Loading weights:   5%|▌         | 17/338 [00:00<00:07, 43.15it/s]Loading weights:  12%|█▏        | 40/338 [00:00<00:03, 92.78it/s]Loading weights:  19%|█▊        | 63/338 [00:00<00:02, 125.57it/s]Loading weights:  26%|██▌       | 87/338 [00:00<00:01, 152.16it/s]Loading weights:  33%|███▎      | 111/338 [00:00<00:01, 170.80it/s]Loading weights:  40%|███▉      | 135/338 [00:01<00:01, 184.57it/s]Loading weights:  47%|████▋     | 159/338 [00:01<00:00, 194.07it/s]Loading weights:  54%|█████▍    | 183/338 [00:01<00:00, 200.98it/s]Loading weights:  61%|██████    | 207/338 [00:01<00:00, 205.31it/s]Loading weights:  68%|██████▊   | 231/338 [00:01<00:00, 208.18it/s]Loading weights:  75%|███████▌  | 255/338 [00:01<00:00, 211.00it/s]Loading weights:  83%|████████▎ | 279/338 [00:01<00:00, 213.25it/s]Loading weights:  90%|████████▉ | 303/338 [00:01<00:00, 214.84it/s]Loading weights:  97%|█████████▋| 327/338 [00:01<00:00, 215.01it/s]Loading weights: 100%|██████████| 338/338 [00:01<00:00, 169.96it/s]
+stage=complete

@@ -4,6 +4,8 @@ Modelo base escolhido para o primeiro QLoRA: **Qwen2.5-1.5B-Instruct**. A ficha
 oficial declara 1,54 bilhão de parâmetros, suporte a português e licença Apache
 2.0. O tokenizer usa a mesma [revisão fixada do modelo](https://huggingface.co/Qwen/Qwen2.5-1.5B-Instruct/tree/989aa7980e4cf806f80c7fef2b1adb7bc71aa306).
 
+[Ficha resumida e proveniência](../data/absa/README.md)
+
 ## Formato e alocação
 
 [Train JSONL](../data/absa/train-v1.jsonl) contém 1.263 exemplos. A

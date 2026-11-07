@@ -16,6 +16,8 @@ ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data/absa"
 MODEL = "Qwen/Qwen2.5-1.5B-Instruct"
 REVISION = "989aa7980e4cf806f80c7fef2b1adb7bc71aa306"
+CORPUS_COMMIT = "d6aedfd3eff5acc58609ee75e04d8c46fa6a532e"
+CORPUS_GENERATOR_SHA = "b8da98d182c18fd9e401fa58adabeb3331f3ccc07f195375695aa30fe90b58a0"
 INSTRUCTION = (
     "Classifique os aspectos sabor, tempo_entrega, temperatura, embalagem, preco e atendimento. "
     "Use pos ou neg e omita aspectos sem opinião clara. "
@@ -87,11 +89,11 @@ def write_or_check(path, content, check):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--check", action="store_true")
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument("--check", action="store_true")
+    mode.add_argument("--check-static", action="store_true", help="Verify data without tokenizer")
     parser.add_argument("--local-files-only", action="store_true")
     args = parser.parse_args()
-
-    from transformers import AutoTokenizer
 
     split_path = DATA / "splits-v1.json"
     manifest = json.loads(split_path.read_text(encoding="utf-8"))
@@ -108,20 +110,52 @@ def main():
         or len(train_ids) > 1500
     ):
         raise ValueError("Invalid ABSA training allocation")
-    tokenizer = AutoTokenizer.from_pretrained(
-        MODEL, revision=REVISION, token=False, local_files_only=args.local_files_only
-    )
+    corpus_path = ROOT / "data/raw/reviews.jsonl"
+    corpus_manifest = json.loads((split_dir / "manifest.json").read_text(encoding="utf-8"))
+    corpus_hash = file_key(corpus_path)
+    if corpus_hash != corpus_manifest["source_sha256_lf"]:
+        raise ValueError("ABSA corpus hash differs from the original split manifest")
+    gold_path = ROOT / "data/gold/aspects_100.human.jsonl"
+    gold_manifest_path = ROOT / "data/gold/human_review_manifest.json"
+    gold_manifest = json.loads(gold_manifest_path.read_text(encoding="utf-8"))
+    gold_hash = hashlib.sha256(gold_path.read_bytes()).hexdigest()
+    if gold_hash != gold_manifest["annotations_sha256"]:
+        raise ValueError("Human gold differs from its frozen manifest")
     report = {
         "dataset_version": "absa-chat-v1",
         "model": MODEL,
         "revision": REVISION,
-        "transformers_version": version("transformers"),
-        "chat_template_sha256": hashlib.sha256(tokenizer.chat_template.encode()).hexdigest(),
+        "provenance": {
+            "origin": "synthetic_generator_labels",
+            "generator_commit": CORPUS_COMMIT,
+            "generator_sha256_lf": CORPUS_GENERATOR_SHA,
+            "corpus_sha256_lf": corpus_hash,
+            "generator_parameters": {"n": 3000, "seed": 42, "end_date": "2026-11-01", "days": 90},
+        },
+        "split_counts": {
+            key: manifest["counts"][key] for key in ("train", "validation", "template_test", "gold")
+        },
         "splits_manifest_sha256_lf": file_key(split_path),
+        "gold_reference": {
+            "version": gold_manifest["version"],
+            "annotations_sha256": gold_hash,
+            "review_manifest_sha256_lf": file_key(gold_manifest_path),
+        },
         "train_budget": 1500,
-        "aspect_order": ASPECTS,
+        "aspect_order": list(ASPECTS),
         "splits": {},
     }
+    tokenizer = None
+    if not args.check_static:
+        from transformers import AutoTokenizer
+
+        tokenizer = AutoTokenizer.from_pretrained(
+            MODEL, revision=REVISION, token=False, local_files_only=args.local_files_only
+        )
+        report["transformers_version"] = version("transformers")
+        report["chat_template_sha256"] = hashlib.sha256(
+            tokenizer.chat_template.encode()
+        ).hexdigest()
     exports = {}
     for name, ids in (("train", train_ids), ("validation", validation_ids)):
         rows = [pool[identifier] for identifier in ids]
@@ -130,15 +164,27 @@ def main():
         exports[DATA / f"{name}-v1.jsonl"] = content
         report["splits"][name] = {
             **distribution(rows),
-            "chat_tokens": token_stats(tokenizer, examples),
             "sha256_lf": hashlib.sha256(content.encode()).hexdigest(),
         }
+        if tokenizer is not None:
+            report["splits"][name]["chat_tokens"] = token_stats(tokenizer, examples)
+    for path, content in exports.items():
+        write_or_check(path, content, args.check or args.check_static)
+    report_path = DATA / "dataset-v1.json"
+    if args.check_static:
+        frozen = json.loads(report_path.read_text(encoding="utf-8"))
+        for key in ("transformers_version", "chat_template_sha256", "suggested_max_length"):
+            del frozen[key]
+        for split in frozen["splits"].values():
+            del split["chat_tokens"]
+        if frozen != report:
+            raise ValueError("ABSA manifest differs from static dataset and inputs")
+        print("Verified ABSA dataset, split counts and provenance without the tokenizer.")
+        return
     longest = max(split["chat_tokens"]["max"] for split in report["splits"].values())
     report["suggested_max_length"] = 2 ** (longest - 1).bit_length()
     report_text = json.dumps(report, ensure_ascii=False, indent=2) + "\n"
-    for path, content in exports.items():
-        write_or_check(path, content, args.check)
-    write_or_check(DATA / "dataset-v1.json", report_text, args.check)
+    write_or_check(report_path, report_text, args.check)
     print(report_text)
 
 

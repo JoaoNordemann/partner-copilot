@@ -72,3 +72,4 @@ data/absa/*
 !data/absa/train-v1.jsonl
 !data/absa/validation-v1.jsonl
 !data/absa/dataset-v1.json
+!data/absa/README.md

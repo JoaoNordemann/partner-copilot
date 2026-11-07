@@ -1,0 +1,878 @@
+[
+  {
+    "position": 0,
+    "token_id": 151644,
+    "label": -100,
+    "token": "<|im_start|>"
+  },
+  {
+    "position": 1,
+    "token_id": 8948,
+    "label": -100,
+    "token": "system"
+  },
+  {
+    "position": 2,
+    "token_id": 198,
+    "label": -100,
+    "token": "Ċ"
+  },
+  {
+    "position": 3,
+    "token_id": 2610,
+    "label": -100,
+    "token": "You"
+  },
+  {
+    "position": 4,
+    "token_id": 525,
+    "label": -100,
+    "token": "Ġare"
+  },
+  {
+    "position": 5,
+    "token_id": 1207,
+    "label": -100,
+    "token": "ĠQ"
+  },
+  {
+    "position": 6,
+    "token_id": 16948,
+    "label": -100,
+    "token": "wen"
+  },
+  {
+    "position": 7,
+    "token_id": 11,
+    "label": -100,
+    "token": ","
+  },
+  {
+    "position": 8,
+    "token_id": 3465,
+    "label": -100,
+    "token": "Ġcreated"
+  },
+  {
+    "position": 9,
+    "token_id": 553,
+    "label": -100,
+    "token": "Ġby"
+  },
+  {
+    "position": 10,
+    "token_id": 54364,
+    "label": -100,
+    "token": "ĠAlibaba"
+  },
+  {
+    "position": 11,
+    "token_id": 14817,
+    "label": -100,
+    "token": "ĠCloud"
+  },
+  {
+    "position": 12,
+    "token_id": 13,
+    "label": -100,
+    "token": "."
+  },
+  {
+    "position": 13,
+    "token_id": 1446,
+    "label": -100,
+    "token": "ĠYou"
+  },
+  {
+    "position": 14,
+    "token_id": 525,
+    "label": -100,
+    "token": "Ġare"
+  },
+  {
+    "position": 15,
+    "token_id": 264,
+    "label": -100,
+    "token": "Ġa"
+  },
+  {
+    "position": 16,
+    "token_id": 10950,
+    "label": -100,
+    "token": "Ġhelpful"
+  },
+  {
+    "position": 17,
+    "token_id": 17847,
+    "label": -100,
+    "token": "Ġassistant"
+  },
+  {
+    "position": 18,
+    "token_id": 13,
+    "label": -100,
+    "token": "."
+  },
+  {
+    "position": 19,
+    "token_id": 151645,
+    "label": -100,
+    "token": "<|im_end|>"
+  },
+  {
+    "position": 20,
+    "token_id": 198,
+    "label": -100,
+    "token": "Ċ"
+  },
+  {
+    "position": 21,
+    "token_id": 151644,
+    "label": -100,
+    "token": "<|im_start|>"
+  },
+  {
+    "position": 22,
+    "token_id": 872,
+    "label": -100,
+    "token": "user"
+  },
+  {
+    "position": 23,
+    "token_id": 198,
+    "label": -100,
+    "token": "Ċ"
+  },
+  {
+    "position": 24,
+    "token_id": 1957,
+    "label": -100,
+    "token": "Class"
+  },
+  {
+    "position": 25,
+    "token_id": 51660,
+    "label": -100,
+    "token": "ifique"
+  },
+  {
+    "position": 26,
+    "token_id": 2643,
+    "label": -100,
+    "token": "Ġos"
+  },
+  {
+    "position": 27,
+    "token_id": 12893,
+    "label": -100,
+    "token": "Ġaspect"
+  },
+  {
+    "position": 28,
+    "token_id": 436,
+    "label": -100,
+    "token": "os"
+  },
+  {
+    "position": 29,
+    "token_id": 274,
+    "label": -100,
+    "token": "Ġs"
+  },
+  {
+    "position": 30,
+    "token_id": 4324,
+    "label": -100,
+    "token": "abor"
+  },
+  {
+    "position": 31,
+    "token_id": 11,
+    "label": -100,
+    "token": ","
+  },
+  {
+    "position": 32,
+    "token_id": 23230,
+    "label": -100,
+    "token": "Ġtempo"
+  },
+  {
+    "position": 33,
+    "token_id": 27425,
+    "label": -100,
+    "token": "_ent"
+  },
+  {
+    "position": 34,
+    "token_id": 38876,
+    "label": -100,
+    "token": "rega"
+  },
+  {
+    "position": 35,
+    "token_id": 11,
+    "label": -100,
+    "token": ","
+  },
+  {
+    "position": 36,
+    "token_id": 82953,
+    "label": -100,
+    "token": "Ġtemperatura"
+  },
+  {
+    "position": 37,
+    "token_id": 11,
+    "label": -100,
+    "token": ","
+  },
+  {
+    "position": 38,
+    "token_id": 7967,
+    "label": -100,
+    "token": "Ġemb"
+  },
+  {
+    "position": 39,
+    "token_id": 278,
+    "label": -100,
+    "token": "al"
+  },
+  {
+    "position": 40,
+    "token_id": 14661,
+    "label": -100,
+    "token": "agem"
+  },
+  {
+    "position": 41,
+    "token_id": 11,
+    "label": -100,
+    "token": ","
+  },
+  {
+    "position": 42,
+    "token_id": 83742,
+    "label": -100,
+    "token": "Ġpreco"
+  },
+  {
+    "position": 43,
+    "token_id": 384,
+    "label": -100,
+    "token": "Ġe"
+  },
+  {
+    "position": 44,
+    "token_id": 518,
+    "label": -100,
+    "token": "Ġat"
+  },
+  {
+    "position": 45,
+    "token_id": 79859,
+    "label": -100,
+    "token": "endimento"
+  },
+  {
+    "position": 46,
+    "token_id": 13,
+    "label": -100,
+    "token": "."
+  },
+  {
+    "position": 47,
+    "token_id": 5443,
+    "label": -100,
+    "token": "ĠUse"
+  },
+  {
+    "position": 48,
+    "token_id": 1133,
+    "label": -100,
+    "token": "Ġpos"
+  },
+  {
+    "position": 49,
+    "token_id": 5908,
+    "label": -100,
+    "token": "Ġou"
+  },
+  {
+    "position": 50,
+    "token_id": 4184,
+    "label": -100,
+    "token": "Ġneg"
+  },
+  {
+    "position": 51,
+    "token_id": 384,
+    "label": -100,
+    "token": "Ġe"
+  },
+  {
+    "position": 52,
+    "token_id": 51044,
+    "label": -100,
+    "token": "Ġomit"
+  },
+  {
+    "position": 53,
+    "token_id": 64,
+    "label": -100,
+    "token": "a"
+  },
+  {
+    "position": 54,
+    "token_id": 12893,
+    "label": -100,
+    "token": "Ġaspect"
+  },
+  {
+    "position": 55,
+    "token_id": 436,
+    "label": -100,
+    "token": "os"
+  },
+  {
+    "position": 56,
+    "token_id": 5234,
+    "label": -100,
+    "token": "Ġsem"
+  },
+  {
+    "position": 57,
+    "token_id": 1179,
+    "label": -100,
+    "token": "Ġop"
+  },
+  {
+    "position": 58,
+    "token_id": 6591,
+    "label": -100,
+    "token": "ini"
+  },
+  {
+    "position": 59,
+    "token_id": 3413,
+    "label": -100,
+    "token": "Ã£o"
+  },
+  {
+    "position": 60,
+    "token_id": 1185,
+    "label": -100,
+    "token": "Ġcl"
+  },
+  {
+    "position": 61,
+    "token_id": 5059,
+    "label": -100,
+    "token": "ara"
+  },
+  {
+    "position": 62,
+    "token_id": 13,
+    "label": -100,
+    "token": "."
+  },
+  {
+    "position": 63,
+    "token_id": 1800,
+    "label": -100,
+    "token": "ĠRes"
+  },
+  {
+    "position": 64,
+    "token_id": 618,
+    "label": -100,
+    "token": "pon"
+  },
+  {
+    "position": 65,
+    "token_id": 3235,
+    "label": -100,
+    "token": "da"
+  },
+  {
+    "position": 66,
+    "token_id": 31090,
+    "label": -100,
+    "token": "ĠsÃ³"
+  },
+  {
+    "position": 67,
+    "token_id": 469,
+    "label": -100,
+    "token": "Ġcom"
+  },
+  {
+    "position": 68,
+    "token_id": 4443,
+    "label": -100,
+    "token": "Ġum"
+  },
+  {
+    "position": 69,
+    "token_id": 35543,
+    "label": -100,
+    "token": "Ġobjeto"
+  },
+  {
+    "position": 70,
+    "token_id": 4718,
+    "label": -100,
+    "token": "ĠJSON"
+  },
+  {
+    "position": 71,
+    "token_id": 469,
+    "label": -100,
+    "token": "Ġcom"
+  },
+  {
+    "position": 72,
+    "token_id": 264,
+    "label": -100,
+    "token": "Ġa"
+  },
+  {
+    "position": 73,
+    "token_id": 97635,
+    "label": -100,
+    "token": "Ġchave"
+  },
+  {
+    "position": 74,
+    "token_id": 330,
+    "label": -100,
+    "token": "Ġ\""
+  },
+  {
+    "position": 75,
+    "token_id": 300,
+    "label": -100,
+    "token": "as"
+  },
+  {
+    "position": 76,
+    "token_id": 7973,
+    "label": -100,
+    "token": "pects"
+  },
+  {
+    "position": 77,
+    "token_id": 11436,
+    "label": -100,
+    "token": "\".ĊĊ"
+  },
+  {
+    "position": 78,
+    "token_id": 19432,
+    "label": -100,
+    "token": "Review"
+  },
+  {
+    "position": 79,
+    "token_id": 510,
+    "label": -100,
+    "token": ":Ċ"
+  },
+  {
+    "position": 80,
+    "token_id": 42612,
+    "label": -100,
+    "token": "Ve"
+  },
+  {
+    "position": 81,
+    "token_id": 815,
+    "label": -100,
+    "token": "io"
+  },
+  {
+    "position": 82,
+    "token_id": 17837,
+    "label": -100,
+    "token": "Ġgel"
+  },
+  {
+    "position": 83,
+    "token_id": 2123,
+    "label": -100,
+    "token": "ado"
+  },
+  {
+    "position": 84,
+    "token_id": 384,
+    "label": -100,
+    "token": "Ġe"
+  },
+  {
+    "position": 85,
+    "token_id": 89698,
+    "label": -100,
+    "token": "Ġpronto"
+  },
+  {
+    "position": 86,
+    "token_id": 44003,
+    "label": -100,
+    "token": "Ġpra"
+  },
+  {
+    "position": 87,
+    "token_id": 4662,
+    "label": -100,
+    "token": "Ġconsum"
+  },
+  {
+    "position": 88,
+    "token_id": 404,
+    "label": -100,
+    "token": "ir"
+  },
+  {
+    "position": 89,
+    "token_id": 13,
+    "label": -100,
+    "token": "."
+  },
+  {
+    "position": 90,
+    "token_id": 393,
+    "label": -100,
+    "token": "ĠP"
+  },
+  {
+    "position": 91,
+    "token_id": 20172,
+    "label": -100,
+    "token": "elo"
+  },
+  {
+    "position": 92,
+    "token_id": 14116,
+    "label": -100,
+    "token": "Ġvalor"
+  },
+  {
+    "position": 93,
+    "token_id": 11,
+    "label": -100,
+    "token": ","
+  },
+  {
+    "position": 94,
+    "token_id": 77731,
+    "label": -100,
+    "token": "Ġache"
+  },
+  {
+    "position": 95,
+    "token_id": 72,
+    "label": -100,
+    "token": "i"
+  },
+  {
+    "position": 96,
+    "token_id": 10608,
+    "label": -100,
+    "token": "Ġuma"
+  },
+  {
+    "position": 97,
+    "token_id": 81932,
+    "label": -100,
+    "token": "Ġboa"
+  },
+  {
+    "position": 98,
+    "token_id": 57629,
+    "label": -100,
+    "token": "Ġcompra"
+  },
+  {
+    "position": 99,
+    "token_id": 13,
+    "label": -100,
+    "token": "."
+  },
+  {
+    "position": 100,
+    "token_id": 134179,
+    "label": -100,
+    "token": "ĠJÃ¡"
+  },
+  {
+    "position": 101,
+    "token_id": 10477,
+    "label": -100,
+    "token": "Ġped"
+  },
+  {
+    "position": 102,
+    "token_id": 72,
+    "label": -100,
+    "token": "i"
+  },
+  {
+    "position": 103,
+    "token_id": 13157,
+    "label": -100,
+    "token": "Ġvit"
+  },
+  {
+    "position": 104,
+    "token_id": 34050,
+    "label": -100,
+    "token": "amina"
+  },
+  {
+    "position": 105,
+    "token_id": 409,
+    "label": -100,
+    "token": "Ġde"
+  },
+  {
+    "position": 106,
+    "token_id": 4313,
+    "label": -100,
+    "token": "Ġmor"
+  },
+  {
+    "position": 107,
+    "token_id": 5170,
+    "label": -100,
+    "token": "ango"
+  },
+  {
+    "position": 108,
+    "token_id": 33335,
+    "label": -100,
+    "token": "Ġantes"
+  },
+  {
+    "position": 109,
+    "token_id": 384,
+    "label": -100,
+    "token": "Ġe"
+  },
+  {
+    "position": 110,
+    "token_id": 85479,
+    "label": -100,
+    "token": "Ġdessa"
+  },
+  {
+    "position": 111,
+    "token_id": 20563,
+    "label": -100,
+    "token": "Ġvez"
+  },
+  {
+    "position": 112,
+    "token_id": 297,
+    "label": -100,
+    "token": "Ġo"
+  },
+  {
+    "position": 113,
+    "token_id": 274,
+    "label": -100,
+    "token": "Ġs"
+  },
+  {
+    "position": 114,
+    "token_id": 4324,
+    "label": -100,
+    "token": "abor"
+  },
+  {
+    "position": 115,
+    "token_id": 77800,
+    "label": -100,
+    "token": "Ġestava"
+  },
+  {
+    "position": 116,
+    "token_id": 281,
+    "label": -100,
+    "token": "Ġp"
+  },
+  {
+    "position": 117,
+    "token_id": 2462,
+    "label": -100,
+    "token": "ior"
+  },
+  {
+    "position": 118,
+    "token_id": 13,
+    "label": -100,
+    "token": "."
+  },
+  {
+    "position": 119,
+    "token_id": 151645,
+    "label": -100,
+    "token": "<|im_end|>"
+  },
+  {
+    "position": 120,
+    "token_id": 198,
+    "label": -100,
+    "token": "Ċ"
+  },
+  {
+    "position": 121,
+    "token_id": 151644,
+    "label": -100,
+    "token": "<|im_start|>"
+  },
+  {
+    "position": 122,
+    "token_id": 77091,
+    "label": -100,
+    "token": "assistant"
+  },
+  {
+    "position": 123,
+    "token_id": 198,
+    "label": -100,
+    "token": "Ċ"
+  },
+  {
+    "position": 124,
+    "token_id": 4913,
+    "label": 4913,
+    "token": "{\""
+  },
+  {
+    "position": 125,
+    "token_id": 300,
+    "label": 300,
+    "token": "as"
+  },
+  {
+    "position": 126,
+    "token_id": 7973,
+    "label": 7973,
+    "token": "pects"
+  },
+  {
+    "position": 127,
+    "token_id": 22317,
+    "label": 22317,
+    "token": "\":{\""
+  },
+  {
+    "position": 128,
+    "token_id": 82,
+    "label": 82,
+    "token": "s"
+  },
+  {
+    "position": 129,
+    "token_id": 4324,
+    "label": 4324,
+    "token": "abor"
+  },
+  {
+    "position": 130,
+    "token_id": 3252,
+    "label": 3252,
+    "token": "\":\""
+  },
+  {
+    "position": 131,
+    "token_id": 28775,
+    "label": 28775,
+    "token": "neg"
+  },
+  {
+    "position": 132,
+    "token_id": 2198,
+    "label": 2198,
+    "token": "\",\""
+  },
+  {
+    "position": 133,
+    "token_id": 870,
+    "label": 870,
+    "token": "tem"
+  },
+  {
+    "position": 134,
+    "token_id": 712,
+    "label": 712,
+    "token": "per"
+  },
+  {
+    "position": 135,
+    "token_id": 24296,
+    "label": 24296,
+    "token": "atura"
+  },
+  {
+    "position": 136,
+    "token_id": 3252,
+    "label": 3252,
+    "token": "\":\""
+  },
+  {
+    "position": 137,
+    "token_id": 966,
+    "label": 966,
+    "token": "pos"
+  },
+  {
+    "position": 138,
+    "token_id": 2198,
+    "label": 2198,
+    "token": "\",\""
+  },
+  {
+    "position": 139,
+    "token_id": 1726,
+    "label": 1726,
+    "token": "pre"
+  },
+  {
+    "position": 140,
+    "token_id": 1015,
+    "label": 1015,
+    "token": "co"
+  },
+  {
+    "position": 141,
+    "token_id": 3252,
+    "label": 3252,
+    "token": "\":\""
+  },
+  {
+    "position": 142,
+    "token_id": 966,
+    "label": 966,
+    "token": "pos"
+  },
+  {
+    "position": 143,
+    "token_id": 30975,
+    "label": 30975,
+    "token": "\"}}"
+  },
+  {
+    "position": 144,
+    "token_id": 151645,
+    "label": 151645,
+    "token": "<|im_end|>"
+  },
+  {
+    "position": 145,
+    "token_id": 198,
+    "label": 198,
+    "token": "Ċ"
+  }
+]
