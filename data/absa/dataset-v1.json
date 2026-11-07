@@ -1,0 +1,108 @@
+{
+  "dataset_version": "absa-chat-v1",
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+  "transformers_version": "5.22.1",
+  "chat_template_sha256": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+  "splits_manifest_sha256_lf": "5aa50b864d4c09e5468dfcb63314c36c48197a2a4b15d2abb7c33e0aa62b001e",
+  "train_budget": 1500,
+  "aspect_order": [
+    "sabor",
+    "tempo_entrega",
+    "temperatura",
+    "embalagem",
+    "preco",
+    "atendimento"
+  ],
+  "splits": {
+    "train": {
+      "reviews": 1263,
+      "by_aspect_polarity": {
+        "sabor": {
+          "pos": 727,
+          "neg": 187
+        },
+        "tempo_entrega": {
+          "pos": 463,
+          "neg": 191
+        },
+        "temperatura": {
+          "pos": 336,
+          "neg": 124
+        },
+        "embalagem": {
+          "pos": 285,
+          "neg": 125
+        },
+        "preco": {
+          "pos": 189,
+          "neg": 48
+        },
+        "atendimento": {
+          "pos": 159,
+          "neg": 32
+        }
+      },
+      "aspects_per_review": {
+        "0": 0,
+        "1": 319,
+        "2": 449,
+        "3+": 495
+      },
+      "mixed_polarity_reviews": 447,
+      "chat_tokens": {
+        "min": 104,
+        "median": 135,
+        "p95": 170,
+        "max": 219,
+        "total": 172956
+      },
+      "sha256_lf": "5a2db6e333e4055a387f49d3fc3ef019668b8d28157d1c340d73e20354b644c2"
+    },
+    "validation": {
+      "reviews": 140,
+      "by_aspect_polarity": {
+        "sabor": {
+          "pos": 85,
+          "neg": 19
+        },
+        "tempo_entrega": {
+          "pos": 50,
+          "neg": 15
+        },
+        "temperatura": {
+          "pos": 48,
+          "neg": 14
+        },
+        "embalagem": {
+          "pos": 32,
+          "neg": 13
+        },
+        "preco": {
+          "pos": 23,
+          "neg": 6
+        },
+        "atendimento": {
+          "pos": 13,
+          "neg": 5
+        }
+      },
+      "aspects_per_review": {
+        "0": 0,
+        "1": 32,
+        "2": 54,
+        "3+": 54
+      },
+      "mixed_polarity_reviews": 48,
+      "chat_tokens": {
+        "min": 103,
+        "median": 135.0,
+        "p95": 174,
+        "max": 200,
+        "total": 19296
+      },
+      "sha256_lf": "56ab6fe5921e8930f3c731da84f9349ccaf4bc65dab45a5f0c589307ac5136a5"
+    }
+  },
+  "suggested_max_length": 256
+}

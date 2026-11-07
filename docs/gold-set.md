@@ -1,6 +1,17 @@
 # Conjunto de referência para aspectos
 
-## Estado e limites
+## Referência humana ABSA v1
+
+A [versão humana](../data/gold/aspects_100.human.jsonl) cobre os mesmos 100 IDs e é
+a referência da avaliação final ABSA. O autor enviou as anotações pelo chat, a
+partir dos IDs e textos, e confirmou três ajustes baseados no guia. Foram omitidos
+13 rótulos, dos quais quatro correspondem ao recorte pré-definido de ambiguidade.
+O [manifesto humano](../data/gold/human_review_manifest.json) registra IDs, motivos
+e hashes. As notas das 100 reviews registram reconhecimento de linguagem
+padronizada. Alguns textos já tinham aparecido no projeto, o que limita a
+independência da revisão.
+
+## Estado e limites do snapshot por IA
 
 Foram anotadas **100 reviews**, vendo somente `id` e texto, depois de escrever o
 [guia de 10 regras](annotation-guide.md). Nenhum rótulo sintético da amostra foi exibido,

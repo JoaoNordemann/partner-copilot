@@ -1120,3 +1120,23 @@ suporte por estrato de exposição e por ambiguidade.
 A auditoria cega ao rótulo encontrou 207/294 ocorrências de frases do gold no
 novo treino. O gold tem 100 reviews anotadas por IA e aguarda revisão humana
 independente. [Protocolo e contagens](absa-splits.md).
+
+
+### ABSA: referência humana congelada
+
+A avaliação final usa as 100 anotações da versão `absa-human-v1`. O autor confirmou
+13 omissões propostas na adjudicação assistida. Quatro reviews compõem o recorte
+pré-definido de ambiguidade: duas de sabor diferente sem avaliação e duas de duração
+sem julgamento. As nove omissões por elogio geral aplicam a regra de ausência de
+aspecto específico. O manifesto humano registra os hashes, a exposição prévia e as
+omissões por ID. A alocação de treino, validação e teste de templates segue o
+manifesto de splits já auditado.
+
+
+### ABSA: dataset conversacional e base QLoRA
+
+Usar Qwen2.5-1.5B-Instruct na revisão `989aa7980e4cf806f80c7fef2b1adb7bc71aa306`.
+Exportar instrução e review em `user` e JSON canônico em `assistant`. Renderizar
+com o template oficial do tokenizer fixado. A primeira rodada usa 1.263 exemplos
+válidos sob o teto de 1.500 e 140 de validação. O máximo medido foi 219 tokens.
+Adotar 256 como limite inicial da sequência. [Distribuição e perfil](absa-dataset.md).

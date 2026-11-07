@@ -8,7 +8,7 @@ processo de treino e de escolha de checkpoint.
 
 | Conjunto | Reviews | Uso |
 | --- | ---: | --- |
-| Gold | 100 | Teste final com rótulos anotados por IA às cegas aos rótulos do gerador. Revisão humana independente pendente |
+| Gold | 100 | Teste final com os rótulos humanos da versão `absa-human-v1`. O manifesto de splits registra o estado histórico da anotação inicial por IA |
 | Treino | 1.263 | Ajuste do modelo com rótulos sintéticos |
 | Validação | 140 | Acompanhar treino e escolher checkpoint, com pelo menos cinco exemplos de cada par aspecto/polaridade |
 | Teste de templates reservados | 346 | Avaliação separada em reviews sintéticas com pelo menos uma família reservada |
@@ -64,8 +64,8 @@ treino. As 12 famílias têm zero ocorrências no treino e na validação.
 
 Na avaliação final, fazer uma passada no gold após escolher o checkpoint pela
 validação. Reutilizar as mesmas previsões para F1 do gold completo e para os
-recortes de famílias vistas, mistas e inéditas. Reportar contagens e o F1 com e
-sem casos ambíguos conforme a decisão registrada. O grupo gold inteiramente
+recortes de famílias vistas, mistas e inéditas. Calcular o F1 no gold humano
+completo e após excluir os quatro IDs ambíguos do [manifesto humano](../data/gold/human_review_manifest.json). O grupo gold inteiramente
 inédito tem duas reviews, então a comparação principal de templates inéditos
 deve incluir o teste sintético reservado. Reportar suas 36 reviews inteiramente
 inéditas separadamente das 310 mistas e explicitar a origem sintética dos alvos.

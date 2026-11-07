@@ -8,7 +8,7 @@ sem datas de execução fictícias ou aprovação automática de experimentos.
 | --- | --- | --- |
 | Fundamentos HF e inferência NF4 | Concluído no escopo estudado | PoCs informadas e execuções Kaggle preservadas |
 | Schema, configuração e dados sintéticos | Implementado e testado | Testes Pydantic/gerador; data/raw versionado |
-| Gold, guia de anotação e splits | Disponíveis com limitações | Revisão assistida, não cega em todos os casos; manifesto e decisões |
+| Gold, guia de anotação e splits | Referência humana congelada | 100 reviews anotadas pelo autor com adjudicação assistida e exposição prévia documentada. [Manifesto](../data/gold/human_review_manifest.json) |
 | Ingestão e persistência | Implementado e testado | IDs determinísticos, Chroma temporário nos testes, bootstrap CPU verificado |
 | Retrieval e baselines | Medido | Com/sem filtros, embeddings, k e placares em RESULTADOS.md |
 | Geração v3 e análise de falhas | Medido, com limitações | n12/n15/n16 e rubrica; prompt/parser congelados |
@@ -18,7 +18,7 @@ sem datas de execução fictícias ou aprovação automática de experimentos.
 | Docker CPU | Receita e bootstrap prontos; container não verificado | Reservar até uma hora nas janelas de treino QLoRA para iniciar o Docker, construir a imagem e testar o container |
 | Replay aprovado | Contrato e testes prontos; catálogo pendente | Até três casos com aprovação humana elegível. Começar pela resposta n17 e pela abstenção n20. A falha n12 fica na aba histórica |
 | CI e versão MVP | Implementado; publicação protegida por gate | Tag v0.1-rag-mvp somente após CI remoto verde no mesmo commit; badge do README |
-| QLoRA / ABSA | Splits auditados | Treinar com validação separada e avaliar gold e templates reservados. [Protocolo](absa-splits.md) |
+| QLoRA / ABSA | Dataset preparado | Qwen2.5-1.5B-Instruct, 1.263 exemplos de treino e 140 de validação. [Dataset e tokens](absa-dataset.md) |
 | FP16 na T4 16 GB | Pendente | Comparação controlada com NF4, sem afirmar resultado antecipado |
 | Space | Adiado | Não bloquear entrega local; distinguir gravação de busca CPU ao vivo |
 | Avaliação final reservada | Preservada, não executada | Uma rodada futura, sem ajuste posterior |

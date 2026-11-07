@@ -20,6 +20,8 @@ data/gold/*
 !data/gold/sample_manifest.json
 !data/gold/aspects_100.ai.jsonl
 !data/gold/annotation_manifest.json
+!data/gold/aspects_100.human.jsonl
+!data/gold/human_review_manifest.json
 !data/gold/aspects_100.human-template.jsonl
 
 !data/splits/
@@ -67,3 +69,6 @@ data/eval/reserved-final-v1/*
 !data/absa/
 data/absa/*
 !data/absa/splits-v1.json
+!data/absa/train-v1.jsonl
+!data/absa/validation-v1.jsonl
+!data/absa/dataset-v1.json

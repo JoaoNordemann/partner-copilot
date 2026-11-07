@@ -1,0 +1,99 @@
+{
+  "version": "absa-human-v1",
+  "status": "human_annotated_and_adjudicated",
+  "origin": "human_chat_submission",
+  "reviewed_count": 100,
+  "procedure": "The human reviewer supplied all labels after seeing IDs and text. The assistant proposed three guide-based adjustments and the reviewer confirmed all three.",
+  "prior_exposure": "All 100 submission notes report recognition of formulaic phrasing. Some reviews had appeared in earlier project work. This is not an independent double-blind review.",
+  "generated_and_ai_labels_shown_during_annotation": false,
+  "blind_sample_sha256": "311821103d98fa351ee183865964a2aaaf7f9de36c6d927459d2c9830954c75b",
+  "guide_sha256": "4bc0db7dda7eea94f5d753ff5a256398e65928b0348aa1a3265f41e820c26cb5",
+  "original_submission_sha256": "be4adf1a550b3890ab3755402b3d19dee1b6612698093f929f4e1aff99da17b0",
+  "annotations_sha256": "4aad038205fbfd2e3167f07dab86933ca9544fddf9c5c87a6205c96129555f93",
+  "ambiguous_ids": [
+    "rev_000926",
+    "rev_001685",
+    "rev_002800",
+    "rev_002980"
+  ],
+  "adjudicated_omissions": [
+    {
+      "id": "rev_002800",
+      "aspect": "sabor",
+      "removed_polarity": "neg",
+      "reason": "Ambiguidade de sabor: diferença do habitual sem julgamento explícito."
+    },
+    {
+      "id": "rev_002980",
+      "aspect": "sabor",
+      "removed_polarity": "neg",
+      "reason": "Ambiguidade de sabor: diferença do habitual sem julgamento explícito."
+    },
+    {
+      "id": "rev_001685",
+      "aspect": "tempo_entrega",
+      "removed_polarity": "pos",
+      "reason": "Ambiguidade de entrega: duração sem julgamento explícito."
+    },
+    {
+      "id": "rev_000926",
+      "aspect": "tempo_entrega",
+      "removed_polarity": "pos",
+      "reason": "Ambiguidade de entrega: duração sem julgamento explícito."
+    },
+    {
+      "id": "rev_001895",
+      "aspect": "sabor",
+      "removed_polarity": "pos",
+      "reason": "Elogio geral ao prato, sem opinião específica sobre sabor."
+    },
+    {
+      "id": "rev_002363",
+      "aspect": "sabor",
+      "removed_polarity": "pos",
+      "reason": "Elogio geral ao prato, sem opinião específica sobre sabor."
+    },
+    {
+      "id": "rev_000613",
+      "aspect": "sabor",
+      "removed_polarity": "pos",
+      "reason": "Elogio geral ao prato, sem opinião específica sobre sabor."
+    },
+    {
+      "id": "rev_000708",
+      "aspect": "sabor",
+      "removed_polarity": "pos",
+      "reason": "Elogio geral ao prato, sem opinião específica sobre sabor."
+    },
+    {
+      "id": "rev_002476",
+      "aspect": "sabor",
+      "removed_polarity": "pos",
+      "reason": "Elogio geral ao prato, sem opinião específica sobre sabor."
+    },
+    {
+      "id": "rev_001760",
+      "aspect": "sabor",
+      "removed_polarity": "pos",
+      "reason": "Elogio geral ao prato, sem opinião específica sobre sabor."
+    },
+    {
+      "id": "rev_002142",
+      "aspect": "sabor",
+      "removed_polarity": "pos",
+      "reason": "Elogio geral ao prato, sem opinião específica sobre sabor."
+    },
+    {
+      "id": "rev_001916",
+      "aspect": "sabor",
+      "removed_polarity": "pos",
+      "reason": "Elogio geral ao prato, sem opinião específica sobre sabor."
+    },
+    {
+      "id": "rev_000650",
+      "aspect": "sabor",
+      "removed_polarity": "pos",
+      "reason": "Elogio geral ao prato, sem opinião específica sobre sabor."
+    }
+  ]
+}
