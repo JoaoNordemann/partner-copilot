@@ -1140,3 +1140,54 @@ Exportar instrução e review em `user` e JSON canônico em `assistant`. Renderi
 com o template oficial do tokenizer fixado. A primeira rodada usa 1.263 exemplos
 válidos sob o teto de 1.500 e 140 de validação. O máximo medido foi 219 tokens.
 Adotar 256 como limite inicial da sequência. [Distribuição e perfil](absa-dataset.md).
+
+
+### ABSA: protocolo de avaliação pré-treino
+
+**Unidade e métricas.** Cada review contribui um conjunto de pares exatos
+`(aspecto, polaridade)`. Para cada uma das 12 classes, contar TP, FP e FN por
+correspondência na mesma review. Trocar a polaridade gera FP para a prevista e
+FN para a esperada. Reportar precisão, recall, F1 e suporte de cada par, além
+dos agregados por aspecto (somando as duas polaridades) e por polaridade
+(somando os seis aspectos). O resultado principal é a média aritmética do F1
+dos pares com suporte positivo no recorte. Informar quantos pares entram nessa
+média e marcar classes sem suporte. Para classes com suporte, a precisão vale
+zero quando não há predições, assim como o F1 quando precisão e recall somam
+zero. Para os agregados sem denominador, reportar a métrica como indisponível.
+
+**Validade.** Exigir um único objeto JSON completo com somente `aspects` na raiz,
+mapa com os seis nomes permitidos, valores `pos` ou `neg` e chaves únicas.
+Um mapa vazio é válido. Espaçamento e ordem de chaves não alteram a validade.
+Resposta inválida produz zero pares previstos e perde todos os pares esperados
+na review. Ela continua no denominador da taxa de validade, reportada como
+contagem de saídas válidas sobre todas as reviews. Aplicar a mesma validação a
+todos os métodos, sem reparo da saída ou segunda tentativa.
+
+**Conjuntos e escolha do modelo.** Usar as 140 reviews de validação para
+acompanhamento, hiperparâmetros e escolha de checkpoint. O gold humano congelado
+com 100 reviews entra em uma única passada final por método, após fixar
+checkpoint, exemplos few-shot, regras, configurações e parser. Reutilizar as
+previsões para o gold completo, o recorte sem os quatro IDs ambíguos e as fatias
+de famílias vistas, mistas e inéditas. Avaliar também as 346 reviews sintéticas
+de templates reservados, com resultados separados para as 36 só com famílias
+inéditas e as 310 mistas. Reportar contagens e suporte em cada recorte. O gold
+tem apenas duas reviews exclusivamente inéditas, com leitura descritiva desse
+resultado. A escolha de hiperparâmetros e de checkpoint termina antes de
+consultar previsões ou métricas do gold e dos templates reservados.
+
+**Baselines da avaliação final.** Medir Qwen2.5-1.5B-Instruct na mesma revisão do
+modelo ajustado, em few-shot sem ajuste de pesos. Selecionar demonstrações
+exclusivamente do treino e fixar a configuração de decodificação antes da
+avaliação. Medir também regras simples por palavras-chave, definidas pelo guia
+e pelo treino, com ajustes restritos à validação. Incluir o baseline clássico
+de baixo custo com TF-IDF e regressão logística por aspecto, com classes
+`ausente`, `pos` e `neg`, caso a implementação caiba antes da rodada final. Ajustar
+vocabulário e pesos no treino e escolher parâmetros na validação. Omitir a
+classe `ausente` da saída. Comparar todos os métodos nos mesmos IDs e reportar
+quando o clássico superar QLoRA.
+
+**Hipótese registrada.** QLoRA supera o few-shot em macro-F1 no gold completo.
+Seu macro-F1 tende a ser menor em reviews com famílias inéditas que nas reviews
+do gold com famílias vistas. Tratar a comparação por exposição como descritiva,
+com suporte por classe e por grupo. Reportar os resultados que contrariem a
+hipótese com as mesmas métricas e os mesmos recortes.
