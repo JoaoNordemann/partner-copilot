@@ -62,9 +62,9 @@ Não altera o catálogo de replay nem cria novas aprovações.
 
 | Caso | Origem | O que mostrar | Limite |
 | --- | --- | --- | --- |
-| Sucesso n01 | JSON v1 | Porção elogiada pelo valor; fonte completa também critica sabor | Parser histórico e leitura de IA; não aprovação humana do replay v3 |
+| Sucesso n17 | v3 | Atendimento prestativo confirmado pela review completa | Parser v3 e sustentação na leitura de IA |
 | Abstenção n20 | v3 | Não há marca de forno nas reviews do contexto | Resultado histórico; revisão de IA, sem avaliação nova |
-| Falha n12 | v3 | Resposta aceita diz sabor bom, mas a fonte descreve gosto ruim no final | Falha confirmada por João; formato válido não assegura fidelidade |
+| Falha n12 | v3 | Resposta aceita diz sabor bom, mas a fonte descreve gosto ruim no final | Falha confirmada pelo autor, em leitura própria. O parser aceitou a resposta apesar da contradição |
 
 Saída bruta, pergunta, versão e proveniência ficam visíveis. SHA256 do arquivo de
 origem e corpus acompanham o exemplo. Os registros não são chamados de limpos:

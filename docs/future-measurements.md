@@ -33,6 +33,12 @@ Manter perguntas, prompt, parser e orçamento iguais; registrar OOM como resulta
 sem trocar silenciosamente hardware ou offload. Compute FP16 em NF4 não é o baseline
 de pesos FP16. Não executar esta comparação agora.
 
+## Latência ponta a ponta com o backend real
+
+Coleta opcional de fila, validação e tempo ponta a ponta. Fazer somente se a
+execução completa couber numa sessão Kaggle já usada para outro trabalho com GPU.
+Se faltar tempo na sessão, registrar a ausência dessa medição como limitação do MVP.
+
 ## Avaliação reservada
 
 O conjunto reservado continua sem execução e não entra no benchmark de CPU, demos,

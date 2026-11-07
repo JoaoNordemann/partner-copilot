@@ -9,11 +9,11 @@ ROOT = Path(__file__).resolve().parents[1]
 CASES = [
     (
         "success",
-        "Sucesso: porção e valor",
-        "reports/generation-json-v1/generation-json-v1.jsonl",
-        "n01",
-        "Aceita pelo parser histórico e sustentada na revisão de IA; "
-        "não equivale a aprovação humana para replay.",
+        "Sucesso: atendimento prestativo",
+        "reports/final-v3/generation-v3-new.jsonl",
+        "n17",
+        "O parser v3 aceitou a resposta. Na leitura de IA, a review sustenta "
+        "a avaliação positiva do atendimento.",
     ),
     (
         "abstention",
@@ -28,8 +28,8 @@ CASES = [
         "Limitação: elogio seletivo",
         "reports/final-v3/generation-v3-new.jsonl",
         "n12",
-        "Falha confirmada por João: custo-benefício elogiado não implica sabor bom; "
-        "a review relata gosto ruim no final.",
+        "Falha confirmada pelo autor, em leitura própria. A review elogia "
+        "o custo-benefício e relata gosto ruim no final.",
     ),
 ]
 

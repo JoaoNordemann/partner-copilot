@@ -128,7 +128,10 @@ def test_history_is_reproducible_and_failure_retains_entire_context():
     history = load_history(ROOT / "configs/demo-examples.json")
     assert set(history) == {"success", "abstention", "failure"}
     html = render_history(history["failure"])
-    assert "Falha confirmada por João" in html and "rev_001172" in html
+    assert "Falha confirmada pelo autor, em leitura própria" in html
+    assert "rev_001172" in html
+    success = render_history(history["success"])
+    assert "partner-copilot-v3" in success and "rev_002438" in success
     for review in history["failure"]["full_context_reviews"]:
         from html import escape
 

@@ -63,3 +63,7 @@ data/eval/reserved-final-v1/*
 !data/eval/reserved-final-v1/label-audit.jsonl
 !data/eval/reserved-final-v1/manifest.json
 !data/eval/reserved-final-v1/.gitattributes
+
+!data/absa/
+data/absa/*
+!data/absa/splits-v1.json

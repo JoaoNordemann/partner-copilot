@@ -30,3 +30,7 @@ jobs:
         run: python scripts/build_results.py --check --update-readme
       - name: Verify historical demo examples
         run: python scripts/build_demo_examples.py --check
+      - name: Verify ABSA splits and template reservation
+        env:
+          PYTHONPATH: src
+        run: python scripts/prepare_absa_splits.py --check

@@ -1054,7 +1054,7 @@ abstenção e versão do prompt. A API adiciona source_reviews; com chunks, obt�
 originais do RAG validado carregados uma vez. Não rotular chunk como fonte inteira;
 verificar também a presença literal do trecho no original e o restaurante da fonte.
 Dados sintéticos, fake e replay são explicitamente rotulados. Replay preserva
-contexto arquivado, não busca ao vivo. A área histórica mostra n01, n20 e n12,
+contexto arquivado, não busca ao vivo. A área histórica mostra n17, n20 e n12,
 com hashes, saída original, limites de revisão e indicação de gravação. Não é um
 atalho para o catálogo de replay aprovado, que continua pendente. Exemplos são
 regenerados sem inferência; nenhum conjunto reservado é aberto. Sem Space nesta
@@ -1072,3 +1072,51 @@ Notas v0.1-rag-mvp declaram n12/n15/n16, QLoRA, FP16/T4, Space e Docker não tes
 Documento de status do estudo criado a pedido de João por não existir no repositório.
 Commit enviado deve passar no CI remoto antes de criar/enviar tag anotada; verificar
 que o SHA da execução bem-sucedida é exatamente o SHA da tag, sem mover tag existente.
+
+
+### ABSA: tarefa, rótulos de treino e ambiguidade
+
+A entrada é o texto de uma review. A saída é um objeto JSON com o mapa `aspects`.
+As chaves permitidas são `sabor`, `tempo_entrega`, `temperatura`, `embalagem`,
+`preco` e `atendimento`. Cada aspecto com opinião identificável recebe `pos` ou
+`neg`. Omitir aspectos sem evidência de polaridade. Quando a review inteira não
+contém opinião identificável, retornar `{"aspects": {}}`. Para elogio e crítica
+explícitos ao mesmo aspecto, aplicar a regra `neg` do guia congelado.
+
+O treino supervisionado parte dos rótulos sintéticos do gerador no `train_pool`
+versionado. O texto foi construído a partir desses rótulos, que oferecem supervisão
+consistente sem custo de inferência. O Mistral como professor adicionaria custo de
+GPU e ruído de anotação. A correspondência entre rótulo e template ajuda no treino,
+mas uma avaliação com os mesmos padrões pode inflar o F1 por memorização. A defesa
+é a separação do gold e o protocolo de avaliação independente, com controle de
+sobreposição de templates. O gold, suas duplicatas em quarentena e o conjunto
+reservado de geração ficam fora do treino. Se houver tempo, o Mistral pode
+parafrasear uma pequena fração do treino. A variante só entra depois de uma
+checagem manual por amostra da preservação dos aspectos e polaridades.
+
+Reviews com ambiguidade sinalizada na preparação ficam fora do treino nesta
+primeira versão. Guardar o ID e o motivo em metadados de auditoria, fora do JSON
+alvo. Pelo guia congelado, “o gosto estava diferente do habitual” sem julgamento
+explícito é ambíguo e deixa `sabor` ausente. Crítica ou estranheza explícita recebe
+`neg`. A decisão de relevância de q22 pertence à avaliação de retrieval e não
+serve como rótulo de polaridade ABSA.
+
+Na avaliação, marcar as reviews ambíguas pela leitura do texto e pelas notas do
+guia antes de olhar as previsões. Usar o gold congelado como referência e calcular
+F1 sobre pares exatos `(aspecto, polaridade)` em duas vistas da mesma execução:
+o gold completo e o gold sem as reviews marcadas como ambíguas. Reportar ambas
+as contagens de reviews e o número excluído. Esse recorte mede sensibilidade à
+ambiguidade com o mesmo modelo e as mesmas previsões.
+### ABSA: validação e reserva de templates
+
+O manifesto fixa 1.263 reviews de treino, 140 de validação e 346 de teste
+sintético reservado. Remover duplicatas de review inteira e excluir as famílias
+ambíguas sinalizadas. Reservar 12 famílias aproximadas por frase normalizada,
+item e minutos mascarados, com um template por par aspecto/polaridade. Reviews
+que contêm essas famílias ficam fora de treino e validação. Escolher checkpoint
+na validação e usar o gold congelado uma vez na avaliação final. Reportar F1 com
+suporte por estrato de exposição e por ambiguidade.
+
+A auditoria cega ao rótulo encontrou 207/294 ocorrências de frases do gold no
+novo treino. O gold tem 100 reviews anotadas por IA e aguarda revisão humana
+independente. [Protocolo e contagens](absa-splits.md).

@@ -57,6 +57,14 @@ opt-in. CI mínimo usa seleção explícita sem runtime ML, Python 3.12 e 3.13.
 [Resultados, tabelas e limitações](reports/final-results-v1/RESULTADOS.md).
 <!-- END GENERATED RESULTS -->
 
+- **Geração v3 no Kaggle, Tesla T4 com NF4:** mediana 6,3 s, máximo observado 31,9 s
+  (9 chamadas). [Medições de geração](reports/cost-latency-consolidation-v1/README.md)
+- **Embedding + busca em CPU, Ryzen 5 5600:** mediana 17,8 ms e p95 19,8 ms
+  (40 amostras), com o modelo já carregado e índice RAG de 862 reviews.
+  A medição local tem escopo restrito a esse índice e hardware. Extrapolar
+  para produção exige medir com volume e carga representativos.
+  [Medições em CPU](reports/api-cpu-latency-v1/README.md)
+
 ## Limitações
 
 Formato válido e trecho literal não garantem resposta correta: n12 seleciona elogio

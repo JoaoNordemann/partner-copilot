@@ -15,13 +15,24 @@ sem datas de execução fictícias ou aprovação automática de experimentos.
 | API | Implementado e testado | Startup, modos, saúde, fila, timeout e testes sem GPU |
 | Demo Gradio | Implementado e verificado localmente | HTTP com API fake e inspeção visual; fontes integrais e exemplos gravados |
 | Latência CPU isolada | Medida | reports/api-cpu-latency-v1; hardware explícito |
-| Docker CPU | Receita e bootstrap prontos; container não verificado | Instalar/iniciar Docker e realizar build/smoke |
-| Replay aprovado | Contrato e testes prontos; catálogo pendente | Revisão humana elegível antes de disponibilizar gravações |
+| Docker CPU | Receita e bootstrap prontos; container não verificado | Reservar até uma hora nas janelas de treino QLoRA para iniciar o Docker, construir a imagem e testar o container |
+| Replay aprovado | Contrato e testes prontos; catálogo pendente | Até três casos com aprovação humana elegível. Começar pela resposta n17 e pela abstenção n20. A falha n12 fica na aba histórica |
 | CI e versão MVP | Implementado; publicação protegida por gate | Tag v0.1-rag-mvp somente após CI remoto verde no mesmo commit; badge do README |
-| QLoRA / ABSA | Pendente | Preparar treino sem gold e avaliar separadamente |
+| QLoRA / ABSA | Splits auditados | Treinar com validação separada e avaliar gold e templates reservados. [Protocolo](absa-splits.md) |
 | FP16 na T4 16 GB | Pendente | Comparação controlada com NF4, sem afirmar resultado antecipado |
 | Space | Adiado | Não bloquear entrega local; distinguir gravação de busca CPU ao vivo |
 | Avaliação final reservada | Preservada, não executada | Uma rodada futura, sem ajuste posterior |
+
+## Distribuição das pendências
+
+- **Durante o treino QLoRA:** testar o container CPU nos intervalos de espera da GPU.
+- **Na próxima sessão Kaggle que tiver folga:** aproveitar a mesma sessão de outro
+  trabalho com GPU para medir fila, validação e latência ponta a ponta do backend real.
+  Se a sessão não comportar a coleta completa, registrar a lacuna como limitação.
+- **Refatoração e publicação:** priorizar refatoração, README e publicação do projeto.
+  A curadoria do MVP tem teto de três entradas de replay aprovadas. Os três exemplos
+  históricos já cobrem o roteiro da demo, incluindo a falha conhecida.
+- **Space:** manter adiado e reavaliar quando houver tempo e catálogo elegível.
 
 [Resultados e limitações](../reports/final-results-v1/RESULTADOS.md) ·
 [Notas da versão](releases/v0.1-rag-mvp.md) · [Decisões](decisions.md)
