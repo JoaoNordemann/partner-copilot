@@ -1191,3 +1191,31 @@ Seu macro-F1 tende a ser menor em reviews com famílias inéditas que nas review
 do gold com famílias vistas. Tratar a comparação por exposição como descritiva,
 com suporte por classe e por grupo. Reportar os resultados que contrariem a
 hipótese com as mesmas métricas e os mesmos recortes.
+
+
+### ABSA: configuração do primeiro treino completo
+
+Usar [absa-qlora-v1.json](../configs/absa-qlora-v1.json) com os hashes do
+manifesto, a revisão Qwen e as versões validadas no smoke da T4. A primeira
+execução usa até três épocas, seed 2718, LoRA r=8 e alpha=16 em `all-linear`,
+NF4 com dupla quantização e compute FP16. Manter os adapters treináveis em FP32
+após inicializar o TRL. O batch efetivo é cinco, com microbatch um e acumulação
+cinco, sequência máxima de 256 tokens e perda restrita à completion. Preservar
+AdamW e LR constante de 2e-4 do smoke para reduzir mudanças entre as execuções.
+Conferir versões, hashes, ausência de truncamento e máscara antes do treino.
+
+Medir `eval_loss` nas 140 reviews de validação ao fim de cada época e escolher
+exclusivamente o menor valor finito. Em empate, preservar o primeiro checkpoint.
+Salvar o adapter escolhido com seu hash, época e histórico de treino e validação.
+A projeção é de 253 passos por época e cerca de 36,9 minutos para três épocas,
+com base na mediana do smoke. O limite proposto para a sessão completa é de
+60 minutos, incluindo carga, avaliação de validação e gravação dos checkpoints.
+
+A auditoria da validação encontrou 317 de 377 ocorrências de frases (84,1%) e
+213 de 272 frases distintas (78,3%) no treino, pela mesma normalização usada
+no gold. A curva de validação serve à escolha de checkpoint dentro do corpus.
+O teste de templates reservados mede desempenho fora das famílias vistas.
+Após congelar o checkpoint, executar uma única passada por método em cada teste.
+Reportar a diferença de F1 entre gold e templates reservados como achado, com
+contagens e origem dos rótulos. As duas avaliações têm referências diferentes,
+então a diferença bruta de F1 não isola o efeito dos templates.

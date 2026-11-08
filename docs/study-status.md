@@ -18,7 +18,7 @@ sem datas de execução fictícias ou aprovação automática de experimentos.
 | Docker CPU | Receita e bootstrap prontos; container não verificado | Reservar até uma hora nas janelas de treino QLoRA para iniciar o Docker, construir a imagem e testar o container |
 | Replay aprovado | Contrato e testes prontos; catálogo pendente | Até três casos com aprovação humana elegível. Começar pela resposta n17 e pela abstenção n20. A falha n12 fica na aba histórica |
 | CI e versão MVP | Implementado; publicação protegida por gate | Tag v0.1-rag-mvp somente após CI remoto verde no mesmo commit; badge do README |
-| QLoRA / ABSA | Smoke T4 aprovado | 20 passos, máscara de 100 exemplos e recarga do adapter verificados. Treino completo pendente. [Relatório](../reports/absa-qlora-smoke-v1/README.md) |
+| QLoRA / ABSA | Treino concluído | 759 passos na T4, checkpoint 253 escolhido pela validação. Gold e templates reservados aguardam avaliação final. [Relatório](../reports/absa-qlora-train-v1/README.md) |
 | FP16 na T4 16 GB | Pendente | Comparação controlada com NF4, sem afirmar resultado antecipado |
 | Space | Adiado | Não bloquear entrega local; distinguir gravação de busca CPU ao vivo |
 | Avaliação final reservada | Preservada, não executada | Uma rodada futura, sem ajuste posterior |

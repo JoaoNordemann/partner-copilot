@@ -1,0 +1,75 @@
+{
+  "run_version": "absa-qlora-v1",
+  "model": {
+    "id": "Qwen/Qwen2.5-1.5B-Instruct",
+    "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+    "attn_implementation": "sdpa"
+  },
+  "data": {
+    "manifest": "data/absa/dataset-v1.json",
+    "manifest_sha256_lf": "0189e2b5f6018e68c80d3ff9332110e63b5b6a527a79535a98074bda2e4470a5",
+    "train": "data/absa/train-v1.jsonl",
+    "validation": "data/absa/validation-v1.jsonl"
+  },
+  "runtime": {
+    "accelerator": "Tesla T4",
+    "cuda": "13.0",
+    "visible_devices": "0",
+    "packages": {
+      "torch": "2.11.0+cu130",
+      "transformers": "5.20.2",
+      "bitsandbytes": "0.50.2",
+      "accelerate": "1.15.0",
+      "trl": "1.17.1",
+      "peft": "0.21.2",
+      "datasets": "5.1.0"
+    },
+    "trainable_dtype_after_sft_init": "float32",
+    "session_time_limit_minutes": 60
+  },
+  "quantization": {
+    "load_in_4bit": true,
+    "bnb_4bit_quant_type": "nf4",
+    "bnb_4bit_use_double_quant": true,
+    "bnb_4bit_compute_dtype": "float16"
+  },
+  "lora": {
+    "r": 8,
+    "lora_alpha": 16,
+    "lora_dropout": 0.0,
+    "target_modules": "all-linear",
+    "task_type": "CAUSAL_LM"
+  },
+  "trainer": {
+    "num_train_epochs": 3,
+    "max_length": 256,
+    "per_device_train_batch_size": 1,
+    "per_device_eval_batch_size": 1,
+    "gradient_accumulation_steps": 5,
+    "completion_only_loss": true,
+    "assistant_only_loss": false,
+    "packing": false,
+    "dataloader_drop_last": false,
+    "learning_rate": 0.0002,
+    "lr_scheduler_type": "constant",
+    "warmup_steps": 0,
+    "optim": "adamw_torch",
+    "fp16": true,
+    "bf16": false,
+    "gradient_checkpointing": true,
+    "gradient_checkpointing_kwargs": {
+      "use_reentrant": false
+    },
+    "seed": 2718,
+    "data_seed": 2718,
+    "eval_strategy": "epoch",
+    "save_strategy": "epoch",
+    "save_total_limit": 3,
+    "load_best_model_at_end": true,
+    "metric_for_best_model": "eval_loss",
+    "greater_is_better": false,
+    "logging_steps": 10,
+    "logging_nan_inf_filter": false,
+    "report_to": "none"
+  }
+}
