@@ -1,0 +1,34 @@
+[
+  {
+    "role": "user",
+    "content": "Classifique os aspectos sabor, tempo_entrega, temperatura, embalagem, preco e atendimento. Use pos ou neg e omita aspectos sem opinião clara. Responda só com um objeto JSON com a chave \"aspects\".\n\nReview:\nGostei bastante do sabor de lasanha bolonhesa. Não precisei esquentar lasanha bolonhesa. Gostei da forma como responderam no chat. Gostei da porção pelo valor cobrado. A entrega demorou demais, deu 115 minutos. Capricharam na embalagem de lasanha bolonhesa. Tomara que acertem isso na próxima."
+  },
+  {
+    "role": "assistant",
+    "content": "{\"aspects\":{\"sabor\":\"pos\",\"tempo_entrega\":\"neg\",\"temperatura\":\"pos\",\"embalagem\":\"pos\",\"preco\":\"pos\",\"atendimento\":\"pos\"}}"
+  },
+  {
+    "role": "user",
+    "content": "Classifique os aspectos sabor, tempo_entrega, temperatura, embalagem, preco e atendimento. Use pos ou neg e omita aspectos sem opinião clara. Responda só com um objeto JSON com a chave \"aspects\".\n\nReview:\nNão precisei esperar muito, deu 19 min. Já pedi açaí 300ml antes e dessa vez o sabor estava pior. O pessoal foi educado quando entrei em contato. A embalagem não segurou açaí 300ml, veio tudo bagunçado. Veio morno e tive receio de consumir."
+  },
+  {
+    "role": "assistant",
+    "content": "{\"aspects\":{\"sabor\":\"neg\",\"tempo_entrega\":\"pos\",\"temperatura\":\"neg\",\"embalagem\":\"neg\",\"atendimento\":\"pos\"}}"
+  },
+  {
+    "role": "user",
+    "content": "Classifique os aspectos sabor, tempo_entrega, temperatura, embalagem, preco e atendimento. Use pos ou neg e omita aspectos sem opinião clara. Responda só com um objeto JSON com a chave \"aspects\".\n\nReview:\nNão precisei esperar muito, deu 35 min. Dessa vez acertaram no sabor de feijoada individual. feijoada individual chegou bem quente. Achei o preço justo. Fiquei sem resposta no chat. Embalagem firme, nada ficou solto."
+  },
+  {
+    "role": "assistant",
+    "content": "{\"aspects\":{\"sabor\":\"pos\",\"tempo_entrega\":\"pos\",\"temperatura\":\"pos\",\"embalagem\":\"pos\",\"preco\":\"pos\",\"atendimento\":\"neg\"}}"
+  },
+  {
+    "role": "user",
+    "content": "Classifique os aspectos sabor, tempo_entrega, temperatura, embalagem, preco e atendimento. Use pos ou neg e omita aspectos sem opinião clara. Responda só com um objeto JSON com a chave \"aspects\".\n\nReview:\ncostela no bafo não vale o valor cobrado. Gostei bastante do sabor de costela no bafo. Chegou bem depois do horário mostrado no app. Veio quente como eu esperava. Consegui falar com o restaurante sem dificuldade. A embalagem não segurou costela no bafo, veio tudo bagunçado."
+  },
+  {
+    "role": "assistant",
+    "content": "{\"aspects\":{\"sabor\":\"pos\",\"tempo_entrega\":\"neg\",\"temperatura\":\"pos\",\"embalagem\":\"neg\",\"preco\":\"neg\",\"atendimento\":\"pos\"}}"
+  }
+]

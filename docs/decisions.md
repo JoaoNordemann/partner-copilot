@@ -1219,3 +1219,31 @@ Após congelar o checkpoint, executar uma única passada por método em cada tes
 Reportar a diferença de F1 entre gold e templates reservados como achado, com
 contagens e origem dos rótulos. As duas avaliações têm referências diferentes,
 então a diferença bruta de F1 não isola o efeito dos templates.
+
+
+### ABSA: portão de validade para a avaliação final
+
+O `checkpoint-253` foi o melhor dos três checkpoints salvos ao fim das
+épocas. O mínimo de perda entre avaliações é desconhecido. O cálculo é
+teacher-forced sobre os tokens da resposta esperada, muitos deles parte da
+estrutura determinística do JSON. A sobreposição de ocorrências de frases com
+o treino é 84,1% na validação e 70,4% no gold. Esses fatores limitam a
+interpretação da perda como evidência de generalização ou de desempenho em
+geração livre.
+
+Verificar o adapter pelo [manifesto de avaliação](../configs/absa-eval-v1.json).
+Fixar decodificação gulosa, template oficial congelado e limite de 96 novos
+tokens. Aplicar o contrato estrito pré-treino, com chaves únicas, sem reparo
+ou tentativa adicional. Rodar as 140 reviews de validação primeiro. O portão
+passa com até 7 saídas inválidas (5%). Acima disso, encerrar a sessão de
+avaliação e investigar na validação. Uma execução incompleta também bloqueia
+o acesso ao gold e ao teste reservado. A tolerância operacional de 5% foi
+definida antes da geração. O F1 de validação é apenas diagnóstico.
+
+Congelar antes da execução todos os comparadores. Few-shot usa quatro
+demonstrações do treino, escolhidas deterministicamente pela cobertura de pares
+ainda sem exemplo, com desempate por número de pares e ID. Regras usam
+vocabulário fixo por aspecto e polaridade. O TF-IDF usa palavras e bigramas com
+regressão logística balanceada por aspecto (classes ausente, pos e neg),
+ajustada apenas no treino. O placar pareado usa F1 dos pares exatos por
+review. Saída inválida recebe zero. Dois mapas vazios válidos recebem um.

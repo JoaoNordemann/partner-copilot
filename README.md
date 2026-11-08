@@ -70,7 +70,19 @@ opt-in. CI mínimo usa seleção explícita sem runtime ML, Python 3.12 e 3.13.
 Formato válido e trecho literal não garantem resposta correta: n12 seleciona elogio
 ignorando crítica; n15 atribui trecho à review errada; n16 combina relatos distintos.
 Amostras pequenas, sintéticas e perguntas expostas limitam as conclusões; revisões
-humanas são assistidas. QLoRA, comparação FP16 na T4 16 GB e Space estão pendentes.
+humanas são assistidas. A comparação FP16 na T4 de 16 GB e o Space estão pendentes.
+
+O QLoRA ABSA foi treinado. O checkpoint 253 teve a menor perda teacher-forced
+entre os três checkpoints avaliados, na primeira época. Na validação, 84,1%
+das ocorrências de frases normalizadas aparecem no treino. No gold, são 70,4%.
+A avaliação de generalização dentro do corpus sintético usa os templates
+reservados, com um recorte de 36 reviews compostas só por famílias inéditas.
+JSON válido em 140/140 na validação. O QLoRA obteve macro-F1 de 0,9819 no gold
+(100 reviews), 0,9948 nos templates reservados (346) e 1,0000 no recorte de
+36 reviews inteiramente inéditas dentro do gerador. O TF-IDF obteve 0,8688,
+0,7240 e 0,3980, respectivamente.
+[Relatório do treino ABSA](reports/absa-qlora-train-v1/README.md) ·
+[Avaliação ABSA](reports/absa-eval-checkpoint-253-v1/README.md).
 [Docker CPU](docs/docker.md) está preparado, mas build/execução não foram testados
 localmente por falta de Docker; o caminho GPU em container também não foi testado.
 

@@ -1,0 +1,23 @@
+{
+  "checkpoint": "checkpoint-253",
+  "archive_sha256": "d7b3a90910071bfd2d9333c8eb7180e68964d2d700ce1438c6fb9fa5898764be",
+  "adapter_files_sha256": {
+    "adapter_config.json": "3101899765b2ab1ab5c005341a5e147525683f7d63ff0a79cba634ee74f99435",
+    "adapter_model.safetensors": "ef97282c03432c22c9735f419463d1e936b0729ac099052ac96e7b170c7e1d05",
+    "chat_template.jinja": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+    "tokenizer.json": "3fd169731d2cbde95e10bf356d66d5997fd885dd8dbb6fb4684da3f23b2585d8",
+    "tokenizer_config.json": "04b1682c59acbd057f4c9072297faa73d56fc9de053094c659cdb4c464f58f86"
+  },
+  "model_revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+  "dataset_commit": "61d28c199522ce8f8fa125bdf6349cb21e3c3e0c",
+  "gate": {
+    "validation_size": 140,
+    "maximum_invalid": 7
+  },
+  "generation": {
+    "do_sample": false,
+    "max_new_tokens": 96,
+    "batch_size": 8
+  },
+  "dataset_manifest_sha256_lf": "0189e2b5f6018e68c80d3ff9332110e63b5b6a527a79535a98074bda2e4470a5"
+}

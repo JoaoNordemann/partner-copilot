@@ -1,0 +1,194 @@
+{
+  "n": 140,
+  "valid": 140,
+  "invalid": 0,
+  "macro_f1": 1.0,
+  "macro_class_count": 12,
+  "by_pair": {
+    "sabor=pos": {
+      "tp": 85,
+      "fp": 0,
+      "fn": 0,
+      "support": 85,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "sabor=neg": {
+      "tp": 19,
+      "fp": 0,
+      "fn": 0,
+      "support": 19,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "tempo_entrega=pos": {
+      "tp": 50,
+      "fp": 0,
+      "fn": 0,
+      "support": 50,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "tempo_entrega=neg": {
+      "tp": 15,
+      "fp": 0,
+      "fn": 0,
+      "support": 15,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "temperatura=pos": {
+      "tp": 48,
+      "fp": 0,
+      "fn": 0,
+      "support": 48,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "temperatura=neg": {
+      "tp": 14,
+      "fp": 0,
+      "fn": 0,
+      "support": 14,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "embalagem=pos": {
+      "tp": 32,
+      "fp": 0,
+      "fn": 0,
+      "support": 32,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "embalagem=neg": {
+      "tp": 13,
+      "fp": 0,
+      "fn": 0,
+      "support": 13,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "preco=pos": {
+      "tp": 23,
+      "fp": 0,
+      "fn": 0,
+      "support": 23,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "preco=neg": {
+      "tp": 6,
+      "fp": 0,
+      "fn": 0,
+      "support": 6,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "atendimento=pos": {
+      "tp": 13,
+      "fp": 0,
+      "fn": 0,
+      "support": 13,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "atendimento=neg": {
+      "tp": 5,
+      "fp": 0,
+      "fn": 0,
+      "support": 5,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    }
+  },
+  "by_aspect": {
+    "sabor": {
+      "tp": 104,
+      "fp": 0,
+      "fn": 0,
+      "support": 104,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "tempo_entrega": {
+      "tp": 65,
+      "fp": 0,
+      "fn": 0,
+      "support": 65,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "temperatura": {
+      "tp": 62,
+      "fp": 0,
+      "fn": 0,
+      "support": 62,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "embalagem": {
+      "tp": 45,
+      "fp": 0,
+      "fn": 0,
+      "support": 45,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "preco": {
+      "tp": 29,
+      "fp": 0,
+      "fn": 0,
+      "support": 29,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "atendimento": {
+      "tp": 18,
+      "fp": 0,
+      "fn": 0,
+      "support": 18,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    }
+  },
+  "by_polarity": {
+    "pos": {
+      "tp": 251,
+      "fp": 0,
+      "fn": 0,
+      "support": 251,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "neg": {
+      "tp": 72,
+      "fp": 0,
+      "fn": 0,
+      "support": 72,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    }
+  },
+  "gate_passed": true
+}
