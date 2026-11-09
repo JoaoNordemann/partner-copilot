@@ -1,4 +1,7 @@
-# Model card do PartnerCopilot ABSA · rascunho
+# Model card do PartnerCopilot ABSA
+
+O adapter está disponível no Hugging Face na revisão `742d1dcb93d71aee84fda6a84f5ca23dd8c281d6`.
+[Revisão publicada](https://huggingface.co/jnordemann/partnercopilot-absa-qlora-v1/tree/742d1dcb93d71aee84fda6a84f5ca23dd8c281d6)
 
 O adapter LoRA do checkpoint 253 extrai seis aspectos de uma review em
 português e atribui polaridade positiva ou negativa a cada aspecto mencionado.
@@ -26,8 +29,20 @@ A validação teve 140/140 JSONs válidos. A validação e o gold compartilham
 No gold, os rótulos do gerador coincidiram com a referência humana em
 87/100 reviews (macro-F1 0,9855). O QLoRA reproduziu as 13 divergências
 de convenção do gerador e confundiu demora no atendimento com atraso na
-entrega em duas outras reviews. O diagnóstico externo em texto real de
-comércio eletrônico tem referência humana congelada e aguarda execução. [Resultados e auditoria](../reports/absa-eval-checkpoint-253-v1/README.md) ·
+entrega em duas outras reviews.
+
+Na B2W-Reviews01, de comércio eletrônico real em português brasileiro, o
+adapter produziu 172/200 JSONs válidos. Nos 30 textos anotados por uma
+pessoa, acertou todos os pares em 9/30 reviews, recuperou 9 dos 12 pares
+anotados e acrescentou 20. Dez das 19 reviews com rótulo vazio receberam
+um par extra. O TF-IDF acertou 18/30 por conjunto exato, recuperou 5 pares
+e acrescentou 8. A validade de formato e os falsos positivos em
+referências vazias excederam os limites do protocolo. O adapter é um
+artefato de pesquisa sobre supervisão sintética. Os resultados de
+transferência são específicos ao pequeno recorte B2W. A B2W foi usada
+apenas na avaliação externa. [Fonte e licença B2W](https://github.com/americanas-tech/b2w-reviews01/blob/4639429ec698d7821fc99a0bc665fa213d9fcd5a/README.md#licensing)
+
+[Resultados e auditoria](../reports/absa-eval-checkpoint-253-v1/README.md) ·
 [Protocolo externo](absa-external-evaluation.md)
 
 O manifesto fixa a revisão da base, a configuração de geração e os hashes

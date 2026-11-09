@@ -65,6 +65,47 @@ por par, preservando os rótulos originais como referência principal.
 
 A amostra de 200 está verificada. A referência humana v1 tem 30 IDs,
 19 mapas vazios e 12 pares anotados após dois ajustes confirmados pelo
-anotador. A rodada aguarda execução.
+anotador. A rodada foi executada uma vez no Kaggle em uma Tesla T4.
 [Rótulos](../data/absa/b2w-human-v1.jsonl) ·
 [Manifesto e SHA-256](../data/absa/b2w-human-v1.manifest.json)
+
+## Resultado do checkpoint 253
+
+O QLoRA produziu 172/200 JSONs válidos (86,0%). Das 28 saídas inválidas,
+27 falharam na validação de aspecto ou polaridade e uma na sintaxe JSON.
+Entre os 200 textos, 87 receberam ao menos um rótulo válido de sabor ou
+temperatura, com 74 menções a sabor e 25 a temperatura.
+
+| Métrica nos 30 textos anotados | QLoRA | TF-IDF + regressão logística |
+| --- | ---: | ---: |
+| Conjunto exato | 9/30 | 18/30 |
+| JSON inválido | 8/30 | 0/30 |
+| Pares corretos | 9 | 5 |
+| Pares extras | 20 | 8 |
+| Pares omitidos | 3 | 7 |
+| Referências vazias com par extra | 10/19 | 5/19 |
+| Macro-F1 descritivo, cinco pares com suporte | 0,6758 | 0,2171 |
+
+| Par | Suporte | QLoRA TP / FP / FN | TF-IDF TP / FP / FN |
+| --- | ---: | ---: | ---: |
+| Entrega positiva | 4 | 3 / 4 / 1 | 4 / 2 / 0 |
+| Entrega negativa | 2 | 2 / 2 / 0 | 0 / 2 / 2 |
+| Embalagem positiva | 0 | 0 / 2 / 0 | 0 / 0 / 0 |
+| Embalagem negativa | 0 | 0 / 7 / 0 | 0 / 0 / 0 |
+| Preço positivo | 3 | 1 / 0 / 2 | 1 / 3 / 2 |
+| Preço negativo | 0 | 0 / 4 / 0 | 0 / 0 / 0 |
+| Atendimento positivo | 1 | 1 / 1 / 0 | 0 / 1 / 1 |
+| Atendimento negativo | 2 | 2 / 0 / 0 | 0 / 0 / 2 |
+
+O QLoRA excedeu dois limites predefinidos. A taxa de JSON inválido foi
+14,0% e a de referências vazias com par extra foi 52,6%. A taxa de omissão
+ficou em 25,0%, abaixo do limite de 30%. O modelo recuperou mais pares
+anotados que o TF-IDF e também acrescentou mais pares sem suporte. Os
+pares sem suporte ficam fora do macro-F1 e seus falsos positivos entram
+nas contagens e no acerto exato. A avaliação descreve a transferência
+de entrega de comida sintética para comércio eletrônico real.
+
+A revisão qualitativa pelo anotador está pendente. O lote local de
+revisão cobre os 17 IDs com falso positivo em pelo menos um dos métodos.
+O ZIP bruto permanece local. Seu SHA-256 é
+`3cc01d66290bfe6da9066b58f80d2a85ae7180b0025f6a039163d55e5095927d`.

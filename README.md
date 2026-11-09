@@ -83,6 +83,13 @@ JSON válido em 140/140 na validação. O QLoRA obteve macro-F1 de 0,9819 no gol
 0,7240 e 0,3980, respectivamente.
 [Relatório do treino ABSA](reports/absa-qlora-train-v1/README.md) ·
 [Avaliação ABSA](reports/absa-eval-checkpoint-253-v1/README.md).
+
+Na avaliação externa B2W, o adapter produziu 172/200 JSONs válidos.
+Nos 30 textos anotados, acertou o conjunto de pares em 9/30 reviews,
+com 20 pares extras. O model card documenta o desempenho e os limites
+observados na transferência para comércio eletrônico real.
+[Relatório B2W](docs/absa-external-evaluation.md) ·
+[Adapter e model card no Hugging Face](https://huggingface.co/jnordemann/partnercopilot-absa-qlora-v1).
 [Docker CPU](docs/docker.md) está preparado, mas build/execução não foram testados
 localmente por falta de Docker; o caminho GPU em container também não foi testado.
 
