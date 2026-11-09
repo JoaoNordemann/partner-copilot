@@ -12,7 +12,10 @@ A sessão foi encerrada após cerca de 9 minutos, com o ZIP baixado e verificado
 Macro-F1 de desenvolvimento de **1,0000**. Todos os 12 pares tiveram precisão,
 recall e F1 iguais a 1,0000. A validação compartilha 84,1% das ocorrências de
 frases com o treino. O checkpoint foi escolhido pela menor perda teacher-forced
-na primeira época, entre os três checkpoints avaliados.
+na primeira época, entre os três checkpoints avaliados. Pela regra dos três,
+0/140 inválidos dá um limite superior unilateral aproximado de 2,1% a 95%,
+sob a hipótese de observações independentes da mesma distribuição. Templates
+repetidos restringem a leitura desse limite.
 
 ## Macro-F1 por conjunto
 
@@ -25,7 +28,15 @@ na primeira época, entre os três checkpoints avaliados.
 | Famílias mistas | 310 | 12 | 0,9946 | 0,5682 | 0,3194 | 0,7350 |
 
 Todos os métodos produziram JSON válido em 100/100 no gold e em 346/346
-nos templates reservados. Os recortes usam as mesmas previsões.
+nos templates reservados. O gold foi medido uma vez por método. O recorte
+sem os quatro ambíguos foi [pré-registrado](../../docs/decisions.md#absa-protocolo-de-avaliação-pré-treino)
+e reutiliza as mesmas previsões.
+
+O Qwen base usou quatro demonstrações do treino, selecionadas por cobertura
+de pares. O baseline usou a mesma instrução por review e a mesma decodificação
+gulosa do QLoRA, precedidas pelas quatro demonstrações. A instrução e os exemplos
+foram fixados antes de abrir os conjuntos finais. Essa comparação representa
+essa configuração de few-shot. [Demonstrações](few-shot.json)
 
 O QLoRA superou o few-shot nos dois conjuntos. O TF-IDF foi o baseline mais
 forte e empatou com o QLoRA em 70/100 reviews do gold. A queda esperada do QLoRA
@@ -37,8 +48,84 @@ ocorrências de frases com o treino.
 
 O conjunto completo de pares do QLoRA coincidiu com a referência em 85/100
 reviews do gold, 340/346 dos templates reservados e 36/36 do recorte inédito.
-Por exemplo, o JSON de `rev_002800` no gold era válido, mas acrescentou
-`sabor=neg`, aspecto omitido na referência humana por ambiguidade.
+Pela regra dos três, 0/36 erros de conjunto exato dá um limite superior
+aproximado de 8,3% a 95%, sob as mesmas hipóteses. Os três pares ausentes do
+recorte são excluídos do macro-F1. A avaliação sintética é quase determinística
+para o extrator nessas amostras. Os 36 textos usam famílias reservadas com
+rótulos do mesmo gerador. A avaliação de texto real está descrita no
+[protocolo externo](../../docs/absa-external-evaluation.md).
+
+## Divergências no gold
+
+Revisão pós-avaliação dos 15 casos sem acerto exato. Classifiquei como
+divergência de convenção quando o QLoRA reproduziu o rótulo sintético e o
+guia humano fundamentava a omissão. Chamei de erro do extrator quando o par
+adicional não tinha evidência textual e também estava ausente do rótulo
+sintético. A leitura seguiu o guia congelado e encontrou **13 divergências
+de convenção, 2 erros do extrator e 0 rótulos humanos questionáveis**.
+
+A comparação direta dos rótulos do gerador com a referência humana nos
+mesmos 100 IDs deu **87/100 conjuntos exatos**, **0,9855 de macro-F1**,
+240 pares em comum, 13 extras do gerador e zero omissões. O gerador
+atribuiu um par extra em cada uma das 13 reviews divergentes. A medida
+quantifica a concordância da supervisão sintética com o guia humano
+nesse recorte. Para o QLoRA, o mesmo gold deu 85/100 conjuntos exatos
+e 0,9819 de macro-F1.
+
+| Review | Classe | Par extra do QLoRA e motivo |
+| --- | --- | --- |
+| rev_001895 | Convenção | Sabor positivo a partir de aprovação geral do prato. |
+| rev_001685 | Convenção | Entrega positiva a partir de 33 minutos sem julgamento. |
+| rev_002363 | Convenção | Sabor positivo a partir de aprovação geral da torta. |
+| rev_000613 | Convenção | Sabor positivo a partir de aprovação geral da vitamina. |
+| rev_002476 | Convenção | Sabor positivo a partir de elogio geral ao prato. |
+| rev_002800 | Convenção | Sabor negativo a partir de diferença do habitual sem avaliação explícita. |
+| rev_002980 | Convenção | Sabor negativo a partir de diferença do habitual sem avaliação explícita. |
+| rev_000708 | Convenção | Sabor positivo a partir de aprovação geral da linguiça. |
+| rev_002257 | Erro do extrator | Entrega negativa a partir de demora para responder a uma dúvida. |
+| rev_001760 | Convenção | Sabor positivo a partir de elogio geral à lasanha. |
+| rev_002142 | Convenção | Sabor positivo a partir de elogio geral ao yakisoba. |
+| rev_001916 | Convenção | Sabor positivo a partir de elogio geral à marmita. |
+| rev_000650 | Convenção | Sabor positivo a partir de aprovação geral da pizza. |
+| rev_000673 | Erro do extrator | Entrega negativa a partir de demora para responder a uma dúvida. |
+| rev_000926 | Convenção | Entrega positiva a partir de 23 minutos sem julgamento. |
+
+A única derrota para o TF-IDF foi em `rev_002800`. A review descreve o gosto
+como diferente do habitual, elogia a embalagem e indica rapidez. O QLoRA
+acertou embalagem e entrega e acrescentou sabor negativo, com F1 por review
+de 0,80. O TF-IDF omitiu sabor e atingiu 1,00. O encerramento com crítica
+genérica não liga explicitamente a insatisfação ao gosto.
+
+As duas confusões de atendimento com prazo de entrega aparecem nos textos
+sintéticos a seguir. Em ambos, a espera é por resposta a uma dúvida.
+
+> **rev_002257** · Demoraram demais pra responder minha dúvida. O sabor de burger duplo estava muito bom.
+
+> **rev_000673** · Resolvi experimentar pizza quatro queijos. Demoraram demais pra responder minha dúvida. Já estava morno quando abri. Espero que melhorem.
+
+A mesma `rev_002800` foi considerada relevante para a pergunta q22 de
+retrieval. No gold ABSA, a frase sobre um gosto diferente ficou sem
+polaridade explícita. Na comparação por review, esse mesmo ponto gerou a
+única derrota para o TF-IDF. A diferença mostra como a mesma frase pode
+ser pertinente para uma busca e deixar a polaridade em aberto.
+[Revisão de q22](../../docs/human-review-results.md#mudança-em-q22)
+
+## Custo de execução
+
+TF-IDF com seis regressões logísticas em um AMD Ryzen 5 5600, um thread,
+Python 3.14.7 e scikit-learn 1.9.1. A medição após aquecimento inclui
+vetorização, predição e serialização JSON, com os classificadores já ajustados.
+As 100 predições coincidiram com as do scikit-learn 1.6.1 no Kaggle.
+
+| Medição em CPU | Mediana | p95 |
+| --- | ---: | ---: |
+| Uma review por chamada, 100 chamadas | 1,29 ms | 1,44 ms |
+| Lote de 100 reviews, 30 repetições | 4,71 ms | 5,22 ms |
+
+O ajuste dos seis classificadores em 1.263 reviews levou 246 ms em uma execução.
+O QLoRA foi avaliado em Tesla T4, com NF4 e lotes de até oito reviews. A sessão
+de cerca de nove minutos incluiu preparação, carga do modelo, QLoRA, few-shot,
+baselines clássicos e download. A rodada não registrou latência isolada do QLoRA.
 
 ## Placar por review
 
