@@ -1247,3 +1247,79 @@ vocabulário fixo por aspecto e polaridade. O TF-IDF usa palavras e bigramas com
 regressão logística balanceada por aspecto (classes ausente, pos e neg),
 ajustada apenas no treino. O placar pareado usa F1 dos pares exatos por
 review. Saída inválida recebe zero. Dois mapas vazios válidos recebem um.
+
+## Enriquecimento ABSA na ingestão — desenho e protocolo exploratório
+
+Executar o extrator em lotes sobre o texto integral, antes do chunking. Gerar
+um resultado por review e versão do extrator, reaproveitando-o nas reingestões
+enquanto o texto e a versão forem os mesmos. Replicar o resultado em todos os
+chunks da review. A consulta usa apenas os metadados já indexados, sem chamar
+o extrator.
+
+Gravar `aspect_<nome>=pos|neg` e manter `aspects_json` sincronizado. Aspectos
+ausentes ficam sem chave. Usar `absa_extractor_version` como identificador
+escalar da versão, resolvido em manifesto para as revisões imutáveis do modelo
+base e do adapter e para as versões do prompt e do parser. Gravar também
+`absa_status=ok|error`: um mapa vazio válido é `ok` e uma tentativa que falhou é
+`error`. Reviews legadas sem versão, com versão antiga, com erro ou com texto
+alterado ficam elegíveis para reprocessamento.
+
+Se o JSON for inválido ou violar o schema, indexar normalmente o texto, o
+embedding e os metadados básicos. Gravar mapa vazio e remover chaves de aspectos
+antigas, inclusive dos chunks reaproveitados. Registrar ID, versão e código do
+erro em log, sem texto da review nem saída bruta. Em coleções enriquecidas,
+as previsões substituem os rótulos sintéticos no índice. Os arquivos de origem
+e as referências de relevância ficam congelados.
+
+### Hipótese e perguntas elegíveis
+
+Em perguntas sobre reclamações de um aspecto, aplicar
+`aspect_<nome>=neg` aumenta a precisão da busca. Erros de omissão ou de
+polaridade do extrator podem excluir reviews relevantes. Fixar o mapeamento
+pelo texto das perguntas, incluindo paráfrases, antes de gerar predições:
+
+| Aspecto | Perguntas respondíveis |
+| --- | --- |
+| embalagem | q01, q05, q21 |
+| atendimento | q02, q23 |
+| temperatura | q03, q06, q19 |
+| sabor | q04, q07, q14–q18, q22 |
+| preco | q08, q24 |
+| tempo_entrega | q09–q13, q20 |
+
+As 24 respondíveis de `human-v2` compõem a análise principal. q29 (sabor) e
+q30 (tempo_entrega) são controles negativos separados: item inexistente e
+janela sem reviews. q25–q28 pedem fatos que a taxonomia ABSA não representa
+e ficam fora da comparação por aspecto.
+
+### Comparação e critério de sucesso
+
+Usar a mesma coleção enriquecida, o corpus congelado de 100 reviews, os mesmos
+embeddings multilíngues, texto, chunking, filtros de restaurante, item e data,
+e o limiar operacional de 0,25 nos dois braços. O único fator que muda é
+acrescentar o filtro de aspecto negativo. Fixar k=5 como análise principal e
+k=8 como diagnóstico. Não acionar fallback sem aspecto nesta comparação,
+pois ele esconderia perdas do filtro.
+
+Calcular as métricas pelas definições já registradas: hit@k, precision@k
+(divisor k mesmo com posições vazias), recall@k limitado e MRR truncado em k.
+Manter os mesmos IDs relevantes nos dois braços. Reportar as contagens,
+médias e vitórias, empates e derrotas pareadas por pergunta para precisão e
+recall. Nos controles negativos, registrar quantas consultas retornam vazio.
+
+Considerar a hipótese apoiada neste conjunto se o filtro ganhar pelo menos
+2 pontos percentuais de precision@5, perder no máximo 2 pontos percentuais
+de recall limitado@5 e transformar em zero acertos no máximo uma pergunta
+que tinha evidência no top 5 sem o filtro. Esses limites são operacionais.
+Reportar todas as diferenças mesmo se o critério não for atingido.
+
+Antes do ranking, contar os pares pergunta–review relevante que passam pelos
+filtros básicos e são excluídos pelo ABSA. Separar saída inválida, aspecto
+ausente e polaridade positiva. Reportar também quantas perguntas perdem todos
+os seus relevantes elegíveis. Ler os casos de perda para distinguir erro do
+extrator de divergência de anotação ou de escopo. Essa auditoria complementa
+a métrica de recall, que só vê os itens retornados no top k.
+
+As perguntas de `human-v2` já orientaram iterações anteriores. Esta comparação
+é exploratória, e o corpus é sintético. O resultado mede o efeito do filtro
+nesse conjunto exposto.

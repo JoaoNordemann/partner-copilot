@@ -1,8 +1,6 @@
 # Estudo de Engenharia de IA: status
 
-Atualizado em 2026-11-06 para o fechamento `v0.1-rag-mvp`. Documento criado porque
-não havia uma tabela de estudo no repositório. Estados refletem evidências reais,
-sem datas de execução fictícias ou aprovação automática de experimentos.
+Atualizado em 2026-11-09 com os resultados externos do ABSA e o plano de GPU.
 
 | Frente | Estado | Evidência / próximo passo |
 | --- | --- | --- |
@@ -19,13 +17,54 @@ sem datas de execução fictícias ou aprovação automática de experimentos.
 | Replay aprovado | Contrato e testes prontos; catálogo pendente | Até três casos com aprovação humana elegível. Começar pela resposta n17 e pela abstenção n20. A falha n12 fica na aba histórica |
 | CI e versão MVP | Implementado; publicação protegida por gate | Tag v0.1-rag-mvp somente após CI remoto verde no mesmo commit; badge do README |
 | QLoRA / ABSA | Treino concluído | 759 passos na T4, checkpoint 253 escolhido pela validação. 140/140 JSONs válidos na validação. Gold e templates reservados medidos uma vez. [Avaliação](../reports/absa-eval-checkpoint-253-v1/README.md) |
-| FP16 na T4 16 GB | Pendente | Comparação controlada com NF4, sem afirmar resultado antecipado |
+| Avaliação externa B2W | Medida | 30 IDs e rótulos congelados, com teste de formato em 200 textos. [Relatório](absa-external-evaluation.md) |
+| Adapter ABSA | Publicado e verificado | Download anônimo em sessão limpa no Kaggle, com 3/3 exemplos sintéticos válidos e exatos. [Model card](absa-model-card.md) |
+| Integração ABSA na ingestão | Protocolo registrado | Implementação e avaliação exploratória pendentes. [Decisões](decisions.md#enriquecimento-absa-na-ingestão--desenho-e-protocolo-exploratório) |
+| FP16 na T4 16 GB | Pendente | Comparar o Mistral FP16 e NF4 com a mesma entrada e configuração de geração |
 | Space | Adiado | Não bloquear entrega local; distinguir gravação de busca CPU ao vivo |
 | Avaliação final reservada | Preservada, não executada | Uma rodada futura, sem ajuste posterior |
 
+## Resultados do ABSA
+
+| Conjunto | QLoRA, acerto exato | Melhor baseline por acerto exato |
+| --- | ---: | ---: |
+| Gold sintético | 85/100 | TF-IDF, 60/100 |
+| Templates reservados | 340/346 | TF-IDF, 101/346 |
+| Famílias inéditas dentro dos reservados | 36/36 | TF-IDF, 22/36 |
+| B2W com rótulos humanos | 9/30 | Regras, 23/30 |
+
+Na B2W, o QLoRA produziu 172/200 JSONs válidos. Nos 30 textos anotados,
+acertou 9 pares, previu 20 pares extras e omitiu 3. Em 13/100 reviews do
+gold, reproduziu a convenção do gerador onde ela divergia do guia humano.
+A amostra externa tem um único anotador e é de e-commerce, o que limita
+a extrapolação para reviews reais de restaurantes.
+[Resultados e baselines](absa-model-card.md#resultados) ·
+[Protocolo e revisão B2W](absa-external-evaluation.md)
+
+A referência B2W versiona os IDs, os rótulos e seu manifesto. Os textos
+integrais ficam locais, conforme a política de distribuição do projeto.
+[Rótulos](../data/absa/b2w-human-v1.jsonl) ·
+[Origem e licença](external-data.md)
+
+## Plano de GPU
+
+Em 2026-11-09, o painel de opções da sessão do Kaggle exibiu
+`Quota: 01:25 / 30 hrs` com GPU T4 x2 selecionada. O orçamento abaixo usa
+85 minutos como saldo observado. Conferir novamente antes de iniciar.
+
+| Trabalho | Teto de sessão | Condição |
+| --- | ---: | --- |
+| Comparação FP16 e NF4 | 35 min | Uma T4 de 16 GB, mesma revisão do Mistral e mesmas entradas. Fazer um teste curto de carga em FP16 na GPU 0 e registrar eventual falta de memória. |
+| Enriquecimento ABSA | 25 min | GPU 0 para extrair os aspectos das 100 reviews do corpus congelado e exportar as previsões. Construir o índice e comparar os filtros em CPU. |
+| Reserva | 25 min | Download, indisponibilidade de hardware ou repetição de uma etapa que falhe. |
+
+Preparar entradas e comandos localmente antes de iniciar cada sessão.
+Medir latência após aquecimento e pico de VRAM na comparação FP16/NF4.
+Se a carga FP16 falhar, registrar o erro e preservar o saldo da integração.
+
 ## Distribuição das pendências
 
-- **Durante o treino QLoRA:** testar o container CPU nos intervalos de espera da GPU.
+- **Docker CPU:** construir a imagem e verificar o container localmente em uma janela sem dependência de GPU.
 - **Na próxima sessão Kaggle que tiver folga:** aproveitar a mesma sessão de outro
   trabalho com GPU para medir fila, validação e latência ponta a ponta do backend real.
   Se a sessão não comportar a coleta completa, registrar a lacuna como limitação.
