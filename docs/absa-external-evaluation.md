@@ -109,6 +109,80 @@ O ZIP bruto permanece local. Seu SHA-256 é
 `3cc01d66290bfe6da9066b58f80d2a85ae7180b0025f6a039163d55e5095927d`.
 
 
+## Baselines complementares e transferência
+
+A expectativa da avaliação era uma queda em relação ao sintético, em
+especial para o TF-IDF treinado nesse domínio. Os limites de validade,
+omissão e falsos positivos em referências vazias foram registrados no
+commit `8cf0cc2`, antes da inferência. O baseline de regras foi calculado
+depois da primeira rodada, com as mesmas expressões do avaliador
+sintético, que já estavam versionadas antes da B2W.
+
+As regras acertaram o conjunto de pares em **23/30 reviews**, com **6
+pares corretos, 2 extras e 6 omitidos**. As 30 saídas passaram no parser.
+Houve par extra em **2/19** referências vazias. O macro-F1 descritivo foi
+**0,4100**. Os dois falsos positivos foram de prazo. Em
+`b2w_row_131837`, a rapidez descreve o produto. Em `b2w_row_018390`,
+o texto pergunta quanto tempo levou a entrega. Os mesmos textos já
+faziam parte da revisão humana de QLoRA e TF-IDF.
+
+| Par | Suporte | Regras TP / FP / FN |
+| --- | ---: | ---: |
+| Entrega positiva | 4 | 3 / 1 / 1 |
+| Entrega negativa | 2 | 1 / 1 / 1 |
+| Embalagem positiva | 0 | 0 / 0 / 0 |
+| Embalagem negativa | 0 | 0 / 0 / 0 |
+| Preço positivo | 3 | 2 / 0 / 1 |
+| Preço negativo | 0 | 0 / 0 / 0 |
+| Atendimento positivo | 1 | 0 / 0 / 1 |
+| Atendimento negativo | 2 | 0 / 0 / 2 |
+
+A validade do QLoRA caiu de **100/100 no gold sintético para 172/200
+na B2W**, uma diferença de 14 pontos percentuais. Para comparar
+macro-F1, recalculamos o gold sintético sobre os mesmos cinco pares
+com suporte na B2W. O QLoRA passou de **0,9830 para 0,6758** e o TF-IDF
+de **0,8817 para 0,2171**. A diferença é descritiva. Os conjuntos
+têm domínios, suportes por par e tamanhos diferentes.
+[Métricas do gold sintético](../reports/absa-eval-checkpoint-253-v1/final.json)
+
+A sessão complementar usou as quatro demonstrações congeladas do treino
+e os mesmos 30 IDs para avaliar o Qwen base, com o adapter desativado.
+O Qwen acertou **0/30 conjuntos exatos**. Produziu **28/30 saídas válidas**,
+com **12 pares corretos, 95 extras e zero omissões**. Houve ao menos um
+par extra em **17/19** referências vazias. O macro-F1 descritivo nos
+cinco pares com suporte foi **0,3996**. Todos os 28 JSONs válidos
+trouxeram algum par extra. Os outros dois foram rejeitados por aspecto
+ou polaridade fora do contrato. A revisão dos casos do few-shot foi
+preparada para o anotador.
+
+| Par | Suporte | Qwen few-shot TP / FP / FN |
+| --- | ---: | ---: |
+| Entrega positiva | 4 | 4 / 2 / 0 |
+| Entrega negativa | 2 | 2 / 19 / 0 |
+| Embalagem positiva | 0 | 0 / 8 / 0 |
+| Embalagem negativa | 0 | 0 / 18 / 0 |
+| Preço positivo | 3 | 3 / 4 / 0 |
+| Preço negativo | 0 | 0 / 19 / 0 |
+| Atendimento positivo | 1 | 1 / 6 / 0 |
+| Atendimento negativo | 2 | 2 / 19 / 0 |
+
+Na mesma sessão em Tesla T4, medimos o checkpoint 253 em 30 outros
+textos da amostra, com lote unitário e cinco aquecimentos excluídos
+das estatísticas. Com o modelo já carregado, a latência de tokenização,
+inferência e decodificação foi **1,41 s de mediana**, **2,38 s de p95**
+e **3,07 s de máximo**. O pico de VRAM foi **1,17 GiB alocada** e
+**1,88 GiB reservada**. A medição exclui leitura de arquivos, carga
+do modelo e rede.
+
+O ZIP complementar permanece local. Seu SHA-256 é
+`bfca2d10264e66916ff63a968bcb4c16c48944b6227774811ed4670ed5af9dde`.
+
+## Conclusão
+
+> O extrator, treinado só com dados sintéticos de restaurantes, acertou o conjunto completo de aspectos e polaridades em 9 de 30 textos reais de e-commerce anotados por mim (30%), contra 23 de 30 (76,7%) do melhor baseline nesse critério, as regras por palavras-chave. Amostra pequena, um único anotador, domínio diferente.
+>
+> O treino ensinou o extrator a reproduzir as convenções do gerador, mas a queda em texto real e os falsos positivos indicam que ele ainda depende de pistas lexicais e falha ao ligar palavras como “rápido” ao que elas descrevem, ou ao deixar um aspecto sem rótulo quando falta evidência.
+
 ## Revisão humana das previsões
 
 O anotador revisou os 17 IDs com ao menos um falso positivo pontuado em
