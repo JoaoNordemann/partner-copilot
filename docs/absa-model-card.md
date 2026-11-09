@@ -125,9 +125,9 @@ inputs = tokenizer.apply_chat_template(
     return_tensors="pt",
 ).to("cuda:0")
 with torch.inference_mode():
-    ids = model.generate(
-        **inputs, do_sample=False, max_new_tokens=96, use_cache=True
-    )[0, inputs["input_ids"].shape[1]:].tolist()
+    ids = model.generate(**inputs, do_sample=False, max_new_tokens=96, use_cache=True)[
+        0, inputs["input_ids"].shape[1] :
+    ].tolist()
 eos = model.generation_config.eos_token_id
 eos = {eos} if isinstance(eos, int) else set(eos or ())
 end = next((i for i, token in enumerate(ids) if token in eos), len(ids))
