@@ -105,7 +105,51 @@ pares sem suporte ficam fora do macro-F1 e seus falsos positivos entram
 nas contagens e no acerto exato. A avaliação descreve a transferência
 de entrega de comida sintética para comércio eletrônico real.
 
-A revisão qualitativa pelo anotador está pendente. O lote local de
-revisão cobre os 17 IDs com falso positivo em pelo menos um dos métodos.
 O ZIP bruto permanece local. Seu SHA-256 é
 `3cc01d66290bfe6da9066b58f80d2a85ae7180b0025f6a039163d55e5095927d`.
+
+
+## Revisão humana das previsões
+
+O anotador revisou os 17 IDs com ao menos um falso positivo pontuado em
+qualquer dos métodos. São 13 IDs no QLoRA e sete no TF-IDF, com três em
+comum. A revisão interpreta as previsões em relação à referência já
+congelada. No caso 02, a observação sobre embalagem confirma a omissão
+que já constava na referência v1.
+
+| Julgamento dos pares extras pontuados | QLoRA | TF-IDF |
+| --- | ---: | ---: |
+| Sem evidência textual | 16 | 6 |
+| Ambíguo | 4 | 1 |
+| Contradito pelo texto | 0 | 1 |
+| Total | 20 | 8 |
+
+No QLoRA, os quatro pares ambíguos foram três de embalagem e um de
+preço. No TF-IDF, a contradição foi atendimento positivo diante de
+uma reclamação de atendimento. O anotador também revisou duas saídas
+brutas do QLoRA rejeitadas pelo parser. Os aspectos fora do contrato
+dessas duas saídas ficaram no diagnóstico qualitativo. As previsões
+válidas de sabor e temperatura foram examinadas como confusão de domínio,
+fora da contagem de pares extras dos quatro aspectos.
+
+| ID | QLoRA | TF-IDF |
+| --- | --- | --- |
+| b2w_row_029847 | Sabor sem evidência. | Sabor sem evidência. Atendimento positivo contradiz a reclamação. |
+| b2w_row_033377 | Embalagem e preço ambíguos. O dano não é atribuído à embalagem e a menção ao valor é contextual. | Sabor sem evidência. |
+| b2w_row_055345 | Prazo, embalagem e preço sem evidência. A crítica aborda falha do produto e atendimento. | Sabor e temperatura sem evidência. |
+| b2w_row_123422 | Sabor fora do recorte. Embalagem ambígua, pois o defeito parece estar no frasco do produto. | Sabor e prazo sem evidência. |
+| b2w_row_000449 | Atendimento sem evidência. O verbo se refere à utilidade do produto. | Saída vazia. |
+| b2w_row_125467 | Sabor e prazo sem evidência. A duração mencionada se refere ao uso. | Saída vazia. |
+| b2w_row_047123 | Sabor e embalagem sem evidência. | Temperatura sem evidência. |
+| b2w_row_038164 | Sabor, prazo e embalagem sem evidência. A rapidez descreve o produto. | Sabor e prazo sem evidência. |
+| b2w_row_131837 | Sabor, prazo e preço sem evidência. Embalagem ambígua diante de um defeito do produto. | Sabor sem evidência. |
+| b2w_row_103622 | Embalagem e preço sem evidência. O texto critica a dimensão do produto. | Saída vazia. |
+| b2w_row_018390 | Prazo positivo sem evidência. O texto é uma pergunta. | Sabor e prazo negativo sem evidência. |
+| b2w_row_124379 | Prazo negativo sem evidência de atraso. | Sabor e temperatura sem evidência. |
+| b2w_row_060054 | Sabor e embalagem sem evidência. A crítica é ao tamanho e à fixação do produto. | Sabor sem evidência. |
+| b2w_row_117689 | Sabor e embalagem sem evidência. A crítica é à apresentação do conteúdo. | Sabor sem evidência. |
+| b2w_row_109399 | Saída rejeitada por chaves de componentes e garantia. Preço positivo ambíguo na saída bruta. | Sabor e prazo sem evidência. Preço positivo ambíguo. |
+| b2w_row_008617 | Coincide com a referência. | Preço positivo sem evidência. A recomendação é genérica. |
+| b2w_row_074082 | Saída rejeitada por chaves de funcionalidade e requisito de internet. | Preço positivo sem evidência. O texto descreve um requisito de internet. |
+
+A segunda anotação cega opcional ainda não foi realizada.
