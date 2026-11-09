@@ -1,0 +1,30 @@
+{
+  "protocol": "absa-external-v1",
+  "source": "B2W-Reviews01",
+  "sample_sha256": "97b813093cda3e33fc6a07e4f81075e181da58d3173c056f8d9ecb00d560f443",
+  "annotation_packet_sha256": "9b9098fe2fad5b2a775fe60ade476763cee73a8b685cdee52caa360e762fbe37",
+  "labels": "data/absa/b2w-human-v1.jsonl",
+  "labels_sha256_lf": "3a760fe77bd6bb57f09f95f3d7d4f78cfaeb7bcd607981d5d760e8f618a23fc9",
+  "annotators": 1,
+  "reviews": 30,
+  "empty_reviews": 19,
+  "pair_counts": {
+    "atendimento=neg": 2,
+    "atendimento=pos": 1,
+    "preco=pos": 3,
+    "tempo_entrega=neg": 2,
+    "tempo_entrega=pos": 4
+  },
+  "confirmed_adjustments": [
+    {
+      "id": "b2w_row_033377",
+      "removed_pair": "embalagem=neg",
+      "reason": "Dano sem vínculo explícito com a embalagem."
+    },
+    {
+      "id": "b2w_row_109399",
+      "removed_pair": "preco=neg",
+      "reason": "Polaridade de preço considerada ambígua."
+    }
+  ]
+}

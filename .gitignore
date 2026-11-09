@@ -73,3 +73,5 @@ data/absa/*
 !data/absa/validation-v1.jsonl
 !data/absa/dataset-v1.json
 !data/absa/README.md
+!data/absa/b2w-human-v1.jsonl
+!data/absa/b2w-human-v1.manifest.json
