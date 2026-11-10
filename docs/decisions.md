@@ -1287,10 +1287,15 @@ pelo texto das perguntas, incluindo paráfrases, antes de gerar predições:
 | preco | q08, q24 |
 | tempo_entrega | q09–q13, q20 |
 
-As 24 respondíveis de `human-v2` compõem a análise principal. q29 (sabor) e
-q30 (tempo_entrega) são controles negativos separados: item inexistente e
-janela sem reviews. q25–q28 pedem fatos que a taxonomia ABSA não representa
-e ficam fora da comparação por aspecto.
+A tabela fixa pelo texto da pergunta o aspecto das 24 respondíveis de
+`human-v2`. Todas as 24 entram na média principal, inclusive as paráfrases.
+A saída do extrator não participa dessa seleção. Aplicar o filtro apenas a
+perguntas de reclamação com aspecto mapeado na taxonomia, sempre com
+`aspect_<nome>=neg`. Sem aspecto aplicável ou com aspecto fora da taxonomia,
+desligar o filtro de aspecto. q25–q28 ficam fora da média principal e são
+controles sem ação do filtro. q29 (sabor) e q30 (tempo_entrega) são controles
+negativos separados com aspecto mapeado, item inexistente e janela sem
+reviews, respectivamente.
 
 ### Comparação e critério de sucesso
 
@@ -1320,15 +1325,24 @@ os seus relevantes elegíveis. Ler os casos de perda para distinguir erro do
 extrator de divergência de anotação ou de escopo. Essa auditoria complementa
 a métrica de recall, que só vê os itens retornados no top k.
 
-### Controle com rótulos de origem e leitura das contagens
+### Quatro braços e leitura das contagens
 
-Além dos braços sem filtro de aspecto e com filtro estrito por predição,
-rodar um terceiro braço com o mesmo filtro estrito sobre os rótulos do
-gerador. Fazer uma junção por ID com a origem sintética versionada e
-conferir que os textos correspondem. Usar uma coleção de controle com os
-mesmos vetores, chunks, escopo e limiar. Congelar os mesmos IDs relevantes
-nos três braços. Reportar filtro por predição e filtro por rótulo de
-origem contra a mesma base, e comparar os dois filtros entre si.
+| Braço | Restrição de aspecto | Fonte dos rótulos |
+| --- | --- | --- |
+| A | Desligada. Referência v0.1. | Nenhuma para a consulta |
+| B | Negativo, filtro estrito | Predições QLoRA |
+| C | Negativo, filtro estrito | Rótulos do gerador, controle idealizado |
+| D | Negativo, filtro estrito | Rótulos humanos congelados do gold |
+
+O braço D está confirmado: os 100 IDs e textos de `human-v2` correspondem
+ao gold cego, e os mesmos 100 IDs constam em
+`data/gold/aspects_100.human.jsonl`. Juntar os rótulos humanos por ID.
+Para o braço C, juntar por ID com a origem sintética versionada e conferir
+a correspondência dos textos. Usar coleções com os mesmos vetores, chunks,
+escopo e limiar. Manter os IDs relevantes congelados nos quatro braços.
+Comparar B, C e D com A e reportar também as diferenças entre os filtros.
+O critério de sucesso pré-registrado vale para B versus A. C e D servem
+para interpretar o resultado e a influência da fonte dos rótulos.
 
 O controle é uma referência idealizada para os rótulos sintéticos, sem
 garantia de teto numérico para cada métrica. Parte da relevância se apoia
