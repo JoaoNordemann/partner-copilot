@@ -14,6 +14,26 @@ A versão publicada carrega o adapter separadamente sobre a base NF4.
 [Licença oficial da base](https://huggingface.co/Qwen/Qwen2.5-1.5B-Instruct/blob/989aa7980e4cf806f80c7fef2b1adb7bc71aa306/LICENSE) ·
 [Revisão original dos pesos do adapter](https://huggingface.co/jnordemann/partnercopilot-absa-qlora-v1/tree/742d1dcb93d71aee84fda6a84f5ca23dd8c281d6)
 
+## Avaliação externa em texto real
+
+O adapter produziu **172/200 JSONs válidos (86%)** em reviews de
+e-commerce da B2W. Das 28 saídas inválidas, 27 incluíram chaves fora da
+taxonomia e uma teve erro de sintaxe. Em **87/200 textos (43,5%)**, o
+adapter atribuiu sabor ou temperatura, aspectos fora do recorte de
+e-commerce. O treino sintético tinha 0/1.263 referências vazias.
+
+Dos 30 textos anotados, 19 tinham referência vazia. O QLoRA acertou
+3/19 dos vazios e 6/11 dos textos com rótulo. As regras por palavras-chave
+acertaram 17/19 e 6/11, respectivamente. Os pares extras da avaliação
+principal cobrem quatro aspectos. Sabor e temperatura foram auditados
+separadamente.
+
+O macro-F1 de 0,9819 descreve o gold sintético. A avaliação B2W combina
+mudança de domínio e autoria humana, com 30 textos anotados por uma
+pessoa. O desempenho em reviews reais de restaurantes segue sem
+medição. **Uso em produção sem validação no domínio de destino está
+fora de escopo.** [Relatório externo](absa-external-evaluation.md)
+
 ## Dados e treino
 
 Os textos de treino e validação são 100% sintéticos, sem dados do iFood.
@@ -139,8 +159,7 @@ O teste no Kaggle retornou para a entrada do exemplo
 [Manifesto com revisões, configuração e hashes](../configs/absa-eval-v1.json)
 
 
-O teste em uma sessão nova do Kaggle baixou a base e o adapter sem
-autenticação, com cache vazio e sem dataset anexado. Em uma Tesla T4,
-os três exemplos sintéticos retornaram JSON válido e todos os pares
-esperados. Os exemplos cobriram prazo e temperatura, sabor e embalagem,
-e atendimento e preço.
+O teste de carregamento em uma sessão nova do Kaggle baixou a base e o
+adapter sem autenticação, com cache vazio e sem dataset anexado. Em uma
+Tesla T4, os três exemplos sintéticos retornaram JSON válido e os pares
+esperados. O teste verifica a instalação e a execução do artefato.

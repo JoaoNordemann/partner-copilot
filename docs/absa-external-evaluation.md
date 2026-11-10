@@ -99,8 +99,7 @@ temperatura, com 74 menções a sabor e 25 a temperatura.
 
 O QLoRA excedeu dois limites predefinidos. A taxa de JSON inválido foi
 14,0% e a de referências vazias com par extra foi 52,6%. A taxa de omissão
-ficou em 25,0%, abaixo do limite de 30%. O modelo recuperou mais pares
-anotados que o TF-IDF e também acrescentou mais pares sem suporte. Os
+ficou em 25,0%, abaixo do limite de 30%. O padrão observado foi superprevisão do QLoRA. Os
 pares sem suporte ficam fora do macro-F1 e seus falsos positivos entram
 nas contagens e no acerto exato. A avaliação descreve a transferência
 de entrega de comida sintética para comércio eletrônico real.
@@ -177,11 +176,63 @@ do modelo e rede.
 O ZIP complementar permanece local. Seu SHA-256 é
 `bfca2d10264e66916ff63a968bcb4c16c48944b6227774811ed4670ed5af9dde`.
 
+## Acerto exato por tipo de referência
+
+Dos 30 textos anotados, 19 têm referência vazia e 11 têm pelo menos um
+rótulo. Os 11 somam 12 pares de aspecto e polaridade. Para acerto exato,
+uma saída inválida recebe zero, inclusive em referências vazias.
+Os pares extras e o acerto exato consideram apenas prazo de entrega,
+embalagem, preço e atendimento. Sabor e temperatura são contabilizados
+separadamente como confusão de domínio.
+
+| Método | Exato, vazios | Exato, com rótulo | Exato, total | Pares corretos / extras / omitidos | Precisão | Recall |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| QLoRA | 3/19 | 6/11 | 9/30 | 9 / 20 / 3 | 9/29 | 9/12 |
+| Qwen few-shot | 0/19 | 0/11 | 0/30 | 12 / 95 / 0 | 12/107 | 12/12 |
+| Regras | 17/19 | 6/11 | 23/30 | 6 / 2 / 6 | 6/8 | 6/12 |
+| TF-IDF | 14/19 | 4/11 | 18/30 | 5 / 8 / 7 | 5/13 | 5/12 |
+
+Um método que sempre prevê um mapa vazio teria 19/30 acertos exatos.
+As regras acertaram 17 referências vazias e, nos textos com rótulo,
+empataram com o QLoRA em 6/11. No conjunto, o QLoRA tendeu a superprever,
+e as regras a omitir. Com 12 pares, as frações são descritivas.
+
+As regras foram registradas por `jnordemann` em 8 de novembro de 2026 às
+15:20 (UTC−3), no avaliador sintético do commit `422b56b`, antes de
+congelar os rótulos B2W no commit `8cf0cc2`, às 23:06 do mesmo dia.
+A rodada de regras na B2W veio depois. A versão original das regras
+reproduz as 30 previsões salvas, sem ajuste para a avaliação externa.
+[Código das regras no commit original](https://github.com/JoaoNordemann/partner-copilot/blob/422b56b/scripts/evaluate_absa.py)
+
+## Auditoria das saídas inválidas
+
+A reanálise das 200 previsões brutas, sem nova geração, identificou 27
+JSONs sintaticamente válidos com chaves de aspecto fora da taxonomia
+e um objeto com uma vírgula onde o JSON exigia dois-pontos. Nenhum dos
+27 casos tinha polaridade fora do vocabulário. Não houve erro por
+aspas ou quebras de linha sem escape, nem texto extra fora do objeto.
+As saídas inválidas ficaram entre 8 e 39 tokens na retokenização do
+texto salvo, frente ao limite de 96 tokens novos. O arquivo bruto
+não registra a condição de parada, mas não há indício de truncamento
+por esse limite.
+
+Com o template de chat e o tokenizador do modelo, os prompts B2W
+válidos tiveram mediana de 116 tokens e faixa de 88 a 351. Os inválidos
+tiveram mediana de 113,5 e faixa de 97 a 375. No treino sintético, a
+mediana foi 117 e a faixa 93 a 179 tokens. A B2W tem uma cauda de
+entradas mais longas. Nesta amostra, o comprimento não se destacou
+como explicação para as falhas de formato.
+
+Nos 30 textos anotados, o número de reviews com ao menos uma previsão
+válida de sabor ou temperatura foi 11 para o QLoRA, 26 para o Qwen
+few-shot, 0 para as regras e 20 para o TF-IDF. No lote de 200, medido
+com o QLoRA, foram 87/200 (43,5%). O treino sintético tinha 0/1.263
+referências vazias. Essa ausência é compatível com a dificuldade de
+omitir rótulos fora do domínio. A rodada não isolou sua contribuição.
+
 ## Conclusão
 
-> O extrator, treinado só com dados sintéticos de restaurantes, acertou o conjunto completo de aspectos e polaridades em 9 de 30 textos reais de e-commerce anotados por mim (30%), contra 23 de 30 (76,7%) do melhor baseline nesse critério, as regras por palavras-chave. Amostra pequena, um único anotador, domínio diferente.
->
-> O treino ensinou o extrator a reproduzir as convenções do gerador, mas a queda em texto real e os falsos positivos indicam que ele ainda depende de pistas lexicais e falha ao ligar palavras como “rápido” ao que elas descrevem, ou ao deixar um aspecto sem rótulo quando falta evidência.
+> O adapter foi treinado só com texto sintético de restaurantes. Em 30 textos reais de e-commerce, o acerto exato foi 9/30, contra 23/30 das regras por palavras-chave. Em 87/200 textos (43,5%), o adapter previu sabor ou temperatura. O macro-F1 de 0,9819 descreve o gold sintético. O teste externo combina mudança de domínio e autoria humana, com amostra pequena e um único anotador. O desempenho em reviews reais de restaurantes segue sem medição.
 
 ## Revisão humana das previsões
 

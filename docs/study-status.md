@@ -58,6 +58,15 @@ Em 2026-11-09, o painel de opções da sessão do Kaggle exibiu
 | Enriquecimento ABSA | 25 min | GPU 0 para extrair os aspectos das 100 reviews do corpus congelado e exportar as previsões. Construir o índice e comparar os filtros em CPU. |
 | Reserva | 25 min | Download, indisponibilidade de hardware ou repetição de uma etapa que falhe. |
 
+A referência para o enriquecimento em lote unitário é a mediana de
+1,41 s por review na T4, com p95 de 2,38 s e pico de 1,17 GiB alocada.
+Extrapolar a mediana dá cerca de 2 a 3 minutos para 100 reviews e
+70 minutos para 3.000, além de carga, download e I/O. Essas projeções
+servem ao planejamento. O teto de 25 minutos cobre a sessão para as
+100 reviews de avaliação. Reservar uma janela própria para o corpus
+de 3.000 se for necessário indexá-lo com ABSA.
+[Latência isolada](absa-external-evaluation.md#baselines-complementares-e-transferência)
+
 Preparar entradas e comandos localmente antes de iniciar cada sessão.
 Medir latência após aquecimento e pico de VRAM na comparação FP16/NF4.
 Se a carga FP16 falhar, registrar o erro e preservar o saldo da integração.
