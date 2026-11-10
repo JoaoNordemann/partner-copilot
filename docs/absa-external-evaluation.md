@@ -200,11 +200,20 @@ e as regras a omitir. Com 12 pares, as frações são descritivas.
 As regras foram registradas por `jnordemann` em 8 de novembro de 2026 às
 15:20 (UTC−3), no avaliador sintético do commit `422b56b`, antes de
 congelar os rótulos B2W no commit `8cf0cc2`, às 23:06 do mesmo dia.
-A rodada de regras na B2W veio depois. A versão original das regras
-reproduz as 30 previsões salvas, sem ajuste para a avaliação externa.
+As regras e partes do pipeline foram escritas com assistência de IA.
+O autor revisou os resultados. O histórico comprova a ordem dos commits.
+O acesso prévio aos textos B2W durante a escrita das regras não foi
+documentado. A versão original reproduz as 30 previsões salvas da rodada
+externa, executada depois.
 [Código das regras no commit original](https://github.com/JoaoNordemann/partner-copilot/blob/422b56b/scripts/evaluate_absa.py)
 
 ## Auditoria das saídas inválidas
+
+A métrica primária é a validade estrita, que exige sintaxe JSON, esquema
+e taxonomia corretos. Foi de **172/200 (86,0%)**. A validade sintática
+isolada, medida como diagnóstico nas mesmas saídas brutas, foi de
+**199/200 (99,5%)**. O parser e a pontuação primária seguem os critérios
+congelados.
 
 A reanálise das 200 previsões brutas, sem nova geração, identificou 27
 JSONs sintaticamente válidos com chaves de aspecto fora da taxonomia
@@ -232,7 +241,15 @@ omitir rótulos fora do domínio. A rodada não isolou sua contribuição.
 
 ## Conclusão
 
-> O adapter foi treinado só com texto sintético de restaurantes. Em 30 textos reais de e-commerce, o acerto exato foi 9/30, contra 23/30 das regras por palavras-chave. Em 87/200 textos (43,5%), o adapter previu sabor ou temperatura. O macro-F1 de 0,9819 descreve o gold sintético. O teste externo combina mudança de domínio e autoria humana, com amostra pequena e um único anotador. O desempenho em reviews reais de restaurantes segue sem medição.
+> Treinado só com texto sintético de restaurantes, o extrator acertou o conjunto completo em 6 de 11 textos reais de e-commerce que tinham rótulo, empatando com regras simples, e em 3 de 19 que não tinham nenhum. Produziu JSON com chaves fora da taxonomia em 27 de 200 textos e atribuiu sabor ou temperatura em 87 de 200. O treino não incluiu exemplos de nenhum aspecto aplicável.
+
+As regras acertaram 17/19 casos vazios. Para justificar o ajuste fino
+neste cenário, seria preciso demonstrar que ele lida melhor com a
+variedade de linguagem. O empate em 6/11 textos com rótulo, numa amostra
+pequena de e-commerce, não demonstra essa vantagem. O desempenho em
+reviews reais de restaurantes segue sem medição. Exemplos fora de
+domínio e com referência vazia ficam para uma versão futura, com
+um novo conjunto anotado antes do treino.
 
 ## Revisão humana das previsões
 

@@ -1320,6 +1320,56 @@ os seus relevantes elegíveis. Ler os casos de perda para distinguir erro do
 extrator de divergência de anotação ou de escopo. Essa auditoria complementa
 a métrica de recall, que só vê os itens retornados no top k.
 
-As perguntas de `human-v2` já orientaram iterações anteriores. Esta comparação
-é exploratória, e o corpus é sintético. O resultado mede o efeito do filtro
-nesse conjunto exposto.
+### Controle com rótulos de origem e leitura das contagens
+
+Além dos braços sem filtro de aspecto e com filtro estrito por predição,
+rodar um terceiro braço com o mesmo filtro estrito sobre os rótulos do
+gerador. Fazer uma junção por ID com a origem sintética versionada e
+conferir que os textos correspondem. Usar uma coleção de controle com os
+mesmos vetores, chunks, escopo e limiar. Congelar os mesmos IDs relevantes
+nos três braços. Reportar filtro por predição e filtro por rótulo de
+origem contra a mesma base, e comparar os dois filtros entre si.
+
+O controle é uma referência idealizada para os rótulos sintéticos, sem
+garantia de teto numérico para cada métrica. Parte da relevância se apoia
+nos mesmos aspectos que orientam o gerador. Se os filtros empatarem,
+atribuir o ganho à ideia de filtrar por aspecto neste benchmark, sem
+atribuir o resultado à qualidade do extrator em texto real.
+
+Todas as 24 perguntas respondíveis têm aspecto mapeado. Nas que usam
+paráfrase, o aspecto vem da intenção registrada na tabela. Informar
+`24/24` na análise principal e manter q29 e q30 como controles separados.
+Publicar os numeradores em 120 posições no top 5 por braço, os IDs
+relevantes recuperados e o placar por pergunta, inclusive as perdas de
+evidência. Cada acerto líquido em 120 posições vale cerca de 0,83 ponto
+percentual de precision@5. O critério já fixado de pelo menos 2 pontos
+percentuais exige três acertos líquidos adicionais.
+
+### Fallback quando a extração falha
+
+Contar quantas das 100 reviews ficam sem aspectos por saída inválida e
+quantas produzem um mapa vazio válido. Contar por ID de review, mesmo
+quando o índice tiver vários chunks. Uma saída inválida não informa se
+o aspecto está presente.
+
+Na consulta operacional com filtro de aspecto, se houver ao menos uma
+review com `absa_status=error` no escopo dos filtros básicos, executar
+a busca sem a restrição de aspecto, preservando restaurante, item,
+período, limiar e k. Registrar o motivo do fallback e reportar quantas
+consultas acionam a regra. A presença de um erro, mesmo com resultados
+válidos no top k, é suficiente para acionar o fallback. Um mapa vazio
+válido sozinho não aciona a regra. Medir o fallback separadamente dos
+braços estritos para manter visível a exclusão de evidência.
+
+### Escopo e próxima versão
+
+O corpus sintético de `human-v2` serve para validar o enriquecimento.
+As perguntas já orientaram iterações anteriores. A avaliação é
+exploratória e o comportamento em reviews reais de restaurante é
+desconhecido.
+
+Adiar o treino de uma segunda versão com exemplos fora de domínio e
+mapas vazios. A avaliação de uma versão futura exige um novo conjunto
+anotado e reservado antes do treino. Os 30 textos B2W anotados ficam
+fora do treino. Priorizar integração, notebook Kaggle, artigo, Docker
+e catálogo de replay.

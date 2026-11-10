@@ -16,9 +16,10 @@ A versão publicada carrega o adapter separadamente sobre a base NF4.
 
 ## Avaliação externa em texto real
 
-O adapter produziu **172/200 JSONs válidos (86%)** em reviews de
-e-commerce da B2W. Das 28 saídas inválidas, 27 incluíram chaves fora da
-taxonomia e uma teve erro de sintaxe. Em **87/200 textos (43,5%)**, o
+A validade estrita, métrica primária, foi de **172/200 (86%)** em reviews
+de e-commerce da B2W. A validade sintática isolada foi de **199/200
+(99,5%)**. Das 28 saídas inválidas pelo contrato, 27 incluíram chaves
+fora da taxonomia e uma teve erro de sintaxe. Em **87/200 textos (43,5%)**, o
 adapter atribuiu sabor ou temperatura, aspectos fora do recorte de
 e-commerce. O treino sintético tinha 0/1.263 referências vazias.
 
@@ -26,7 +27,13 @@ Dos 30 textos anotados, 19 tinham referência vazia. O QLoRA acertou
 3/19 dos vazios e 6/11 dos textos com rótulo. As regras por palavras-chave
 acertaram 17/19 e 6/11, respectivamente. Os pares extras da avaliação
 principal cobrem quatro aspectos. Sabor e temperatura foram auditados
-separadamente.
+separadamente. Os textos da B2W não foram redistribuídos pelo projeto.
+O repositório guarda os IDs e os rótulos humanos.
+
+As regras e partes do pipeline foram escritas com assistência de IA.
+O autor revisou os resultados. As regras já estavam versionadas antes
+do congelamento dos rótulos. O acesso prévio aos textos durante sua
+escrita não foi documentado.
 
 O macro-F1 de 0,9819 descreve o gold sintético. A avaliação B2W combina
 mudança de domínio e autoria humana, com 30 textos anotados por uma
