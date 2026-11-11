@@ -54,6 +54,11 @@ class Settings(BaseSettings):
     ingestion_chunk_overlap_tokens: int = Field(default=16, ge=0)
     ingestion_max_review_chars: int = Field(default=50000, ge=1)
 
+    aspect_enrichment_enabled: bool = False
+    aspect_filter_enabled: bool = False
+    aspect_extractor: Literal["fake", "precomputed", "qlora"] = "precomputed"
+    aspect_predictions_path: Path | None = None
+
     # --- Retrieval -------------------------------------------------------
     retrieval_k: int = Field(default=8, ge=1, le=50)
     retrieval_min_score: float = Field(default=0.25, ge=0.0, le=1.0)

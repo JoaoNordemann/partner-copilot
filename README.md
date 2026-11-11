@@ -94,5 +94,5 @@ O autor revisou os resultados.
 [Docker CPU](docs/docker.md) está preparado, mas build/execução não foram testados
 localmente por falta de Docker; o caminho GPU em container também não foi testado.
 
-[Notas v0.1-rag-mvp](docs/releases/v0.1-rag-mvp.md) · [Status do estudo](docs/study-status.md) ·
+[Notas v0.2-aspects](docs/releases/v0.2-aspects.md) · [Notas v0.1-rag-mvp](docs/releases/v0.1-rag-mvp.md) · [Status do estudo](docs/study-status.md) ·
 [Demo](docs/demo.md) · [API](docs/api.md) · [Decisões](docs/decisions.md)

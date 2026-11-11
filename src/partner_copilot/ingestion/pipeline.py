@@ -11,6 +11,7 @@ from typing import Protocol
 
 from pydantic import ValidationError
 
+from partner_copilot.ingestion.aspects import AspectExtractor
 from partner_copilot.ingestion.chunking import InvalidChunkInput, TextSplitter
 from partner_copilot.ingestion.documents import IndexedDocument, WriteResult
 from partner_copilot.schemas import Review
@@ -116,10 +117,12 @@ class IngestionPipeline:
         *,
         batch_size: int = 128,
         max_review_chars: int = 50000,
+        aspect_extractor: AspectExtractor | None = None,
     ) -> None:
         if batch_size < 1 or max_review_chars < 1:
             raise ValueError("batch_size and max_review_chars must be positive")
         self.store, self.splitter = store, splitter
+        self.aspect_extractor = aspect_extractor
         self.batch_size, self.max_review_chars = batch_size, max_review_chars
 
     def run(self, path: Path) -> IngestionReport:
@@ -189,6 +192,18 @@ class IngestionPipeline:
                 seen[review.id] = review
                 if pending and len(pending) + len(documents) > self.batch_size:
                     flush()
+                if self.aspect_extractor is not None:
+                    extraction = self.aspect_extractor.extract(review)
+                    if extraction.status == "inválido":
+                        logger.warning(
+                            "invalid_aspect_extraction review_id=%s extractor_version=%s",
+                            review.id,
+                            self.aspect_extractor.version,
+                        )
+                    for document in documents:
+                        document.aspects = extraction.aspects
+                        document.extractor_version = self.aspect_extractor.version
+                        document.extractor_status = extraction.status
                 pending.extend(documents)
                 if len(pending) >= self.batch_size:
                     flush()

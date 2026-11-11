@@ -9,6 +9,7 @@ from typing import TYPE_CHECKING
 
 from partner_copilot.config import Settings
 from partner_copilot.data_splits import validate_rag_collection_ids, validate_rag_input
+from partner_copilot.ingestion.aspects import build_aspect_extractor
 from partner_copilot.ingestion.chunking import TokenTextSplitter
 from partner_copilot.ingestion.pipeline import IngestionPipeline, IngestionReport
 
@@ -56,6 +57,10 @@ def run_ingestion(
         raise IngestionPreflightError(
             f"Split validation failed: {exc}. Run scripts/prepare_data_splits.py first."
         ) from exc
+    try:
+        extractor = build_aspect_extractor(settings)
+    except (ValueError, OSError, KeyError) as exc:
+        raise IngestionPreflightError(f"Aspect extractor configuration failed: {exc}") from exc
     settings.export_hf_env()
     store = _create_store(settings)
     if not reset:
@@ -78,7 +83,11 @@ def run_ingestion(
         removed = store.reset()
         logger.info("ingestion_reset collection=%s removed=%d", store.collection_name, removed)
     report = IngestionPipeline(
-        store, splitter, batch_size=batch_size, max_review_chars=settings.ingestion_max_review_chars
+        store,
+        splitter,
+        batch_size=batch_size,
+        max_review_chars=settings.ingestion_max_review_chars,
+        aspect_extractor=extractor,
     ).run(path)
     return IngestionOutcome(
         report, store.collection_name, settings.chroma_path, store.count(), removed

@@ -9,6 +9,7 @@ import chromadb
 from chromadb.api.types import EmbeddingFunction, Metadata, Where
 
 from partner_copilot.config import MULTILINGUAL_MINILM_MODEL, Settings, get_settings
+from partner_copilot.ingestion.aspects import ASPECTS
 from partner_copilot.ingestion.documents import IndexedDocument, WriteResult
 from partner_copilot.ingestion.embedder import Embedder, SentenceTransformerEmbedder
 from partner_copilot.schemas import RetrievedDoc, Review
@@ -50,6 +51,7 @@ class ChromaStore:
             contract = json.dumps(
                 {
                     "model": model,
+                    **({"aspect_enrichment": True} if config.aspect_enrichment_enabled else {}),
                     "normalize": True,
                     "document_prefix": self.embedder.document_prefix,
                     "query_prefix": self.embedder.query_prefix,
@@ -92,7 +94,8 @@ class ChromaStore:
         if contract is not None and metadata.get("embedding_input_contract") != contract:
             # The previous implementation used this exact model with normalization and no prefixes.
             compatible_legacy = (
-                metadata.get("embedding_input_contract") is None
+                not config.aspect_enrichment_enabled
+                and metadata.get("embedding_input_contract") is None
                 and model.removeprefix("sentence-transformers/") == MULTILINGUAL_MINILM_MODEL
                 and self.embedder is not None
                 and not self.embedder.document_prefix
@@ -210,6 +213,7 @@ class ChromaStore:
                         key: None
                         for key in (previous_metadata.get(review.id) or {})
                         if key.startswith("aspect_")
+                        or key in ("extractor_version", "extractor_status")
                     },
                     "aspects_json": json.dumps(review.aspects, ensure_ascii=False),
                     "restaurant_id": review.restaurant_id,
@@ -230,6 +234,21 @@ class ChromaStore:
                         else {}
                     ),
                     **{f"aspect_{key}": value for key, value in review.aspects.items()},
+                    **(
+                        {
+                            "extractor_version": review.extractor_version,
+                            "extractor_status": review.extractor_status,
+                            **{
+                                f"aspect_exclude_{aspect}": (
+                                    "neg" in review.aspects.values()
+                                    and review.aspects.get(aspect) != "neg"
+                                )
+                                for aspect in sorted(ASPECTS)
+                            },
+                        }
+                        if review.extractor_status is not None
+                        else {}
+                    ),
                 }
             )
         vectors = (

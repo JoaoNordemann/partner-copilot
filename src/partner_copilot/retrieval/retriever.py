@@ -4,6 +4,7 @@ from datetime import date
 from typing import Any, Protocol
 
 from partner_copilot.config import Settings, get_settings
+from partner_copilot.ingestion.aspects import aspect_filter
 from partner_copilot.schemas import RetrievedDoc
 
 # Structural contract; importing the retriever must not require the Chroma adapter.
@@ -33,6 +34,7 @@ class Retriever:
         if not 1 <= self.k <= 50 or not 0 <= self.min_score <= 1:
             raise ValueError("k must be between 1 and 50; min_score between 0 and 1")
         self.store = store
+        self.aspect_filter_enabled = config.aspect_filter_enabled
 
     def retrieve(
         self,
@@ -56,7 +58,9 @@ class Retriever:
         if aspect is not None:
             if not aspect.strip():
                 raise ValueError("aspect must not be blank")
-            filters.append({f"aspect_{aspect}": "neg"})
+            predicate = aspect_filter(aspect, self.aspect_filter_enabled)
+            if predicate is not None:
+                filters.append(predicate)
         for name, value in (
             ("item", item),
             ("category", category),

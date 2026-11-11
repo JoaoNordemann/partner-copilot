@@ -10,6 +10,7 @@ from partner_copilot.config import Settings
 from partner_copilot.data_splits import validate_rag_collection_ids
 from partner_copilot.generation.output import parser_identity
 from partner_copilot.generation.prompts import load_prompt_template
+from partner_copilot.ingestion.aspects import aspect_filter
 from partner_copilot.schemas import RetrievedDoc, Review
 
 logger = logging.getLogger("partner_copilot.api")
@@ -37,14 +38,16 @@ def profile(base: Settings, api: APISettings) -> Settings:
     )
 
 
-def where_for(request: AskRequest) -> dict:
+def where_for(request: AskRequest, aspect_filter_enabled: bool = False) -> dict:
     filters = [{"restaurant_id": request.restaurant_id}]
     if request.filters:
         f = request.filters
         if f.item is not None:
             filters.append({"item": f.item})
         if f.aspect is not None:
-            filters.append({f"aspect_{f.aspect}": "neg"})
+            predicate = aspect_filter(f.aspect, aspect_filter_enabled)
+            if predicate is not None:
+                filters.append(predicate)
         if f.start_date is not None:
             filters.append({"created_at_int": {"$gte": int(f.start_date.strftime("%Y%m%d"))}})
         if f.end_date is not None:
@@ -86,7 +89,7 @@ class CPUIndex:
         result = self.store.col.query(
             query_embeddings=[vector],
             n_results=min(request.k * 2, count),
-            where=where_for(request),
+            where=where_for(request, self.settings.aspect_filter_enabled),
             include=["documents", "metadatas", "distances"],
         )
         docs = []
