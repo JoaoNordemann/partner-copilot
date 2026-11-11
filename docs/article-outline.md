@@ -1,6 +1,6 @@
 # PartnerCopilot: por que o extrator errou 16 de 19 textos sem aspecto
 
-Em 19 textos de e-commerce sem aspecto aplicável, o extrator treinado só com reviews sintéticas de restaurantes acertou o mapa vazio em 3 casos. Regras simples acertaram 17. Nos 11 textos com rótulo, os dois métodos acertaram 6 mapas completos. O teste mede a transferência para e-commerce. O desempenho em reviews reais de restaurantes segue em aberto. [Avaliação externa B2W](absa-external-evaluation.md)
+No recorte de e-commerce sem aspecto aplicável (n = 19), o extrator treinado só com reviews sintéticas de restaurantes acertou o mapa vazio em 3 casos. Regras simples acertaram 17. Nos 11 textos com rótulo, os dois métodos acertaram 6 mapas completos. O teste mede a transferência para e-commerce. O desempenho em reviews reais de restaurantes segue em aberto. [Avaliação externa B2W](absa-external-evaluation.md)
 
 ## 1. O problema do parceiro
 
@@ -42,6 +42,7 @@ Em 19 textos de e-commerce sem aspecto aplicável, o extrator treinado só com r
 - Apresentar os relevantes no top 5 por braço. **37/120** sem aspecto, **45/120** com QLoRA, **45/120** com rótulos do gerador e **44/120** com rótulos humanos.
 - O QLoRA passou no critério pré-registrado. Ganhou **6,67 pontos em precision@5** e **11,74 em recall limitado@5**, com **zero perguntas** perdendo evidência que já aparecia no top 5.
 - O QLoRA e o gerador produziram rankings iguais. O empate descreve a filtragem neste corpus, em que os dois concordam em **98/100 mapas**. Em q22, o rótulo humano omite a polaridade de sabor por ambiguidade, e o braço humano deixa fora um relevante recuperado pelos outros dois braços com filtro.
+- Destacar que o alinhamento entre rótulos e relevância favorece o filtro. A precision@5 final foi 37,5% de um teto de 45,83%. O filtro recuperou 45 dos 55 relevantes que cabiam nas 120 posições. B e C empatados não distinguem o extrator do controle do gerador. A B2W teve 28/200 saídas inválidas e a taxa em reviews reais de restaurantes segue desconhecida.
 - Usar a tabela e o protocolo como fontes. [Experimento em CPU](../reports/absa-retrieval-v1/README.md) · [Critério pré-registrado](decisions.md#comparação-e-critério-de-sucesso)
 
 ## 7. Limitações e trabalho futuro

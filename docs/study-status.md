@@ -1,6 +1,6 @@
 # Estudo de Engenharia de IA: status
 
-Atualizado em 2026-11-09 com os resultados externos do ABSA e o plano de GPU.
+Atualizado com os resultados do filtro por aspecto, da avaliação externa e da latência isolada do QLoRA.
 
 | Frente | Estado | Evidência / próximo passo |
 | --- | --- | --- |
@@ -17,9 +17,11 @@ Atualizado em 2026-11-09 com os resultados externos do ABSA e o plano de GPU.
 | Replay aprovado | Contrato e testes prontos; catálogo pendente | Até três casos com aprovação humana elegível. Começar pela resposta n17 e pela abstenção n20. A falha n12 fica na aba histórica |
 | CI e versão MVP | Implementado; publicação protegida por gate | Tag v0.1-rag-mvp somente após CI remoto verde no mesmo commit; badge do README |
 | QLoRA / ABSA | Treino concluído | 759 passos na T4, checkpoint 253 escolhido pela validação. 140/140 JSONs válidos na validação. Gold e templates reservados medidos uma vez. [Avaliação](../reports/absa-eval-checkpoint-253-v1/README.md) |
-| Avaliação externa B2W | Medida | 30 IDs e rótulos congelados, com teste de formato em 200 textos. [Relatório](absa-external-evaluation.md) |
+| Avaliação externa B2W | Medida | 9/30 mapas exatos em e-commerce. Validade estrita de 172/200. [Relatório](absa-external-evaluation.md) |
 | Adapter ABSA | Publicado e verificado | Download anônimo em sessão limpa no Kaggle, com 3/3 exemplos sintéticos válidos e exatos. [Model card](absa-model-card.md) |
-| Integração ABSA na ingestão | Protocolo registrado | Implementação e avaliação exploratória pendentes. [Decisões](decisions.md#enriquecimento-absa-na-ingestão--desenho-e-protocolo-exploratório) |
+| Integração ABSA na ingestão | Publicada e desligada por padrão | Tag `v0.2-aspects` no commit `69b448f`, aprovado pelo CI. [CI do commit da tag](https://github.com/JoaoNordemann/partner-copilot/actions/runs/42930288620) |
+| Retrieval com aspecto | Medido em CPU | 37/120 → 45/120 relevantes no top 5 com QLoRA. Teto de 55/120. [Relatório](../reports/absa-retrieval-v1/README.md) |
+| Latência isolada do QLoRA | Medida em Tesla T4 | 30 reviews em lote unitário após aquecimento. Mediana de 1,41 s, p95 de 2,38 s e pico de 1,17 GiB alocados. [Medição](absa-external-evaluation.md#baselines-complementares-e-transferência) |
 | FP16 na T4 16 GB | Pendente | Comparar o Mistral FP16 e NF4 com a mesma entrada e configuração de geração |
 | Space | Adiado | Não bloquear entrega local; distinguir gravação de busca CPU ao vivo |
 | Avaliação final reservada | Preservada, não executada | Uma rodada futura, sem ajuste posterior |
@@ -46,6 +48,19 @@ integrais ficam locais, conforme a política de distribuição do projeto.
 [Rótulos](../data/absa/b2w-human-v1.jsonl) ·
 [Origem e licença](external-data.md)
 
+No retrieval com aspecto, a precision@5 passou de 30,83% para 37,50%,
+com teto de 45,83% (55/120). O recall limitado@5 subiu de 73,13% para
+84,86%, com 7 vitórias, 17 empates e nenhuma derrota. QLoRA e gerador
+empataram nos rankings, com convenção de relevância compartilhada,
+corpus sintético e perguntas já vistas.
+[Resultados por pergunta](../reports/absa-retrieval-v1/README.md)
+
+Nos textos B2W com aspecto anotado, QLoRA e regras empataram em 6/11.
+Nos vazios, foram 3/19 para o QLoRA e 17/19 para as regras. A validade
+sintática foi 199/200. A medição isolada do QLoRA na T4 incluiu
+tokenização, inferência e decodificação com o modelo já carregado.
+[Avaliação externa e latência](absa-external-evaluation.md)
+
 ## Plano de GPU
 
 Em 2026-11-09, o painel de opções da sessão do Kaggle exibiu
@@ -55,21 +70,21 @@ Em 2026-11-09, o painel de opções da sessão do Kaggle exibiu
 | Trabalho | Teto de sessão | Condição |
 | --- | ---: | --- |
 | Comparação FP16 e NF4 | 35 min | Uma T4 de 16 GB, mesma revisão do Mistral e mesmas entradas. Fazer um teste curto de carga em FP16 na GPU 0 e registrar eventual falta de memória. |
-| Enriquecimento ABSA | 25 min | GPU 0 para extrair os aspectos das 100 reviews do corpus congelado e exportar as previsões. Construir o índice e comparar os filtros em CPU. |
+| Experimento ABSA no retrieval | 0 min de GPU | Concluído em CPU com as predições congeladas. |
 | Reserva | 25 min | Download, indisponibilidade de hardware ou repetição de uma etapa que falhe. |
 
 A referência para o enriquecimento em lote unitário é a mediana de
 1,41 s por review na T4, com p95 de 2,38 s e pico de 1,17 GiB alocada.
 Extrapolar a mediana dá cerca de 2 a 3 minutos para 100 reviews e
 70 minutos para 3.000, além de carga, download e I/O. Essas projeções
-servem ao planejamento. O teto de 25 minutos cobre a sessão para as
-100 reviews de avaliação. Reservar uma janela própria para o corpus
+servem ao planejamento. A avaliação reutilizou as predições das
+100 reviews. Reservar uma janela própria para o corpus
 de 3.000 se for necessário indexá-lo com ABSA.
 [Latência isolada](absa-external-evaluation.md#baselines-complementares-e-transferência)
 
 Preparar entradas e comandos localmente antes de iniciar cada sessão.
 Medir latência após aquecimento e pico de VRAM na comparação FP16/NF4.
-Se a carga FP16 falhar, registrar o erro e preservar o saldo da integração.
+Se a carga FP16 falhar, registrar o erro e preservar o saldo de GPU.
 
 ## Distribuição das pendências
 
