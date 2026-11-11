@@ -1,0 +1,18 @@
+{
+  "extractor_version": "partnercopilot-absa-qlora-v1/checkpoint-253",
+  "extractor_config": "configs/absa-eval-v1.json",
+  "extractor_config_sha256_lf": "f51ed1d60bb4cbfb98cf06aed28bd1c2554736e88c44881bd6e81618d95846a9",
+  "adapter_revision": "742d1dcb93d71aee84fda6a84f5ca23dd8c281d6",
+  "adapter_weights_sha256": "ef97282c03432c22c9735f419463d1e936b0729ac099052ac96e7b170c7e1d05",
+  "corpus": "data/eval/human-v2/corpus.jsonl",
+  "corpus_sha256_lf": "74f04a4bf0407de3a4302f9a869dbeadde6541bd9fa56bb74e5e2fe0a832c95f",
+  "source_archive_sha256": "15d07e2a3037a749fc5103a0b46801882e6f750cc7113cae694ad99be8418ece",
+  "source_member": "qlora.jsonl",
+  "source_predictions_sha256": "9b557b621aefaf5df2a02d8f1a8ad32687274461c8b4bfe48d419f133e444be2",
+  "source_count": 446,
+  "predictions_sha256_lf": "7f06b334ebd000954851be8e9049bbdd385ab6a1b7c16086a7f1e066f9389daa",
+  "review_count": 100,
+  "ok": 100,
+  "invalid": 0,
+  "valid_empty": 0
+}

@@ -1260,8 +1260,10 @@ Gravar `aspect_<nome>=pos|neg` e manter `aspects_json` sincronizado. Aspectos
 ausentes ficam sem chave. Usar `absa_extractor_version` como identificador
 escalar da versão, resolvido em manifesto para as revisões imutáveis do modelo
 base e do adapter e para as versões do prompt e do parser. Gravar também
-`absa_status=ok|error`: um mapa vazio válido é `ok` e uma tentativa que falhou é
-`error`. Reviews legadas sem versão, com versão antiga, com erro ou com texto
+`absa_status=ok|inválido`: um mapa vazio válido é `ok` e uma tentativa que
+falhou é `inválido`. O artefato de predições registra `status` e o SHA-256 dos
+pesos do adapter por review. Reviews legadas sem versão, com versão antiga,
+com erro ou com texto
 alterado ficam elegíveis para reprocessamento.
 
 Se o JSON for inválido ou violar o schema, indexar normalmente o texto, o
@@ -1303,8 +1305,8 @@ Usar a mesma coleção enriquecida, o corpus congelado de 100 reviews, os mesmos
 embeddings multilíngues, texto, chunking, filtros de restaurante, item e data,
 e o limiar operacional de 0,25 nos dois braços. O único fator que muda é
 acrescentar o filtro de aspecto negativo. Fixar k=5 como análise principal e
-k=8 como diagnóstico. Não acionar fallback sem aspecto nesta comparação,
-pois ele esconderia perdas do filtro.
+k=8 como diagnóstico. No braço B, aplicar a exceção por review inválida
+descrita abaixo.
 
 Calcular as métricas pelas definições já registradas: hit@k, precision@k
 (divisor k mesmo com posições vazias), recall@k limitado e MRR truncado em k.
@@ -1319,8 +1321,9 @@ que tinha evidência no top 5 sem o filtro. Esses limites são operacionais.
 Reportar todas as diferenças mesmo se o critério não for atingido.
 
 Antes do ranking, contar os pares pergunta–review relevante que passam pelos
-filtros básicos e são excluídos pelo ABSA. Separar saída inválida, aspecto
-ausente e polaridade positiva. Reportar também quantas perguntas perdem todos
+filtros básicos e são excluídos pelo ABSA. Separar aspecto ausente e polaridade
+positiva. Contar à parte os pares com saída inválida, preservados pela exceção.
+Reportar também quantas perguntas perdem todos
 os seus relevantes elegíveis. Ler os casos de perda para distinguir erro do
 extrator de divergência de anotação ou de escopo. Essa auditoria complementa
 a métrica de recall, que só vê os itens retornados no top k.
@@ -1330,7 +1333,7 @@ a métrica de recall, que só vê os itens retornados no top k.
 | Braço | Restrição de aspecto | Fonte dos rótulos |
 | --- | --- | --- |
 | A | Desligada. Referência v0.1. | Nenhuma para a consulta |
-| B | Negativo, filtro estrito | Predições QLoRA |
+| B | Negativo, com reviews inválidas elegíveis | Predições QLoRA |
 | C | Negativo, filtro estrito | Rótulos do gerador, controle idealizado |
 | D | Negativo, filtro estrito | Rótulos humanos congelados do gold |
 
@@ -1359,21 +1362,21 @@ evidência. Cada acerto líquido em 120 posições vale cerca de 0,83 ponto
 percentual de precision@5. O critério já fixado de pelo menos 2 pontos
 percentuais exige três acertos líquidos adicionais.
 
-### Fallback quando a extração falha
+### Elegibilidade quando a extração falha
 
-Contar quantas das 100 reviews ficam sem aspectos por saída inválida e
-quantas produzem um mapa vazio válido. Contar por ID de review, mesmo
-quando o índice tiver vários chunks. Uma saída inválida não informa se
-o aspecto está presente.
+Para o braço B e a consulta operacional, combinar os filtros básicos
+com `aspect_<nome>=neg OR absa_status=inválido`. A exceção vale para
+cada review com extração inválida, inclusive se houver outros candidatos
+com extração válida. Restaurante, item, período, limiar e k continuam
+valendo. Um mapa vazio válido segue a restrição por aspecto.
 
-Na consulta operacional com filtro de aspecto, se houver ao menos uma
-review com `absa_status=error` no escopo dos filtros básicos, executar
-a busca sem a restrição de aspecto, preservando restaurante, item,
-período, limiar e k. Registrar o motivo do fallback e reportar quantas
-consultas acionam a regra. A presença de um erro, mesmo com resultados
-válidos no top k, é suficiente para acionar o fallback. Um mapa vazio
-válido sozinho não aciona a regra. Medir o fallback separadamente dos
-braços estritos para manter visível a exclusão de evidência.
+Contar as saídas inválidas e os mapas vazios válidos por ID de review,
+mesmo quando o índice tiver vários chunks. O corpus congelado de 100
+reviews coincide em IDs e textos com o gold e reutiliza as predições
+da passada única do checkpoint 253. A conferência do parser confirmou
+100 válidas, zero inválidas e zero mapas vazios válidos. Os hashes de
+origem, do adapter e do recorte constam no manifesto.
+[Predições e proveniência](../reports/absa-eval-checkpoint-253-v1/retrieval-predictions.manifest.json)
 
 ### Escopo e próxima versão
 
