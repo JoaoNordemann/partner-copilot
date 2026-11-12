@@ -1,0 +1,460 @@
+{
+  "session": [
+    {
+      "event": "session",
+      "base_commit": "8bf96afb41b386c9a0bb750ce3235b5cfbe46461",
+      "protocol_commit": "5c65ba4dfa50db4a734c6be3187b4f244e053f4e",
+      "budget_minutes": 35,
+      "quota_minutes_before": 88,
+      "visible_devices": "0",
+      "python": "3.13.16",
+      "gpu": "Tesla T4, 15360 MiB, 580.178.04"
+    },
+    {
+      "event": "model_snapshot",
+      "model": "mistralai/Mistral-7B-Instruct-v0.2",
+      "revision": "63a8b081895390a26e140280378bc85ec8bce07a"
+    },
+    {
+      "event": "stage_start",
+      "stage": "nf4"
+    },
+    {
+      "event": "stage_start",
+      "stage": "fp16"
+    },
+    {
+      "event": "stage_start",
+      "stage": "api_index"
+    },
+    {
+      "event": "stage_start",
+      "stage": "api_http"
+    },
+    {
+      "event": "session_finished",
+      "elapsed_seconds": 2073.00208327
+    }
+  ],
+  "precision": {
+    "nf4": {
+      "environment": {
+        "event": "environment",
+        "mode": "nf4",
+        "gpu": "Tesla T4",
+        "cuda": "13.0",
+        "revision": "63a8b081895390a26e140280378bc85ec8bce07a",
+        "python": "3.13.16",
+        "memory": {
+          "free_bytes": 15526068224,
+          "total_bytes": 15636037632,
+          "allocated_bytes": 0,
+          "reserved_bytes": 0,
+          "peak_allocated_bytes": 0,
+          "peak_reserved_bytes": 0
+        },
+        "commit": "8bf96afb41b386c9a0bb750ce3235b5cfbe46461",
+        "driver": "580.178.04",
+        "packages": {
+          "torch": "2.11.0+cu130",
+          "transformers": "5.20.2",
+          "accelerate": "1.15.0",
+          "bitsandbytes": "0.50.2",
+          "chromadb": "1.5.9"
+        }
+      },
+      "load": {
+        "event": "load",
+        "seconds": 31.893105418999994,
+        "memory": {
+          "free_bytes": 11239489536,
+          "total_bytes": 15636037632,
+          "allocated_bytes": 4130416640,
+          "reserved_bytes": 4269801472,
+          "peak_allocated_bytes": 4234058752,
+          "peak_reserved_bytes": 4269801472
+        }
+      },
+      "cohorts": {
+        "limpo_original": {
+          "expected": 9,
+          "accepted": 6,
+          "latency_seconds": {
+            "n": 9,
+            "median": 5.635820111000044,
+            "max": 20.538722639000014
+          },
+          "tokens_per_second": {
+            "n": 9,
+            "median": 13.23886822853095,
+            "max": 15.954037437733335
+          },
+          "peak_allocated_bytes": 4860002304,
+          "peak_reserved_bytes": 5372903424
+        },
+        "contaminado": {
+          "expected": 27,
+          "accepted": 13,
+          "latency_seconds": {
+            "n": 27,
+            "median": 15.722266166000054,
+            "max": 38.497734563999984
+          },
+          "tokens_per_second": {
+            "n": 27,
+            "median": 13.493549301497334,
+            "max": 16.059102254639363
+          },
+          "peak_allocated_bytes": 5027661824,
+          "peak_reserved_bytes": 6780092416
+        }
+      }
+    },
+    "fp16": {
+      "environment": {
+        "event": "environment",
+        "mode": "fp16",
+        "gpu": "Tesla T4",
+        "cuda": "13.0",
+        "revision": "63a8b081895390a26e140280378bc85ec8bce07a",
+        "python": "3.13.16",
+        "memory": {
+          "free_bytes": 15526068224,
+          "total_bytes": 15636037632,
+          "allocated_bytes": 0,
+          "reserved_bytes": 0,
+          "peak_allocated_bytes": 0,
+          "peak_reserved_bytes": 0
+        },
+        "commit": "8bf96afb41b386c9a0bb750ce3235b5cfbe46461",
+        "driver": "580.178.04",
+        "packages": {
+          "torch": "2.11.0+cu130",
+          "transformers": "5.20.2",
+          "accelerate": "1.15.0",
+          "bitsandbytes": "0.50.2",
+          "chromadb": "1.5.9"
+        }
+      },
+      "load": {
+        "event": "load",
+        "seconds": 9.355506837999997,
+        "memory": {
+          "free_bytes": 1024262144,
+          "total_bytes": 15636037632,
+          "allocated_bytes": 14483465216,
+          "reserved_bytes": 14501806080,
+          "peak_allocated_bytes": 14483465216,
+          "peak_reserved_bytes": 14501806080
+        }
+      },
+      "cohorts": {
+        "limpo_original": {
+          "expected": 9,
+          "accepted": 8,
+          "latency_seconds": {
+            "n": 9,
+            "median": 9.071162923999964,
+            "max": 22.50475500399989
+          },
+          "tokens_per_second": {
+            "n": 9,
+            "median": 9.228246509959037,
+            "max": 10.23237165377962
+          },
+          "peak_allocated_bytes": 15207283712,
+          "peak_reserved_bytes": 15365832704
+        },
+        "contaminado": {
+          "expected": 27,
+          "accepted": 11,
+          "latency_seconds": {
+            "n": 27,
+            "median": 20.447357233000048,
+            "max": 52.902026719000105
+          },
+          "tokens_per_second": {
+            "n": 27,
+            "median": 9.334654720337658,
+            "max": 9.880314047855947
+          },
+          "peak_allocated_bytes": 15380610048,
+          "peak_reserved_bytes": 15445524480
+        }
+      }
+    }
+  },
+  "pairs": {
+    "limpo_original": {
+      "n": 9,
+      "both_accepted": 6,
+      "raw_changed_ids": [
+        "n12",
+        "n13",
+        "n14",
+        "n15",
+        "n16",
+        "n17",
+        "n19",
+        "n20"
+      ],
+      "acceptance_changed_ids": [
+        "n14",
+        "n16"
+      ],
+      "structured_changed_ids": [
+        "n12",
+        "n13",
+        "n17"
+      ]
+    },
+    "contaminado": {
+      "n": 27,
+      "both_accepted": 8,
+      "raw_changed_ids": [
+        "q01",
+        "q02",
+        "q03",
+        "q04",
+        "q05",
+        "q06",
+        "q07",
+        "q08",
+        "q09",
+        "q10",
+        "q11",
+        "q12",
+        "q14",
+        "q15",
+        "q16",
+        "q17",
+        "q18",
+        "q19",
+        "q20",
+        "q21",
+        "q22",
+        "q23",
+        "q24",
+        "q25",
+        "q26",
+        "q27",
+        "q28"
+      ],
+      "acceptance_changed_ids": [
+        "q05",
+        "q09",
+        "q11",
+        "q12",
+        "q14",
+        "q17",
+        "q18",
+        "q23"
+      ],
+      "structured_changed_ids": [
+        "q01",
+        "q08",
+        "q10"
+      ]
+    }
+  },
+  "api": {
+    "sequential_status": {
+      "200": 8,
+      "502": 12
+    },
+    "http_seconds": {
+      "n": 20,
+      "median": 24.074734301000035,
+      "max": 39.61529631899998
+    },
+    "http_success_seconds": {
+      "n": 8,
+      "median": 13.734341256499988,
+      "max": 31.620298107000053
+    },
+    "stages_ms": {
+      "embedding_ms": {
+        "n": 20,
+        "median": 33.86242700003095,
+        "max": 39.072024000233796
+      },
+      "search_ms": {
+        "n": 20,
+        "median": 6.669843000054243,
+        "max": 7.286197000212269
+      },
+      "queue_ms": {
+        "n": 20,
+        "median": 0.025860500272756326,
+        "max": 0.03258799983996141
+      },
+      "generation_without_queue_ms": {
+        "n": 20,
+        "median": 24029.46270449979,
+        "max": 39572.47367500008
+      },
+      "validation_ms": {
+        "n": 8,
+        "median": 0.6732174998660412,
+        "max": 0.7350839996433933
+      }
+    },
+    "concurrent": [
+      {
+        "id": "q25",
+        "seconds": 5.798549831999935,
+        "http_status": 200,
+        "timings_ms": {
+          "embedding_ms": 63.77837299987732,
+          "search_ms": 11.934010999993916,
+          "embedding_search_ms": 75.7600380002259,
+          "generation_ms": 5717.104844999994,
+          "validation_ms": 0.5540940001083072,
+          "replay_lookup_ms": null,
+          "queue_ms": 0.02932699999291799,
+          "total_ms": 5794.860233000236,
+          "generation_without_queue_ms": 5717.0755180000015
+        }
+      },
+      {
+        "id": "q24",
+        "seconds": 12.125190766000287,
+        "http_status": 200,
+        "timings_ms": {
+          "embedding_ms": 66.12213600010364,
+          "search_ms": 13.788331999876391,
+          "embedding_search_ms": 79.93959199984602,
+          "generation_ms": 12040.532347999942,
+          "validation_ms": 0.6017949999659322,
+          "replay_lookup_ms": null,
+          "queue_ms": 5713.564491999932,
+          "total_ms": 12121.752534999814,
+          "generation_without_queue_ms": 6326.96785600001
+        }
+      }
+    ],
+    "generation_intervals": [
+      {
+        "event": "llm_interval",
+        "started": 1770.674920653,
+        "ended": 1783.58698086
+      },
+      {
+        "event": "llm_interval",
+        "started": 1783.672427253,
+        "ended": 1825.38603209
+      },
+      {
+        "event": "llm_interval",
+        "started": 1825.463655328,
+        "ended": 1839.816745582
+      },
+      {
+        "event": "llm_interval",
+        "started": 1839.894724893,
+        "ended": 1866.840054636
+      },
+      {
+        "event": "llm_interval",
+        "started": 1866.915916399,
+        "ended": 1905.804244478
+      },
+      {
+        "event": "llm_interval",
+        "started": 1905.884338602,
+        "ended": 1921.813626538
+      },
+      {
+        "event": "llm_interval",
+        "started": 1921.894560415,
+        "ended": 1936.223884108
+      },
+      {
+        "event": "llm_interval",
+        "started": 1936.299582422,
+        "ended": 1975.867063343
+      },
+      {
+        "event": "llm_interval",
+        "started": 1975.945517798,
+        "ended": 1986.430783176
+      },
+      {
+        "event": "llm_interval",
+        "started": 1986.510384895,
+        "ended": 1999.817990186
+      },
+      {
+        "event": "llm_interval",
+        "started": 1999.899737088,
+        "ended": 2024.065246519
+      },
+      {
+        "event": "llm_interval",
+        "started": 2024.144814595,
+        "ended": 2052.964938203
+      },
+      {
+        "event": "llm_interval",
+        "started": 2053.04281347,
+        "ended": 2083.633292808
+      },
+      {
+        "event": "llm_interval",
+        "started": 2083.711551623,
+        "ended": 2107.594861608
+      },
+      {
+        "event": "llm_interval",
+        "started": 2107.675384113,
+        "ended": 2139.244192746
+      },
+      {
+        "event": "llm_interval",
+        "started": 2139.327752606,
+        "ended": 2163.566981802
+      },
+      {
+        "event": "llm_interval",
+        "started": 2163.650404057,
+        "ended": 2176.210299933
+      },
+      {
+        "event": "llm_interval",
+        "started": 2176.288361278,
+        "ended": 2189.308180313
+      },
+      {
+        "event": "llm_interval",
+        "started": 2189.384784059,
+        "ended": 2216.225073207
+      },
+      {
+        "event": "llm_interval",
+        "started": 2216.303376104,
+        "ended": 2226.003814492
+      },
+      {
+        "event": "llm_interval",
+        "started": 2226.084094697,
+        "ended": 2236.871381592
+      },
+      {
+        "event": "llm_interval",
+        "started": 2236.949905539,
+        "ended": 2261.485828519
+      },
+      {
+        "event": "llm_interval",
+        "started": 2261.627810602,
+        "ended": 2267.339711083
+      },
+      {
+        "event": "llm_interval",
+        "started": 2267.346195448,
+        "ended": 2273.667348431
+      }
+    ]
+  },
+  "archive_sha256": "98a68fe0368790e0517829bda443cf3d6694840ff9d6db185da85812a170c831"
+}

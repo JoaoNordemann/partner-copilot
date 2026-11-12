@@ -1,0 +1,7 @@
+{"event": "session", "base_commit": "8bf96afb41b386c9a0bb750ce3235b5cfbe46461", "protocol_commit": "5c65ba4dfa50db4a734c6be3187b4f244e053f4e", "budget_minutes": 35, "quota_minutes_before": 88, "visible_devices": "0", "python": "3.13.16", "gpu": "Tesla T4, 15360 MiB, 580.178.04"}
+{"event": "model_snapshot", "model": "mistralai/Mistral-7B-Instruct-v0.2", "revision": "63a8b081895390a26e140280378bc85ec8bce07a"}
+{"event": "stage_start", "stage": "nf4"}
+{"event": "stage_start", "stage": "fp16"}
+{"event": "stage_start", "stage": "api_index"}
+{"event": "stage_start", "stage": "api_http"}
+{"event": "session_finished", "elapsed_seconds": 2073.00208327}

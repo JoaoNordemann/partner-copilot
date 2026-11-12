@@ -1,0 +1,71 @@
+# Mistral na T4 em FP16, NF4 e HTTP real
+
+A versão privada 368621275 do Kaggle terminou em 34 min 50 s. A cota
+observada antes da sessão era de 88 min, com teto de 35 min para a rodada.
+Os processos receberam somente a GPU 0, uma Tesla T4 com 15.360 MiB
+anunciados. Foram executados NF4, FP16 e API NF4 em processos separados.
+Os registros preservam o commit do protocolo, a revisão do modelo,
+o ambiente, as saídas brutas e os intervalos da geração.
+[Ambiente e sessão](session.jsonl) · [Resumo reproduzível](summary.json)
+
+## Geração isolada
+
+Carregamento a partir do cache local, com tokenizer e sincronização CUDA,
+levou 31,89 s em NF4 e 9,36 s em FP16. O tempo de rede ficou fora.
+A ordem fixa NF4 → FP16 permite que a segunda carga se beneficie do
+cache do sistema operacional. Foram feitas duas chamadas de aquecimento
+por modo. As 36 chamadas medidas mantiveram prompt v3, contexto,
+decodificação gulosa e orçamento de 512 tokens novos.
+
+| Modo | Conjunto | n | Pico alocado / reservado (GiB) | Latência mediana / máxima (s) | Tokens/s mediana / máxima | Aceitas |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| NF4 | Originalmente limpo | 9 | 4,53 / 5,00 | 5,64 / 20,54 | 13,24 / 15,95 | 6/9 |
+| FP16 | Originalmente limpo | 9 | 14,16 / 14,31 | 9,07 / 22,50 | 9,23 / 10,23 | 8/9 |
+| NF4 | Contaminado | 27 | 4,68 / 6,31 | 15,72 / 38,50 | 13,49 / 16,06 | 13/27 |
+| FP16 | Contaminado | 27 | 14,32 / 14,38 | 20,45 / 52,90 | 9,33 / 9,88 | 11/27 |
+
+FP16 completou o protocolo com margem pequena. A menor leitura de VRAM
+livre após uma geração foi de cerca de 49 MiB. NF4 teve menor pico e
+maior taxa de tokens por segundo nos dois conjuntos, contrariando a
+hipótese de que sua taxa seria menor ou igual à de FP16.
+
+No conjunto originalmente limpo, 8/9 saídas brutas mudaram. Duas
+passaram de rejeitadas em NF4 a aceitas em FP16. Entre as seis aceitas
+nos dois modos, três respostas estruturadas mudaram. No conjunto
+contaminado, mudaram 27/27 saídas brutas, oito decisões de aceitação
+(cinco a favor de NF4 e três de FP16) e três das oito respostas
+estruturadas aceitas nos dois modos. Aceitação mede o contrato do
+parser. A rodada não adjudicou correção factual.
+
+## API ponta a ponta
+
+O servidor local usou NF4 na T4 e MiniLM multilíngue e Chroma em CPU,
+com 862 documentos do split RAG. A amostra sequencial incluiu 20
+requisições medidas após duas de aquecimento, no conjunto contaminado.
+Todas chegaram à geração. Oito retornaram HTTP 200 e doze retornaram
+502 por contrato de saída, com sete erros de esquema, três de trecho
+e dois de ID de fonte. Não houve timeout na amostra.
+
+| Etapa | n | Mediana | Máximo |
+| --- | ---: | ---: | ---: |
+| HTTP, todas as requisições | 20 | 24,07 s | 39,62 s |
+| HTTP 200 | 8 | 13,73 s | 31,62 s |
+| Embedding | 20 | 33,86 ms | 39,07 ms |
+| Busca | 20 | 6,67 ms | 7,29 ms |
+| Fila | 20 | 0,026 ms | 0,033 ms |
+| Geração sem fila | 20 | 24,03 s | 39,57 s |
+| Validação com HTTP 200 | 8 | 0,673 ms | 0,735 ms |
+
+A API atual inclui a fila no campo de geração. A tabela subtrai esse
+tempo uma vez. As rejeições não trazem a duração de validação medida,
+por isso a linha de validação cobre as oito requisições com HTTP 200.
+
+No par simultâneo, as duas requisições retornaram HTTP 200. q25
+terminou em 5,80 s, com 0,03 ms de fila. q24 terminou em 12,13 s, com
+5,71 s de fila e 6,33 s de geração sem fila. O segundo intervalo de
+geração começou 6,5 ms após o fim do primeiro. Os intervalos registrados
+mostram execução serial no slot de geração.
+
+[Notebook privado da rodada](https://www.kaggle.com/code/jnordemann/partnercopilot-mistral-t4-benchmark?scriptVersionId=368621275) · [Registros HTTP](api.jsonl) · [Intervalos](api-generation-intervals.jsonl)
+
+Reproduza o resumo com `python scripts/summarize_gpu_benchmark.py reports/mistral-t4-v1`.
