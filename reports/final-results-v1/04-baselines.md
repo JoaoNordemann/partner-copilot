@@ -83,9 +83,9 @@
 | random; restaurante; operational; k=8 | Matriz completa com aleatório e palavras-chave | human-v2 q01–q30; desenvolvimento exposto/contaminado | 24 perguntas; 200 permutações | Hit=0,8233; recall limitado=0,6458; recall clássico=0,6458; MRR=0,3827; precision=0,1954; DP recall entre seeds=0,0745 | Hit 3952/4800; relevantes 7504; irrelevantes 30896 | Seeds não são perguntas independentes; os cortes operacionais dos métodos não são confiança equivalente. |
 | random; restaurante; operational; k=12 | Matriz completa com aleatório e palavras-chave | human-v2 q01–q30; desenvolvimento exposto/contaminado | 24 perguntas; 200 permutações | Hit=0,9775; recall limitado=0,9549; recall clássico=0,9549; MRR=0,3978; precision=0,1934; DP recall entre seeds=0,0354 | Hit 4692/4800; relevantes 11141; irrelevantes 46459 | Seeds não são perguntas independentes; os cortes operacionais dos métodos não são confiança equivalente. |
 
-Commit dos arquivos de entrada: `1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8`.
-Gerador: `scripts/build_results.py`; SHA256 LF `5e2ea19ea0c4d3591af5c327bd13c73053f3f876605aeb671ce6480e503a17b8`.
+Commit dos arquivos de entrada: `717a338c2cb830735555dc3c5c12d419361e866e`.
+Gerador: `scripts/build_results.py`; SHA256 LF `b771e78d9c067e584cd3cfd9561d7d57cbefb5da7f3852c311bf8fb394f336d8`.
 R/I somam documentos por pergunta, não IDs únicos no corpus. Aleatório: 24 perguntas x 200 repetições; contagens em 4.800 pares pergunta-seed, que não são amostras independentes.
 Entradas desta tabela:
 
-- [reports/retrieval-cpu-ablation-v1/results.json](https://github.com/JoaoNordemann/partner-copilot/blob/1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8/reports/retrieval-cpu-ablation-v1/results.json)
+- [reports/retrieval-cpu-ablation-v1/results.json](https://github.com/JoaoNordemann/partner-copilot/blob/717a338c2cb830735555dc3c5c12d419361e866e/reports/retrieval-cpu-ablation-v1/results.json)

@@ -52,7 +52,7 @@ opt-in. CI mínimo usa seleção explícita sem runtime ML, Python 3.12 e 3.13.
 - Retrieval: recall limitado@5 sem filtro de 0,2514 no multilíngue e 0,2583 no inglês; 4V/16E/4D em 24 perguntas respondíveis expostas.
 - Geração v3: 6/9 saídas aceitas, incluindo duas abstenções; 3/4 substantivas aceitas sustentadas e pertinentes na leitura de IA.
 - Retry descartado: 25 chamadas extras, 0 rejeições recuperadas; formato válido não garante resposta correta.
-- Evidência limitada: corpus conhecido, amostras pequenas e revisão humana assistida; pesos integrais FP16 ainda pendentes.
+- Evidência limitada por corpus conhecido, amostras pequenas e revisão humana assistida.
 
 [Resultados, tabelas e limitações](reports/final-results-v1/RESULTADOS.md).
 <!-- END GENERATED RESULTS -->
@@ -65,12 +65,17 @@ opt-in. CI mínimo usa seleção explícita sem runtime ML, Python 3.12 e 3.13.
   para produção exige medir com volume e carga representativos.
   [Medições em CPU](reports/api-cpu-latency-v1/README.md)
 
+Em T4 de 16 GB, o Mistral 7B em 4 bits usou **4,53 GiB de pico alocado**
+e respondeu em **5,64 s** (mediana, n = 9, conjunto originalmente limpo).
+Em FP16, coube com **14,16 GiB de pico alocado** e mediana de **9,07 s**
+no mesmo conjunto. [Comparação na mesma T4](reports/mistral-t4-v1/README.md)
+
 ## Limitações
 
 Formato válido e trecho literal não garantem resposta correta: n12 seleciona elogio
 ignorando crítica; n15 atribui trecho à review errada; n16 combina relatos distintos.
 Amostras pequenas, sintéticas e perguntas expostas limitam as conclusões; revisões
-humanas são assistidas. A comparação FP16 na T4 de 16 GB e o Space estão pendentes.
+humanas são assistidas. O Space está pendente.
 
 O QLoRA ABSA foi treinado. O checkpoint 253 teve a menor perda teacher-forced
 entre os três checkpoints avaliados, na primeira época. Na validação, 84,1%

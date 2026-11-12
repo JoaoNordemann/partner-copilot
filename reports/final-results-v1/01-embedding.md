@@ -23,9 +23,9 @@
 | english; restaurante; k=12 | Ranking cosseno sem corte de score | human-v2 q01–q30; desenvolvimento exposto/contaminado | 24 respondíveis de 30 | Hit=0,9583; recall limitado=0,9479; recall clássico=0,9479; MRR=0,4062; precision=0,1944 | Hit 23/24; relevantes 56; irrelevantes 232 | Conjunto pequeno e exposto; não é estimativa independente de generalização. |
 | multilingual; restaurante; k=12 | Ranking cosseno sem corte de score | human-v2 q01–q30; desenvolvimento exposto/contaminado | 24 respondíveis de 30 | Hit=1,0000; recall limitado=1,0000; recall clássico=1,0000; MRR=0,5296; precision=0,2014 | Hit 24/24; relevantes 58; irrelevantes 230; contra inglês V/E/D=2/22/0 | Conjunto pequeno e exposto; não é estimativa independente de generalização. |
 
-Commit dos arquivos de entrada: `1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8`.
-Gerador: `scripts/build_results.py`; SHA256 LF `5e2ea19ea0c4d3591af5c327bd13c73053f3f876605aeb671ce6480e503a17b8`.
+Commit dos arquivos de entrada: `717a338c2cb830735555dc3c5c12d419361e866e`.
+Gerador: `scripts/build_results.py`; SHA256 LF `b771e78d9c067e584cd3cfd9561d7d57cbefb5da7f3852c311bf8fb394f336d8`.
 R/I somam documentos por pergunta, não IDs únicos no corpus. Aleatório: 24 perguntas x 200 repetições; contagens em 4.800 pares pergunta-seed, que não são amostras independentes.
 Entradas desta tabela:
 
-- [reports/retrieval-cpu-ablation-v1/results.json](https://github.com/JoaoNordemann/partner-copilot/blob/1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8/reports/retrieval-cpu-ablation-v1/results.json)
+- [reports/retrieval-cpu-ablation-v1/results.json](https://github.com/JoaoNordemann/partner-copilot/blob/717a338c2cb830735555dc3c5c12d419361e866e/reports/retrieval-cpu-ablation-v1/results.json)

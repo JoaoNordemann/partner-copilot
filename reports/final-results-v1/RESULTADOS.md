@@ -39,12 +39,12 @@ O segundo comando exige diretório novo; --check não escreve arquivos.
 | english; restaurante; k=12 | Ranking cosseno sem corte de score | human-v2 q01–q30; desenvolvimento exposto/contaminado | 24 respondíveis de 30 | Hit=0,9583; recall limitado=0,9479; recall clássico=0,9479; MRR=0,4062; precision=0,1944 | Hit 23/24; relevantes 56; irrelevantes 232 | Conjunto pequeno e exposto; não é estimativa independente de generalização. |
 | multilingual; restaurante; k=12 | Ranking cosseno sem corte de score | human-v2 q01–q30; desenvolvimento exposto/contaminado | 24 respondíveis de 30 | Hit=1,0000; recall limitado=1,0000; recall clássico=1,0000; MRR=0,5296; precision=0,2014 | Hit 24/24; relevantes 58; irrelevantes 230; contra inglês V/E/D=2/22/0 | Conjunto pequeno e exposto; não é estimativa independente de generalização. |
 
-Commit dos arquivos de entrada: `1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8`.
-Gerador: `scripts/build_results.py`; SHA256 LF `5e2ea19ea0c4d3591af5c327bd13c73053f3f876605aeb671ce6480e503a17b8`.
+Commit dos arquivos de entrada: `717a338c2cb830735555dc3c5c12d419361e866e`.
+Gerador: `scripts/build_results.py`; SHA256 LF `b771e78d9c067e584cd3cfd9561d7d57cbefb5da7f3852c311bf8fb394f336d8`.
 R/I somam documentos por pergunta, não IDs únicos no corpus. Aleatório: 24 perguntas x 200 repetições; contagens em 4.800 pares pergunta-seed, que não são amostras independentes.
 Entradas desta tabela:
 
-- [reports/retrieval-cpu-ablation-v1/results.json](https://github.com/JoaoNordemann/partner-copilot/blob/1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8/reports/retrieval-cpu-ablation-v1/results.json)
+- [reports/retrieval-cpu-ablation-v1/results.json](https://github.com/JoaoNordemann/partner-copilot/blob/717a338c2cb830735555dc3c5c12d419361e866e/reports/retrieval-cpu-ablation-v1/results.json)
 
 
 # Quanto do desempenho depende do filtro por restaurante?
@@ -72,12 +72,12 @@ Entradas desta tabela:
 | random; k=8 | Efeito de filtrar somente restaurant_id | human-v2 q01–q30; desenvolvimento exposto/contaminado | 24 perguntas; 200 repetições | recall limitado: 0,0825 → 0,6458; delta 0,5633 | V/E/D=24/0/0; sem: Hit 871/4800; relevantes 949; irrelevantes 37451; com: Hit 3952/4800; relevantes 7504; irrelevantes 30896 | O filtro fornece escopo; item/data não são aplicados e o efeito não isola entendimento semântico. |
 | random; k=12 | Efeito de filtrar somente restaurant_id | human-v2 q01–q30; desenvolvimento exposto/contaminado | 24 perguntas; 200 repetições | recall limitado: 0,1228 → 0,9549; delta 0,8321 | V/E/D=24/0/0; sem: Hit 1233/4800; relevantes 1428; irrelevantes 56172; com: Hit 4692/4800; relevantes 11141; irrelevantes 46459 | O filtro fornece escopo; item/data não são aplicados e o efeito não isola entendimento semântico. |
 
-Commit dos arquivos de entrada: `1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8`.
-Gerador: `scripts/build_results.py`; SHA256 LF `5e2ea19ea0c4d3591af5c327bd13c73053f3f876605aeb671ce6480e503a17b8`.
+Commit dos arquivos de entrada: `717a338c2cb830735555dc3c5c12d419361e866e`.
+Gerador: `scripts/build_results.py`; SHA256 LF `b771e78d9c067e584cd3cfd9561d7d57cbefb5da7f3852c311bf8fb394f336d8`.
 R/I somam documentos por pergunta, não IDs únicos no corpus. Aleatório: 24 perguntas x 200 repetições; contagens em 4.800 pares pergunta-seed, que não são amostras independentes.
 Entradas desta tabela:
 
-- [reports/retrieval-cpu-ablation-v1/results.json](https://github.com/JoaoNordemann/partner-copilot/blob/1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8/reports/retrieval-cpu-ablation-v1/results.json)
+- [reports/retrieval-cpu-ablation-v1/results.json](https://github.com/JoaoNordemann/partner-copilot/blob/717a338c2cb830735555dc3c5c12d419361e866e/reports/retrieval-cpu-ablation-v1/results.json)
 
 
 # Quando aumentar k deixa de compensar o ruído?
@@ -117,12 +117,12 @@ Entradas desta tabela:
 | random; restaurante; 5→8 | Ganho de recall clássico versus ruído ao ampliar k | human-v2 q01–q30; desenvolvimento exposto/contaminado | 24 perguntas; 200 repetições | recall clássico 0,4109→0,6458; precision 0,1974→0,1954 | R adicionais=2766; I adicionais=11634; V/E/D=24/0/0 | Recall limitado muda de denominador com k; estes dados de retrieval não determinam o melhor contexto de geração. |
 | random; restaurante; 8→12 | Ganho de recall clássico versus ruído ao ampliar k | human-v2 q01–q30; desenvolvimento exposto/contaminado | 24 perguntas; 200 repetições | recall clássico 0,6458→0,9549; precision 0,1954→0,1934 | R adicionais=3637; I adicionais=15563; V/E/D=24/0/0 | Recall limitado muda de denominador com k; estes dados de retrieval não determinam o melhor contexto de geração. |
 
-Commit dos arquivos de entrada: `1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8`.
-Gerador: `scripts/build_results.py`; SHA256 LF `5e2ea19ea0c4d3591af5c327bd13c73053f3f876605aeb671ce6480e503a17b8`.
+Commit dos arquivos de entrada: `717a338c2cb830735555dc3c5c12d419361e866e`.
+Gerador: `scripts/build_results.py`; SHA256 LF `b771e78d9c067e584cd3cfd9561d7d57cbefb5da7f3852c311bf8fb394f336d8`.
 R/I somam documentos por pergunta, não IDs únicos no corpus. Aleatório: 24 perguntas x 200 repetições; contagens em 4.800 pares pergunta-seed, que não são amostras independentes.
 Entradas desta tabela:
 
-- [reports/retrieval-cpu-ablation-v1/results.json](https://github.com/JoaoNordemann/partner-copilot/blob/1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8/reports/retrieval-cpu-ablation-v1/results.json)
+- [reports/retrieval-cpu-ablation-v1/results.json](https://github.com/JoaoNordemann/partner-copilot/blob/717a338c2cb830735555dc3c5c12d419361e866e/reports/retrieval-cpu-ablation-v1/results.json)
 
 
 # O embedding acrescenta algo aos baselines baratos?
@@ -210,12 +210,12 @@ Entradas desta tabela:
 | random; restaurante; operational; k=8 | Matriz completa com aleatório e palavras-chave | human-v2 q01–q30; desenvolvimento exposto/contaminado | 24 perguntas; 200 permutações | Hit=0,8233; recall limitado=0,6458; recall clássico=0,6458; MRR=0,3827; precision=0,1954; DP recall entre seeds=0,0745 | Hit 3952/4800; relevantes 7504; irrelevantes 30896 | Seeds não são perguntas independentes; os cortes operacionais dos métodos não são confiança equivalente. |
 | random; restaurante; operational; k=12 | Matriz completa com aleatório e palavras-chave | human-v2 q01–q30; desenvolvimento exposto/contaminado | 24 perguntas; 200 permutações | Hit=0,9775; recall limitado=0,9549; recall clássico=0,9549; MRR=0,3978; precision=0,1934; DP recall entre seeds=0,0354 | Hit 4692/4800; relevantes 11141; irrelevantes 46459 | Seeds não são perguntas independentes; os cortes operacionais dos métodos não são confiança equivalente. |
 
-Commit dos arquivos de entrada: `1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8`.
-Gerador: `scripts/build_results.py`; SHA256 LF `5e2ea19ea0c4d3591af5c327bd13c73053f3f876605aeb671ce6480e503a17b8`.
+Commit dos arquivos de entrada: `717a338c2cb830735555dc3c5c12d419361e866e`.
+Gerador: `scripts/build_results.py`; SHA256 LF `b771e78d9c067e584cd3cfd9561d7d57cbefb5da7f3852c311bf8fb394f336d8`.
 R/I somam documentos por pergunta, não IDs únicos no corpus. Aleatório: 24 perguntas x 200 repetições; contagens em 4.800 pares pergunta-seed, que não são amostras independentes.
 Entradas desta tabela:
 
-- [reports/retrieval-cpu-ablation-v1/results.json](https://github.com/JoaoNordemann/partner-copilot/blob/1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8/reports/retrieval-cpu-ablation-v1/results.json)
+- [reports/retrieval-cpu-ablation-v1/results.json](https://github.com/JoaoNordemann/partner-copilot/blob/717a338c2cb830735555dc3c5c12d419361e866e/reports/retrieval-cpu-ablation-v1/results.json)
 
 
 # Formato válido, fonte válida e conteúdo sustentado coincidem?
@@ -229,13 +229,13 @@ Entradas desta tabela:
 | v3-old | Schema, IDs, trecho, aceitação e conteúdo separados | q01–q30; contaminado por iterações anteriores | 30 perguntas; 27 saídas; 3 sem LLM | schema 16/27; parser 14/27; IDs 10/11; literal 9/10 | sustentadas IA 1/3 lidas; humanas assistidas 0/1 (1 lidas); humanas sustentadas e pertinentes 0/1 | Denominadores variam por ramo; sustentação só cobre casos lidos e N/A não significa falha. |
 | v3-new | Schema, IDs, trecho, aceitação e conteúdo separados | n11–n20; limpo na execução congelada; corpus conhecido/rótulos IA | 10 perguntas; 9 saídas; 1 sem LLM | schema 9/9; parser 6/9; IDs 7/7; literal 4/7 | sustentadas IA 6/9 lidas; humanas assistidas 1/4 (4 lidas); humanas sustentadas e pertinentes 1/4 | Denominadores variam por ramo; sustentação só cobre casos lidos e N/A não significa falha. |
 
-Commit dos arquivos de entrada: `1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8`.
-Gerador: `scripts/build_results.py`; SHA256 LF `5e2ea19ea0c4d3591af5c327bd13c73053f3f876605aeb671ce6480e503a17b8`.
+Commit dos arquivos de entrada: `717a338c2cb830735555dc3c5c12d419361e866e`.
+Gerador: `scripts/build_results.py`; SHA256 LF `b771e78d9c067e584cd3cfd9561d7d57cbefb5da7f3852c311bf8fb394f336d8`.
 Entradas desta tabela:
 
-- [reports/generation-retrospective-v1/ai-review.jsonl](https://github.com/JoaoNordemann/partner-copilot/blob/1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8/reports/generation-retrospective-v1/ai-review.jsonl)
-- [reports/generation-retrospective-v1/human-review.jsonl](https://github.com/JoaoNordemann/partner-copilot/blob/1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8/reports/generation-retrospective-v1/human-review.jsonl)
-- [reports/generation-retrospective-v1/metrics.json](https://github.com/JoaoNordemann/partner-copilot/blob/1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8/reports/generation-retrospective-v1/metrics.json)
+- [reports/generation-retrospective-v1/ai-review.jsonl](https://github.com/JoaoNordemann/partner-copilot/blob/717a338c2cb830735555dc3c5c12d419361e866e/reports/generation-retrospective-v1/ai-review.jsonl)
+- [reports/generation-retrospective-v1/human-review.jsonl](https://github.com/JoaoNordemann/partner-copilot/blob/717a338c2cb830735555dc3c5c12d419361e866e/reports/generation-retrospective-v1/human-review.jsonl)
+- [reports/generation-retrospective-v1/metrics.json](https://github.com/JoaoNordemann/partner-copilot/blob/717a338c2cb830735555dc3c5c12d419361e866e/reports/generation-retrospective-v1/metrics.json)
 
 
 # O sistema encontra evidência e se abstém quando necessário?
@@ -249,18 +249,18 @@ Entradas desta tabela:
 | v3-old | Abstenção formal e presença de fonte relevante | q01–q30; contaminado por iterações anteriores | 24 respondíveis; 6 negativas | evidência nas positivas 23/24; recusa indevida formal 2/24 | negativas abstidas 6/6; LLM 4/4 chamadas negativas; 2 sem LLM; erros de contrato 13/30 | Recusas semânticas em saídas rejeitadas ficam fora da taxa formal; lista relevante não comprova fidelidade. |
 | v3-new | Abstenção formal e presença de fonte relevante | n11–n20; limpo na execução congelada; corpus conhecido/rótulos IA | 7 respondíveis; 3 negativas | evidência nas positivas 7/7; recusa indevida formal 0/7 | negativas abstidas 3/3; LLM 2/2 chamadas negativas; 1 sem LLM; erros de contrato 3/10 | Recusas semânticas em saídas rejeitadas ficam fora da taxa formal; lista relevante não comprova fidelidade. |
 
-Commit dos arquivos de entrada: `1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8`.
-Gerador: `scripts/build_results.py`; SHA256 LF `5e2ea19ea0c4d3591af5c327bd13c73053f3f876605aeb671ce6480e503a17b8`.
+Commit dos arquivos de entrada: `717a338c2cb830735555dc3c5c12d419361e866e`.
+Gerador: `scripts/build_results.py`; SHA256 LF `b771e78d9c067e584cd3cfd9561d7d57cbefb5da7f3852c311bf8fb394f336d8`.
 Entradas desta tabela:
 
-- [reports/final-v3/generation-v3-contaminated.jsonl](https://github.com/JoaoNordemann/partner-copilot/blob/1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8/reports/final-v3/generation-v3-contaminated.jsonl)
-- [reports/final-v3/generation-v3-new.jsonl](https://github.com/JoaoNordemann/partner-copilot/blob/1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8/reports/final-v3/generation-v3-new.jsonl)
-- [reports/generation-json-v1/generation-json-v1.jsonl](https://github.com/JoaoNordemann/partner-copilot/blob/1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8/reports/generation-json-v1/generation-json-v1.jsonl)
-- [reports/generation-kaggle-D/generation-kaggle-D.jsonl](https://github.com/JoaoNordemann/partner-copilot/blob/1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8/reports/generation-kaggle-D/generation-kaggle-D.jsonl)
-- [reports/generation-kaggle-v1/generation-kaggle-v1.jsonl](https://github.com/JoaoNordemann/partner-copilot/blob/1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8/reports/generation-kaggle-v1/generation-kaggle-v1.jsonl)
-- [reports/generation-kaggle-v2/generation-kaggle-B-prompt-v2-parser-v1.jsonl](https://github.com/JoaoNordemann/partner-copilot/blob/1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8/reports/generation-kaggle-v2/generation-kaggle-B-prompt-v2-parser-v1.jsonl)
-- [reports/generation-kaggle-v2/generation-kaggle-C-parser-v2.jsonl](https://github.com/JoaoNordemann/partner-copilot/blob/1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8/reports/generation-kaggle-v2/generation-kaggle-C-parser-v2.jsonl)
-- [reports/generation-retrospective-v1/metrics.json](https://github.com/JoaoNordemann/partner-copilot/blob/1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8/reports/generation-retrospective-v1/metrics.json)
+- [reports/final-v3/generation-v3-contaminated.jsonl](https://github.com/JoaoNordemann/partner-copilot/blob/717a338c2cb830735555dc3c5c12d419361e866e/reports/final-v3/generation-v3-contaminated.jsonl)
+- [reports/final-v3/generation-v3-new.jsonl](https://github.com/JoaoNordemann/partner-copilot/blob/717a338c2cb830735555dc3c5c12d419361e866e/reports/final-v3/generation-v3-new.jsonl)
+- [reports/generation-json-v1/generation-json-v1.jsonl](https://github.com/JoaoNordemann/partner-copilot/blob/717a338c2cb830735555dc3c5c12d419361e866e/reports/generation-json-v1/generation-json-v1.jsonl)
+- [reports/generation-kaggle-D/generation-kaggle-D.jsonl](https://github.com/JoaoNordemann/partner-copilot/blob/717a338c2cb830735555dc3c5c12d419361e866e/reports/generation-kaggle-D/generation-kaggle-D.jsonl)
+- [reports/generation-kaggle-v1/generation-kaggle-v1.jsonl](https://github.com/JoaoNordemann/partner-copilot/blob/717a338c2cb830735555dc3c5c12d419361e866e/reports/generation-kaggle-v1/generation-kaggle-v1.jsonl)
+- [reports/generation-kaggle-v2/generation-kaggle-B-prompt-v2-parser-v1.jsonl](https://github.com/JoaoNordemann/partner-copilot/blob/717a338c2cb830735555dc3c5c12d419361e866e/reports/generation-kaggle-v2/generation-kaggle-B-prompt-v2-parser-v1.jsonl)
+- [reports/generation-kaggle-v2/generation-kaggle-C-parser-v2.jsonl](https://github.com/JoaoNordemann/partner-copilot/blob/717a338c2cb830735555dc3c5c12d419361e866e/reports/generation-kaggle-v2/generation-kaggle-C-parser-v2.jsonl)
+- [reports/generation-retrospective-v1/metrics.json](https://github.com/JoaoNordemann/partner-copilot/blob/717a338c2cb830735555dc3c5c12d419361e866e/reports/generation-retrospective-v1/metrics.json)
 
 
 # Quais falhas foram confirmadas na leitura humana?
@@ -278,12 +278,12 @@ Entradas desta tabela:
 | json-v1/n09 | Sustentação e pertinência na revisão humana assistida | n01–n10; contaminado nesta consolidação retrospectiva; seleção retrospectiva de entrevista | 1 caso | sem_suporte; responde=nao; abstenção=nao_se_aplica | leitura 1; concordância conjunta 1/1; A rev_002142 não menciona análise microbiológica. O modelo afirma que ela ocorreu sem apoio na fonte; deveria abster-se, mas respondeu com abstem=false. | IA ajudou no enquadramento e houve exposição aos julgamentos; não é revisão cega nem acurácia global. |
 | v3-old/q21 | Sustentação e pertinência na revisão humana assistida | q01–q30; contaminado por iterações anteriores; seleção retrospectiva de entrevista | 1 caso | sem_suporte; responde=nao; abstenção=indevida | leitura 1; concordância conjunta 1/1; A rev_002355 relata que não fecharam direito a embalagem. A recusa do modelo ignora evidência pertinente no contexto. | IA ajudou no enquadramento e houve exposição aos julgamentos; não é revisão cega nem acurácia global. |
 
-Commit dos arquivos de entrada: `1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8`.
-Gerador: `scripts/build_results.py`; SHA256 LF `5e2ea19ea0c4d3591af5c327bd13c73053f3f876605aeb671ce6480e503a17b8`.
+Commit dos arquivos de entrada: `717a338c2cb830735555dc3c5c12d419361e866e`.
+Gerador: `scripts/build_results.py`; SHA256 LF `b771e78d9c067e584cd3cfd9561d7d57cbefb5da7f3852c311bf8fb394f336d8`.
 Entradas desta tabela:
 
-- [reports/generation-retrospective-v1/ai-review.jsonl](https://github.com/JoaoNordemann/partner-copilot/blob/1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8/reports/generation-retrospective-v1/ai-review.jsonl)
-- [reports/generation-retrospective-v1/human-review.jsonl](https://github.com/JoaoNordemann/partner-copilot/blob/1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8/reports/generation-retrospective-v1/human-review.jsonl)
+- [reports/generation-retrospective-v1/ai-review.jsonl](https://github.com/JoaoNordemann/partner-copilot/blob/717a338c2cb830735555dc3c5c12d419361e866e/reports/generation-retrospective-v1/ai-review.jsonl)
+- [reports/generation-retrospective-v1/human-review.jsonl](https://github.com/JoaoNordemann/partner-copilot/blob/717a338c2cb830735555dc3c5c12d419361e866e/reports/generation-retrospective-v1/human-review.jsonl)
 
 
 # Qual custo computacional e latência foram medidos, em qual hardware?
@@ -298,15 +298,24 @@ Entradas desta tabela:
 | v3-contaminated; Kaggle/Tesla T4; d03e3ae | Latência de geração, carga e pico alocado NF4 | q01–q30; contaminado por iterações anteriores | 27 chamadas | mediana/média/p95 12,912/16,788/40,641 s; carga 97,161 s; pico 5,028 GB / 4,683 GiB | prompt 27773; gerados 5768; soma geração 453,278 s | Carga é atributo repetido, reservado difere de alocado e o tempo não é benchmark da máquina local. |
 | english; PC Windows / CPU não identificada | Tempo total histórico da ablação CPU | human-v2 q01–q30; desenvolvimento exposto/contaminado | 100 documentos; 30 perguntas x 2 modos | execução inteira 16,863 s | 1 execução por modelo | Inclui cache/download/carga/indexação/consultas; não é latência isolada nem comparação justa de velocidade. |
 | multilingual; PC Windows / CPU não identificada | Tempo total histórico da ablação CPU | human-v2 q01–q30; desenvolvimento exposto/contaminado | 100 documentos; 30 perguntas x 2 modos | execução inteira 8,255 s | 1 execução por modelo | Inclui cache/download/carga/indexação/consultas; não é latência isolada nem comparação justa de velocidade. |
-| Embedding de consulta em CPU | Lacuna de medição | Não executado; limpo/contaminado não se aplica | 0 medições isoladas | Pendente; sem valor estimado | 0 benchmarks novos nesta consolidação | Não inferir tempo pela diferença pipeline menos geração nem confundir compute FP16 com pesos FP16. |
-| Retrieval isolado em CPU | Lacuna de medição | Não executado; limpo/contaminado não se aplica | 0 medições isoladas | Pendente; sem valor estimado | 0 benchmarks novos nesta consolidação | Não inferir tempo pela diferença pipeline menos geração nem confundir compute FP16 com pesos FP16. |
-| Pesos integrais FP16 em T4 16 GB | Lacuna de medição | Não executado; limpo/contaminado não se aplica | 0 medições isoladas | Pendente; sem valor estimado | 0 benchmarks novos nesta consolidação | Não inferir tempo pela diferença pipeline menos geração nem confundir compute FP16 com pesos FP16. |
+| NF4 em Kaggle/Tesla T4 16 GB, CUDA 13.0 | Geração isolada com aquecimento e pico de VRAM | Originalmente limpo | 9 chamadas | mediana/máximo 5,64/20,54 s. Pico alocado/reservado 4,53/5,00 GiB. Mediana 13,24 tokens/s | Parser aceitou 6/9 | Uma sessão e uma revisão fixa. Aceitação mede o contrato. |
+| NF4 em Kaggle/Tesla T4 16 GB, CUDA 13.0 | Geração isolada com aquecimento e pico de VRAM | Contaminado | 27 chamadas | mediana/máximo 15,72/38,50 s. Pico alocado/reservado 4,68/6,31 GiB. Mediana 13,49 tokens/s | Parser aceitou 13/27 | Uma sessão e uma revisão fixa. Aceitação mede o contrato. |
+| Carga NF4 em Kaggle/Tesla T4 16 GB | Carga do cache local com sincronização CUDA | Carga do modelo, sem perguntas | 1 carga | 31,89 s | Uma carga por processo | NF4 foi carregado primeiro. O cache do sistema pode favorecer FP16. |
+| FP16 em Kaggle/Tesla T4 16 GB, CUDA 13.0 | Geração isolada com aquecimento e pico de VRAM | Originalmente limpo | 9 chamadas | mediana/máximo 9,07/22,50 s. Pico alocado/reservado 14,16/14,31 GiB. Mediana 9,23 tokens/s | Parser aceitou 8/9 | Uma sessão e uma revisão fixa. Aceitação mede o contrato. |
+| FP16 em Kaggle/Tesla T4 16 GB, CUDA 13.0 | Geração isolada com aquecimento e pico de VRAM | Contaminado | 27 chamadas | mediana/máximo 20,45/52,90 s. Pico alocado/reservado 14,32/14,38 GiB. Mediana 9,33 tokens/s | Parser aceitou 11/27 | Uma sessão e uma revisão fixa. Aceitação mede o contrato. |
+| Carga FP16 em Kaggle/Tesla T4 16 GB | Carga do cache local com sincronização CUDA | Carga do modelo, sem perguntas | 1 carga | 9,36 s | Uma carga por processo | NF4 foi carregado primeiro. O cache do sistema pode favorecer FP16. |
+| HTTP ponta a ponta na API real em Kaggle/Tesla T4 NF4 + CPU | Mediana e máximo após aquecimento | Contaminado, índice RAG de 862 documentos | 20 requisições | 24,075/39,615 s | 8 HTTP 200 e 12 HTTP 502 na série | Validação temporizada nas respostas HTTP 200. |
+| Embedding em CPU na API real em Kaggle/Tesla T4 NF4 + CPU | Mediana e máximo após aquecimento | Contaminado, índice RAG de 862 documentos | 20 requisições | 33,862/39,072 ms | 8 HTTP 200 e 12 HTTP 502 na série | Validação temporizada nas respostas HTTP 200. |
+| Busca em CPU na API real em Kaggle/Tesla T4 NF4 + CPU | Mediana e máximo após aquecimento | Contaminado, índice RAG de 862 documentos | 20 requisições | 6,670/7,286 ms | 8 HTTP 200 e 12 HTTP 502 na série | Validação temporizada nas respostas HTTP 200. |
+| Geração sem fila na API real em Kaggle/Tesla T4 NF4 + CPU | Mediana e máximo após aquecimento | Contaminado, índice RAG de 862 documentos | 20 requisições | 24029,463/39572,474 ms | 8 HTTP 200 e 12 HTTP 502 na série | Validação temporizada nas respostas HTTP 200. |
+| Validação das respostas HTTP 200 na API real em Kaggle/Tesla T4 NF4 + CPU | Mediana e máximo após aquecimento | Contaminado, índice RAG de 862 documentos | 8 requisições | 0,673/0,735 ms | 8 HTTP 200 e 12 HTTP 502 na série | Validação temporizada nas respostas HTTP 200. |
 
-Commit dos arquivos de entrada: `1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8`.
-Gerador: `scripts/build_results.py`; SHA256 LF `5e2ea19ea0c4d3591af5c327bd13c73053f3f876605aeb671ce6480e503a17b8`.
+Commit dos arquivos de entrada: `717a338c2cb830735555dc3c5c12d419361e866e`.
+Gerador: `scripts/build_results.py`; SHA256 LF `b771e78d9c067e584cd3cfd9561d7d57cbefb5da7f3852c311bf8fb394f336d8`.
 Entradas desta tabela:
 
-- [reports/cost-latency-consolidation-v1/metrics.json](https://github.com/JoaoNordemann/partner-copilot/blob/1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8/reports/cost-latency-consolidation-v1/metrics.json)
+- [reports/cost-latency-consolidation-v1/metrics.json](https://github.com/JoaoNordemann/partner-copilot/blob/717a338c2cb830735555dc3c5c12d419361e866e/reports/cost-latency-consolidation-v1/metrics.json)
+- [reports/mistral-t4-v1/summary.json](https://github.com/JoaoNordemann/partner-copilot/blob/717a338c2cb830735555dc3c5c12d419361e866e/reports/mistral-t4-v1/summary.json)
 
 
 # O que foi tentado e não sustentou a conclusão esperada?
@@ -323,12 +332,12 @@ Entradas desta tabela:
 | k=8→12; multilíngue filtrado | Ruído adicional com k maior | human-v2 q01–q30; desenvolvimento exposto/contaminado | 24 respondíveis | Hit não aumenta; recall clássico aumenta | 6 relevantes e 90 irrelevantes adicionais | O custo para a geração não foi isolado; não escolher k ótimo apenas por estes números. |
 | v3 nova: JSON puro | Aderência sem ignorar sufixo | n11–n20; limpo na execução congelada; corpus conhecido/rótulos IA | 9 saídas | Primeiro objeto pode ser válido mesmo com sufixo | schema 9/9; sufixos ignorados 9/9; JSON sem sufixo 0/9 | A regra de primeiro objeto foi pré-definida e preserva o bruto; isso não demonstra JSON puro. |
 
-Commit dos arquivos de entrada: `1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8`.
-Gerador: `scripts/build_results.py`; SHA256 LF `5e2ea19ea0c4d3591af5c327bd13c73053f3f876605aeb671ce6480e503a17b8`.
+Commit dos arquivos de entrada: `717a338c2cb830735555dc3c5c12d419361e866e`.
+Gerador: `scripts/build_results.py`; SHA256 LF `b771e78d9c067e584cd3cfd9561d7d57cbefb5da7f3852c311bf8fb394f336d8`.
 R/I somam documentos por pergunta, não IDs únicos no corpus. Aleatório: 24 perguntas x 200 repetições; contagens em 4.800 pares pergunta-seed, que não são amostras independentes.
 Entradas desta tabela:
 
-- [reports/generation-kaggle-D/analysis.json](https://github.com/JoaoNordemann/partner-copilot/blob/1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8/reports/generation-kaggle-D/analysis.json)
-- [reports/generation-retrospective-v1/human-review.jsonl](https://github.com/JoaoNordemann/partner-copilot/blob/1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8/reports/generation-retrospective-v1/human-review.jsonl)
-- [reports/generation-retrospective-v1/metrics.json](https://github.com/JoaoNordemann/partner-copilot/blob/1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8/reports/generation-retrospective-v1/metrics.json)
-- [reports/retrieval-cpu-ablation-v1/results.json](https://github.com/JoaoNordemann/partner-copilot/blob/1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8/reports/retrieval-cpu-ablation-v1/results.json)
+- [reports/generation-kaggle-D/analysis.json](https://github.com/JoaoNordemann/partner-copilot/blob/717a338c2cb830735555dc3c5c12d419361e866e/reports/generation-kaggle-D/analysis.json)
+- [reports/generation-retrospective-v1/human-review.jsonl](https://github.com/JoaoNordemann/partner-copilot/blob/717a338c2cb830735555dc3c5c12d419361e866e/reports/generation-retrospective-v1/human-review.jsonl)
+- [reports/generation-retrospective-v1/metrics.json](https://github.com/JoaoNordemann/partner-copilot/blob/717a338c2cb830735555dc3c5c12d419361e866e/reports/generation-retrospective-v1/metrics.json)
+- [reports/retrieval-cpu-ablation-v1/results.json](https://github.com/JoaoNordemann/partner-copilot/blob/717a338c2cb830735555dc3c5c12d419361e866e/reports/retrieval-cpu-ablation-v1/results.json)

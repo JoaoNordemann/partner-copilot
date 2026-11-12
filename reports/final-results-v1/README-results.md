@@ -33,7 +33,8 @@ No Kaggle/Tesla T4 com NF4, a v1 teve mediana de geração de
 carga não se soma por pergunta e reservado difere de alocado. As latências isoladas
 de CPU não integram este snapshot histórico; foram medidas depois no
 [relatório da API](../api-cpu-latency-v1/README.md), com hardware próprio.
-Pesos integrais FP16 e custo monetário seguem pendentes. Nenhuma nova inferência
-foi feita para gerar estas tabelas.
+A comparação pareada de pesos integrais FP16 e NF4 na T4 está no
+[relatório da rodada](../mistral-t4-v1/README.md). O custo monetário
+segue pendente. As tabelas consolidam medições já registradas.
 
 [Tabelas, contagens e proveniência](RESULTADOS.md).

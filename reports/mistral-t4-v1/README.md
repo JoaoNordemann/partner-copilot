@@ -37,6 +37,22 @@ contaminado, mudaram 27/27 saídas brutas, oito decisões de aceitação
 estruturadas aceitas nos dois modos. Aceitação mede o contrato do
 parser. A rodada não adjudicou correção factual.
 
+### Leitura de casos pareados
+
+- **n14:** em NF4, o trecho citado escreve «velo» no lugar de «velho»
+  e falha na checagem literal. FP16 cita o trecho exato, incluindo a
+  informação de que o lacre estava inteiro, e a saída passa.
+- **n12:** os dois modos passam no parser e usam o mesmo trecho sobre
+  custo-benefício para afirmar que o sabor era bom. A review descreve
+  gosto ruim no final. A diferença de redação preserva o erro factual.
+- **q05:** NF4 passa com uma citação sobre a tampa solta. FP16 usa a
+  chave `fontes:` no lugar de `fontes` e falha no contrato. Em q09,
+  FP16 falha ao juntar trechos que não aparecem nessa sequência.
+
+Esses casos são leituras selecionadas. As contagens medem aceitação e
+mudança de saída em duas amostras pequenas, sem estimativa de vantagem
+factual de um modo sobre o outro. [Saídas NF4](nf4.jsonl) · [Saídas FP16](fp16.jsonl)
+
 ## API ponta a ponta
 
 O servidor local usou NF4 na T4 e MiniLM multilíngue e Chroma em CPU,

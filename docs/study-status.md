@@ -22,7 +22,8 @@ Atualizado com os resultados do filtro por aspecto, da avaliação externa e da 
 | Integração ABSA na ingestão | Publicada e desligada por padrão | Tag `v0.2-aspects` no commit `69b448f`, aprovado pelo CI. [CI do commit da tag](https://github.com/JoaoNordemann/partner-copilot/actions/runs/42930288620) |
 | Retrieval com aspecto | Medido em CPU | 37/120 → 45/120 relevantes no top 5 com QLoRA. Teto de 55/120. [Relatório](../reports/absa-retrieval-v1/README.md) |
 | Latência isolada do QLoRA | Medida em Tesla T4 | 30 reviews em lote unitário após aquecimento. Mediana de 1,41 s, p95 de 2,38 s e pico de 1,17 GiB alocados. [Medição](absa-external-evaluation.md#baselines-complementares-e-transferência) |
-| FP16 na T4 16 GB | Pendente | Comparar o Mistral FP16 e NF4 com a mesma entrada e configuração de geração |
+| FP16 na T4 16 GB | Medido | Completou 36/36 chamadas. A menor leitura após geração foi de 49 MiB livres. [Relatório](../reports/mistral-t4-v1/README.md) |
+| API real ponta a ponta | Medida | NF4 na T4, 20 chamadas sequenciais e duas simultâneas. [Relatório](../reports/mistral-t4-v1/README.md#api-ponta-a-ponta) |
 | Space | Adiado | Não bloquear entrega local; distinguir gravação de busca CPU ao vivo |
 | Avaliação final reservada | Preservada, não executada | Uma rodada futura, sem ajuste posterior |
 
@@ -61,6 +62,21 @@ sintática foi 199/200. A medição isolada do QLoRA na T4 incluiu
 tokenização, inferência e decodificação com o modelo já carregado.
 [Avaliação externa e latência](absa-external-evaluation.md)
 
+## Custos medidos na T4
+
+| Ambiente e conjunto | Modo | n | Pico alocado / reservado | Latência mediana / máxima | Mediana de tokens/s |
+| --- | --- | ---: | ---: | ---: | ---: |
+| Kaggle, T4 16 GB, originalmente limpo | NF4 | 9 | 4,53 / 5,00 GiB | 5,64 / 20,54 s | 13,24 |
+| Kaggle, T4 16 GB, originalmente limpo | FP16 | 9 | 14,16 / 14,31 GiB | 9,07 / 22,50 s | 9,23 |
+| Kaggle, T4 16 GB, contaminado | NF4 | 27 | 4,68 / 6,31 GiB | 15,72 / 38,50 s | 13,49 |
+| Kaggle, T4 16 GB, contaminado | FP16 | 27 | 14,32 / 14,38 GiB | 20,45 / 52,90 s | 9,33 |
+
+Na API real com NF4 na T4 e retrieval em CPU, as 20 requisições do conjunto
+contaminado tiveram mediana de 24,07 s e máximo de 39,62 s. Oito
+retornaram HTTP 200 e 12 retornaram HTTP 502 por contrato de saída.
+No par simultâneo, a segunda requisição esperou 5,71 s.
+[Relatório e ambiente da medição](../reports/mistral-t4-v1/README.md)
+
 ## Plano de GPU
 
 Em 2026-11-09, o painel de opções da sessão do Kaggle exibiu
@@ -69,7 +85,7 @@ Em 2026-11-09, o painel de opções da sessão do Kaggle exibiu
 
 | Trabalho | Teto de sessão | Condição |
 | --- | ---: | --- |
-| Comparação FP16 e NF4 | 35 min | Uma T4 de 16 GB, mesma revisão do Mistral e mesmas entradas. Fazer um teste curto de carga em FP16 na GPU 0 e registrar eventual falta de memória. |
+| Comparação FP16 e NF4 com API real | 34 min 50 s de sessão | Concluída em uma T4. O teto era de 35 min, com 88 min de cota antes da partida. |
 | Experimento ABSA no retrieval | 0 min de GPU | Concluído em CPU com as predições congeladas. |
 | Reserva | 25 min | Download, indisponibilidade de hardware ou repetição de uma etapa que falhe. |
 
@@ -83,15 +99,10 @@ de 3.000 se for necessário indexá-lo com ABSA.
 [Latência isolada](absa-external-evaluation.md#baselines-complementares-e-transferência)
 
 Preparar entradas e comandos localmente antes de iniciar cada sessão.
-Medir latência após aquecimento e pico de VRAM na comparação FP16/NF4.
-Se a carga FP16 falhar, registrar o erro e preservar o saldo de GPU.
 
 ## Distribuição das pendências
 
 - **Docker CPU:** construir a imagem e verificar o container localmente em uma janela sem dependência de GPU.
-- **Na próxima sessão Kaggle que tiver folga:** aproveitar a mesma sessão de outro
-  trabalho com GPU para medir fila, validação e latência ponta a ponta do backend real.
-  Se a sessão não comportar a coleta completa, registrar a lacuna como limitação.
 - **Refatoração e publicação:** priorizar refatoração, README e publicação do projeto.
   A curadoria do MVP tem teto de três entradas de replay aprovadas. Os três exemplos
   históricos já cobrem o roteiro da demo, incluindo a falha conhecida.

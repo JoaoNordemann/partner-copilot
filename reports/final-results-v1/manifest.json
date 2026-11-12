@@ -1,95 +1,100 @@
 {
   "generator": "scripts/build_results.py",
-  "generator_sha256_lf": "5e2ea19ea0c4d3591af5c327bd13c73053f3f876605aeb671ce6480e503a17b8",
-  "input_commit": "1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8",
+  "generator_sha256_lf": "b771e78d9c067e584cd3cfd9561d7d57cbefb5da7f3852c311bf8fb394f336d8",
+  "input_commit": "717a338c2cb830735555dc3c5c12d419361e866e",
   "inputs": {
     "reports/cost-latency-consolidation-v1/metrics.json": {
-      "commit": "1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8",
+      "commit": "717a338c2cb830735555dc3c5c12d419361e866e",
       "sha256_bytes": "c732d8b151f398adf30d7441aa23001ba8693a77f7c7141da3ec02d31a910ee7",
       "sha256_lf": "ecb17a84871ed4f6600fe713bed9c343bb24d5c82d54f18902d10cb1406af18f"
     },
     "reports/final-v3/generation-v3-contaminated.jsonl": {
-      "commit": "1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8",
+      "commit": "717a338c2cb830735555dc3c5c12d419361e866e",
       "sha256_bytes": "b0e3674d175c7bdd8241c1cdc9bd09e6fe53b59477ee7d8bdf24c8679a5f9a61",
       "sha256_lf": "b0e3674d175c7bdd8241c1cdc9bd09e6fe53b59477ee7d8bdf24c8679a5f9a61"
     },
     "reports/final-v3/generation-v3-new.jsonl": {
-      "commit": "1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8",
+      "commit": "717a338c2cb830735555dc3c5c12d419361e866e",
       "sha256_bytes": "b424bc5d3af972fdf42cccdb14a467bd144f8a6b15904b70d93dcad8c644f0e7",
       "sha256_lf": "b424bc5d3af972fdf42cccdb14a467bd144f8a6b15904b70d93dcad8c644f0e7"
     },
     "reports/generation-json-v1/generation-json-v1.jsonl": {
-      "commit": "1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8",
+      "commit": "717a338c2cb830735555dc3c5c12d419361e866e",
       "sha256_bytes": "29c1511078ab6293e35fa6d109ecec4d395cee919025fedc229d74fc87af4960",
       "sha256_lf": "29c1511078ab6293e35fa6d109ecec4d395cee919025fedc229d74fc87af4960"
     },
     "reports/generation-kaggle-D/analysis.json": {
-      "commit": "1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8",
+      "commit": "717a338c2cb830735555dc3c5c12d419361e866e",
       "sha256_bytes": "74b00719a3b2d1821dcb72f48d52867b6b98d4ac55edd1b950d92d6aeec6a3f1",
       "sha256_lf": "c7e97a3d86d239c586e418e86fd8ff663312bac927ac22939535e6b38f1eeb1e"
     },
     "reports/generation-kaggle-D/generation-kaggle-D.jsonl": {
-      "commit": "1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8",
+      "commit": "717a338c2cb830735555dc3c5c12d419361e866e",
       "sha256_bytes": "5befbf9d0d7087f6d3e4f2c6d2b289f426605c835799ee2e3bc1d42a0a2b77fe",
       "sha256_lf": "5befbf9d0d7087f6d3e4f2c6d2b289f426605c835799ee2e3bc1d42a0a2b77fe"
     },
     "reports/generation-kaggle-v1/generation-kaggle-v1.jsonl": {
-      "commit": "1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8",
+      "commit": "717a338c2cb830735555dc3c5c12d419361e866e",
       "sha256_bytes": "23f8945599009e4f1bf454e6dd0130494ecf10ae18296ef81ccd2651c9051974",
       "sha256_lf": "23f8945599009e4f1bf454e6dd0130494ecf10ae18296ef81ccd2651c9051974"
     },
     "reports/generation-kaggle-v1/generation-kaggle-v1.smoke.json": {
-      "commit": "1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8",
+      "commit": "717a338c2cb830735555dc3c5c12d419361e866e",
       "sha256_bytes": "57a1e43c71df975f84da72b14c5312d3b7a398c0dac42e31b876f465dbf273fc",
       "sha256_lf": "57a1e43c71df975f84da72b14c5312d3b7a398c0dac42e31b876f465dbf273fc"
     },
     "reports/generation-kaggle-v2/generation-kaggle-B-prompt-v2-parser-v1.jsonl": {
-      "commit": "1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8",
+      "commit": "717a338c2cb830735555dc3c5c12d419361e866e",
       "sha256_bytes": "bdfca1a4966d25ed8757c0f79f2d8940811417c26ed2e645363a7ea21de147bf",
       "sha256_lf": "bdfca1a4966d25ed8757c0f79f2d8940811417c26ed2e645363a7ea21de147bf"
     },
     "reports/generation-kaggle-v2/generation-kaggle-B-prompt-v2-parser-v1.smoke.json": {
-      "commit": "1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8",
+      "commit": "717a338c2cb830735555dc3c5c12d419361e866e",
       "sha256_bytes": "0a5886134c4541baa2fcf4db25ffd0f390f797d963c08f79bd45924109b224ed",
       "sha256_lf": "0a5886134c4541baa2fcf4db25ffd0f390f797d963c08f79bd45924109b224ed"
     },
     "reports/generation-kaggle-v2/generation-kaggle-C-parser-v2.jsonl": {
-      "commit": "1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8",
+      "commit": "717a338c2cb830735555dc3c5c12d419361e866e",
       "sha256_bytes": "bf07ad04aa432e6a5b994b2a6c92c523c6b409915256af580410a1d343d27101",
       "sha256_lf": "bf07ad04aa432e6a5b994b2a6c92c523c6b409915256af580410a1d343d27101"
     },
     "reports/generation-retrospective-v1/ai-review.jsonl": {
-      "commit": "1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8",
+      "commit": "717a338c2cb830735555dc3c5c12d419361e866e",
       "sha256_bytes": "c03b7f45f0c01834b6752c975aa2b5182f9810224da11360a9d0db3ad73dce98",
       "sha256_lf": "1ca5bc0f640f2333578c7847e970754ba195afc26f695b25eff57d72c69f0921"
     },
     "reports/generation-retrospective-v1/human-review.jsonl": {
-      "commit": "1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8",
+      "commit": "717a338c2cb830735555dc3c5c12d419361e866e",
       "sha256_bytes": "b5f4ff1c66ef3b27d9c3f0eadd79aa65341aa3421f3f4719fd5160bd1397b148",
       "sha256_lf": "8587b34306f1ffacd68086348fe6827094f874c30c4766803dc9bea6910e834c"
     },
     "reports/generation-retrospective-v1/metrics.json": {
-      "commit": "1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8",
+      "commit": "717a338c2cb830735555dc3c5c12d419361e866e",
       "sha256_bytes": "584c29b9deccabb55166e1274439b5b9e19cd2e829759e21a30cabb0b9f711d0",
       "sha256_lf": "66c951161986310e5eaaaa6fdea0c6332f7a99de792865001c042c32281307e4"
     },
+    "reports/mistral-t4-v1/summary.json": {
+      "commit": "717a338c2cb830735555dc3c5c12d419361e866e",
+      "sha256_bytes": "7dbb20b17bf5b0e38d10540e3931be9c833f7675915fbc3fba8d2ce582248f8d",
+      "sha256_lf": "cf4eba6e8ef5df3fc8ba8ff133ffb861c7080c05bdb3f75a350d45a5f679b4e1"
+    },
     "reports/retrieval-cpu-ablation-v1/english.json": {
-      "commit": "1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8",
+      "commit": "717a338c2cb830735555dc3c5c12d419361e866e",
       "sha256_bytes": "d2f685bfa15b6a3dc3ba74ad68ea4d7b20758e509051e943545a97fe75364b9f",
       "sha256_lf": "9d2e39318411038019deb28b6a4cde30f6ca66d7c62b1d3146063fa4b067b433"
     },
     "reports/retrieval-cpu-ablation-v1/multilingual.json": {
-      "commit": "1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8",
+      "commit": "717a338c2cb830735555dc3c5c12d419361e866e",
       "sha256_bytes": "51549585597a1358e4cf79a3dd5700a37c0422213a3cba68df0c09eac85c48e0",
       "sha256_lf": "8da1587fcc436406ced0e9b85d21a955ed3d72b926bf5d6bdc539b0a2b43626d"
     },
     "reports/retrieval-cpu-ablation-v1/protocol.json": {
-      "commit": "1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8",
+      "commit": "717a338c2cb830735555dc3c5c12d419361e866e",
       "sha256_bytes": "d151abf0e7b8cefd2e8db45fd2d94d78af255f85a962f91178a9fdd8bb849255",
       "sha256_lf": "ffbd5a6da10f819e25c3ebcfaad6682db1fae948abc3f440d147e7942ccf2cd9"
     },
     "reports/retrieval-cpu-ablation-v1/results.json": {
-      "commit": "1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8",
+      "commit": "717a338c2cb830735555dc3c5c12d419361e866e",
       "sha256_bytes": "00b817076d920663e84837fdefc1b8ac7153153cc1630d543d17e3d725ce359b",
       "sha256_lf": "1af23e2fcd6e07b9cb13c8a7262dad20b233600c28ca0b771bfde4666140cedd"
     }
@@ -1826,7 +1831,8 @@
       ],
       "id": "08-custo",
       "inputs": [
-        "reports/cost-latency-consolidation-v1/metrics.json"
+        "reports/cost-latency-consolidation-v1/metrics.json",
+        "reports/mistral-t4-v1/summary.json"
       ],
       "question": "Qual custo computacional e latência foram medidos, em qual hardware?",
       "rows": [
@@ -1903,31 +1909,103 @@
           "Inclui cache/download/carga/indexação/consultas; não é latência isolada nem comparação justa de velocidade."
         ],
         [
-          "Embedding de consulta em CPU",
-          "Lacuna de medição",
-          "Não executado; limpo/contaminado não se aplica",
-          "0 medições isoladas",
-          "Pendente; sem valor estimado",
-          "0 benchmarks novos nesta consolidação",
-          "Não inferir tempo pela diferença pipeline menos geração nem confundir compute FP16 com pesos FP16."
+          "NF4 em Kaggle/Tesla T4 16 GB, CUDA 13.0",
+          "Geração isolada com aquecimento e pico de VRAM",
+          "Originalmente limpo",
+          "9 chamadas",
+          "mediana/máximo 5,64/20,54 s. Pico alocado/reservado 4,53/5,00 GiB. Mediana 13,24 tokens/s",
+          "Parser aceitou 6/9",
+          "Uma sessão e uma revisão fixa. Aceitação mede o contrato."
         ],
         [
-          "Retrieval isolado em CPU",
-          "Lacuna de medição",
-          "Não executado; limpo/contaminado não se aplica",
-          "0 medições isoladas",
-          "Pendente; sem valor estimado",
-          "0 benchmarks novos nesta consolidação",
-          "Não inferir tempo pela diferença pipeline menos geração nem confundir compute FP16 com pesos FP16."
+          "NF4 em Kaggle/Tesla T4 16 GB, CUDA 13.0",
+          "Geração isolada com aquecimento e pico de VRAM",
+          "Contaminado",
+          "27 chamadas",
+          "mediana/máximo 15,72/38,50 s. Pico alocado/reservado 4,68/6,31 GiB. Mediana 13,49 tokens/s",
+          "Parser aceitou 13/27",
+          "Uma sessão e uma revisão fixa. Aceitação mede o contrato."
         ],
         [
-          "Pesos integrais FP16 em T4 16 GB",
-          "Lacuna de medição",
-          "Não executado; limpo/contaminado não se aplica",
-          "0 medições isoladas",
-          "Pendente; sem valor estimado",
-          "0 benchmarks novos nesta consolidação",
-          "Não inferir tempo pela diferença pipeline menos geração nem confundir compute FP16 com pesos FP16."
+          "Carga NF4 em Kaggle/Tesla T4 16 GB",
+          "Carga do cache local com sincronização CUDA",
+          "Carga do modelo, sem perguntas",
+          "1 carga",
+          "31,89 s",
+          "Uma carga por processo",
+          "NF4 foi carregado primeiro. O cache do sistema pode favorecer FP16."
+        ],
+        [
+          "FP16 em Kaggle/Tesla T4 16 GB, CUDA 13.0",
+          "Geração isolada com aquecimento e pico de VRAM",
+          "Originalmente limpo",
+          "9 chamadas",
+          "mediana/máximo 9,07/22,50 s. Pico alocado/reservado 14,16/14,31 GiB. Mediana 9,23 tokens/s",
+          "Parser aceitou 8/9",
+          "Uma sessão e uma revisão fixa. Aceitação mede o contrato."
+        ],
+        [
+          "FP16 em Kaggle/Tesla T4 16 GB, CUDA 13.0",
+          "Geração isolada com aquecimento e pico de VRAM",
+          "Contaminado",
+          "27 chamadas",
+          "mediana/máximo 20,45/52,90 s. Pico alocado/reservado 14,32/14,38 GiB. Mediana 9,33 tokens/s",
+          "Parser aceitou 11/27",
+          "Uma sessão e uma revisão fixa. Aceitação mede o contrato."
+        ],
+        [
+          "Carga FP16 em Kaggle/Tesla T4 16 GB",
+          "Carga do cache local com sincronização CUDA",
+          "Carga do modelo, sem perguntas",
+          "1 carga",
+          "9,36 s",
+          "Uma carga por processo",
+          "NF4 foi carregado primeiro. O cache do sistema pode favorecer FP16."
+        ],
+        [
+          "HTTP ponta a ponta na API real em Kaggle/Tesla T4 NF4 + CPU",
+          "Mediana e máximo após aquecimento",
+          "Contaminado, índice RAG de 862 documentos",
+          "20 requisições",
+          "24,075/39,615 s",
+          "8 HTTP 200 e 12 HTTP 502 na série",
+          "Validação temporizada nas respostas HTTP 200."
+        ],
+        [
+          "Embedding em CPU na API real em Kaggle/Tesla T4 NF4 + CPU",
+          "Mediana e máximo após aquecimento",
+          "Contaminado, índice RAG de 862 documentos",
+          "20 requisições",
+          "33,862/39,072 ms",
+          "8 HTTP 200 e 12 HTTP 502 na série",
+          "Validação temporizada nas respostas HTTP 200."
+        ],
+        [
+          "Busca em CPU na API real em Kaggle/Tesla T4 NF4 + CPU",
+          "Mediana e máximo após aquecimento",
+          "Contaminado, índice RAG de 862 documentos",
+          "20 requisições",
+          "6,670/7,286 ms",
+          "8 HTTP 200 e 12 HTTP 502 na série",
+          "Validação temporizada nas respostas HTTP 200."
+        ],
+        [
+          "Geração sem fila na API real em Kaggle/Tesla T4 NF4 + CPU",
+          "Mediana e máximo após aquecimento",
+          "Contaminado, índice RAG de 862 documentos",
+          "20 requisições",
+          "24029,463/39572,474 ms",
+          "8 HTTP 200 e 12 HTTP 502 na série",
+          "Validação temporizada nas respostas HTTP 200."
+        ],
+        [
+          "Validação das respostas HTTP 200 na API real em Kaggle/Tesla T4 NF4 + CPU",
+          "Mediana e máximo após aquecimento",
+          "Contaminado, índice RAG de 862 documentos",
+          "8 requisições",
+          "0,673/0,735 ms",
+          "8 HTTP 200 e 12 HTTP 502 na série",
+          "Validação temporizada nas respostas HTTP 200."
         ]
       ]
     },

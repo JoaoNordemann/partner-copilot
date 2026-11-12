@@ -12,12 +12,12 @@
 | k=8→12; multilíngue filtrado | Ruído adicional com k maior | human-v2 q01–q30; desenvolvimento exposto/contaminado | 24 respondíveis | Hit não aumenta; recall clássico aumenta | 6 relevantes e 90 irrelevantes adicionais | O custo para a geração não foi isolado; não escolher k ótimo apenas por estes números. |
 | v3 nova: JSON puro | Aderência sem ignorar sufixo | n11–n20; limpo na execução congelada; corpus conhecido/rótulos IA | 9 saídas | Primeiro objeto pode ser válido mesmo com sufixo | schema 9/9; sufixos ignorados 9/9; JSON sem sufixo 0/9 | A regra de primeiro objeto foi pré-definida e preserva o bruto; isso não demonstra JSON puro. |
 
-Commit dos arquivos de entrada: `1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8`.
-Gerador: `scripts/build_results.py`; SHA256 LF `5e2ea19ea0c4d3591af5c327bd13c73053f3f876605aeb671ce6480e503a17b8`.
+Commit dos arquivos de entrada: `717a338c2cb830735555dc3c5c12d419361e866e`.
+Gerador: `scripts/build_results.py`; SHA256 LF `b771e78d9c067e584cd3cfd9561d7d57cbefb5da7f3852c311bf8fb394f336d8`.
 R/I somam documentos por pergunta, não IDs únicos no corpus. Aleatório: 24 perguntas x 200 repetições; contagens em 4.800 pares pergunta-seed, que não são amostras independentes.
 Entradas desta tabela:
 
-- [reports/generation-kaggle-D/analysis.json](https://github.com/JoaoNordemann/partner-copilot/blob/1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8/reports/generation-kaggle-D/analysis.json)
-- [reports/generation-retrospective-v1/human-review.jsonl](https://github.com/JoaoNordemann/partner-copilot/blob/1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8/reports/generation-retrospective-v1/human-review.jsonl)
-- [reports/generation-retrospective-v1/metrics.json](https://github.com/JoaoNordemann/partner-copilot/blob/1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8/reports/generation-retrospective-v1/metrics.json)
-- [reports/retrieval-cpu-ablation-v1/results.json](https://github.com/JoaoNordemann/partner-copilot/blob/1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8/reports/retrieval-cpu-ablation-v1/results.json)
+- [reports/generation-kaggle-D/analysis.json](https://github.com/JoaoNordemann/partner-copilot/blob/717a338c2cb830735555dc3c5c12d419361e866e/reports/generation-kaggle-D/analysis.json)
+- [reports/generation-retrospective-v1/human-review.jsonl](https://github.com/JoaoNordemann/partner-copilot/blob/717a338c2cb830735555dc3c5c12d419361e866e/reports/generation-retrospective-v1/human-review.jsonl)
+- [reports/generation-retrospective-v1/metrics.json](https://github.com/JoaoNordemann/partner-copilot/blob/717a338c2cb830735555dc3c5c12d419361e866e/reports/generation-retrospective-v1/metrics.json)
+- [reports/retrieval-cpu-ablation-v1/results.json](https://github.com/JoaoNordemann/partner-copilot/blob/717a338c2cb830735555dc3c5c12d419361e866e/reports/retrieval-cpu-ablation-v1/results.json)

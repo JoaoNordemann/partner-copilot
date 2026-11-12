@@ -10,7 +10,7 @@ import subprocess
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-INPUT_COMMIT = "1f954b3fa3e73e2d4aca3ae896affd2f6300a6d8"
+INPUT_COMMIT = "717a338c2cb830735555dc3c5c12d419361e866e"
 BEGIN = "<!-- BEGIN GENERATED RESULTS -->"
 END = "<!-- END GENERATED RESULTS -->"
 COLUMNS = [
@@ -28,6 +28,7 @@ RPATH = "reports/retrieval-cpu-ablation-v1/results.json"
 GPATH = "reports/generation-retrospective-v1/metrics.json"
 HPATH = "reports/generation-retrospective-v1/human-review.jsonl"
 APATH = "reports/generation-retrospective-v1/ai-review.jsonl"
+TPATH = "reports/mistral-t4-v1/summary.json"
 CPATH = "reports/cost-latency-consolidation-v1/metrics.json"
 
 
@@ -140,6 +141,7 @@ def build_tables(inputs: Inputs) -> tuple[list[dict], dict]:
     humans = inputs.read(HPATH)
     ai = inputs.read(APATH)
     cost = inputs.read(CPATH)
+    t4 = inputs.read(TPATH)
     inputs.verify_upstream(generation)
     inputs.verify_upstream(cost)
     correction = inputs.read("reports/generation-kaggle-D/analysis.json")
@@ -444,28 +446,63 @@ def build_tables(inputs: Inputs) -> tuple[list[dict], dict]:
                 "latência isolada nem comparação justa de velocidade.",
             ]
         )
-    for what in (
-        "Embedding de consulta em CPU",
-        "Retrieval isolado em CPU",
-        "Pesos integrais FP16 em T4 16 GB",
+    for mode, run in t4["precision"].items():
+        environment = run["environment"]
+        for cohort, measured in run["cohorts"].items():
+            latency = measured["latency_seconds"]
+            throughput = measured["tokens_per_second"]
+            allocated = number(measured["peak_allocated_bytes"] / 2**30, 2)
+            reserved = number(measured["peak_reserved_bytes"] / 2**30, 2)
+            rows.append(
+                [
+                    f"{mode.upper()} em Kaggle/Tesla T4 16 GB, CUDA {environment['cuda']}",
+                    "Geração isolada com aquecimento e pico de VRAM",
+                    "Originalmente limpo" if cohort == "limpo_original" else "Contaminado",
+                    f"{latency['n']} chamadas",
+                    f"mediana/máximo {number(latency['median'], 2)}/"
+                    f"{number(latency['max'], 2)} s. Pico alocado/reservado "
+                    f"{allocated}/{reserved} GiB. Mediana "
+                    f"{number(throughput['median'], 2)} tokens/s",
+                    f"Parser aceitou {measured['accepted']}/{latency['n']}",
+                    "Uma sessão e uma revisão fixa. Aceitação mede o contrato.",
+                ]
+            )
+        rows.append(
+            [
+                f"Carga {mode.upper()} em Kaggle/Tesla T4 16 GB",
+                "Carga do cache local com sincronização CUDA",
+                "Carga do modelo, sem perguntas",
+                "1 carga",
+                f"{number(run['load']['seconds'], 2)} s",
+                "Uma carga por processo",
+                "NF4 foi carregado primeiro. O cache do sistema pode favorecer FP16.",
+            ]
+        )
+    api = t4["api"]
+    for label, units, timing in (
+        ("HTTP ponta a ponta", "s", api["http_seconds"]),
+        ("Embedding em CPU", "ms", api["stages_ms"]["embedding_ms"]),
+        ("Busca em CPU", "ms", api["stages_ms"]["search_ms"]),
+        ("Geração sem fila", "ms", api["stages_ms"]["generation_without_queue_ms"]),
+        ("Validação das respostas HTTP 200", "ms", api["stages_ms"]["validation_ms"]),
     ):
         rows.append(
             [
-                what,
-                "Lacuna de medição",
-                "Não executado; limpo/contaminado não se aplica",
-                "0 medições isoladas",
-                "Pendente; sem valor estimado",
-                "0 benchmarks novos nesta consolidação",
-                "Não inferir tempo pela diferença pipeline menos geração "
-                "nem confundir compute FP16 com pesos FP16.",
+                f"{label} na API real em Kaggle/Tesla T4 NF4 + CPU",
+                "Mediana e máximo após aquecimento",
+                "Contaminado, índice RAG de 862 documentos",
+                f"{timing['n']} requisições",
+                f"{number(timing['median'], 3)}/{number(timing['max'], 3)} {units}",
+                "8 HTTP 200 e 12 HTTP 502 na série",
+                "Validação temporizada nas respostas HTTP 200.",
             ]
         )
+
     table(
         "08-custo",
         "Qual custo computacional e latência foram medidos, em qual hardware?",
         rows,
-        [CPATH],
+        [CPATH, TPATH],
     )
 
     primary = find_pair(
@@ -646,8 +683,9 @@ No Kaggle/Tesla T4 com NF4, a v1 teve mediana de geração de
 carga não se soma por pergunta e reservado difere de alocado. As latências isoladas
 de CPU não integram este snapshot histórico; foram medidas depois no
 [relatório da API](reports/api-cpu-latency-v1/README.md), com hardware próprio.
-Pesos integrais FP16 e custo monetário seguem pendentes. Nenhuma nova inferência
-foi feita para gerar estas tabelas.
+A comparação pareada de pesos integrais FP16 e NF4 na T4 está no
+[relatório da rodada](reports/mistral-t4-v1/README.md). O custo monetário
+segue pendente. As tabelas consolidam medições já registradas.
 
 [Tabelas, contagens e proveniência](reports/final-results-v1/RESULTADOS.md).
 """
@@ -684,8 +722,7 @@ def headlines(context: dict) -> str:
         f"- Retry descartado: {correction['corrections_requested']} chamadas extras, "
         f"{correction['corrections_accepted']} rejeições recuperadas; "
         "formato válido não garante resposta correta.",
-        "- Evidência limitada: corpus conhecido, amostras pequenas e revisão humana assistida; "
-        "pesos integrais FP16 ainda pendentes.",
+        "- Evidência limitada por corpus conhecido, amostras pequenas e revisão humana assistida.",
     ]
     return (
         "\n".join(lines)
@@ -758,9 +795,11 @@ def main() -> int:
         for table in tables
     }
     section = prose(context)
-    rendered["README-results.md"] = section.replace(
-        "(reports/final-results-v1/RESULTADOS.md)", "(RESULTADOS.md)"
-    ).replace("(reports/api-cpu-latency-v1/README.md)", "(../api-cpu-latency-v1/README.md)")
+    rendered["README-results.md"] = (
+        section.replace("(reports/final-results-v1/RESULTADOS.md)", "(RESULTADOS.md)")
+        .replace("(reports/api-cpu-latency-v1/README.md)", "(../api-cpu-latency-v1/README.md)")
+        .replace("(reports/mistral-t4-v1/README.md)", "(../mistral-t4-v1/README.md)")
+    )
     intro = "# Resultados e limitações: documento final\n\n"
     intro += "Consolidação de artefatos existentes, sem modelos, downloads ou novas avaliações.\n"
     intro += (
