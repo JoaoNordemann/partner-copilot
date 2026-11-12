@@ -17,16 +17,43 @@ No recorte de e-commerce sem aspecto aplicável (n = 19), o extrator treinado s�
 
 ## 3. Retrieval: o filtro de restaurante pesou mais que a troca de embedding
 
-- Usar a ablação de ranking em 24 perguntas respondíveis já vistas. Sem filtro, a troca do MiniLM inglês pelo multilíngue teve delta de **−0,69 ponto percentual** em recall limitado@5, com **4 vitórias, 16 empates e 4 derrotas**. A hipótese de ganho com a troca ficou sem apoio nessa rodada.
-- Com o mesmo embedding multilíngue, restringir ao restaurante levou o recall limitado@5 de **25,14% a 74,65%** e o hit@5 de **10/24 a 22/24**. A ablação usa só o filtro de restaurante e ranking sem corte de score.
-- Interpretar o ganho como efeito do escopo explícito nas consultas deste benchmark. [Ablação completa](../reports/final-results-v1/RESULTADOS.md)
+Nas 24 perguntas respondíveis da ablação, troquei o MiniLM inglês pelo
+multilíngue e mantive o ranking sem filtro e sem corte de score. O recall
+limitado@5 passou de **25,83% para 25,14%**, uma queda de **0,69 ponto
+percentual**. O multilíngue ganhou em quatro perguntas, empatou em 16 e
+perdeu em quatro. Nesta amostra, a troca de embedding trouxe pouca diferença.
+
+Ao restringir o mesmo embedding multilíngue ao restaurante da pergunta,
+o recall limitado@5 passou de **25,14% para 74,65%**. O número de perguntas
+com pelo menos uma evidência relevante entre as cinco primeiras passou de
+**10/24 para 22/24**. O filtro tira da disputa reviews de outros restaurantes
+antes de ordená-las. Neste recorte, definir o escopo da busca teve mais efeito
+que trocar o encoder.
+
+O recall limitado divide os relevantes recuperados por quantos relevantes
+cabem no top 5 de cada pergunta e depois tira a média. A ablação usou só o
+filtro de restaurante, em um corpus sintético com perguntas já vistas.
+[Ablação de retrieval](../reports/final-results-v1/RESULTADOS.md)
 
 ## 4. Geração: contrato de saída e fidelidade
 
-- Usar as 27 saídas efetivamente geradas nas 30 perguntas antigas. A melhor variante de texto livre foi aceita em **2/27**. O retry acrescentou **25 chamadas** e recuperou **0/25**, mantendo **2/27**.
-- A variante estruturada JSON v3 atingiu **14/27 aceitas pelo parser** nas perguntas antigas. Tratar a diferença como resultado entre versões já iteradas, com mudanças no prompt e no contrato.
-- Contar o caso **n12**, da rodada posterior. O parser aceitou uma resposta com trecho literal, mas o elogio ao custo-benefício foi usado para sustentar uma afirmação sobre sabor. A mesma review descrevia gosto ruim no final. Separar aceitação estrutural de sustentação da afirmação.
-- Usar a tabela de aceitação e a leitura assistida de n12 como fontes. [Relatório de geração](../reports/final-results-v1/RESULTADOS.md)
+Das 30 perguntas antigas, 27 chegaram ao gerador. A melhor variante em texto
+livre passou no parser em **2/27**. Tentei recuperar as 25 rejeições com uma
+segunda chamada por caso. Foram **0/25** recuperadas, e a aceitação ficou em
+**2/27**. A versão v3, com JSON estruturado, chegou a **14/27** nas mesmas
+perguntas. O prompt e o contrato mudaram juntos durante as iterações, de modo
+que a comparação mede as versões completas. Na rodada originalmente limpa,
+a v3 passou em **6/9**, incluindo duas abstenções geradas. A repetição isolada
+com NF4 na T4 aceitou **6/9** desse grupo e **13/27** do grupo contaminado.
+[Resultados de geração](../reports/final-results-v1/RESULTADOS.md) ·
+[Medição isolada na T4](../reports/mistral-t4-v1/README.md)
+
+Em n12, o parser encontrou o ID correto e um trecho literal de
+`rev_001172`. A review elogiava o custo-benefício e descrevia gosto ruim no
+final. A resposta usou o elogio para dizer que o sabor era bom. A verificação
+literal confirmou a origem do trecho, enquanto a leitura da review completa
+expôs o erro na afirmação.
+[Revisão do caso n12](../reports/generation-retrospective-v1/human-review.jsonl)
 
 ## 5. ABSA: de 0,98 no sintético a 9/30 em e-commerce real
 
@@ -38,12 +65,36 @@ No recorte de e-commerce sem aspecto aplicável (n = 19), o extrator treinado s�
 
 ## 6. Filtro por aspecto: quatro braços no mesmo corpus
 
-- Fixar o cenário no texto. **100 reviews sintéticas**, **24 perguntas respondíveis já vistas**, mesmo embedding e mesmos filtros de restaurante, item e data.
-- Apresentar os relevantes no top 5 por braço. **37/120** sem aspecto, **45/120** com QLoRA, **45/120** com rótulos do gerador e **44/120** com rótulos humanos.
-- O QLoRA passou no critério pré-registrado. Ganhou **6,67 pontos em precision@5** e **11,74 em recall limitado@5**, com **zero perguntas** perdendo evidência que já aparecia no top 5.
-- O QLoRA e o gerador produziram rankings iguais. O empate descreve a filtragem neste corpus, em que os dois concordam em **98/100 mapas**. Em q22, o rótulo humano omite a polaridade de sabor por ambiguidade, e o braço humano deixa fora um relevante recuperado pelos outros dois braços com filtro.
-- Destacar que o alinhamento entre rótulos e relevância favorece o filtro. A precision@5 final foi 37,5% de um teto de 45,83%. O filtro recuperou 45 dos 55 relevantes que cabiam nas 120 posições. B e C empatados não distinguem o extrator do controle do gerador. A B2W teve 28/200 saídas inválidas e a taxa em reviews reais de restaurantes segue desconhecida.
-- Usar a tabela e o protocolo como fontes. [Experimento em CPU](../reports/absa-retrieval-v1/README.md) · [Critério pré-registrado](decisions.md#comparação-e-critério-de-sucesso)
+Mantive os mesmos embeddings e os mesmos filtros de restaurante, item e data
+em quatro coleções Chroma novas. O teste usou 100 reviews sintéticas e 24
+perguntas respondíveis já vistas. Todas pediam algum aspecto, inclusive as
+seis formuladas como paráfrases.
+
+| Braço | Relevantes no top 5 | Precision@5 | Recall limitado@5 | Vitórias / empates / derrotas vs. A |
+| --- | ---: | ---: | ---: | ---: |
+| A · Sem filtro de aspecto | 37/120 | 30,83% | 73,13% | — |
+| B · Predições QLoRA | 45/120 | 37,50% | 84,86% | 7 / 17 / 0 |
+| C · Rótulos do gerador | 45/120 | 37,50% | 84,86% | 7 / 17 / 0 |
+| D · Rótulos humanos | 44/120 | 36,67% | 83,82% | 6 / 18 / 0 |
+
+O filtro QLoRA passou no critério pré-registrado. Recuperou oito relevantes
+a mais em 120 posições, com **+6,67 pontos em precision@5** e **+11,74 em
+recall limitado@5**. Nenhuma pergunta perdeu toda a evidência que já aparecia
+no top 5. O conjunto permite preencher **55/120 posições** com reviews
+relevantes, de modo que os 45 acertos representam **81,82% do teto**.
+Em cinco dos 17 empates, os rankings do top 5 ficaram idênticos. Nos outros
+12, algum ID mudou sem alterar a contagem de relevantes.
+
+O QLoRA e o gerador produziram rankings iguais. Os mapas completos
+coincidiram em 98/100 reviews, e a convenção de aspecto negativo usada tanto
+nos rótulos quanto na relevância favorece o filtro. O resultado mostra o efeito
+da filtragem neste corpus e o teste deixou os dois métodos empatados. Em q22,
+a anotação humana deixou em aberto a polaridade de um sabor descrito como
+diferente do habitual. Essa review entrou com QLoRA e gerador, mas ficou fora
+no braço humano. Houve 0/100 extrações inválidas no corpus sintético. Na
+B2W foram 28/200, e a taxa em reviews reais de restaurantes segue desconhecida.
+[Experimento em CPU](../reports/absa-retrieval-v1/README.md) ·
+[Protocolo](decisions.md#comparação-e-critério-de-sucesso)
 
 ## 7. Limitações e trabalho futuro
 
