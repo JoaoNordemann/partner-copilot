@@ -1390,3 +1390,81 @@ mapas vazios. A avaliação de uma versão futura exige um novo conjunto
 anotado e reservado antes do treino. Os 30 textos B2W anotados ficam
 fora do treino. Priorizar integração, notebook Kaggle, artigo, Docker
 e catálogo de replay.
+
+## Comparação FP16 e NF4 e latência da API real
+
+Protocolo prospectivo. Fixar uma única Tesla T4 de 16 GB na GPU 0 para
+os dois modos e executar um processo por vez, liberando a VRAM entre
+eles. Usar o Mistral-7B-Instruct-v0.2 na mesma revisão imutável, com
+arquivos disponíveis no mesmo cache antes da medição. Registrar revisão,
+GPU, VRAM total visível, versões do driver, CUDA, Python e bibliotecas.
+Rodar NF4 com dupla quantização e cálculo FP16 primeiro, depois FP16 com
+pesos integrais na GPU. Manter o backend de atenção e o cache KV iguais.
+Registrar eventual falta de memória no carregamento, no aquecimento ou
+durante a geração, com a etapa e os IDs afetados. Uma execução parcial
+será identificada como tal.
+
+**Hipóteses.** FP16 cabe na T4 com margem pequena sob os limites do
+protocolo. NF4 reduz o pico de VRAM e sua taxa mediana de tokens gerados
+por segundo é menor ou igual à de FP16. Reportar o resultado observado,
+inclusive se contrariar alguma hipótese.
+
+### Comparação controlada do gerador
+
+Reutilizar os prompts renderizados, a ordem e os contextos dos JSONLs
+[limpo](../reports/final-v3/generation-v3-new.jsonl) e
+[contaminado](../reports/final-v3/generation-v3-contaminated.jsonl).
+Verificar os hashes de origem e selecionar apenas registros com
+`llm_called=true`. O conjunto limpo no protocolo original tem 9 chamadas,
+n11–n17 e n19–n20. O contaminado tem 27, q01–q12 e q14–q28. Reportar cada
+conjunto separadamente. A rodada repete prompts congelados para comparação
+pareada. O conjunto limpo já foi executado na avaliação original.
+
+Fixar prompt `partner-copilot-v3`, parser `parser-v3`, o mesmo template
+de chat e tokenizer, lote unitário, seed 42, decodificação gulosa
+(`do_sample=false`, temperatura 0) e limite de 512 tokens novos.
+Preservar os tokens de entrada e o mesmo limite de contexto. Aquecer
+cada modo com duas chamadas descartadas, q01 e q02. Executar depois as
+9 chamadas do conjunto limpo e as 27 do contaminado, sem retry.
+
+Medir o tempo de carga do cache local até o modelo estar pronto, com
+sincronização CUDA. Registrar pico de VRAM alocada e reservada na carga
+e por conjunto após aquecimento. Medir latência da geração por resposta
+com sincronização CUDA e registrar mediana e máximo por conjunto e modo.
+Registrar tokens novos e a duração sincronizada de `generate` por chamada.
+Calcular tokens gerados por segundo a partir desses dois valores, com
+mediana por conjunto. Usar o mesmo critério de contagem do token final
+nos dois modos. Excluir download, fila, retrieval e parsing da latência
+isolada. Identificar cada número pelo modo e pelo conjunto.
+
+Aplicar o mesmo parser v3 a cada saída com seu contexto original.
+Reportar saídas aceitas em 9 e em 27 para cada modo, transições de
+aceitação entre modos e quantas saídas brutas diferem em comparação
+exata. Entre pares aceitos pelos dois modos, comparar também a resposta
+estruturada, incluindo abstenção, afirmações e fontes. Informar os
+denominadores efetivos e a lista de IDs que mudaram. Aceitação pelo parser
+e igualdade da resposta são medidas de contrato e de mudança de saída.
+
+### Medição ponta a ponta da API com backend real
+
+Usar o backend real NF4 na mesma T4, com MiniLM multilíngue e Chroma em
+CPU. Congelar a revisão do índice, o corpus e a configuração da API.
+Executar `POST /ask` no servidor local via HTTP e manter prompt v3,
+parser v3, k=8 e corte de 0,25. Esperar a saúde do serviço e aquecer o
+caminho completo com duas requisições excluídas da amostra, q22 e q23.
+Medir 20 requisições sequenciais com perguntas do conjunto contaminado,
+q01–q12 e q14–q21, mantendo os filtros originais. Identificar no resultado
+se cada requisição chegou ao gerador e se o parser aceitou a saída.
+
+Registrar o tempo HTTP no cliente, fila, embedding, busca, geração e
+validação quando disponíveis, além de status HTTP, código de erro e
+timeout. Reportar mediana, p95 empírico pelo posto mais próximo
+(`ceil(0,95 × n)` em ordem crescente), máximo e n. Preservar falhas e
+timeouts no resumo geral e informar separadamente os tempos das
+requisições bem-sucedidas. O p95 com 20 medições tem resolução limitada.
+
+Depois das chamadas sequenciais, disparar q24 e q25 juntas por conexões
+independentes, mantendo um slot de geração. Registrar ordem de entrada e
+início e fim da geração, tempo em fila e resposta de cada uma. Verificar
+se as gerações se sobrepõem e relatar espera, recusa ou timeout observado.
+Manter as duas chamadas fora das estatísticas sequenciais.
