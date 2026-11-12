@@ -1,0 +1,54 @@
+name: CPU container validation
+on: push
+jobs:
+  container:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build CPU image
+        run: |
+          docker version
+          docker build --target cpu -t partner-copilot:cpu .
+          docker image inspect partner-copilot:cpu --format 'user={{.Config.User}} size={{.Size}} id={{.Id}}'
+      - name: Check image before first boot
+        run: |
+          docker run --rm --entrypoint sh partner-copilot:cpu -ec '
+            test "$(id -u)" = 10001
+            test "$(id -g)" = 10001
+            forbidden=$(find /app /state /home/copilot \( -name ".env" -o -name ".env.*" -o -name "*.safetensors" -o -name "pytorch_model*.bin" -o -name "*.gguf" \) -print)
+            test -z "$forbidden"
+            id
+            echo "No .env or model weights in app, state or user home before first boot."
+          '
+      - name: Run fake backend and check HTTP
+        run: |
+          docker run -d --name partner-copilot -p 127.0.0.1:8000:8000 \
+            -v partner-copilot-state:/state -e LLM_BACKEND=fake partner-copilot:cpu
+          for i in $(seq 1 90); do
+            status=$(docker inspect --format '{{.State.Status}} {{.State.Health.Status}}' partner-copilot)
+            if [ "$status" = "running healthy" ]; then break; fi
+            if [ "$status" != "running starting" ]; then exit 1; fi
+            sleep 5
+          done
+          test "$status" = "running healthy"
+          curl --fail-with-body --silent --show-error http://127.0.0.1:8000/health | tee /tmp/pc-health.json
+          curl --fail-with-body --silent --show-error http://127.0.0.1:8000/ask \
+            -H 'Content-Type: application/json' \
+            -d '{"restaurant_id":"rest_001","question":"Há reclamações de entrega?","k":8}' \
+            | tee /tmp/pc-ask.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          health = json.loads(Path("/tmp/pc-health.json").read_text())
+          ask = json.loads(Path("/tmp/pc-ask.json").read_text())
+          assert health["status"] == "ok" and health["backend"] == "fake", health
+          meta = ask["metadata"]
+          assert meta["backend"] == "fake" and meta["is_simulation"], meta
+          assert not meta["llm_called"] and meta["retrieved_documents"] > 0, meta
+          assert ask["result"]["abstem"] is True, ask
+          print("Both HTTP endpoints returned 200 and the fake response followed the contract.")
+          PY
+      - name: Container logs
+        if: always()
+        run: docker logs partner-copilot || true
