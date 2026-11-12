@@ -96,8 +96,12 @@ As regras e partes do pipeline foram escritas com assistência de IA.
 O autor revisou os resultados.
 [Relatório B2W](docs/absa-external-evaluation.md) ·
 [Adapter e model card no Hugging Face](https://huggingface.co/jnordemann/partnercopilot-absa-qlora-v1).
-[Docker CPU](docs/docker.md) está preparado, mas build/execução não foram testados
-localmente por falta de Docker; o caminho GPU em container também não foi testado.
+A imagem Docker CPU foi construída e executada em um runner Linux do GitHub Actions.
+Com o backend `fake`, `/health` e `/ask` retornaram HTTP 200. A imagem rodou
+com UID/GID 10001 e a inspeção antes da inicialização confirmou a ausência de
+`.env` e de arquivos de pesos nos diretórios verificados.
+O caminho GPU fica **não testado em container**.
+[Instruções Docker](docs/docker.md) · [Execução no GitHub Actions](https://github.com/JoaoNordemann/partner-copilot/actions/runs/43225980422/job/131209151066)
 
 [Notas v0.2-aspects](docs/releases/v0.2-aspects.md) · [Notas v0.1-rag-mvp](docs/releases/v0.1-rag-mvp.md) · [Status do estudo](docs/study-status.md) ·
 [Demo](docs/demo.md) · [API](docs/api.md) · [Decisões](docs/decisions.md)

@@ -13,7 +13,7 @@ Atualizado com os resultados do filtro por aspecto, da avaliação externa e da 
 | API | Implementado e testado | Startup, modos, saúde, fila, timeout e testes sem GPU |
 | Demo Gradio | Implementado e verificado localmente | HTTP com API fake e inspeção visual; fontes integrais e exemplos gravados |
 | Latência CPU isolada | Medida | reports/api-cpu-latency-v1; hardware explícito |
-| Docker CPU | Receita e bootstrap prontos; container não verificado | Reservar até uma hora nas janelas de treino QLoRA para iniciar o Docker, construir a imagem e testar o container |
+| Docker CPU | Validado em runner Linux | Build do alvo CPU, healthcheck saudável e HTTP 200 em `/health` e `/ask` com backend `fake`. [Execução](https://github.com/JoaoNordemann/partner-copilot/actions/runs/43225980422/job/131209151066) |
 | Replay aprovado | Contrato e testes prontos; catálogo pendente | Até três casos com aprovação humana elegível. Começar pela resposta n17 e pela abstenção n20. A falha n12 fica na aba histórica |
 | CI e versão MVP | Implementado; publicação protegida por gate | Tag v0.1-rag-mvp somente após CI remoto verde no mesmo commit; badge do README |
 | QLoRA / ABSA | Treino concluído | 759 passos na T4, checkpoint 253 escolhido pela validação. 140/140 JSONs válidos na validação. Gold e templates reservados medidos uma vez. [Avaliação](../reports/absa-eval-checkpoint-253-v1/README.md) |
@@ -102,7 +102,6 @@ Preparar entradas e comandos localmente antes de iniciar cada sessão.
 
 ## Distribuição das pendências
 
-- **Docker CPU:** construir a imagem e verificar o container localmente em uma janela sem dependência de GPU.
 - **Refatoração e publicação:** priorizar refatoração, README e publicação do projeto.
   A curadoria do MVP tem teto de três entradas de replay aprovadas. Os três exemplos
   históricos já cobrem o roteiro da demo, incluindo a falha conhecida.

@@ -1,8 +1,15 @@
 # Container CPU
 
-Status: Docker não está instalado neste PC Windows. Build e execução da imagem
-CPU ainda **não foram testados localmente**; os testes de bootstrap com doubles
-não substituem um teste do container. A receita GPU também não foi testada.
+A imagem CPU foi construída com o alvo `cpu` e executada com o backend
+`fake` em um runner Ubuntu do GitHub Actions. O healthcheck do Docker marcou
+o container como saudável. O volume inicializou o índice com 862 documentos,
+e `/health` e `/ask` retornaram HTTP 200. A resposta de `/ask` indicou
+simulação e abstenção conforme o contrato do backend falso.
+
+A inspeção da imagem antes do bootstrap confirmou UID e GID 10001 e ausência
+de `.env` e de arquivos de pesos em `/app`, `/state` e `/home/copilot`.
+O caminho GPU fica **não testado em container**.
+[Build, inspeção e respostas HTTP](https://github.com/JoaoNordemann/partner-copilot/actions/runs/43225980422/job/131209151066)
 
 Foi verificado no Windows um bootstrap real com encoder CPU já em cache:
 primeira chamada reconstruiu o RAG e segunda chamada reutilizou o índice, sem
