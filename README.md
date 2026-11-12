@@ -70,6 +70,18 @@ e respondeu em **5,64 s** (mediana, n = 9, conjunto originalmente limpo).
 Em FP16, coube com **14,16 GiB de pico alocado** e mediana de **9,07 s**
 no mesmo conjunto. [Comparação na mesma T4](reports/mistral-t4-v1/README.md)
 
+## Demo local
+
+A aba de casos históricos exibe respostas gravadas em dados sintéticos.
+O GIF alterna os três casos da demo, com a falha identificada na interface.
+
+![Três casos gravados da demo local do PartnerCopilot](docs/assets/demo/casos-gravados.gif)
+
+[Sucesso](docs/assets/demo/n17-sucesso.jpg) ·
+[Abstenção](docs/assets/demo/n20-abstencao.jpg) ·
+[Falha](docs/assets/demo/n12-falha.jpg) ·
+[Curadoria e decisão sobre o Space](docs/demo.md#curadoria-das-respostas-gravadas)
+
 ## Limitações
 
 Formato válido e trecho literal não garantem resposta correta: n12 seleciona elogio

@@ -79,13 +79,33 @@ python scripts/build_demo_examples.py
 O segundo comando apenas reextrai os mesmos registros, sem gerar respostas.
 Não consulta nem expõe o conjunto reservado para a avaliação final.
 
-## Space e GPU
+## Curadoria das respostas gravadas
 
-Space adiado: publicação não bloqueia a entrega local. Ainda não há catálogo
-aprovado de replay v3; não contornar sua validação para publicar. O replay atual
-usa contexto arquivado, sem busca ao vivo. Uma eventual busca CPU ao vivo deve
-aparecer como painel separado, sem atribuir seu contexto à resposta gravada.
-Não há Space criado, link público, nova tag ou inferência GPU nesta entrega.
+Curadoria registrada em 12 de novembro de 2026 após leitura das reviews
+completas de cada contexto. A aba histórica mantém o rótulo **RESPOSTA GRAVADA**
+e apresenta o contexto arquivado. A aprovação abaixo autoriza a exibição no
+papel indicado para cada caso.
+
+| Caso | Quem aprovou e para quê | Evidência lida |
+| --- | --- | --- |
+| n17 · Sucesso | Codex, curadoria editorial da resposta gravada | A review integral `rev_002438` descreve atendimento prestativo no relato da Feijoada Individual. A resposta é sustentada e responde à pergunta. |
+| n20 · Abstenção | Codex, curadoria editorial da abstenção gravada | As quatro reviews integrais `rev_000294`, `rev_000604`, `rev_000797` e `rev_002335` tratam da Pizza Portuguesa e nenhuma identifica a marca do forno. A abstenção é apropriada ao contexto. |
+| n12 · Falha | Codex, curadoria editorial como falha. João confirmou a falha em revisão humana assistida. | `rev_001172` elogia custo-benefício e relata gosto ruim no final. As outras três reviews do contexto foram lidas. Nenhuma sustenta atribuir elogio ao sabor à review citada. |
+
+[Respostas e reviews integrais](../configs/demo-examples.json) ·
+[Registro da revisão humana de n12](../reports/generation-retrospective-v1/human-review.jsonl)
+
+## Decisão sobre o Space
+
+**Adiado.** O build e os endpoints do container CPU foram testados com
+backend falso. Os três casos estão rotulados para a demo local. O
+catálogo operacional de replay v3 exige aprovação humana de sustentação
+e pertinência. Para n17 e n20, o registro disponível é a revisão editorial
+do Codex. n12 permanece na aba histórica como falha. A janela de duas
+horas livres para publicar e validar o Space também não foi confirmada.
+
+As capturas e o GIF do README mostram os três estados da demo local.
+O GIF alterna três capturas da aba histórica em oito segundos.
 
 Para uma apresentação real em Kaggle/Colab, manter a API/modelo uma vez na sessão
 e apontar o cliente Gradio à API local. Se precisar de link temporário privado:

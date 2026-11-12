@@ -14,7 +14,7 @@ Atualizado com os resultados do filtro por aspecto, da avaliação externa e da 
 | Demo Gradio | Implementado e verificado localmente | HTTP com API fake e inspeção visual; fontes integrais e exemplos gravados |
 | Latência CPU isolada | Medida | reports/api-cpu-latency-v1; hardware explícito |
 | Docker CPU | Validado em runner Linux | Build do alvo CPU, healthcheck saudável e HTTP 200 em `/health` e `/ask` com backend `fake`. [Execução](https://github.com/JoaoNordemann/partner-copilot/actions/runs/43225980422/job/131209151066) |
-| Replay aprovado | Contrato e testes prontos; catálogo pendente | Até três casos com aprovação humana elegível. Começar pela resposta n17 e pela abstenção n20. A falha n12 fica na aba histórica |
+| Respostas gravadas | Três casos revisados para a demo local | n17 e n20 com revisão editorial do Codex. n12 exibida como falha confirmada por João. Aprovação humana para o catálogo operacional segue pendente. [Curadoria](demo.md#curadoria-das-respostas-gravadas) |
 | CI e versão MVP | Implementado; publicação protegida por gate | Tag v0.1-rag-mvp somente após CI remoto verde no mesmo commit; badge do README |
 | QLoRA / ABSA | Treino concluído | 759 passos na T4, checkpoint 253 escolhido pela validação. 140/140 JSONs válidos na validação. Gold e templates reservados medidos uma vez. [Avaliação](../reports/absa-eval-checkpoint-253-v1/README.md) |
 | Avaliação externa B2W | Medida | 9/30 mapas exatos em e-commerce. Validade estrita de 172/200. [Relatório](absa-external-evaluation.md) |
@@ -24,7 +24,7 @@ Atualizado com os resultados do filtro por aspecto, da avaliação externa e da 
 | Latência isolada do QLoRA | Medida em Tesla T4 | 30 reviews em lote unitário após aquecimento. Mediana de 1,41 s, p95 de 2,38 s e pico de 1,17 GiB alocados. [Medição](absa-external-evaluation.md#baselines-complementares-e-transferência) |
 | FP16 na T4 16 GB | Medido | Completou 36/36 chamadas. A menor leitura após geração foi de 49 MiB livres. [Relatório](../reports/mistral-t4-v1/README.md) |
 | API real ponta a ponta | Medida | NF4 na T4, 20 chamadas sequenciais e duas simultâneas. [Relatório](../reports/mistral-t4-v1/README.md#api-ponta-a-ponta) |
-| Space | Adiado | Não bloquear entrega local; distinguir gravação de busca CPU ao vivo |
+| Space | Adiado | Catálogo operacional sem aprovação humana e janela de duas horas livres sem confirmação. Capturas e GIF no README. [Decisão](demo.md#decisão-sobre-o-space) |
 | Avaliação final reservada | Preservada, não executada | Uma rodada futura, sem ajuste posterior |
 
 ## Resultados do ABSA
