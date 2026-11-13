@@ -4,6 +4,10 @@
 
 O PartnerCopilot ajuda parceiros de restaurantes a investigar atrasos, atendimento e qualidade nas avaliações dos pedidos. **Dados sintéticos, sem dados do iFood.**
 
+**Como funciona.** Primeiro, a ingestão valida e indexa as avaliações sintéticas. Quando chega uma pergunta, a busca seleciona avaliações do restaurante. O modelo usa essas fontes para responder, e o código confere os IDs e trechos citados. Se faltar evidência, a resposta pode ser uma abstenção.
+
+**Como medi.** Comparei buscas com e sem filtro nas mesmas perguntas, contei quantas saídas passaram na validação e comparei a extração de aspectos com regras simples em textos de e-commerce. Nesse último teste, quando nenhuma categoria se aplicava, o extrator acertou 3 de 19 casos e as regras acertaram 17.
+
 | Medição | Resultado |
 | --- | --- |
 | Busca por restaurante | A cobertura da evidência nos cinco primeiros resultados (recall limitado@5) subiu de **25,14% para 74,65%** ao restringir a busca ao restaurante (24 perguntas sintéticas já vistas). |
