@@ -2,3 +2,4 @@
 data/gold/*.jsonl -text whitespace=trailing-space,space-before-tab,cr-at-eol
 data/gold/*.json -text whitespace=trailing-space,space-before-tab,cr-at-eol
 docs/annotation-guide.md -text whitespace=trailing-space,space-before-tab,cr-at-eol
+/reports/mistral-t4-v1/summary.json text eol=lf
