@@ -29,7 +29,11 @@ class InvalidCitationError(GenerationContractError):
 
 
 class LLM(Protocol):
-    def generate(self, user_prompt: str, max_new_tokens: int | None = None) -> str: ...
+    """Generate raw text for a user prompt."""
+
+    def generate(self, user_prompt: str, max_new_tokens: int | None = None) -> str:
+        """Return the completion text using the optional token budget."""
+        ...
 
 
 class GenerationMetrics(BaseModel):

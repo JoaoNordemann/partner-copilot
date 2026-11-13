@@ -4,6 +4,7 @@ import asyncio
 import json
 import logging
 import threading
+from collections.abc import Callable
 from contextlib import asynccontextmanager
 from time import perf_counter
 from uuid import uuid4
@@ -211,7 +212,13 @@ class AskService:
         return result
 
 
-def create_app(api_settings: APISettings | None = None, *, resources_factory=None) -> FastAPI:
+def create_app(
+    api_settings: APISettings | None = None,
+    *,
+    resources_factory: Callable[[Settings, APISettings], Resources] | None = None,
+) -> FastAPI:
+    """Build the HTTP API and initialize shared resources during startup."""
+
     @asynccontextmanager
     async def lifespan(app):
         api = api_settings if api_settings is not None else APISettings()

@@ -26,6 +26,8 @@ def model_collection_name(base: str, model: str, contract: str | None) -> str:
 
 
 class ChromaStore:
+    """Persist review documents and search their embeddings by cosine distance."""
+
     def __init__(
         self,
         path: str | Path | None = None,
@@ -125,6 +127,7 @@ class ChromaStore:
             removed += len(ids)
 
     def upsert(self, reviews: list[Review]) -> None:
+        """Index reviews by stable document ID."""
         documents = [
             review
             if isinstance(review, IndexedDocument)
@@ -150,6 +153,7 @@ class ChromaStore:
     def upsert_documents(
         self, documents: list[IndexedDocument], batch_size: int = 128
     ) -> WriteResult:
+        """Write chunks in batches and remove superseded chunks."""
         if batch_size < 1:
             raise ValueError("batch_size must be positive")
         groups: dict[str, list[IndexedDocument]] = {}
@@ -270,6 +274,7 @@ class ChromaStore:
         )
 
     def query(self, text: str, k: int, where: Where | None = None) -> list[RetrievedDoc]:
+        """Search the collection using the optional metadata predicate."""
         if k < 1:
             raise ValueError("k must be positive")
         count = self.count()

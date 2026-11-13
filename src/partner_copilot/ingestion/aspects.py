@@ -63,9 +63,13 @@ class AspectExtraction:
 
 
 class AspectExtractor(Protocol):
+    """Extract versioned aspect labels from a review during ingestion."""
+
     version: str
 
-    def extract(self, review: Review) -> AspectExtraction: ...
+    def extract(self, review: Review) -> AspectExtraction:
+        """Return aspect labels and their validation status."""
+        ...
 
 
 class FakeAspectExtractor:

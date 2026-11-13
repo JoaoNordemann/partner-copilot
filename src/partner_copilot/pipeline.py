@@ -21,6 +21,8 @@ logger = logging.getLogger(__name__)
 
 
 class RAGPipeline:
+    """Retrieve evidence and validate a generated answer or abstention."""
+
     def __init__(
         self, retriever: Retriever, llm: LLM | None = None, *, settings: Settings | None = None
     ) -> None:
@@ -42,6 +44,7 @@ class RAGPipeline:
         city: str | None = None,
         bairro: str | None = None,
     ) -> Answer:
+        """Answer a question within the supplied restaurant and filters."""
         started = perf_counter()
         docs = self.retriever.retrieve(
             question,

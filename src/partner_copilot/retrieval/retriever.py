@@ -20,6 +20,8 @@ def date_key(value: date) -> int:
 
 
 class Retriever:
+    """Rank reviews within a restaurant using metadata and similarity."""
+
     def __init__(
         self,
         store: VectorStore,
