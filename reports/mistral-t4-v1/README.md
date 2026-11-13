@@ -25,9 +25,14 @@ decodificação gulosa e orçamento de 512 tokens novos.
 | FP16 | Contaminado | 27 | 14,32 / 14,38 | 20,45 / 52,90 | 9,33 / 9,88 | 11/27 |
 
 FP16 completou o protocolo com margem pequena. A menor leitura de VRAM
-livre após uma geração foi de cerca de 49 MiB. NF4 teve menor pico e
+livre após uma geração foi de cerca de 49 MiB com o prompt v3. A cerca de
+128 KiB de cache KV por token, 49 MiB equivalem a aproximadamente 392
+tokens de margem teórica. Contextos mais longos podem esgotá-la. NF4 teve menor pico e
 maior taxa de tokens por segundo nos dois conjuntos, contrariando a
-hipótese de que sua taxa seria menor ou igual à de FP16.
+hipótese de que sua taxa seria menor ou igual à de FP16. Tokens/s é a
+medida principal de velocidade, pois a latência também depende do tamanho
+da saída. Largura de banda é uma explicação plausível, sem medição direta.
+A ordem fixa também deixa efeitos térmicos ou de cache sem controle.
 
 No conjunto originalmente limpo, 8/9 saídas brutas mudaram. Duas
 passaram de rejeitadas em NF4 a aceitas em FP16. Entre as seis aceitas
@@ -36,6 +41,20 @@ contaminado, mudaram 27/27 saídas brutas, oito decisões de aceitação
 (cinco a favor de NF4 e três de FP16) e três das oito respostas
 estruturadas aceitas nos dois modos. Aceitação mede o contrato do
 parser. A rodada não adjudicou correção factual.
+
+### Comparação entre sessões NF4
+
+Na rodada v3 original, as medianas foram 6,3 s (n = 9) e 12,9 s
+(n = 27). Nesta rodada foram 5,64 s e 15,72 s, respectivamente.
+São variações descritivas entre sessões, sem atribuição causal.
+
+Nas 27 chamadas contaminadas, 13 textos brutos mudaram e apenas q19
+mudou de decisão, de aceita para rejeitada por trecho não literal.
+Em q19, a terceira fonte mudou de `rev_002335` para `rev_000797`,
+com um trecho que não aparece integralmente nessa fonte. As duas
+sessões usaram geração gulosa, seed 42, limite de 512 tokens e as mesmas
+versões registradas de Torch, Transformers e bitsandbytes. A causa da
+mudança de saída não foi isolada. A execução não foi idêntica byte a byte.
 
 ### Leitura de casos pareados
 
@@ -54,6 +73,14 @@ mudança de saída em duas amostras pequenas, sem estimativa de vantagem
 factual de um modo sobre o outro. [Saídas NF4](nf4.jsonl) · [Saídas FP16](fp16.jsonl)
 
 ## API ponta a ponta
+
+**Com o contrato estrito, o backend real respondeu com HTTP 200 a 8 de
+20 requisições.** A amostra sequencial usa q01–q12 e q14–q21, todas
+respondíveis e já vistas. q22 e q23 foram aquecimento. q24 e q25 foram
+o par simultâneo e ficaram fora do denominador, incluindo a pergunta
+sem resposta q25. A geração isolada usou um corpus de 100 documentos.
+Os conjuntos e os contextos diferem, portanto a diferença nas taxas não
+isola o efeito do tamanho do índice.
 
 O servidor local usou NF4 na T4 e MiniLM multilíngue e Chroma em CPU,
 com 862 documentos do split RAG. A amostra sequencial incluiu 20
@@ -76,7 +103,31 @@ A API atual inclui a fila no campo de geração. A tabela subtrai esse
 tempo uma vez. As rejeições não trazem a duração de validação medida,
 por isso a linha de validação cobre as oito requisições com HTTP 200.
 
-No par simultâneo, as duas requisições retornaram HTTP 200. q25
+### Diagnóstico das rejeições HTTP
+
+| Motivo registrado | n | Perguntas |
+| --- | ---: | --- |
+| Esquema inválido | 7 | q03, q05, q06, q10, q11, q15, q19 |
+| Trecho sem correspondência literal | 3 | q02, q12, q21 |
+| ID de fonte inválido | 2 | q04, q08 |
+
+Os intervalos do servidor dão mediana de geração de 13,69 s nos 8
+sucessos e 24,39 s nas 12 rejeições. As medianas HTTP correspondentes
+são 13,73 s e 24,44 s. O registro HTTP e os intervalos não preservam a
+saída bruta, os tokens gerados ou o motivo de parada para essas chamadas.
+Mesmo com o teto padrão da API de 400 tokens, a duração não permite
+identificar truncamento. Também não permite distinguir preâmbulo,
+marcador misturado, ausência de citação ou corrupção de ID dentro dos
+motivos registrados. As saídas da geração isolada não substituem as
+saídas HTTP.
+
+Embedding e busca foram medidos na CPU da sessão Kaggle com 862
+documentos. Os 13,7 ms e 4,1 ms do teste anterior são de um Ryzen 5
+5600 com 100 documentos. São ambientes e índices distintos.
+
+### Concorrência
+
+No único par simultâneo, as duas requisições retornaram HTTP 200. q25
 terminou em 5,80 s, com 0,03 ms de fila. q24 terminou em 12,13 s, com
 5,71 s de fila e 6,33 s de geração sem fila. O segundo intervalo de
 geração começou 6,5 ms após o fim do primeiro. Os intervalos registrados

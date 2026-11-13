@@ -1468,3 +1468,35 @@ independentes, mantendo um slot de geração. Registrar ordem de entrada e
 início e fim da geração, tempo em fila e resposta de cada uma. Verificar
 se as gerações se sobrepõem e relatar espera, recusa ou timeout observado.
 Manter as duas chamadas fora das estatísticas sequenciais.
+
+
+## Decisão sobre as rejeições da API com geração real
+
+**Declarar o resultado.** Na rodada HTTP sequencial com NF4 na T4 e
+índice de 862 documentos, 8 de 20 requisições retornaram HTTP 200 e
+12 retornaram HTTP 502 por falha de contrato. As perguntas medidas foram
+q01–q12 e q14–q21, todas respondíveis e já usadas em iterações.
+Aquecimento e concorrência ficaram fora dessa contagem. A avaliação
+isolada originalmente limpa teve 6 de 9 saídas aceitas, em outras
+perguntas e com um corpus de 100 documentos. Os resultados não isolam
+o efeito do índice ou da execução via API.
+
+| Motivo registrado pelo validador | Contagem | Perguntas |
+| --- | ---: | --- |
+| Esquema inválido | 7 | q03, q05, q06, q10, q11, q15, q19 |
+| Trecho sem correspondência literal | 3 | q02, q12, q21 |
+| ID de fonte inválido | 2 | q04, q08 |
+
+Os artefatos HTTP guardam o motivo do validador e os intervalos de
+geração. Para as 12 falhas, faltam a saída bruta, a contagem de tokens
+e o motivo de parada. Assim, não é possível verificar quantas chegaram
+ao teto padrão de 400 tokens, nem distinguir truncamento, preâmbulo,
+linha sem citação ou marcador misturado dentro das rejeições de
+esquema. ID inválido também não comprova alteração textual do ID.
+
+Sem evidência de uma causa mecânica corrigível, a correção fica como
+trabalho futuro. Se houver essa evidência, testar em experimento
+separado, com perguntas novas escritas antes da execução, v3 preservado
+e limite de duas horas. Ao atingir o limite, manter a decisão de declarar.
+
+[Relatório e artefatos HTTP](../reports/mistral-t4-v1/README.md#diagnóstico-das-rejeições-http)

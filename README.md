@@ -31,6 +31,7 @@ O primeiro uso baixa o encoder e monta o índice. A aba histórica inclui as ava
 
 ## O que não funcionou
 
+- **Com o contrato estrito, o backend real respondeu a 8 de 20 requisições.** As outras 12 retornaram HTTP 502 por falha de contrato no teste com NF4 na T4 e índice de 862 documentos. [Diagnóstico das rejeições](reports/mistral-t4-v1/README.md#diagnóstico-das-rejeições-http)
 - O retry acrescentou 25 chamadas e recuperou **0/25** rejeições.
 - Em `n12`, uma resposta aceita usou um elogio ao custo-benefício para afirmar que o sabor era bom. A review relatava gosto ruim no final.
 - O QLoRA previu sabor ou temperatura em **87/200** textos de e-commerce. Seu treino sintético não incluía exemplos sem aspecto aplicável.
