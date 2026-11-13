@@ -101,8 +101,8 @@ def main(argv: list[str] | None = None) -> int:
         )
     except GenerationContractError as exc:
         return _error(args, "generation_contract_error", str(exc), 4)
-    except Exception:
-        logger.exception("ask_failed")
+    except Exception as exc:
+        logger.error("ask_failed error_type=%s", type(exc).__name__)
         return _error(args, "runtime_error", "Query execution failed; see stderr logs", 1)
     if args.json:
         print(answer.model_dump_json(indent=2))

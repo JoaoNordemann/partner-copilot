@@ -135,9 +135,11 @@ class IngestionPipeline:
                 return
             try:
                 result = self.store.upsert_documents(pending, batch_size=self.batch_size)
-            except Exception:
-                logger.exception(
-                    "ingestion_write_failed completed=%s; retry is safe", report.to_dict()
+            except Exception as exc:
+                logger.error(
+                    "ingestion_write_failed error_type=%s completed=%s; retry is safe",
+                    type(exc).__name__,
+                    report.to_dict(),
                 )
                 raise
             report.reviews_upserted += len({doc.review_id for doc in pending})
@@ -149,7 +151,7 @@ class IngestionPipeline:
             logger.info("ingestion_progress %s", report.to_dict())
             pending.clear()
 
-        logger.info("ingestion_started path=%s batch_size=%d", path, self.batch_size)
+        logger.info("ingestion_started batch_size=%d", self.batch_size)
         with path.open(encoding="utf-8-sig") as source:
             for line_number, line in enumerate(source, 1):
                 report.lines_read += 1
