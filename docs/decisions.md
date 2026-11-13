@@ -1500,3 +1500,20 @@ separado, com perguntas novas escritas antes da execução, v3 preservado
 e limite de duas horas. Ao atingir o limite, manter a decisão de declarar.
 
 [Relatório e artefatos HTTP](../reports/mistral-t4-v1/README.md#diagnóstico-das-rejeições-http)
+
+
+## Regras de refatoração após o congelamento
+
+- Refatorações permitidas: tipagem, docstrings, nomes, código morto,
+  organização de pastas e mensagens. Prompt, parser, limiares, dados,
+  modelos e configurações padrão ficam congelados.
+- Arquivos com hash registrado, incluindo dados de avaliação, relatórios,
+  manifestos e predições, ficam protegidos contra edição, movimentação
+  e renomeação.
+- Após cada refatoração pequena, rodar `python -m pytest -m "not gpu"`
+  e `python scripts/build_results.py --check`. Se um verificador falhar
+  por causa do código alterado, reverter a refatoração. Preservar os
+  hashes registrados e a proveniência dos resultados.
+- Fazer commits pequenos, com mensagens claras e um assunto por commit.
+- A tag `v1.0-rc1` permanece no commit original. Correções entram em
+  commits novos. A tag final será criada na etapa de publicação.
