@@ -4,8 +4,8 @@
   "examples": [
     {
       "id": "success",
-      "title": "Sucesso: atendimento prestativo",
-      "note": "O parser v3 aceitou a resposta. Na leitura de IA, a review sustenta a avaliação positiva do atendimento.",
+      "title": "Caso rejeitado: atendimento da loja",
+      "note": "A fonte sustenta o elogio ao atendimento da loja. O autor rejeitou o caso como exemplo de sucesso pela atribuição do atendimento ao produto.",
       "source_file": "reports/final-v3/generation-v3-new.jsonl",
       "source_sha256": "b424bc5d3af972fdf42cccdb14a467bd144f8a6b15904b70d93dcad8c644f0e7",
       "corpus_sha256_lf": "74f04a4bf0407de3a4302f9a869dbeadde6541bd9fa56bb74e5e2fe0a832c95f",
@@ -204,7 +204,7 @@
     {
       "id": "abstention",
       "title": "Abstenção correta: marca do forno",
-      "note": "Sem evidência sobre marca de forno no contexto. Abstenção considerada correta na leitura de IA.",
+      "note": "Sem evidência sobre marca de forno no contexto. Abstenção aprovada pelo autor após leitura do contexto completo.",
       "source_file": "reports/final-v3/generation-v3-new.jsonl",
       "source_sha256": "b424bc5d3af972fdf42cccdb14a467bd144f8a6b15904b70d93dcad8c644f0e7",
       "corpus_sha256_lf": "74f04a4bf0407de3a4302f9a869dbeadde6541bd9fa56bb74e5e2fe0a832c95f",
@@ -520,7 +520,7 @@
     },
     {
       "id": "failure",
-      "title": "Limitação: elogio seletivo",
+      "title": "Falha de fundamentação: elogio seletivo",
       "note": "Falha confirmada pelo autor, em leitura própria. A review elogia o custo-benefício e relata gosto ruim no final.",
       "source_file": "reports/final-v3/generation-v3-new.jsonl",
       "source_sha256": "b424bc5d3af972fdf42cccdb14a467bd144f8a6b15904b70d93dcad8c644f0e7",

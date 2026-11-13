@@ -9,11 +9,11 @@ ROOT = Path(__file__).resolve().parents[1]
 CASES = [
     (
         "success",
-        "Sucesso: atendimento prestativo",
+        "Caso rejeitado: atendimento da loja",
         "reports/final-v3/generation-v3-new.jsonl",
         "n17",
-        "O parser v3 aceitou a resposta. Na leitura de IA, a review sustenta "
-        "a avaliação positiva do atendimento.",
+        "A fonte sustenta o elogio ao atendimento da loja. O autor rejeitou "
+        "o caso como exemplo de sucesso pela atribuição do atendimento ao produto.",
     ),
     (
         "abstention",
@@ -21,11 +21,11 @@ CASES = [
         "reports/final-v3/generation-v3-new.jsonl",
         "n20",
         "Sem evidência sobre marca de forno no contexto. "
-        "Abstenção considerada correta na leitura de IA.",
+        "Abstenção aprovada pelo autor após leitura do contexto completo.",
     ),
     (
         "failure",
-        "Limitação: elogio seletivo",
+        "Falha de fundamentação: elogio seletivo",
         "reports/final-v3/generation-v3-new.jsonl",
         "n12",
         "Falha confirmada pelo autor, em leitura própria. A review elogia "

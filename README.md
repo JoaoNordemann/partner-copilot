@@ -2,23 +2,21 @@
 
 [![CI](https://github.com/JoaoNordemann/partner-copilot/actions/workflows/retriever-unit.yml/badge.svg)](https://github.com/JoaoNordemann/partner-copilot/actions/workflows/retriever-unit.yml)
 
-Encontrar evidências sobre atrasos, atendimento ou qualidade entre muitas avaliações dá trabalho a quem opera um restaurante. O PartnerCopilot busca evidências para perguntas como “Por que os pedidos estão chegando atrasados?”, cita as avaliações usadas e se abstém quando falta evidência. O protótipo usa dados sintéticos.
+O PartnerCopilot ajuda parceiros de restaurantes a investigar atrasos, atendimento e qualidade nas avaliações dos pedidos. **Dados sintéticos, sem dados do iFood.**
 
 | Medição | Resultado |
 | --- | --- |
 | Busca por restaurante | A cobertura da evidência nos cinco primeiros resultados (recall limitado@5) subiu de **25,14% para 74,65%** ao restringir a busca ao restaurante (24 perguntas sintéticas já vistas). |
 | Filtro por aspecto | A proporção de posições relevantes entre os cinco primeiros resultados (precision@5) subiu de **30,83% para 37,50%**, de um teto de 45,83% (24 perguntas sintéticas já vistas). |
-| Contrato de geração | O JSON v3 passou no parser em **14/27** saídas, ante 2/27 em texto livre (perguntas antigas usadas em iterações). |
-| Extração em e-commerce | Em avaliações de e-commerce, o modelo ajustado deixou a lista de aspectos vazia em **3/19** casos em que deveria, ante 17/19 das regras. |
+| Contrato de geração | O JSON v3 passou no parser em **14/27** saídas, na sessão original, ante 2/27 em texto livre (n = 27 chamadas em perguntas já vistas). A repetição NF4 aceitou 13/27. |
+| Extração em e-commerce | Em avaliações de e-commerce, o modelo ajustado deixou a lista de aspectos vazia em **3/19** casos em que deveria, ante 17/19 das regras (n = 19 textos sem aspecto aplicável). |
 | API real | Mediana de **24,07 s** ponta a ponta em NF4 na T4 (20 requisições com perguntas já vistas, incluindo 8 sucessos e 12 rejeições por saída fora do contrato). |
-
-[Resultados e métodos](reports/final-results-v1/RESULTADOS.md) · [Filtro por aspecto](reports/absa-retrieval-v1/README.md) · [Avaliação externa](docs/absa-external-evaluation.md) · [Medição na T4](reports/mistral-t4-v1/README.md)
 
 ## Rodar em CPU
 
 A demo em CPU simula uma abstenção fixa no modo padrão e mostra respostas gravadas na aba histórica. A geração ao vivo requer GPU.
 
-Na raiz do clone, com Python 3.12 ou 3.13 e ambiente virtual ativo:
+Clone com `git -c core.autocrlf=false clone https://github.com/JoaoNordemann/partner-copilot.git` para preservar os arquivos de dados byte a byte no Windows. Na raiz do clone, com Python 3.12 ou 3.13 e ambiente virtual ativo:
 
 ```powershell
 python -m pip install --index-url https://download.pytorch.org/whl/cpu "torch>=2.2,<3"
@@ -29,6 +27,15 @@ python scripts/run_mvp.py
 Abra a [demo](http://127.0.0.1:8000/demo/) ou a [documentação da API](http://127.0.0.1:8000/docs).
 O primeiro uso baixa o encoder e monta o índice. A aba histórica inclui as avaliações completas usadas como fonte.
 
+### Testar
+
+Em outro terminal, na raiz do clone e com o mesmo ambiente virtual ativo:
+
+```powershell
+python -m pip install -e . --no-deps pytest pytest-cov
+python -m pytest -m "not gpu"
+```
+
 ## O que não funcionou
 
 - **Com o contrato estrito, o backend real respondeu a 8 de 20 requisições.** As outras 12 retornaram HTTP 502 por falha de contrato no teste com NF4 na T4 e índice de 862 documentos. [Diagnóstico das rejeições](reports/mistral-t4-v1/README.md#diagnóstico-das-rejeições-http)
@@ -38,16 +45,22 @@ O primeiro uso baixa o encoder e monta o índice. A aba histórica inclui as ava
 
 ## Limitações e trabalho futuro
 
-Os testes de busca usam corpus sintético e perguntas já vistas. O ganho do filtro por aspecto foi igual com rótulos QLoRA e do gerador. A avaliação externa é de e-commerce, e o desempenho em reviews reais de restaurantes segue em aberto. Uma próxima versão deve incluir exemplos sem aspecto aplicável, reservar um novo teste anotado antes do treino e comparar o resultado com regras simples.
+A geração real exige GPU e falhou no contrato em 12 de 20 requisições do teste na T4. A extração de aspectos perdeu desempenho na transferência para e-commerce. A busca usa corpus sintético e perguntas já vistas. O desempenho em avaliações reais de restaurantes segue sem medição. O próximo teste deve usar um novo conjunto anotado, com exemplos sem aspecto aplicável.
+
+[Artigo](docs/article-outline.md) · [RESULTADOS.md](reports/final-results-v1/RESULTADOS.md) · [Adapter no Hugging Face](https://huggingface.co/jnordemann/partnercopilot-absa-qlora-v1) · [Notebook no Kaggle](https://www.kaggle.com/code/jnordemann/partnercopilot-absa-em-portugu-s?scriptVersionId=368237209) · [Container CPU](docs/docker.md)
 
 ## Demo local
+
+O replay operacional está fora do escopo do MVP.
+
+**Space adiado.** O MVP fica com a demo local e os registros históricos, pois a janela para publicar e validar o Space não foi confirmada.
 
 A aba de casos históricos exibe respostas gravadas em dados sintéticos.
 O GIF alterna os três casos da demo, com a falha identificada na interface.
 
 ![Três casos gravados da demo local do PartnerCopilot](docs/assets/demo/casos-gravados.gif)
 
-[Sucesso](docs/assets/demo/n17-sucesso.jpg) ·
+[Captura anterior do caso n17](docs/assets/demo/n17-sucesso.jpg) ·
 [Abstenção](docs/assets/demo/n20-abstencao.jpg) ·
 [Falha](docs/assets/demo/n12-falha.jpg) ·
 [Curadoria e decisão sobre o Space](docs/demo.md#curadoria-das-respostas-gravadas)

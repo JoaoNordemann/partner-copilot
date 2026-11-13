@@ -14,8 +14,8 @@ Atualizado com os resultados do filtro por aspecto, da avaliação externa e da 
 | Demo Gradio | Implementado e verificado localmente | HTTP com API fake e inspeção visual; fontes integrais e exemplos gravados |
 | Latência CPU isolada | Medida | reports/api-cpu-latency-v1; hardware explícito |
 | Docker CPU | Validado em runner Linux | Build do alvo CPU, healthcheck saudável e HTTP 200 em `/health` e `/ask` com backend `fake`. [Execução](https://github.com/JoaoNordemann/partner-copilot/actions/runs/43225980422/job/131209151066) |
-| Respostas gravadas | Três casos revisados para a demo local | n17 e n20 com revisão editorial do Codex. n12 exibida como falha confirmada por João. Aprovação humana para o catálogo operacional segue pendente. [Curadoria](demo.md#curadoria-das-respostas-gravadas) |
-| CI e versão MVP | Implementado; publicação protegida por gate | Tag v0.1-rag-mvp somente após CI remoto verde no mesmo commit; badge do README |
+| Respostas gravadas | Curadoria humana concluída | n20 aprovado como abstenção, n12 aprovado como falha de fundamentação e n17 rejeitado como sucesso. Replay operacional fora do MVP. [Curadoria](demo.md#curadoria-das-respostas-gravadas) |
+| Congelamento do MVP | Funcionalidades congeladas | `v1.0-rc1` marca o commit aprovado pelo CI remoto. Após o congelamento, entram apenas correções de texto, documentação e bugs que impeçam a execução. |
 | QLoRA / ABSA | Treino concluído | 759 passos na T4, checkpoint 253 escolhido pela validação. 140/140 JSONs válidos na validação. Gold e templates reservados medidos uma vez. [Avaliação](../reports/absa-eval-checkpoint-253-v1/README.md) |
 | Avaliação externa B2W | Medida | 9/30 mapas exatos em e-commerce. Validade estrita de 172/200. [Relatório](absa-external-evaluation.md) |
 | Adapter ABSA | Publicado e verificado | Download anônimo em sessão limpa no Kaggle, com 3/3 exemplos sintéticos válidos e exatos. [Model card](absa-model-card.md) |
@@ -24,7 +24,7 @@ Atualizado com os resultados do filtro por aspecto, da avaliação externa e da 
 | Latência isolada do QLoRA | Medida em Tesla T4 | 30 reviews em lote unitário após aquecimento. Mediana de 1,41 s, p95 de 2,38 s e pico de 1,17 GiB alocados. [Medição](absa-external-evaluation.md#baselines-complementares-e-transferência) |
 | FP16 na T4 16 GB | Medido | Completou 36/36 chamadas. A menor leitura após geração foi de 49 MiB livres. [Relatório](../reports/mistral-t4-v1/README.md) |
 | API real ponta a ponta | Medida | NF4 na T4, 20 chamadas sequenciais e duas simultâneas. [Relatório](../reports/mistral-t4-v1/README.md#api-ponta-a-ponta) |
-| Space | Adiado | Catálogo operacional sem aprovação humana e janela de duas horas livres sem confirmação. Capturas e GIF no README. [Decisão](demo.md#decisão-sobre-o-space) |
+| Space | Adiado | Replay operacional fora do MVP e janela de publicação e validação sem confirmação. Capturas e GIF no README. [Decisão](demo.md#decisão-sobre-o-space) |
 | Avaliação final reservada | Preservada, não executada | Uma rodada futura, sem ajuste posterior |
 
 ## Resultados do ABSA
@@ -103,9 +103,9 @@ Preparar entradas e comandos localmente antes de iniciar cada sessão.
 ## Distribuição das pendências
 
 - **Refatoração e publicação:** priorizar refatoração, README e publicação do projeto.
-  A curadoria do MVP tem teto de três entradas de replay aprovadas. Os três exemplos
-  históricos já cobrem o roteiro da demo, incluindo a falha conhecida.
-- **Space:** manter adiado e reavaliar quando houver tempo e catálogo elegível.
+  O replay operacional está fora do MVP. Os três casos históricos registram
+  a abstenção aprovada, a falha conhecida e o caso rejeitado como sucesso.
+- **Space:** adiado. A apresentação usa as capturas e o GIF da demo local.
 
 [Resultados e limitações](../reports/final-results-v1/RESULTADOS.md) ·
 [Notas da versão](releases/v0.1-rag-mvp.md) · [Decisões](decisions.md)

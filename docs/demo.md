@@ -62,8 +62,8 @@ Não altera o catálogo de replay nem cria novas aprovações.
 
 | Caso | Origem | O que mostrar | Limite |
 | --- | --- | --- | --- |
-| Sucesso n17 | v3 | Atendimento prestativo confirmado pela review completa | Parser v3 e sustentação na leitura de IA |
-| Abstenção n20 | v3 | Não há marca de forno nas reviews do contexto | Resultado histórico; revisão de IA, sem avaliação nova |
+| Atendimento n17 | v3 | A fonte descreve atendimento prestativo da loja | Rejeitado como exemplo de sucesso pelo autor |
+| Abstenção n20 | v3 | Não há marca de forno nas reviews do contexto | Abstenção aprovada pelo autor |
 | Falha n12 | v3 | Resposta aceita diz sabor bom, mas a fonte descreve gosto ruim no final | Falha confirmada pelo autor, em leitura própria. O parser aceitou a resposta apesar da contradição |
 
 Saída bruta, pergunta, versão e proveniência ficam visíveis. SHA256 do arquivo de
@@ -88,21 +88,18 @@ papel indicado para cada caso.
 
 | Caso | Quem aprovou e para quê | Evidência lida |
 | --- | --- | --- |
-| n17 · Sucesso | Codex, curadoria editorial da resposta gravada | A review integral `rev_002438` descreve atendimento prestativo no relato da Feijoada Individual. A resposta é sustentada e responde à pergunta. |
-| n20 · Abstenção | Codex, curadoria editorial da abstenção gravada | As quatro reviews integrais `rev_000294`, `rev_000604`, `rev_000797` e `rev_002335` tratam da Pizza Portuguesa e nenhuma identifica a marca do forno. A abstenção é apropriada ao contexto. |
-| n12 · Falha | Codex, curadoria editorial como falha. João confirmou a falha em revisão humana assistida. | `rev_001172` elogia custo-benefício e relata gosto ruim no final. As outras três reviews do contexto foram lidas. Nenhuma sustenta atribuir elogio ao sabor à review citada. |
+| n17 · Atendimento | João rejeitou como exemplo de sucesso | A fonte sustenta a avaliação positiva e a citação é correta. A formulação atribui o atendimento ao produto. Reformulação sugerida: “O cliente elogiou o atendimento da loja, descrevendo-a como prestativa”. |
+| n20 · Abstenção | João aprovou a abstenção gravada | Nenhuma das quatro avaliações completas identifica o forno ou sua marca. |
+| n12 · Falha de fundamentação | João aprovou a exibição como falha conhecida | O trecho citado existe em `rev_001172` e elogia o custo-benefício. A frase imediatamente anterior descreve gosto ruim no final, contrariando a afirmação sobre o sabor. |
 
 [Respostas e reviews integrais](../configs/demo-examples.json) ·
 [Registro da revisão humana de n12](../reports/generation-retrospective-v1/human-review.jsonl)
 
 ## Decisão sobre o Space
 
-**Adiado.** O build e os endpoints do container CPU foram testados com
-backend falso. Os três casos estão rotulados para a demo local. O
-catálogo operacional de replay v3 exige aprovação humana de sustentação
-e pertinência. Para n17 e n20, o registro disponível é a revisão editorial
-do Codex. n12 permanece na aba histórica como falha. A janela de duas
-horas livres para publicar e validar o Space também não foi confirmada.
+**Adiado.** A janela de duas horas para publicar e validar o Space não foi
+confirmada. O replay operacional está fora do escopo do MVP. A aba histórica
+preserva os casos e suas decisões de curadoria.
 
 As capturas e o GIF do README mostram os três estados da demo local.
 O GIF alterna três capturas da aba histórica em oito segundos.
