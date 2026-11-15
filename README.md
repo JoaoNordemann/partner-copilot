@@ -33,6 +33,8 @@ O primeiro uso baixa o encoder e monta o índice. A aba histórica inclui as ava
 
 ### Testar
 
+O CI roda em Python 3.12 e 3.13. O Python 3.14 foi testado apenas localmente no Windows, com 326 testes aprovados na suíte sem GPU.
+
 Em outro terminal, na raiz do clone e com o mesmo ambiente virtual ativo:
 
 ```powershell
@@ -74,7 +76,23 @@ O GIF alterna os três casos da demo, com a falha identificada na interface.
 <details>
 <summary>Arquitetura, resultados adicionais e execução em Docker</summary>
 
-FastAPI e Gradio usam um índice Chroma persistente. A ingestão valida e separa dados, divide textos longos e atualiza os documentos pelos mesmos IDs. Embeddings multilíngues e filtros recuperam o contexto. A geração v3 produz JSON e o parser confere esquema, IDs e trechos literais.
+```mermaid
+flowchart LR
+    A[Avaliações sintéticas] --> B[Ingestão e validação]
+    B --> C[Embeddings e metadados]
+    B -. opt-in .-> D[Extrator de aspectos]
+    D --> C
+    C --> E[(Chroma)]
+    Q[Pergunta na API ou demo] --> R[Retrieval com filtros]
+    E --> R
+    R -->|Contexto disponível| G[Geração de JSON]
+    R -->|Contexto vazio| X[Abstenção]
+    G --> V[Validação de esquema, IDs e trechos]
+    V -->|Aceita| O[Resposta com fontes ou abstenção]
+    V -->|Rejeitada| F[Erro de contrato]
+```
+
+[Reprodução dos resultados](docs/reproduction.md) · [Ficha dos dados](docs/dataset-card.md)
 
 <!-- BEGIN GENERATED RESULTS -->
 - RAG de reviews sintéticas, com citações verificadas e abstenção; sem dados reais do iFood.
@@ -90,7 +108,7 @@ Em T4 de 16 GB, o Mistral 7B em 4 bits usou **4,53 GiB de pico alocado** e respo
 
 O container CPU com backend `fake` retornou HTTP 200 em `/health` e `/ask` em Ubuntu no GitHub Actions. O caminho GPU está **não testado em container**. [Docker](docs/docker.md)
 
-As regras e partes do pipeline foram escritas com assistência de IA. O autor revisou os resultados.
+O corpus é sintético, os julgamentos de relevância submetidos à revisão humana foram preparados com assistência de IA e confirmados pelo autor, e o código foi escrito com assistência de IA e revisado pelo autor. [Licença MIT](LICENSE) · [Uso da B2W](docs/dataset-card.md#avaliação-externa-b2w)
 
 </details>
 

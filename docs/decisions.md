@@ -1,5 +1,34 @@
 # Decisões de schema e metadados
 
+## Índice de decisões
+
+| Decisão | Quando | Escolha e motivo | Alternativa descartada |
+| --- | --- | --- | --- |
+| [Data: ISO na origem, inteiro para filtros](#data-iso-na-origem-inteiro-para-filtros) | Schema inicial | ISO nos dados brutos e YYYYMMDD no índice para comparar datas | Comparação por faixa sobre texto |
+| [Categoria e bairro](#categoria-e-bairro) | Schema inicial | Metadados de categoria e bairro para filtrar | Restrição ao texto da avaliação |
+| [Aspectos e ausência](#aspectos-e-ausência) | Schema inicial | Chave ausente para aspecto não mencionado | Sentinela none |
+| [Contrato dos embeddings](#contrato-dos-embeddings) | Antes de indexar | Encoder multilíngue e identidade por coleção | Mistura de vetores de modelos diferentes |
+| [Contrato de retrieval](#contrato-de-retrieval) | Antes das ablações | Similaridade cosseno, filtros explícitos e top-k com limiar | Relaxar filtros ao faltar contexto |
+| [Métricas e baselines de ranking — protocolo definido antes do cálculo](#métricas-e-baselines-de-ranking--protocolo-definido-antes-do-cálculo) | Antes de calcular | Métricas fixas e comparação com lexical e aleatório | Ajustar métricas após ver resultados |
+| [Calibração de min_score — protocolo anterior à seleção do limiar](#calibração-de-min_score--protocolo-anterior-à-seleção-do-limiar) | Antes de calibrar | Manter limiar de operação diante de scores sobrepostos | Promover limiar ajustado na mesma amostra |
+| [Versão ativa de avaliação](#versão-ativa-de-avaliação) | Após revisão humana | Usar human-v2 por padrão para preservar os julgamentos revisados | v1 como conjunto padrão |
+| [Contrato de resposta, abstenção e contexto da geração](#contrato-de-resposta-abstenção-e-contexto-da-geração) | Antes de gerar | Resposta com fontes, metadados e dois caminhos de abstenção | Recusa em texto livre como sinal único |
+| [Versoes independentes de prompt e parser](#versoes-independentes-de-prompt-e-parser) | Antes das ablações de geração | Versionar prompt e parser separadamente para atribuir efeitos | Sobrescrever v1 |
+| [Resultado negativo D e saida estruturada](#resultado-negativo-d-e-saida-estruturada) | Após o teste D | Adotar JSON para validar esquema e IDs | Retry automático sem ganho |
+| [V3 congelada: JSON com trecho literal e primeiro objeto](#v3-congelada-json-com-trecho-literal-e-primeiro-objeto) | Antes da avaliação final | Fixar saída v3 com verificação literal | Ajustar o contrato com o conjunto final |
+| [Protocolo prospectivo de ablações e comparação pareada — 2026-11-06](#protocolo-prospectivo-de-ablações-e-comparação-pareada--2026-11-06) | 2026-11-06 | Separar exposição e comparar por pergunta | Selecionar configuração só pela melhor média |
+| [Reserva de perguntas para avaliação final sem novos ajustes](#reserva-de-perguntas-para-avaliação-final-sem-novos-ajustes) | Antes da próxima rodada | Reservar perguntas inéditas para avaliação final | Ajustar depois de ver a reserva |
+| [Contrato da API e seleção de backends — decisão anterior à implementação](#contrato-da-api-e-seleção-de-backends--decisão-anterior-à-implementação) | Antes de implementar a API | Seleção explícita de backend e erros estáveis | Fallback silencioso e resposta bruta ao cliente |
+| [Implementação da API: startup, concorrência e logs](#implementação-da-api-startup-concorrência-e-logs) | Implementação da API | Recursos no startup, fila por processo e logs de metadados | Carga do modelo por pergunta |
+| [ABSA: tarefa, rótulos de treino e ambiguidade](#absa-tarefa-rótulos-de-treino-e-ambiguidade) | Antes do treino | Usar rótulos do gerador e auditar divergências com o gold | Professor Mistral para rotular o treino |
+| [ABSA: validação e reserva de templates](#absa-validação-e-reserva-de-templates) | Antes do treino | Reservar famílias de templates para medir generalização | Escolher checkpoint pelo gold |
+| [ABSA: configuração do primeiro treino completo](#absa-configuração-do-primeiro-treino-completo) | Antes do treino completo | Selecionar checkpoint pela menor perda de validação | Escolher pelo macro-F1 de classes raras |
+| [ABSA: portão de validade para a avaliação final](#absa-portão-de-validade-para-a-avaliação-final) | Antes do teste final | Validar a geração livre antes de tocar no gold | Avaliar múltiplos checkpoints no gold |
+| [Enriquecimento ABSA na ingestão — desenho e protocolo exploratório](#enriquecimento-absa-na-ingestão--desenho-e-protocolo-exploratório) | Antes do experimento | Comparar quatro braços e preservar avaliações com extração inválida | Ativar filtro experimental por padrão |
+| [Comparação FP16 e NF4 e latência da API real](#comparação-fp16-e-nf4-e-latência-da-api-real) | Antes da sessão T4 | Fixar GPU e protocolo e medir custo e qualidade separadamente | Misturar execuções de hardware diferente |
+| [Decisão sobre as rejeições da API com geração real](#decisão-sobre-as-rejeições-da-api-com-geração-real) | Após o benchmark HTTP | Declarar as rejeições e instrumentar em trabalho futuro | Ajustar sem causa mecânica comprovada |
+| [Regras de refatoração após o congelamento](#regras-de-refatoração-após-o-congelamento) | Após v1.0-rc1 | Preservar a tag e os hashes históricos | Reescrever hashes para passar verificadores |
+
 ## Data: ISO na origem, inteiro para filtros
 
 `Review.created_at` é `date`, lido e serializado como ISO (`2026-11-01`).
