@@ -115,8 +115,11 @@ Os intervalos do servidor dão mediana de geração de 13,69 s nos 8
 sucessos e 24,39 s nas 12 rejeições. As medianas HTTP correspondentes
 são 13,73 s e 24,44 s. O registro HTTP e os intervalos não preservam a
 saída bruta, os tokens gerados ou o motivo de parada para essas chamadas.
-Mesmo com o teto padrão da API de 400 tokens, a duração não permite
-identificar truncamento. Também não permite distinguir preâmbulo,
+A diferença de duração sugere saídas mais longas, por inferência de
+latência. JSON cortado no teto padrão de 400 tokens também pode falhar
+no esquema. Truncamento segue como hipótese. A primeira instrumentação
+seria guardar a saída bruta em artefato controlado, contar tokens e
+registrar o motivo de parada. Os registros também não permitem distinguir preâmbulo,
 marcador misturado, ausência de citação ou corrupção de ID dentro dos
 motivos registrados. As saídas da geração isolada não substituem as
 saídas HTTP.

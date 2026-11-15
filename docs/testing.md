@@ -72,3 +72,38 @@ são reais. A saída inclui os metadados medidos quando a execução acontece.
 As perguntas desse teste não vêm do eval set. Um caso real de abstenção não substitui
 uma avaliação da taxa de abstenção; se a versão v1 falhar, registrar o erro e preservar
 o template antes de criar v2. Neste ambiente CPU, o teste real não foi executado.
+
+## Cobertura dos caminhos críticos
+
+Medição local em Windows com Python 3.14.7 no código de `679fc88`,
+com `coverage run --branch --source=partner_copilot -m pytest -m "not gpu"`.
+A suíte terminou com 326 aprovados, um teste semântico opcional pulado e
+dois testes GPU excluídos. O Hugging Face ficou em modo offline. Os testes
+padrão usam fakes, fixtures, Chroma local e clientes em processo. Instalar
+dependências e iniciar a demo pela primeira vez são etapas separadas e
+podem exigir rede. O teste semântico opcional usa um encoder em cache.
+
+| Módulo | Cobertura de linhas e ramos | Lacunas observadas |
+| --- | ---: | --- |
+| Retriever | 88% | Parâmetros fora da faixa, consulta em branco, aspecto e outros filtros em branco. |
+| Seleção de parser | 100% | A seleção coberta não implica cobertura de todos os contratos. |
+| Parser e validação v3 | 96% | Rejeição explícita de fontes duplicadas numa afirmação ficou sem execução. |
+| Pipeline RAG | 100% | Abstenção sem chamada ao modelo e rejeições do parser exercitadas. |
+| API | 88% | Exceções inesperadas de retrieval e geração, fonte fragmentada sem texto integral e fonte de outro restaurante. |
+| Contratos HTTP | 92% | Ramos de consistência de resposta e metadados. |
+| Runtime da API | 65% | Inicialização real, reconstrução de fontes e alguns caminhos de falha de componentes. |
+| Aspectos | 65% | Predições incompletas ou com metadados inconsistentes e caminhos da implementação QLoRA. O filtro com extrator falso cobre a manutenção de reviews sem aspectos. |
+
+A prioridade futura é testar falhas que afetam isolamento entre restaurantes
+e integridade das fontes, usando fakes. A carga real de modelos fica em
+testes opcionais. O CI remoto em Python 3.12 e 3.13 passou no commit
+`679fc88` e seleciona a suíte CPU com `-m "not gpu"`.
+[Execução no GitHub](https://github.com/JoaoNordemann/partner-copilot/actions/runs/43470483267)
+
+## Primeira execução em clone novo
+
+Clone baixado do GitHub em `679fc88` no Windows com Python 3.14.7.
+Os três comandos do README passaram em ambiente virtual novo. A primeira
+execução baixou o encoder público sem token, construiu o índice de 862
+documentos e retornou HTTP 200 em /health e /demo/ com backend fake.
+O teste usou uma porta local alternativa para evitar conflito.
