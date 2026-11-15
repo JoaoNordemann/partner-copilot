@@ -1,0 +1,7 @@
+# Publicação do PartnerCopilot
+
+- GitHub. Descrição: “Copiloto RAG em português para analisar avaliações sintéticas de restaurantes com fontes e abstenção”. Tópicos: rag, fastapi, chromadb, qlora, absa, portuguese, llm-evaluation. Fixar PartnerCopilot no perfil e publicar as [notas v1.0](releases/v1.0.md) após aprovação do CI no commit final.
+- Hugging Face. [Adapter](https://huggingface.co/jnordemann/partnercopilot-absa-qlora-v1), base Qwen/Qwen2.5-1.5B-Instruct, idioma pt, Apache 2.0 e etiquetas absa, qlora, peft. Adiar publicação separada do dataset. O corpus sintético e sua [ficha](dataset-card.md) já estão no GitHub, com manifesto e instruções.
+- Kaggle. Usar apenas o [notebook público de ABSA](https://www.kaggle.com/code/jnordemann/partnercopilot-absa-em-portugu-s?scriptVersionId=368237209), com links para código e adapter, e resultados agregados da B2W.
+- Portão humano. Peça a uma pessoa que nunca viu o projeto para ler a [primeira tela do README](../README.md) e o [resumo do artigo](article-outline.md#resumo) em um minuto. Pergunte qual foi o resultado principal, nas palavras dela. O relato deve identificar a dificuldade do extrator em e-commerce e o desempenho superior das regras nos casos sem categoria aplicável. Se isso não aparecer, revise o texto e repita a leitura.
+- Antes de divulgar, confirme a revogação das credenciais já compartilhadas e publique somente os artefatos auditados.

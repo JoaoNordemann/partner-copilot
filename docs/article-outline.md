@@ -2,6 +2,10 @@
 
 Em avaliações reais de e-commerce sem nenhuma das categorias analisadas (n = 19), o extrator treinado só com avaliações sintéticas de restaurantes deixou a resposta vazia corretamente em **3 casos**. Regras simples acertaram **17**. As categorias avaliadas eram prazo de entrega, atendimento, preço e embalagem. Nos 11 textos com pelo menos uma dessas categorias anotada, ambos acertaram todos os rótulos em 6 casos. O teste mede a transferência para e-commerce. O desempenho em reviews reais de restaurantes segue em aberto. [Avaliação externa B2W](absa-external-evaluation.md)
 
+## Resumo
+
+Em 19 textos reais de e-commerce sem categoria aplicável, o extrator treinado com dados sintéticos de restaurantes acertou 3 casos e regras simples acertaram 17. No protótipo de busca, restringir o restaurante elevou a cobertura de evidências no top 5 em 24 perguntas já vistas. No teste HTTP com geração real, 12 de 20 requisições falharam no contrato. O estudo mede um protótipo com dados sintéticos e um teste externo de e-commerce. Avaliações reais de restaurante seguem sem teste.
+
 ## 1. O problema do parceiro
 
 Quando um restaurante quer entender por que os pedidos chegam atrasados, precisa localizar relatos pertinentes entre avaliações sobre muitos assuntos. O PartnerCopilot busca avaliações no escopo do restaurante, gera respostas com fontes e se abstém quando falta evidência. O corpus do produto e o treino do extrator são sintéticos.
@@ -104,7 +108,7 @@ B2W foram 28/200, e a taxa em reviews reais de restaurantes segue desconhecida.
 
 ## 7. O que não funcionou
 
-**O backend real devolveu HTTP 502 em 12 de 20 requisições.** Na T4 com NF4 e índice de 862 documentos, as 20 perguntas sequenciais eram respondíveis e já vistas. Houve **8 HTTP 200**, **7 rejeições de esquema**, **3 de trecho** e **2 de ID**. Os registros das falhas não guardam saída bruta nem tokens gerados, então truncamento ficou indeterminado. O índice e as perguntas diferem da avaliação isolada. O retry no experimento de texto livre também ficou em **0/25 recuperações** nas rejeições do conjunto contaminado. [Diagnóstico HTTP](../reports/mistral-t4-v1/README.md#diagnóstico-das-rejeições-http) · [Resultados de geração](../reports/final-results-v1/RESULTADOS.md)
+**O backend real devolveu HTTP 502 em 12 de 20 requisições.** Na T4 com NF4 e índice de 862 documentos, as 20 perguntas sequenciais eram respondíveis e já vistas. Houve **8 HTTP 200**, **7 rejeições de esquema**, **3 de trecho** e **2 de ID**. A geração levou mediana de 24,39 s nas 12 rejeições e 13,69 s nos 8 sucessos. Isso sugere saídas mais longas, por inferência de latência. JSON cortado também pode falhar na validação de esquema. Truncamento segue como hipótese. Os 8/20 da API vieram de perguntas já vistas e de um índice de 862 documentos. Os 6/9 da geração isolada vieram de outras perguntas, originalmente limpas, num corpus de 100 documentos. As taxas não são diretamente comparáveis. O retry no experimento de texto livre também ficou em **0/25 recuperações** nas rejeições do conjunto contaminado. [Diagnóstico HTTP](../reports/mistral-t4-v1/README.md#diagnóstico-das-rejeições-http) · [Resultados de geração](../reports/final-results-v1/RESULTADOS.md)
 
 ### Custo na T4
 
@@ -119,4 +123,6 @@ FP16 coube com o prompt v3, com **49 MiB livres** na menor leitura. A ordem fixa
 
 **O desempenho em avaliações reais de restaurantes segue em aberto.** A busca foi medida em 24 perguntas já vistas sobre um corpus sintético. O filtro por aspecto compartilha a convenção do gerador com a relevância. Na geração, aceitação pelo parser e fidelidade são medidas distintas, como mostra n12. O teste externo anotado cobre 30 textos de e-commerce avaliados por um anotador.
 
-Uma próxima avaliação deve reservar um novo conjunto anotado antes do treino e testar exemplos sem aspecto aplicável. Para o filtro, importa medir simultaneamente precisão e perda de evidência. Para o backend real, registrar tokens e motivo de parada em uma avaliação separada permitiria investigar as rejeições.
+Uma próxima avaliação deve reservar um novo conjunto anotado antes do treino e testar exemplos sem aspecto aplicável. Para o filtro, importa medir simultaneamente precisão e perda de evidência. Para o backend real, a primeira instrumentação seria preservar a saída bruta das falhas em um artefato controlado e registrar tokens gerados e motivo de parada. Esses campos permitiriam investigar truncamento em uma avaliação separada.
+
+[Código](https://github.com/JoaoNordemann/partner-copilot) · [Adapter](https://huggingface.co/jnordemann/partnercopilot-absa-qlora-v1) · [Notebook público](https://www.kaggle.com/code/jnordemann/partnercopilot-absa-em-portugu-s?scriptVersionId=368237209) · [Resultados](../reports/final-results-v1/RESULTADOS.md)
