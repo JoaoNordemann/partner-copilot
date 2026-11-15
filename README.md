@@ -11,10 +11,14 @@ O PartnerCopilot ajuda parceiros de restaurantes a investigar atrasos, atendimen
 | Medição | Resultado |
 | --- | --- |
 | Busca por restaurante | A cobertura da evidência nos cinco primeiros resultados (recall limitado@5) subiu de **25,14% para 74,65%** ao restringir a busca ao restaurante (24 perguntas sintéticas já vistas). |
-| Filtro por aspecto | A proporção de posições relevantes entre os cinco primeiros resultados (precision@5) subiu de **30,83% para 37,50%**, de um teto de 45,83% (24 perguntas sintéticas já vistas). |
-| Contrato de geração | O JSON v3 passou no parser em **14/27** saídas, na sessão original, ante 2/27 em texto livre (n = 27 chamadas em perguntas já vistas). A repetição NF4 aceitou 13/27. |
+| Filtro por aspecto | A proporção de posições relevantes entre os cinco primeiros resultados (precision@5) subiu de **30,83% para 37,50%**, em 24 perguntas sintéticas já vistas. Isso equivale a cerca de **82% do teto** de 45,83%. |
+| Contrato de geração | O JSON v3 passou no parser em **14/27** saídas, na sessão original, com **0/27 na primeira versão** e **2/27 na melhor variante de texto livre**. A repetição NF4 aceitou 13/27. Mesmas perguntas, coortes não controladas. |
 | Extração em e-commerce | Em avaliações de e-commerce, o modelo ajustado deixou a lista de aspectos vazia em **3/19** casos em que deveria, ante 17/19 das regras (n = 19 textos sem aspecto aplicável). |
 | API real | Mediana de **24,07 s** ponta a ponta em NF4 na T4 (20 requisições com perguntas já vistas, incluindo 8 sucessos e 12 rejeições por saída fora do contrato). |
+
+**Limitações.** A geração real exige GPU. O desempenho em reviews reais de restaurante segue sem teste.
+
+**Processo.** Usei assistência de IA para escrever o código e revisar a relevância. Revisei o código e confirmei os julgamentos submetidos à revisão humana.
 
 ## Rodar em CPU
 
@@ -108,7 +112,7 @@ Em T4 de 16 GB, o Mistral 7B em 4 bits usou **4,53 GiB de pico alocado** e respo
 
 O container CPU com backend `fake` retornou HTTP 200 em `/health` e `/ask` em Ubuntu no GitHub Actions. O caminho GPU está **não testado em container**. [Docker](docs/docker.md)
 
-O corpus é sintético, os julgamentos de relevância submetidos à revisão humana foram preparados com assistência de IA e confirmados pelo autor, e o código foi escrito com assistência de IA e revisado pelo autor. [Licença MIT](LICENSE) · [Uso da B2W](docs/dataset-card.md#avaliação-externa-b2w)
+[Licença MIT](LICENSE) · [Uso da B2W](docs/dataset-card.md#avaliação-externa-b2w)
 
 </details>
 
